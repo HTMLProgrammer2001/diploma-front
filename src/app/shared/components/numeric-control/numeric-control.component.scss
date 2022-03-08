@@ -1,0 +1,127 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  .cr-numeric-control {
+    &.ng-invalid {
+      border-color: $error-color;
+    }
+
+    &.ng-disabled {
+      background: $control-color-disabled;
+
+      kendo-label {
+        .k-numerictextbox {
+          .k-numeric-wrap {
+            opacity: 1;
+
+            input.k-input {
+              color: $control-color-text-primary;
+            }
+          }
+        }
+      }
+    }
+    margin: 0;
+    height: 48px;
+    padding: 3px 10px 2px;
+    list-style: none;
+    line-height: 1;
+    border: 1px solid #E9E9E9;
+    background: white;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    kendo-label {
+      display: block;
+      width: 100%;
+      border: 0;
+      color: $control-color-label;
+      font-size: small;
+      > label {
+        &.k-label {
+          line-height: 17px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          max-width: 100%;
+          padding-right: 10px;
+          position: relative;
+          height: 17px;
+          font-size: 13px;
+          display: inline-block;
+          padding-left: 2px;
+        }
+        > .k-label-optional {
+          font-size: 0;
+          position: absolute;
+          color: $control-color-required;
+          right: 0;
+        }
+        > .k-label-optional::before {
+          position: relative;
+          left: -5px;
+          font-size: 14px;
+          content: "*";
+          color: $control-color-required;
+        }
+      }
+      .k-numerictextbox {
+        margin: 0;
+        display: block;
+        width: 100%;
+        .k-numeric-wrap {
+          border: 0;
+          background: none;
+          input.k-input {
+            color: $control-color-text-primary;
+            text-align: right;
+            padding: 1px 2px 1px;
+            height: 20px;
+            line-height: 1;
+            font-size: 18px;
+          }
+          &.k-state-focused, &:focus {
+            box-shadow: none;
+          }
+          span.k-select {
+            position: absolute;
+            top: -19px;
+            background: #fff;
+            right: -10px;
+            height: 48px;
+          }
+        }
+      }
+    }
+  }
+}
+:host {
+  body.rtl-on & {
+    ::ng-deep {
+      .cr-numeric-control kendo-label .k-numerictextbox .k-numeric-wrap input.k-input {
+          padding: 4px 0 4px 8px;
+          text-align: start!important;
+          direction: ltr;
+      }
+      .cr-numeric-control kendo-label > label.k-label {
+        padding-right: 2px;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  body.edit-mode & {
+    ::ng-deep {
+      p[data-translate],
+      span[data-translate],
+      div[data-translate],
+      kendo-pager-input[data-translate],
+      button[data-translate],
+      label[data-translate],
+      kendo-label[data-translate] > label{
+        box-shadow: inset 0px 0px 3px 1px white, 0px 0px 3px 1px #000000;
+        border-radius: 5px;
+      }
+    }
+  }
+
+}

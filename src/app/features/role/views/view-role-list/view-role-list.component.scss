@@ -1,0 +1,21 @@
+:host::ng-deep {
+  .ng-star-inserted {
+    td {
+      &:last-child {
+        div {
+          visibility: hidden;
+        }
+      }
+    }
+
+    .k-state-selected {
+      td {
+        &:last-child {
+          div {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+}

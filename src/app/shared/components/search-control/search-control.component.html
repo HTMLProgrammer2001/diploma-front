@@ -1,0 +1,34 @@
+<div class="cr-quick-grid-search"
+     [class.ng-disabled]="isDisabled"
+     [attr.data-translate]="dataWatermarkTranslateKeys"
+>
+  <input
+    [attr.data-element-name]="dataElementName"
+    kendoTextBox
+    placeholder="{{dataWatermark || (dataWatermarkTranslateKeys | translate)}}"
+    [disabled]="isDisabled"
+    [(ngModel)]="dataValue"
+    (input)="onInput($event)"
+  />
+  <span>
+    <cr-svg-icon-control
+      [width]="'30px'"
+      [height]="'30px'"
+      [fill]="'#b3aeae'"
+      [iconName]="'icon-search'">
+    </cr-svg-icon-control>
+  </span>
+
+  <span
+    *ngIf="!!dataValue"
+    (click)="onClear()"
+    class="cr-search-control-icon"
+  >
+    <cr-svg-icon-control
+      [width]="'30px'"
+      [height]="'30px'"
+      [fill]="'#b3aeae'"
+      [iconName]="'icon-close'">
+    </cr-svg-icon-control>
+  </span>
+</div>

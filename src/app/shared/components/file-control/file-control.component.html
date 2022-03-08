@@ -1,0 +1,36 @@
+<div
+  *ngIf="_parsedPermissionSettings.isAccessRead"
+  kendoTooltip
+  tooltipClass="cr-tooltip"
+  position="top"
+  class="cr-file-control"
+  kendoUploadDropZone="dropZone"
+  [ngClass]="customClass"
+  [class.cr-required]="requiredRule?.isActive"
+  [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+  [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+  [class.ng-invalid]="validationResult?.isValid === false || validationMessage">
+  <div title="{{validationResult?.messages | validationMessageTranslate}}{{validationMessage}}">
+    <kendo-fileselect
+      [attr.data-element-name]="dataElementName"
+      #fileSelect
+      zoneId="dropZone"
+      [attr.data-translate]="translateKeys"
+      [accept]="allowedExtensions ? allowedExtensions.join(',') : undefined"
+      [restrictions]="fileRestrictions"
+      [multiple]="multiple"
+      [(ngModel)]="selectedFiles"
+      (valueChange)="onValueChange($event)"
+      [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled">
+      <kendo-fileselect-messages
+        dropFilesHere="{{dataDropzoneMessage | translate}}"
+        select="{{dataLabel | translate}}"
+        >
+      </kendo-fileselect-messages>
+    </kendo-fileselect>
+  </div>
+</div>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

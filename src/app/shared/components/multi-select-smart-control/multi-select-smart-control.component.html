@@ -1,0 +1,124 @@
+<div
+     *ngIf="_parsedPermissionSettings.isAccessRead"
+     class="cr-control-multiselect"
+     kendoTooltip
+     position="top"
+     tooltipClass="cr-tooltip"
+     [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+     [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+     [ngClass]="{'ng-invalid': validationResult?.isValid === false}"
+>
+  <kendo-label text="{{dataLabel || (translateKeys | translate)}}"
+               title="{{validationResult?.messages | validationMessageTranslate}}"
+               [optional]="requiredRule?.isActive"
+               [attr.data-translate]="translateKeys">
+    <kendo-label-messages optional="'*'">
+    </kendo-label-messages>
+    <kendo-multiselect [attr.data-element-name]="dataElementName"
+                       #multiSelectComponent
+                       *ngIf="!!dataCacheName && dataCacheName.length > 0 && !isSimpleMode"
+                       [popupSettings]="{popupClass : 'cr-custom-multiselect-list', width: 'auto'}"
+                       [data]="cache.dataSource"
+                       [(value)]="cache.currentDataItems"
+                       [textField]="textField"
+                       [valueField]="valueField"
+                       [readonly]="isReadOnly"
+                       (open)="onDropdownOpen()"
+                       (close)="onDropdownClose($event)"
+                       (valueChange)="onSelectionChange($event)"
+                       [valuePrimitive]="false"
+                       [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+                       [filterable]="true"
+                       [loading]="isLoading"
+                       [autoClose]="false"
+                       (blur)="onBlur($event)"
+    >
+      <ng-template kendoMultiSelectTagTemplate let-dataItem>
+        <!-- ⁣ is U+2063 Invisible Separator -->
+        <span style="color: #c0b211"
+              *ngIf="useCodeInValue && dataItem && dataItem[codeField]">{{dataItem && dataItem[codeField] ? dataItem[codeField] : '⁣'}}&nbsp;&nbsp;</span>
+        <span>{{dataItem && dataItem[textField] ? dataItem[textField] : '&nbsp;'}}</span>
+      </ng-template>
+      <ng-template kendoMultiSelectItemTemplate let-dataItem>
+        <div class="cr-multi-select-dropdown-item">
+          <div class="cr-fake-checkbox"></div>
+          <span style="color: #c0b211"
+                *ngIf="useCodeInValue && dataItem && dataItem[codeField]">{{dataItem && dataItem[codeField] ? dataItem[codeField] : '⁣'}}&nbsp;&nbsp;</span>
+          <span>{{dataItem && dataItem[textField] ? dataItem[textField] : '&nbsp;'}}</span>
+        </div>
+      </ng-template>
+      <ng-template kendoComboBoxFooterTemplate>
+        <div class="cr-multi-select-paginator" *ngIf="isFooterVisible">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="cr-multi-select-paginator-button-wrap">
+                <span class="cr-button" (click)="onPrevPage()"><</span>
+                <span> {{this.cache.paginatorDropDown.page}} / {{this.cache.paginatorDropDown.totalPages}}</span>
+                <span class="cr-button" (click)="onNextPage()">></span>
+              </div>
+            </div>
+            <div class="col-lg-6 cr-align-right">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-multiselect>
+
+    <kendo-multiselect [attr.data-element-name]="dataElementName"
+                       #multiSelectComponent
+                       *ngIf="!!dataCacheName && dataCacheName.length > 0 && isSimpleMode"
+                       kendoMultiSelectSummaryTag
+                       [popupSettings]="{popupClass : 'cr-custom-multiselect-list', width: 'auto'}"
+                       [data]="cache.dataSource"
+                       [(value)]="cache.currentDataItems"
+                       [textField]="textField"
+                       [valueField]="valueField"
+                       [readonly]="isReadOnly"
+                       (open)="onDropdownOpen()"
+                       (close)="onDropdownClose($event)"
+                       (valueChange)="onSelectionChange($event)"
+                       [valuePrimitive]="false"
+                       [disabled]="isDisabled"
+                       [filterable]="true"
+                       [loading]="isLoading"
+                       [autoClose]="false"
+                       (blur)="onBlur($event)"
+    >
+      <ng-template kendoMultiSelectGroupTagTemplate let-dataItems>
+          <span>{{'COMMON.MULTISELECT_GROUP_TAG_LABEL' | translate:{
+            selected: dataItems.length
+          }
+            }}</span>
+      </ng-template>
+
+      <ng-template kendoMultiSelectItemTemplate let-dataItem>
+        <div class="cr-multi-select-dropdown-item">
+          <div class="cr-fake-checkbox"></div>
+          <span style="color: #c0b211"
+                *ngIf="useCodeInValue && dataItem && dataItem[codeField]">{{dataItem && dataItem[codeField] ? dataItem[codeField] : '⁣'}}&nbsp;&nbsp;</span>
+          <span>{{dataItem && dataItem[textField] ? dataItem[textField] : '&nbsp;'}}</span>
+        </div>
+      </ng-template>
+
+      <ng-template kendoComboBoxFooterTemplate>
+        <div class="cr-multi-select-paginator" *ngIf="isFooterVisible">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="cr-multi-select-paginator-button-wrap">
+                <span class="cr-button" (click)="onPrevPage()"><</span>
+                <span> {{this.cache.paginatorDropDown.page}} / {{this.cache.paginatorDropDown.totalPages}}</span>
+                <span class="cr-button" (click)="onNextPage()">></span>
+              </div>
+            </div>
+            <div class="col-lg-6 cr-align-right">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-multiselect>
+  </kendo-label>
+</div>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

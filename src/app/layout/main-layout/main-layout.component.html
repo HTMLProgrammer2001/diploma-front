@@ -1,0 +1,50 @@
+<section [class.cr-menu-collapsed]="collapsedMenu" class="main" id="main-section">
+  <div class="cr-main-flex-menu">
+    <cr-nav-menu [collapsed]="collapsedMenu"></cr-nav-menu>
+  </div>
+  <div class="cr-main-flex">
+    <main>
+      <header id="main-header">
+        <div class="cr-header-view-main">
+          <div class="row align-items-center">
+            <div class="col-5 mr-auto">
+              <cr-button-control
+                (click)="collapseState()"
+                [buttonTemplateType]="'icon-button'"
+                [classArray]="['cr-icon-button','cr-icon-hamburger']"
+                [height]="'30px'"
+                [icon]="'icon-hamburger'"
+                [width]="'30px'"
+              ></cr-button-control>
+            </div>
+            <div class="col-auto cr-button-margin cr-control-button-wrapper">
+              <div class="cr-network-status-wrapper">
+                <span *ngIf="!networkStatusService.online" class="cr-network-status-offline">
+                  {{ 'COMMON.NETWORK.DISCONNECT_LAYOUT_MESSAGE'  | translate }}
+                </span>
+              </div>
+
+              <cr-language-switcher [languages]="languages"></cr-language-switcher>
+
+              <cr-button-control
+                (buttonClickEvent)="changeScreenSize()"
+                [buttonTemplateType]="'icon-button'"
+                [height]="'30px'"
+                [icon]="'icon-full-screen'"
+                [width]="'30px'">
+              </cr-button-control>
+
+              <cr-user-info (onLogout)="logout()"></cr-user-info>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div #divElement class="content" id="content">
+        <router-outlet></router-outlet>
+      </div>
+      <footer>
+        <cr-bookmark-list></cr-bookmark-list>
+      </footer>
+    </main>
+  </div>
+</section>

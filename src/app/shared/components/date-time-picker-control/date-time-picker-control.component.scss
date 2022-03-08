@@ -1,0 +1,262 @@
+@use "../../../../styles/variables" as *;
+.cr-control-date-time-picker {
+  &.ng-disabled {
+    background: $control-color-disabled;
+
+    ::ng-deep {
+      .k-datetimepicker {
+        .k-dateinput .k-dateinput-wrap {
+          background: $control-color-disabled;
+        }
+
+        .k-picker-wrap {
+          background: $control-color-disabled;
+
+          span.k-select {
+            background: $control-color-disabled;
+          }
+        }
+      }
+
+      kendo-label {
+        display: block;
+        width: 100%;
+        border: 0;
+        color: $control-color-label;
+        font-size: small;
+
+        > label.k-label {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          line-height: 17px;
+          max-width: calc(100% - 40px);
+          padding-right: 10px;
+          position: relative;
+          height: 17px;
+          font-size: 13px;
+          margin: 0 10px;
+          display: inline-block;
+          padding-left: 2px;
+        }
+
+        .k-datetimepicker {
+          .k-input {
+            color: $control-color-text-primary;
+            margin: 0px 30px 0px 10px;
+            padding: 1px 2px 1px;
+            height: 20px;
+            font-size: 18px;
+            line-height: 1;
+          }
+
+          width: 100%;
+
+          .k-picker-wrap {
+            margin: 0;
+            border: 0;
+
+            &.k-state-focused, &:focus {
+              box-shadow: none;
+            }
+
+            span.k-select {
+              position: absolute;
+              top: -22px;
+              background: #fff;
+              right: 0px;
+              padding: 4px;
+              width: 33px;
+              height: 48px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 3px 0 2px;
+  height: 48px;
+  list-style: none;
+  border: 1px solid #E9E9E9;
+  background: white;
+  border-radius: 5px;
+
+  &.ng-invalid {
+    border-color: $error-color;
+  }
+
+  ::ng-deep {
+    kendo-label {
+      display: block;
+      width: 100%;
+      border: 0;
+      color: $control-color-label;
+      font-size: small;
+
+      > label {
+        &.k-label {
+          max-width: fit-content;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          line-height: 17px;
+          padding-right: 10px;
+          position: relative;
+          height: 17px;
+          font-size: 13px;
+          margin: 0 30px 0 10px;
+          display: block;
+          padding-left: 2px;
+        }
+
+        > .k-label-optional {
+          font-size: 0;
+          position: absolute;
+          color: $control-color-required;
+          right: 0;
+        }
+
+        > .k-label-optional::before {
+          position: relative;
+          left: -5px;
+          font-size: 14px;
+          content: "*";
+          color: $control-color-required;
+        }
+      }
+
+      .k-datetimepicker {
+        width: 100%;
+
+        .k-input {
+          color: $control-color-text-primary;
+          margin: 0px 30px 0px 10px;
+          padding: 1px 2px 1px;
+          height: 20px;
+          font-size: 18px;
+          line-height: 1;
+        }
+
+        .k-picker-wrap {
+          margin: 0;
+          border: 0;
+
+          &.k-state-focused, &:focus {
+            box-shadow: none;
+          }
+
+          span.k-link {
+            background: none;
+          }
+
+          span.k-select {
+            width: 33px;
+            position: absolute;
+            top: -22px;
+            background: transparent;
+            right: 0px;
+            padding: 4px;
+            height: 48px;
+            z-index: 1;
+
+            .k-icon {
+              &:before {
+                content: '';
+              }
+            }
+          }
+        }
+      }
+    }
+
+    cr-svg-icon-control {
+      position: absolute;
+      right: 1px;
+      transform: translateY(-50%);
+      top: 50%;
+      z-index: 0;
+    }
+  }
+}
+
+:host-context(.k-grid-table-wrap) {
+  .cr-control-date-time-picker {
+    height: 41px;
+
+    ::ng-deep {
+      kendo-label .k-datetimepicker .k-picker-wrap span.k-select {
+        height: 46px;
+
+        .k-link {
+          height: initial;
+          padding: 0;
+        }
+      }
+
+      kendo-datetimepicker {
+        display: block;
+      }
+    }
+  }
+}
+
+:host {
+  //Global Rtl styles
+  body.rtl-on & {
+    .cr-control-date-time-picker {
+      ::ng-deep {
+        cr-svg-icon-control {
+          right: inherit;
+          left: 1px;
+        }
+
+        kendo-label {
+          > .k-label-optional {
+            right: initial;
+            left: 0;
+          }
+
+          > .k-label-optional::before {
+            right: -5px;
+            left: initial;
+          }
+
+          > label.k-label {
+            padding-left: 10px;
+            padding-right: 2px;
+            margin: 0 10px 0 30px;
+          }
+
+          .k-datetimepicker {
+            .k-picker-wrap {
+              span.k-select {
+                left: 0;
+                right: initial;
+              }
+            }
+          }
+        }
+
+        kendo-label .k-datetimepicker .k-input {
+          padding: 0;
+          margin: 0 10px 0 30px;
+        }
+
+        kendo-label > label > .k-label-optional {
+          left: 0;
+          right: initial;
+
+          &:before {
+            right: 5px;
+            left: initial;
+          }
+        }
+      }
+    }
+  }
+}

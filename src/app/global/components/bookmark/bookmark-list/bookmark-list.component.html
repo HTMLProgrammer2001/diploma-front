@@ -1,0 +1,94 @@
+<section class="wrapper cr-bookmark-wrapper">
+  <div class="cr-task-bar-opener">
+    <span (click)="onOpenTaskbar(itemListRef)">
+      <cr-svg-icon-control [width]="'30px'" [height]="'30px'"
+                           [iconName]="'icon-bookmark-stack'">
+
+      </cr-svg-icon-control>
+    </span>
+  </div>
+  <div id="main-task-container"
+       class="task-container"
+       (wheel)="onMouseWheelEvent($event)"
+       (mousedown)="mouseDownHandler($event)">
+    <ng-container *ngFor="let taskBookmark of bookmarksService.taskBookmarkCollection; let i = index">
+
+      <div class="task-container__item"
+           (click)="chooseBookmark(taskBookmark.id, i)"
+           [ngClass]="{'active': bookmarksService.getCurrentId() === taskBookmark.id}"
+      >
+       <span *ngIf="isDevelop" style="font-size: 10px; margin-right: 20px">
+         {{taskBookmark.id}}
+       </span>
+        <div class="cr-bookmark-item-wrapper" [attr.data-translate]="taskBookmark.nameTranslateKey">
+          <div *ngIf="taskBookmark.iconSvg" class="icon-wrapper">
+            <cr-svg-icon-control [width]="'30px'" [height]="'30px'"
+                                 [iconName]="taskBookmark.iconSvg"></cr-svg-icon-control>
+          </div>
+          {{ !!taskBookmark
+          ? taskBookmark.name
+            ? (taskBookmark.name | replace : {value: taskBookmark.nameValue})
+            : (taskBookmark.nameTranslateKey | translate : {value: taskBookmark.nameValue})
+          : ''}}
+          <span *ngIf="taskBookmark.isPinned" class="cr-pin-icon-wrapper">
+            <cr-svg-icon-control [width]="'20px'" [height]="'20px'" [iconName]="'icon-un-pin'"></cr-svg-icon-control>
+          </span>
+          <!--          <span class="material-icons" (click)="closeBookmark(taskBookmark.id)">close</span>-->
+          <span (click)="closeBookmark(taskBookmark.id)">
+            <cr-svg-icon-control
+              [width]="'20px'"
+              [height]="'20px'"
+              [fill]="'#2b2b2b'"
+              [iconName]="'icon-close'">
+            </cr-svg-icon-control>
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="cr-task-bar-arrows-wrapper">
+    <span
+      (mousedown)="scrollButtonLeft()"
+      (mouseup)="removeScrollInterval()"
+      (mouseout)="removeScrollInterval()"
+      class="k-icon k-i-arrow-w"
+    ></span>
+    <span
+      (mousedown)="scrollButtonRight()"
+      (mouseup)="removeScrollInterval()"
+      (mouseout)="removeScrollInterval()"
+      class="k-icon k-i-arrow-e"
+    ></span>
+  </div>
+</section>
+
+<ng-template #itemListRef>
+  <div class="task-bar-container">
+    <ng-container *ngFor="let taskBookmark of bookmarksService.taskBookmarkCollection; let i = index">
+      <div class="task-bar-item"
+           (click)="chooseBookmark(taskBookmark.id, i)"
+           [ngClass]="{'active': bookmarksService.getCurrentId() === taskBookmark.id}"
+      >
+        <div class="cr-bookmark-item-wrapper" [attr.data-translate]="taskBookmark.nameTranslateKey">
+        <span *ngIf="taskBookmark.isPinned" class="cr-pin-icon-wrapper">
+          <cr-svg-icon-control [width]="'20px'" [height]="'20px'" [iconName]="'icon-un-pin'"></cr-svg-icon-control>
+        </span>
+          {{ !!taskBookmark
+          ? taskBookmark.name
+            ? (taskBookmark.name | replace : {value: taskBookmark.nameValue})
+            : (taskBookmark.nameTranslateKey | translate : {value: taskBookmark.nameValue})
+          : ''}}
+          <!--          <span class="material-icons" (click)="closeBookmark(taskBookmark.id)">close</span>-->
+          <span (click)="closeBookmark(taskBookmark.id)">
+            <cr-svg-icon-control
+              [width]="'20px'"
+              [height]="'20px'"
+              [fill]="'#2b2b2b'"
+              [iconName]="'icon-close'">
+            </cr-svg-icon-control>
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

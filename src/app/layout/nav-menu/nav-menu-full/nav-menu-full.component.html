@@ -1,0 +1,65 @@
+<section class="cr-full-nav-menu">
+  <kendo-panelbar (stateChange)="onStateChange($event)">
+    <kendo-panelbar-item
+      *ngFor="let item of menuItems; let i = index"
+      [class.blocked-by-title]="item.itemType === 'section'"
+      [class.hidden-by-filter]="!item.isFilterSuccess"
+      [class.hidden-by-access]="item.isAccessGranted && !item.isAccessGranted()"
+      [expanded]="item.expanded"
+      [id]="item.id"
+      title=""
+    >
+
+      <!--section-->
+      <ng-template
+        *ngIf="item.itemType === 'section'"
+        kendoPanelBarItemTitle>
+        <span [attr.data-translate]="item.titleTranslateKeys"
+              [style]="'padding: 0 calc(35px * '+ level +')'"
+              class="cr-menu-icon cr-menu-icon-title {{item.levelClass}}">
+          <span>{{item.title || (item.titleTranslateKeys | translate)}}</span>
+        </span>
+      </ng-template>
+
+      <!--link-->
+      <ng-template
+        *ngIf="item.itemType === 'link'"
+        kendoPanelBarItemTitle>
+        <span [attr.data-translate]="item.titleTranslateKeys"
+              (click)="navigateByRoute(item)"
+              [style]="'padding: 0 calc(35px * '+ level +')'"
+              class="cr-menu-icon cr-menu-icon-link {{item.levelClass}}">
+          <div *ngIf="item.iconSvg"
+               class="svg-icon-style">
+            <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+          </div>
+          <span>{{item.title || (item.titleTranslateKeys | translate)}}</span>
+        </span>
+      </ng-template>
+
+      <!--menu-->
+      <ng-template *ngIf="item.itemType === 'menu'"
+                   kendoPanelBarItemTitle>
+        <span [attr.data-translate]="item.titleTranslateKeys"
+              (click)="navigateByRoute(item)"
+              [style]="'padding: 0 calc(35px * '+ level +')'"
+              class="cr-menu-icon cr-menu-icon-menu {{item.levelClass}}">
+          <div *ngIf="item.iconSvg"
+               class="svg-icon-style">
+            <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+          </div>
+          <span>{{item.title || (item.titleTranslateKeys | translate)}}</span>
+        </span>
+      </ng-template>
+
+      <!--sub menu-->
+      <ng-template *ngIf="item.itemType === 'menu'" kendoPanelBarContent>
+        <cr-nav-menu-full
+          [level]="level + 1"
+          [menuItems]="item.items"
+        ></cr-nav-menu-full>
+      </ng-template>
+
+    </kendo-panelbar-item>
+  </kendo-panelbar>
+</section>

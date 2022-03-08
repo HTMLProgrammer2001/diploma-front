@@ -1,0 +1,6 @@
+<section>
+  <p>{{'COMMON.ERROR_DIALOG.CONTENT' | translate}}</p>
+  <ul *ngIf="errors">
+    <li *ngFor="let error of errors">{{ error.message }}</li>
+  </ul>
+</section>

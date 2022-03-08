@@ -1,0 +1,43 @@
+<div class="cr-user-info-button">
+  <button #anchor (click)="toggle()" class="k-button cr-icon-button k-button-icon">
+    <kendo-avatar *ngIf="!!src else elseBlock" [shape]="'circle'" [imageSrc]="src" [size]="'small'" ></kendo-avatar>
+    <ng-template #elseBlock>
+      <kendo-avatar [shape]="'circle'" [initials]="initials" [size]="'small'"></kendo-avatar>
+    </ng-template>
+  </button>
+  <kendo-popup
+    #popup
+    [anchor]="anchor"
+    [popupClass]="'cr-user-info-popup'"
+    [anchorAlign]="{ horizontal: 'right', vertical: 'bottom' }"
+    [popupAlign]="{ horizontal: 'right', vertical: 'top' }"
+    popupClass="content"
+    *ngIf="show">
+    <div class="cr-user-info-inner-wrapper">
+      <div class="cr-user-info-credentials-wrapper">
+        <div class="cr-avatar-wrapper">
+          <kendo-avatar *ngIf="!!src else elseBlockInner" [shape]="'circle'" [imageSrc]="src" [size]="'large'" ></kendo-avatar>
+          <ng-template #elseBlockInner>
+            <kendo-avatar [shape]="'circle'" [initials]="initials" [size]="'large'"></kendo-avatar>
+          </ng-template>
+        </div>
+        <div class="cr-information-wrapper">
+          <!--#TODO Removed greeting in SIR-3391 Task (Styling) -->
+          <!--<p class="cr-user-info-name">{{'COMMON.USER_INFO.GREETING' | translate}} {{ userName }}</p>-->
+          <p class="cr-user-info-name">{{ userName }}</p>
+          <p class="cr-user-info-company">{{ companyName }}</p>
+        </div>
+      </div>
+      <ul class="cr-user-info-actions">
+        <li>
+          <cr-button-control
+            buttonTemplateType="primary-action-button"
+            textTranslateKey="COMMON.USER_INFO.ACTIONS.LOGOUT"
+            (buttonClickEvent)="logout()"
+          ></cr-button-control>
+        </li>
+      </ul>
+      <p class="cr-user-info-version">Version {{appVersion}} (tag: {{tagVersion}})</p>
+    </div>
+  </kendo-popup>
+</div>

@@ -1,0 +1,51 @@
+@import "../../../../styles/variables";
+
+.cr-custom-line-button.k-button{
+  &:hover, &:focus {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.cr-custom-button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-align: left;
+  color: $btn-text-secondary;
+  padding: 4px 0;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+}
+
+.cr-custom-line-button {
+  @extend .cr-custom-button;
+  border-bottom: 2px solid $btn-border-secondary;
+
+  &:disabled {
+    color: #D3D3D3;
+    border-bottom: 2px solid #D3D3D3;
+  }
+}
+
+.cr-custom-button-reset {
+  @extend .cr-custom-button;
+  cursor: pointer;
+  border-bottom: 2px solid $base-color-1;
+
+  &:disabled {
+    color: #D3D3D3;
+    border-bottom: 2px solid #D3D3D3;
+  }
+
+  &:hover {
+    transition: .1s all ease-in-out;
+    color: $btn-text-secondary;
+    border-bottom: 2px solid $btn-border-secondary;
+  }
+}

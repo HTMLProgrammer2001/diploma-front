@@ -1,0 +1,205 @@
+@use "variables" as *;
+//Kendo notification
+.k-notification-group {
+  z-index: 999;
+}
+
+//Regular switch style
+.k-radio-label {
+  align-items: center;
+
+  > .k-radio {
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+}
+
+//Kendo panelbar custom validation
+kendo-panelbar.k-panelbar {
+  > kendo-panelbar-item.k-item.ng-invalid {
+    > span.k-header {
+      border-radius: 8px;
+      border: 1px solid $error-color;
+    }
+  }
+}
+
+//Kendo button styles
+.k-button.cr-icon-button {
+  border: 0;
+  background: none;
+  color: $btn-text-secondary;
+
+  .k-state-focused {
+    box-shadow: none;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.k-button.cr-action-button {
+  color: $btn-text-primary;
+  background: $btn-primary;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 40px;
+
+  &.cancel-button {
+    background: $btn-secondary;
+    border: 1px solid $btn-border-secondary;
+  }
+}
+
+// kendo panel bar
+.k-panelbar {
+  border: 0;
+  //box-shadow:rgba(0, 0, 0, 0.3) 0px 0px 6px 0px;
+  //border-radius: 8px;
+  > .k-item {
+
+    > .k-link {
+
+      padding: 10px;
+      font-weight: 500;
+      color: $control-color-text-primary;
+      background-color: $base-color-1;
+
+      &:hover, &.k-state-selected, &.k-state-selected:hover {
+        color: $control-color-text-primary;
+        background-color: $base-color-1;
+      }
+
+      &.k-state-focused {
+        box-shadow: none;
+      }
+    }
+  }
+}
+.k-input {
+  padding: 4px 8px 4px 0;
+}
+
+//Kendo panelbar component
+.k-panelbar {
+  .k-item {
+    .k-link {
+      &.k-header {
+        font-size: 18px;
+      }
+
+      height: 50px;
+      transition: .3s ease-in-out;
+      border-radius: 0;
+      padding: 10px 25px;
+      box-shadow: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.7;
+      letter-spacing: normal;
+      text-align: left;
+      color: $base-text-color-root;
+
+      &.k-state-focused {
+        box-shadow: none;
+      }
+    }
+
+    &.k-state-expanded {
+      .k-link {
+        &.k-state-focused {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+.k-tabstrip > .k-content {
+  outline: none;
+  border: none;
+}
+.k-tabstrip > .k-content.k-state-active {
+  padding: 0;
+  outline: none;
+}
+
+.k-panelbar > .k-item > .k-link:hover,
+.k-panelbar > .k-item > .k-link.k-state-selected,
+.k-panelbar > .k-item > .k-link.k-state-selected:hover {
+  background: $base-color-1;
+}
+
+.k-panelbar > .k-item.k-state-expanded > .k-link:hover,
+.k-panelbar > .k-item.k-state-expanded > .k-link.k-state-selected,
+.k-panelbar > .k-item.k-state-expanded > .k-link.k-state-selected:hover {
+  background: $base-background-color-root;
+  color: $base-color-2;
+}
+
+.k-panelbar > .k-item.k-state-expanded > .k-link {
+  background: $base-background-color-root;
+  color: $base-color-2;
+}
+
+//Kendo Grid Pager styles
+.k-pager-wrap:focus,
+.k-pager-wrap.k-focus,
+.k-pager-wrap.k-state-focus {
+  box-shadow: none;
+}
+
+.k-numerictextbox .k-numeric-wrap.k-state-focused {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.k-pager-sizes .k-dropdown,
+.k-pager-sizes .k-dropdowntree,
+.k-pager-sizes > select {
+  font-size: initial;
+}
+
+//Checkbox - indeterminate state
+.k-checkbox:indeterminate::before,
+.k-checkbox.k-indeterminate::before,
+.k-checkbox.k-state-indeterminate::before {
+  content: "";
+  transform: none;
+  width: 8px;
+  height: 8px;
+  font-size: 0;
+  font-family: initial;
+  top: 5px;
+  left: 5px;
+  color: $control-color-primary;
+  background: $control-color-primary;
+}
+
+.k-avatar-solid.k-avatar-primary {
+  background: $control-color-primary;
+  color: $base-text-color-root;
+}
+
+//tabstrip styles
+.k-tabstrip-top > .k-tabstrip-items-wrapper {
+  flex-wrap: wrap;
+  max-width: calc(100% - 170px);
+  //border-width: 0;
+  .k-tabstrip-items {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+}
+
+//Grid basic styles
+.k-grid-header,
+.k-grouping-header,
+.k-grid-add-row,
+.k-grid-footer,
+.k-grid,
+.k-content,
+ul.cr-checkbox-control {
+  color: $control-color-text-primary;
+}

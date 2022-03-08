@@ -1,0 +1,129 @@
+import {BrowserModule} from '@angular/platform-browser';
+import {APP_INITIALIZER, ElementRef, LOCALE_ID, NgModule, Provider} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from './shared/shared.module';
+import {LayoutModule} from './layout/layout.module';
+import {ApiHttpInterceptor} from './global/services/http.interceptor';
+import {BookmarkService} from './global/services/bookmark.service';
+import {BaseViewComponent} from './global/components/base-view/base-view.component';
+import {TreeListModule} from '@progress/kendo-angular-treelist';
+import {TreeViewModule} from '@progress/kendo-angular-treeview';
+import {LoggerService} from './global/services/logger.service';
+import {DialogModule, DialogsModule, WindowModule} from '@progress/kendo-angular-dialog';
+import {NOTIFICATION_CONTAINER, NotificationModule} from '@progress/kendo-angular-notification';
+import {PreloaderComponent} from './global/components/preloader/preloader.component';
+import {
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {LanguageService} from './global/services/language.service';
+import {MessageService} from '@progress/kendo-angular-l10n';
+import {MenuModule} from '@progress/kendo-angular-menu';
+import {ValidationDialogComponent} from './global/components/validation-dialog/validation-dialog.component';
+import {ErrorService} from './global/services/error.service';
+import {ErrorDialogComponent} from './global/components/error-dialog/error-dialog.component';
+import '@progress/kendo-angular-intl/locales/he/all';
+import {ErrorsModule} from './errors/errors.module';
+import {CldrIntlService, IntlService} from '@progress/kendo-angular-intl';
+import {AuthService} from './global/services/auth/auth.service';
+import {CustomNotificationService} from './global/services/custom-notification.service';
+
+export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
+  new TranslateHttpLoader(http, './assets/i18n/', '.json?v=' + Date.now());
+
+export class MissingTranslationService implements MissingTranslationHandler {
+  handle(params: MissingTranslationHandlerParams): string {
+    return `WARN: '${params.key}' is missing in '${params.translateService.currentLang}' locale`;
+  }
+}
+
+export const bookmarkProviderFactory = (provider: BookmarkService): any => () => provider.load().toPromise();
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    BaseViewComponent,
+    PreloaderComponent,
+    ValidationDialogComponent,
+    ErrorDialogComponent,
+  ],
+  imports: [
+    LayoutModule,
+    ErrorsModule,
+    SharedModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    TreeListModule,
+    TreeViewModule,
+    DialogsModule,
+    NotificationModule,
+    DialogModule,
+    WindowModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MissingTranslationService},
+    }),
+    MenuModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiHttpInterceptor,
+      multi: true,
+    },
+    {
+      provide: NOTIFICATION_CONTAINER,
+      useFactory: () => ({nativeElement: document.body} as ElementRef),
+    },
+    LoggerService,
+    TreeListModule,
+    TreeViewModule,
+    LanguageService,
+    TranslateService,
+    {provide: MessageService, useClass: LanguageService},
+    {provide: ErrorService, useClass: ErrorService},
+    {provide: APP_INITIALIZER, useFactory: bookmarkProviderFactory, deps: [BookmarkService], multi: true},
+    {provide: LOCALE_ID, useValue: 'en'},
+  ],
+  exports: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+  constructor(
+    private translate: TranslateService,
+    private languageService: LanguageService,
+    private authService: AuthService,
+    private intlService: IntlService,
+    private customNotificationService: CustomNotificationService,
+    private errorService: ErrorService,
+  ) {
+    this.translate.currentLang = '';
+
+    this.languageService.getDefaultLanguage$().subscribe(lang => {
+        if (lang) {
+          this.translate.use(lang.code);
+          (this.intlService as CldrIntlService).localeId = lang.code;
+        }
+      },
+      error => {
+        this.customNotificationService.showDialogError(this.errorService.getMessagesToShow(error.errors));
+      });
+  }
+}

@@ -1,0 +1,30 @@
+<div class="cr-paging-wrapper" #paging>
+  <div class="cr-paging-flex-wrapper">
+    <div class="cr-paging-flex-column">
+      <div class="cr-paging-amount-wrapper">
+        <p [attr.data-translate]="'COMMON.PAGINATION.PER_PAGE'">
+          {{ 'COMMON.PAGINATION.PER_PAGE' | translate }}
+        </p>
+        <kendo-pager-page-sizes [pageSizes]="sizes"></kendo-pager-page-sizes>
+      </div>
+    </div>
+    <div class="cr-paging-flex-column">
+      <div class="cr-paging-info-wrapper">
+        <kendo-pager-input
+          [attr.data-translate]="'COMMON.PAGINATION.PAGE, COMMON.PAGINATION.OF'"></kendo-pager-input>
+        <kendo-grid-messages
+          [pagerOf]="'COMMON.PAGINATION.OF' | translate"
+          [pagerPage]="'COMMON.PAGINATION.PAGE' | translate"></kendo-grid-messages>
+        <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+        <kendo-pager-next-buttons></kendo-pager-next-buttons>
+      </div>
+    </div>
+    <div class="cr-paging-flex-column">
+      <div class="cr-paging-pagesize-wrapper">
+        <p [attr.data-translate]="'COMMON.PAGINATION.COUNT'">{{'COMMON.PAGINATION.COUNT' | translate}}
+          <span>{{totalElements || 0}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

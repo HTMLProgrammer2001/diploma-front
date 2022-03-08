@@ -1,0 +1,61 @@
+@use "styles/variables" as *;
+@import 'main.scss';
+
+html,
+body {
+  font-family: 'Rubik', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#loader{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, .5);
+
+  .cr-loader-wrapper{
+    position: relative;
+    display: inline;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .cr-dbl-spinner {
+      position: absolute;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 8px solid transparent;
+      border-top: 8px solid $border-color-primary;
+      border-left: 8px solid $border-color-primary;
+      -webkit-animation: 1s spin linear infinite;
+      animation: 1s spin linear infinite;
+    }
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

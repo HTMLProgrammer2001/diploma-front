@@ -1,0 +1,30 @@
+<ul
+  class="cr-checkbox-control"
+  [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+  [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+  *ngIf="_parsedPermissionSettings.isAccessRead"
+>
+  <li>
+    <input
+      [attr.data-element-name]="dataElementName"
+      #checkboxControl
+      type="checkbox"
+      kendoCheckBox
+      [(ngModel)]="dataValue"
+      (change)="onValueChange($event)"
+      [readOnly]="isReadOnly"
+      [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+      [class.invalid]="isValid"
+      (click)="onClick($event)"
+    />
+    <kendo-label
+      text="{{dataLabel || (translateKeys | translate)}}"
+      [for]="checkboxControl"
+      [attr.data-translate] = "translateKeys">
+    </kendo-label>
+  </li>
+</ul>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

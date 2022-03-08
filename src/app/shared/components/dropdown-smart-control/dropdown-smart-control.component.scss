@@ -1,0 +1,500 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  overflow: visible !important;
+
+  kendo-popup.k-animation-container.k-animation-container-shown {
+    z-index: 101;
+  }
+
+  kendo-popup.k-animation-container.k-animation-container-shown {
+    .cr-grouping {
+      .k-outer-group-header:first-of-type {
+        display: none;
+      }
+
+      ul li:first-of-type {
+        display: none;
+      }
+    }
+  }
+
+  .cr-dropdown-icon-value-wrapper {
+    padding-left: 2px;
+    margin-top: 14px;
+  }
+
+  .cr-control-smart-dropdown {
+    &:hover {
+      .menu-icon {
+        display: block;
+        background: $control-color-primary;
+        border-width: 0;
+        position: absolute;
+        top: 4px;
+        left: 2px;
+        border-radius: 5px;
+        width: 8px;
+        height: 8px;
+        cursor: pointer;
+      }
+    }
+
+    .menu-icon {
+      display: none;
+    }
+
+    &.ng-disabled {
+      background: $control-color-disabled;
+
+      kendo-label {
+        .k-dropdown-wrap {
+          color: $control-color-text-primary;
+          opacity: 1;
+
+          .k-input {
+            color: $control-color-text-primary;
+          }
+
+          .k-dateinput-wrap {
+            background: $control-color-disabled;
+            color: $control-color-text-primary;
+          }
+
+          .k-select {
+            display: none;
+            background: $control-color-disabled !important;
+          }
+        }
+      }
+    }
+
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 3px 0 2px;
+    height: 48px;
+    list-style: none;
+    border: 1px solid #E9E9E9;
+    background: white;
+    border-radius: 5px;
+
+    &.ng-invalid {
+      border-color: $error-color;
+    }
+
+    kendo-label {
+      padding: 3px 0 2px;
+      height: 42px;
+      position: relative;
+      display: block;
+      width: 100%;
+      border: 0;
+      color: $control-color-label;
+      font-size: small;
+
+      &.cr-icon-label {
+        label {
+          padding-left: 44px !important;
+        }
+
+        .k-input {
+          min-height: 40px;
+        }
+      }
+
+      > label {
+
+        &.k-label {
+          position: absolute;
+          top: 0;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          line-height: 15px;
+          max-width: calc(100% - 40px);
+          padding-right: 10px;
+          height: 17px;
+          font-size: 13px;
+          margin: 0 10px;
+          display: inline-block;
+          padding-left: 2px;
+        }
+
+        > .k-label-optional {
+          font-size: 0;
+          position: absolute;
+          color: $control-color-required;
+          right: 0;
+        }
+
+        > .k-label-optional::before {
+          position: relative;
+          left: -5px;
+          font-size: 13px;
+          content: "*";
+          color: $control-color-required;
+        }
+      }
+
+      .k-dropdown {
+        padding: 0;
+        width: 100%;
+        height: 40px;
+        margin: -4px 0 0 0;
+        justify-content: center;
+        display: flex;
+
+        .k-dropdown-wrap {
+          border: 0;
+          background: none;
+          display: flex;
+          align-items: flex-end;
+
+          &.k-state-focused, &:focus {
+            box-shadow: none;
+          }
+
+          span.k-select {
+            position: absolute;
+            top: -3px;
+            background: #fff;
+            right: 0px;
+            padding: 4px;
+            height: 48px;
+          }
+        }
+      }
+    }
+  }
+
+  .cr-dropdown-grid,
+  .k-grid-table-wrap {
+    .cr-control-smart-dropdown {
+      height: 41px;
+    }
+  }
+
+  //Dropdown quick search control
+
+  .k-dropdown {
+    font-size: 18px;
+
+    .k-input {
+      color: $control-color-text-primary;
+      margin: 0px 18px 0px 10px;
+      padding: 1px 2px;
+      height: 20px;
+      line-height: 1;
+    }
+  }
+
+  .cr-quick-dropdown-search-wrapper {
+    border-bottom: 1px solid $border-color-primary;
+  }
+
+  .cr-quick-dropdown-search {
+    width: 100%;
+    position: relative;
+    display: flex;
+
+    > input {
+      width: 100%;
+      border: 0;
+      height: 38px;
+      font-size: 18px;
+    }
+
+    > span {
+      position: absolute;
+      right: 0;
+      line-height: 38px;
+      background: #fff;
+      height: 38px;
+      width: 30px;
+      text-align: center;
+      color: #b3aeae;
+    }
+
+    .k-textbox:hover, .k-textbox.k-state-hover {
+      box-shadow: none;
+    }
+  }
+
+  .cr-icon-list {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  .cr-dropdown-paginator {
+    border-top: 1px solid $border-color-primary;
+
+    > * {
+      float: left;
+    }
+  }
+
+  .cr-custom-dropdown-list {
+    .k-list-scroller {
+      max-height: initial !important;
+    }
+
+    &.k-list-container {
+      .k-list {
+        padding: 0 0 0 2px;
+
+        .k-item {
+          &.k-state-selected {
+            border-right: 1px solid #ededed;
+            border-left: 1px solid #ededed;
+
+            &:hover {
+              border-right: 1px solid #ededed;
+              border-left: 1px solid #ededed;
+
+              &:after {
+                background: $border-color-primary;
+              }
+            }
+          }
+
+          &:hover {
+            border-right: 1px solid #ededed;
+            border-left: 1px solid #ededed;
+
+            &:after {
+              display: block;
+            }
+          }
+
+          &:after {
+            background: $base-color-1;
+            transition: 0.3s ease-in-out;
+            position: absolute;
+            left: -3px;
+            display: none;
+            content: "";
+            width: 3px;
+            height: 100%;
+          }
+
+          padding: 15px 20px;
+          border-right: 1px solid #fff;
+          border-left: 1px solid #fff;
+        }
+      }
+    }
+
+    &.cr-dropdown-popup-template-wrapper {
+      &.k-list-container {
+        .k-list {
+          .k-item {
+            &:first-child {
+              border-right: 1px solid #eee;
+              border-left: 1px solid #eee;
+              background: #eee;
+
+              &:after {
+                background: $border-color-primary;
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .k-context-menu-popup {
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 3%), 0 4px 5px 0 rgb(0 0 0 / 4%);
+    border: none;
+    outline: solid 1px $base-color-1 !important;
+    background-color: $base-color-2;
+
+    cr-svg-icon-control {
+      display: flex;
+      margin-right: 5px;
+    }
+
+    .k-menu-vertical > .k-menu-item > .k-menu-link {
+      padding: 15px 20px;
+    }
+
+    .k-popup.k-menu-popup {
+      border-radius: 0;
+    }
+  }
+}
+
+:host {
+  //Global Rtl styles
+  body.rtl-on & {
+
+    ::ng-deep {
+      .cr-control-smart-dropdown kendo-label > label.k-label {
+        padding-right: 2px;
+        padding-left: 10px;
+      }
+
+      .cr-control-smart-dropdown kendo-label > label > .k-label-optional {
+        left: 0;
+        right: initial;
+      }
+
+      .cr-control-smart-dropdown {
+        .k-dropdown {
+          .k-dropdown-wrap {
+            span {
+              &.k-select {
+                left: 0;
+                right: initial;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //RTL for popups
+  kendo-popup[dir="rtl"] & {
+    .k-list-container {
+      margin-left: 0;
+      position: relative;
+      right: 0;
+    }
+
+    .cr-custom-dropdown-list {
+      &.k-list-container {
+        .k-list {
+          padding: 0 2px 0 0;
+
+          .k-item {
+            &:after, &:before {
+              right: -3px;
+              left: initial;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.cr-control-smart-dropdown {
+  &.cr-templates-dropdown-smart-control-wrapper {
+    &.cr-template-list-opened {
+      ::ng-deep {
+        background: $control-color-primary;
+      }
+    }
+
+    ::ng-deep {
+      overflow: hidden !important;
+      padding: 0;
+      border: solid 2px $border-color-primary;
+      background-color: #fff;
+      border-radius: 12px;
+      transition: .3s ease-in-out;
+
+      .k-input {
+        display: none;
+      }
+
+      kendo-label {
+        height: 100%;
+        padding: 0;
+
+        .k-dropdown {
+          height: 100%;
+          margin: 0;
+
+          .k-dropdown-wrap {
+            &[aria-expanded=true] {
+              span.k-select {
+                transform: rotate(180deg);
+              }
+            }
+
+            span.k-select {
+              background: transparent;
+              transition: .3s ease-in-out;
+              height: 100%;
+              top: 0;
+            }
+          }
+        }
+      }
+
+      kendo-label > label.k-label {
+        position: absolute;
+        margin: 0;
+        max-width: 100%;
+        width: 100%;
+        padding: 0 35px 0 15px;
+        top: 50%;
+        left: 50%;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: $control-color-text-primary;
+        transform: translate(-50%, -50%);
+      }
+
+      &.ng-disabled {
+        outline: none;
+        cursor: default;
+        opacity: 0.6;
+        filter: grayscale(0.1);
+        pointer-events: none;
+        box-shadow: none;
+
+        kendo-label {
+          .k-dropdown {
+            .k-dropdown-wrap {
+              span.k-select {
+                display: flex;
+                background: transparent !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host-context(body.rtl-on) {
+  .cr-control-smart-dropdown {
+    &.cr-templates-dropdown-smart-control-wrapper {
+      ::ng-deep {
+        .k-input {
+          display: none;
+        }
+
+        kendo-label > label.k-label {
+          padding: 0 15px 0 35px !important;
+        }
+      }
+    }
+  }
+}
+
+
+::ng-deep {
+  body.rtl-on {
+    .cr-icon-list {
+      margin: 0 0 0px 15px;
+    }
+
+    .cr-icon-label {
+      label {
+        margin-right: 56px;
+      }
+    }
+  }
+}

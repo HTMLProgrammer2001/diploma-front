@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+
+  svg {
+    display: flex;
+    all: inherit;
+
+    &.cr-no-svg-icon {
+      outline: 1px solid #e9e9e9;
+    }
+  }
+}

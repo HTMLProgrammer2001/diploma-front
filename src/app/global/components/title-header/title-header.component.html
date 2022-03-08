@@ -1,0 +1,73 @@
+<div class="cr-header-view" [class.is-popup]="isPopup">
+  <div class="row align-items-center">
+    <div class="cr-flex-wrapper">
+      <div [attr.data-translate]="titleTranslateKey | translateAttribute: additionalTranslateKeys"
+           class="cr-flex-column cr-header-text">
+        {{!!title
+        ? (title | replace : {value: titleValue})
+        : (!!titleTranslateKey
+          ? (titleTranslateKey | translate : {value: titleValue})
+          : '')}}
+      </div>
+      <div class="cr-flex-column cr-align-right cr-button-margin">
+        <ng-container *ngFor="let btn of buttonSettings">
+          <ng-container *ngIf="btn.isVisible !== false && btn.appearance === 'icon-button' && btn.template !=='pin'">
+            <cr-button-control
+              buttonTemplateType="icon-button"
+              [disabled]="btn.isDisabled"
+              (buttonClickEvent)="onButtonClick(btn)"
+              width="30px"
+              height="30px"
+              [icon]="btn.iconSvg"
+            ></cr-button-control>
+          </ng-container>
+          <ng-container *ngIf="btn.isVisible !== false && btn.appearance === 'icon-button' && btn.template ==='pin'">
+            <cr-button-control
+              buttonTemplateType="icon-button"
+              [disabled]="btn.isDisabled"
+              (buttonClickEvent)="onButtonClick(btn)"
+              width="30px"
+              height="30px"
+              [icon]="currentBookmarkTask?.isPinned ? 'icon-un-pin' : 'icon-pin'"
+            ></cr-button-control>
+          </ng-container>
+          <ng-container  *ngIf="btn.isVisible !== false && btn.appearance === 'primary-button'">
+            <cr-button-control
+              buttonTemplateType="primary-action-button"
+              [disabled]="btn.isDisabled"
+              (buttonClickEvent)="onButtonClick(btn)"
+              [text]="btn.name"
+              [textTranslateKey]="btn.nameTranslateKey"
+            ></cr-button-control>
+          </ng-container>
+          <ng-container  *ngIf="btn.isVisible !== false && btn.appearance === 'secondary-button'">
+            <cr-button-control
+              buttonTemplateType="secondary-action-button"
+              [disabled]="btn.isDisabled"
+              (buttonClickEvent)="onButtonClick(btn)"
+              [text]="btn.name"
+              [textTranslateKey]="btn.nameTranslateKey"
+            ></cr-button-control>
+          </ng-container>
+          <ng-container *ngIf="btn.isVisible !== false && btn.appearance === 'status'">
+            <div class="cr-status-label">
+              <cr-button-control
+                buttonTemplateType="icon-button"
+                [disabled]="btn.isDisabled"
+                (buttonClickEvent)="onButtonClick(btn)"
+                width="30px"
+                height="30px"
+                [icon]="btn.iconSvg"
+              ></cr-button-control>
+
+              <span [attr.data-translate]="btn.nameTranslateKey">{{btn.name || (btn.nameTranslateKey | translate)}}</span>
+            </div>
+          </ng-container>
+          <ng-container  *ngIf="btn.isVisible !== false && btn.appearance === 'separator'">
+            <div class="cr-header-separator"></div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

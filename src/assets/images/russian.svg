@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+
+<g transform="matrix(3.3333335 0 0 3.3333335 -0 5)">
+    <path d="M0 0L9 0L9 3L0 3z" stroke="none" fill="#FFFFFF" fill-rule="nonzero" />
+    <path d="M0 3L9 3L9 6L0 6z" stroke="none" fill="#D52B1E" fill-rule="nonzero" />
+    <path d="M0 2L9 2L9 4L0 4z" stroke="none" fill="#0039A6" fill-rule="nonzero" />
+</g>
+</svg>

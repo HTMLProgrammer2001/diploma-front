@@ -1,0 +1,75 @@
+<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
+  <div #contextmenutarget
+       kendoTooltip
+       position="top"
+       tooltipClass="cr-tooltip"
+       class="cr-control-dropdown"
+       [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+       [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+       [ngClass]="{'ng-invalid': validationResult?.isValid === false}"
+       [class.ng-invalid]="validationMessage">
+    <div *ngIf="contextMenuItems"
+         class="menu-icon"
+         (click)="onShowContextMenu($event)">
+    </div>
+    <kendo-label text="{{dataLabel || (translateKeys | translate)}}"
+                 title="{{validationResult?.messages | validationMessageTranslate}}{{validationMessage}}"
+                 [optional]="requiredRule?.isActive"
+                 [attr.data-translate]="translateKeys">
+      <kendo-label-messages optional="'*'">
+      </kendo-label-messages>
+      <kendo-dropdownlist
+        [attr.data-element-name]="dataElementName"
+        #dropdownList
+        [data]="dataSource"
+        [(ngModel)]="dataValue"
+        [popupSettings]="{popupClass : 'cr-custom-dropdown-simple-list', width: 'auto' }"
+        (selectionChange)="onSelectionChange($event)"
+        (open)="onOpen()"
+        [textField]="dataDisplayField"
+        [valueField]="dataValueField"
+        [readonly]="isReadOnly"
+        [defaultItem]="defaultItem"
+        [valuePrimitive]="true"
+        [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+        (blur)="onBlur($event)"
+        [itemDisabled]="itemDisabled">
+        <ng-template kendoDropDownListValueTemplate let-dataItem>
+          <span>
+            {{dataItem && dataItem[dataDisplayField] ? dataItem[dataDisplayField] :
+            dataItem && dataItem[dataTranslateKeysField] ? (dataItem[dataTranslateKeysField] | translate) : ''}}
+          </span>
+        </ng-template>
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+        <span style="white-space: nowrap; max-width: 800px">
+          <span [attr.data-translate]="dataItem[dataTranslateKeysField]">
+            {{dataItem && dataItem[dataDisplayField] ? dataItem[dataDisplayField] :
+            dataItem && dataItem[dataTranslateKeysField] ? (dataItem[dataTranslateKeysField] | translate) : ''}}
+          </span>
+        </span>
+        </ng-template>
+      </kendo-dropdownlist>
+    </kendo-label>
+  </div>
+
+  <kendo-contextmenu
+    #contextmenu
+    *ngIf="contextMenuItems"
+    [target]="contextmenutarget"
+    [items]="contextMenuItems"
+    (select)="onSelectContextMenu($event)">
+    <ng-template kendoMenuItemTemplate let-item="item">
+    <span *ngIf="item.iconSvg" class="cr-pin-icon-wrapper">
+            <cr-svg-icon-control [width]="'20px'" [height]="'20px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+    </span>
+      <span>
+          {{ item.text || item.textTranslateKey | translate }}
+    </span>
+
+    </ng-template>
+  </kendo-contextmenu>
+</ng-container>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

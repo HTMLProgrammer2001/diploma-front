@@ -1,0 +1,147 @@
+@use "../../../../styles/variables" as *;
+.cr-control-date-picker-simple {
+  ::ng-deep {
+    margin: 0;
+    position: relative;
+    padding: 0 10px;
+    list-style: none;
+    line-height: 1;
+    border: 1px solid #E9E9E9;
+    background: white;
+    border-radius: 5px;
+
+    .k-datepicker {
+      width: 100%;
+
+      .k-picker-wrap {
+        border: 0;
+
+        &.k-state-focused, &:focus {
+          box-shadow: none;
+        }
+
+        span.k-select {
+          background: none;
+          z-index: 1;
+
+          .k-icon {
+            &:before {
+              content: '';
+            }
+          }
+        }
+      }
+    }
+
+    &.ng-invalid {
+      border-color: $error-color;
+    }
+
+    .k-dateinput .k-dateinput-wrap {
+      height: initial;
+      padding: 5px;
+    }
+
+    .k-input {
+      padding: 4px;
+      height: 20px;
+    }
+
+    cr-svg-icon-control {
+      position: absolute;
+      right: 1px;
+      transform: translateY(-50%);
+      top: 50%;
+      z-index: 0;
+    }
+
+    > .k-label-optional {
+      font-size: 0;
+      position: absolute;
+      color: $control-color-required;
+      right: 0;
+    }
+
+    > .k-label-optional::before {
+      position: relative;
+      left: -5px;
+      font-size: 13px;
+      content: "*";
+      color: $control-color-required;
+    }
+
+    &.ng-disabled {
+      background: $control-color-disabled;
+
+      .k-datepicker {
+        .k-dateinput .k-dateinput-wrap {
+          background: $control-color-disabled;
+        }
+
+        .k-picker-wrap {
+          background: $control-color-disabled;
+
+          span.k-select {
+            background: $control-color-disabled;
+          }
+        }
+      }
+    }
+  }
+}
+
+:host {
+  //Global Rtl styles
+  body.rtl-on & {
+    ::ng-deep {
+      //Date time pickers
+      .cr-control-date-picker-simple {
+        cr-svg-icon-control {
+          right: inherit;
+          left: 1px;
+        }
+
+        kendo-label {
+          > .k-label-optional {
+            right: initial;
+            left: 0;
+          }
+
+          > .k-label-optional::before {
+            right: -5px;
+            left: initial;
+          }
+
+          > label.k-label {
+            padding-left: 10px;
+            padding-right: 2px;
+          }
+
+          .k-datepicker {
+            .k-picker-wrap {
+              span.k-select {
+                left: 0;
+                right: initial;
+              }
+            }
+          }
+        }
+      }
+
+      .cr-control-date-picker-simple kendo-label .k-timepicker .k-input {
+        padding: 4px 2px 1px;
+        margin: 0 10px 0 18px;
+      }
+
+      .cr-control-date-picker-simple kendo-label > label > .k-label-optional {
+        left: 0px;
+        right: initial;
+
+        &:before {
+          right: 5px;
+          left: initial;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
+  <div kendoTooltip
+       class="cr-control-date-time-picker"
+       tooltipClass="cr-tooltip"
+       [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+       [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+       [class.ng-invalid]="validationResult?.isValid === false || validationMessage"
+  >
+    <kendo-label text="{{dataLabel || (translateKeys | translate)}}"
+                 [optional]="isRequired"
+                 title="{{validationResult?.messages | validationMessageTranslate}}{{validationMessage}}"
+                 [attr.data-translate]="translateKeys">
+      <kendo-label-messages optional="*">
+      </kendo-label-messages>
+      <kendo-datetimepicker
+        [attr.data-element-name]="dataElementName"
+        #datetimepicker
+        placeholder=""
+        [value]="dataValue  | stringToDate: patternDateInput"
+        (valueChange)="onValueChange($event)"
+        [readonly]="isReadOnly"
+        (blur)="onBlur($event)"
+        [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+        [format]="currentDateTimeFormatPattern"
+      >
+        <kendo-datetimepicker-messages
+          [now]="'COMMON.CALENDAR.NOW' | translate"
+          [nowLabel]="'COMMON.CALENDAR.SELECT_NOW' | translate"
+          [today]="'COMMON.CALENDAR.TODAY' | translate"
+          [cancel]="'COMMON.CALENDAR.CANCEL' | translate"
+          [cancelLabel]="'COMMON.CALENDAR.CANCEL_LABEL' | translate"
+          [accept]="'COMMON.CALENDAR.SET' | translate"
+          [acceptLabel]="'COMMON.CALENDAR.SET_LABEL' | translate"
+          [dateTabLabel]="'COMMON.CALENDAR.DATE_LABEL' | translate"
+          [dateTab]="'COMMON.CALENDAR.DATE' | translate"
+          [timeTabLabel]="'COMMON.CALENDAR.TIME_LABEL' | translate"
+          [timeTab]="'COMMON.CALENDAR.TIME' | translate"
+        ></kendo-datetimepicker-messages>
+      </kendo-datetimepicker>
+    </kendo-label>
+    <cr-svg-icon-control
+      [width]="'30px'"
+      [height]="'30px'"
+      [fill]="'#2b2b2b'"
+      [iconName]="'icon-date-time-picker'"
+    ></cr-svg-icon-control>
+  </div>
+</ng-container>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

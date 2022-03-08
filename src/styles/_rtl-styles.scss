@@ -1,0 +1,689 @@
+@use "variables" as *;
+.rtl-on {
+
+  .cr-control-button-wrapper {
+    cr-user-info {
+      padding-right: 10px;
+      padding-left: initial;
+    }
+  }
+
+  //New grid styles
+  .cr-grid-wrapper-new {
+
+    .k-tabstrip-top > .k-tabstrip-items-wrapper .k-item {
+      &:first-child {
+        border-left: 1px solid transparent;
+        border-right: 1px solid $base-color-2;
+      }
+    }
+
+    &.cr-grid-no-inner-borders {
+      .k-grid {
+        tr {
+          &:first-child {
+            td {
+              padding: 22px 22px 11px 25px !important;
+            }
+
+            &:last-child {
+              td {
+                padding: 22px 22px 22px 25px !important;
+              }
+            }
+          }
+
+          &:last-child {
+            td {
+              padding: 11px 22px 22px 25px !important;
+            }
+          }
+        }
+
+        td {
+          padding: 11px 22px 11px 25px !important;
+          border-top: 0 !important;
+          border-bottom: 0 !important;
+        }
+      }
+    }
+
+    &.cr-grid-with-collapse {
+      .k-detail-row {
+        .k-header:last-child {
+          padding: 8px 12px;
+        }
+
+        tr {
+          td {
+            &:last-child {
+              padding: 8px 12px;
+            }
+          }
+        }
+      }
+    }
+
+    .cr-row-left {
+      padding-left: inherit;
+      padding-right: 30px !important;
+    }
+
+    .k-grid-header {
+      .k-header {
+        &:first-child {
+          padding: 0 22px 0 12px;
+          border-right: 3px solid $base-color-2;
+          border-left: none;
+        }
+
+        &:last-child {
+          padding: 8px 12px 8px 25px;
+        }
+      }
+    }
+
+    .k-grid {
+      tr {
+        &.k-state-selected {
+          td {
+            &:first-child {
+              border-right: 3px solid $border-color-primary;
+              border-left: none;
+            }
+          }
+        }
+
+        td {
+          &:first-child {
+            padding: 0 22px 0 12px;
+            border-right: 3px solid transparent;
+            border-left: none;
+          }
+
+          &:last-child {
+            padding: 8px 12px 8px 25px;
+          }
+
+          &.action-group {
+            padding-left: 25px;
+            padding-right: inherit;
+            text-align: left;
+
+            &.cr-button-wrapper-padding-right {
+              text-align: left;
+              padding-left: 25px;
+              padding-right: inherit;
+            }
+          }
+        }
+      }
+    }
+
+    .cr-paging-flex-wrapper {
+      .cr-paging-amount-wrapper {
+        .k-pager-sizes {
+          .k-pager-nav {
+            .k-input {
+              margin: 0 10px 0 0;
+            }
+          }
+        }
+
+        p {
+          margin-left: 15px;
+          margin-right: 0;
+        }
+      }
+    }
+
+    kendo-grid tr.k-state-selected + .k-detail-row .k-hierarchy-cell {
+      border-left: 3px solid transparent !important;
+      border-right: 3px solid $border-color-primary !important;
+      background: #f7f7f7 !important;
+    }
+  }
+
+
+  //Change datepickers
+  .k-time-container {
+    margin-right: -100px;
+    margin-left: -117px;
+  }
+
+  .k-datetime-container {
+    direction: ltr;
+
+    .k-datetime-wrap {
+      direction: rtl;
+    }
+  }
+
+  .k-datetime-container .k-time-tab .k-datetime-selector {
+    transform: translateX(100%);
+  }
+
+  .k-calendar .k-content.k-scrollable,
+  .k-calendar .k-calendar-content.k-scrollable {
+    margin-right: -100px;
+    margin-left: -117px;
+  }
+
+  .k-calendar .k-content > table,
+  .k-calendar .k-content > .k-calendar-table,
+  .k-calendar .k-calendar-content > table,
+  .k-calendar .k-calendar-content > .k-calendar-table {
+    margin-left: -17px;
+    margin-right: initial;
+  }
+
+  //Change bootstrap auto margin class to reversed version
+  .mr-auto, .mx-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  //Header title component styles
+  .cr-header-view-main {
+    .row {
+      flex-direction: row;
+
+    }
+  }
+
+  //Base align classes reverse
+  .cr-align-right {
+    text-align: left;
+  }
+
+  //Reverse all tables' data
+  table {
+    direction: rtl;
+    text-align: right;
+
+    th, td, tr {
+      text-align: right;
+    }
+  }
+
+  //Change paging direction
+  .cr-grid-wrapper {
+    .k-grid-pager {
+      direction: rtl;
+    }
+  }
+
+  //Change main navigation menu
+  .cr-full-nav-menu {
+    .k-i-arrow-s::before {
+      transform: rotate(90deg);
+    }
+
+    .svg-icon-style {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+
+    .k-panelbar > .k-item {
+      direction: rtl;
+
+      > .k-link {
+        padding: 5px 10px 5px 5px;
+      }
+
+      .k-panelbar > .k-item {
+        .k-link {
+          &:before {
+            right: initial;
+            left: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .menu {
+    .aside {
+      ul {
+        .k-icon {
+          margin: 0 0 2px 5px;
+        }
+
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  //Regular switch control
+  .k-radio-label {
+    > .k-radio {
+      margin-left: 15px;
+      margin-right: 0;
+    }
+  }
+
+  //Change inputs
+  input,
+  textarea {
+    direction: RTL;
+    text-align: start !important;
+  }
+
+  .k-input {
+    padding: 4px 0 4px 8px;
+  }
+
+  //Labels
+  .cr-numeric-control kendo-label > label > .k-label-optional,
+  .cr-edit-control kendo-label > label > .k-label-optional {
+    left: 0px;
+    right: initial;
+
+    &:before {
+      right: 5px;
+      left: initial;
+    }
+  }
+
+  .cr-numeric-control kendo-label > label.k-label,
+  .cr-edit-control kendo-label > label.k-label {
+    padding-right: 2px;
+    padding-left: 10px;
+  }
+
+  .cr-edit-control kendo-label .prefix-text.active {
+    left: initial;
+    right: 0;
+  }
+
+  .cr-edit-control kendo-label input.prefix {
+    padding-left: 0;
+    padding-right: 40px;
+  }
+
+  .cr-icon-hamburger {
+    margin-right: initial;
+    margin-left: 10px;
+  }
+
+  //Radio controls
+  .k-radio + .k-radio-label,
+  .k-radio-label + .k-radio {
+    margin-left: 0;
+    margin-right: 4px;
+  }
+
+  //Cr .cr-absolute-title-in-grid styles
+  .cr-absolute-title-in-grid {
+    right: 0px;
+    left: initial;
+  }
+
+  //Combobox styles
+  .cr-grid-wrapper .k-combobox .k-state-default > .k-select {
+    left: 0;
+    right: initial;
+  }
+
+  .cr-control-combobox kendo-label > label.k-label {
+    padding-left: 10px;
+    padding-right: 2px;
+  }
+
+  .k-combobox.k-combobox-clearable .k-input {
+    padding: 0;
+    margin: 0 10px 0 30px;
+  }
+
+  //Dropdown controls
+  .k-dropdown .k-input {
+    padding: 1px 2px;
+    margin: 0 10px 0 18px;
+  }
+
+  .cr-control-dropdown {
+    kendo-label {
+      > label {
+        &.k-label {
+          padding-left: 10px;
+          padding-right: 2px;
+        }
+
+        > .k-label-optional {
+          left: 0px;
+          right: initial;
+        }
+
+        > .k-label-optional::before {
+          right: 5px;
+          left: initial;
+        }
+      }
+    }
+  }
+
+  //Dedicated Component headers styles
+  .cr-partner-header-outer-wrapper,
+  .cr-item-header-outer-wrapper,
+  .cr-promotion-header-outer-wrapper,
+  .cr-employee-header-outer-wrapper,
+  .cr-special-price-header-outer-wrapper {
+    margin: 0 -25px 30px 0;
+  }
+
+  .cr-special-price-priority-wrapper {
+    .cr-ss-priority-main-column {
+      padding-right: 15px;
+      padding-left: 0;
+    }
+
+    .cr-ss-priority-control-column {
+      border-right: 1px solid $base-color-1;
+      border-left: 0;
+
+      .cr-pp-buttons-outer-wrapper {
+        right: initial;
+        left: 36px;
+      }
+    }
+  }
+
+  //Global grid styles
+  .cr-grid-wrapper {
+    .k-grid-header {
+      .k-header {
+        &:first-child {
+          border-left: none;
+          border-right: 3px solid $base-color-2;
+        }
+      }
+    }
+
+    &.cr-inner-grid {
+      .cr-control-line-header-wrapper {
+        text-align: left;
+      }
+    }
+
+    .k-grid {
+      tr {
+        &.k-state-selected {
+          td {
+            &:first-child {
+              border-left: 3px solid transparent;
+              border-right: 3px solid $border-color-primary;
+            }
+          }
+        }
+
+        td {
+          &:first-child {
+            border-right: 3px solid transparent;
+          }
+
+          border-left: none;
+
+          &.action-group {
+            border-left: none;
+            border-right: none;
+          }
+        }
+      }
+    }
+
+    .cr-paging-pagesize-wrapper {
+      span {
+        text-align: left;
+        padding: 0 0 5px 10px;
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    }
+
+    .cr-paging-flex-wrapper {
+
+      .cr-paging-amount-wrapper {
+        p {
+          margin-right: 0;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+
+  //Grid action line styles
+  .cr-component {
+    .action-group {
+      text-align: left;
+      padding-left: 25px !important;
+      padding-right: 12px !important;
+    }
+  }
+
+  //Blocker styles
+  .cr-popup-blocker {
+    left: 0;
+    right: -30px;
+  }
+
+  //Basket control icons
+  .cr-icon-button-wrapper {
+    &.cr-basket-icon-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: initial;
+      z-index: 4;
+    }
+  }
+
+  .cr-absolute-button-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: initial;
+    z-index: 2;
+  }
+
+  .cr-rtl-switcher-wrapper {
+    .cr-control-dropdown {
+      margin: 0 0 0 10px;
+    }
+  }
+
+  //Rtl switcher wrapper
+  kendo-button-list {
+    .k-list {
+      padding: 0 !important;
+
+      li {
+        border-left: none !important;
+        border-right: none !important;
+
+        &:hover {
+          border-left: none !important;
+          border-right: none !important;
+        }
+
+        &.k-state-focused {
+          border-left: none !important;
+          border-right: none !important;
+          background: none !important;
+        }
+      }
+    }
+
+    .cr-lang-wrap {
+      border-left: none !important;
+      border-right: 2px solid transparent !important;
+
+      &:hover {
+        border-left: none !important;
+        border-right: 2px solid #ededed !important;
+        background: #ededed;
+      }
+
+      &.cr-active-language {
+        border-left: none !important;
+        border-right: 2px solid $border-color-primary !important;
+        background: #ededed;
+      }
+    }
+
+    .svg-icon-language {
+      margin-right: 0;
+      margin-left: 20px;
+    }
+  }
+
+  .cr-rtl-switcher-wrapper {
+    .k-input {
+      text-align: right;
+      direction: rtl;
+    }
+  }
+
+  //Tender outer wrapper
+  .cr-tender-header-outer-wrapper {
+    margin: 0 -25px 30px;
+  }
+
+  //Menu logo styles
+  .cr-nav-menu-logo .svg-icon-logo {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+
+  //Switcher
+  ul.cr-switch-control > li:first-child .cr-switcher-label-after {
+    margin-right: 15px;
+    margin-left: 0;
+  }
+
+  ul.cr-switch-control > li:first-child .cr-switcher-label-before {
+    margin-left: 15px;
+    margin-right: 0;
+  }
+
+  .cr-basket-wrapper {
+    .k-i-backward-element {
+      margin: 0 0 0 5px;
+    }
+  }
+
+  .cr-outer-wrapper {
+    .row {
+      .cr-col-no-padding-left {
+        padding-left: 15px;
+        padding-right: 0;
+      }
+
+      .cr-col-no-padding-right {
+        padding-left: 0;
+        padding-right: 15px;
+      }
+
+      .cr-col-content-align-right {
+        text-align: left;
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+//Dropdown smart control search
+.k-animation-container[dir="rtl"] {
+  .cr-quick-dropdown-search {
+    > span {
+      position: absolute;
+      right: initial;
+      left: 0;
+    }
+  }
+
+  .k-list-container {
+    .k-list {
+      .k-item {
+        &:hover {
+          &.k-state-selected {
+            &:before {
+              background: #eee;
+            }
+
+            &:after {
+              background: $base-color-root;
+            }
+          }
+
+          &:before,
+          &:after {
+            background: $base-color-1;
+            display: block;
+          }
+        }
+
+        &.k-state-selected {
+          &:before,
+          &:after {
+            display: block;
+          }
+        }
+
+        &:before {
+          background: #eee;
+        }
+
+        &:after {
+          background: $base-color-root;
+        }
+      }
+    }
+  }
+}
+
+//RTL for popups
+kendo-popup[dir="rtl"] {
+  .k-list-container {
+    margin-left: 0;
+    position: relative;
+    right: 0;
+  }
+
+  .cr-custom-dropdown-list {
+    &.k-list-container {
+      .k-list {
+        padding: 0 2px 0 0;
+
+        .k-item {
+          &:after, &:before {
+            right: -3px;
+            left: initial;
+          }
+        }
+      }
+    }
+  }
+}
+
+.k-animation-container {
+  .k-rtl {
+    &.k-menu-popup {
+      border-radius: 5px 0px 5px 5px;
+
+      .k-link > span.k-menu-expand-arrow:before {
+        transform: rotate(90deg);
+      }
+
+      .k-link.sub-main-menu {
+        .svg-icon-style {
+          margin-left: 0;
+          margin-right: 10px;
+        }
+
+        border-left: none;
+        border-right: 2px solid #1c1c1c;
+      }
+    }
+  }
+}

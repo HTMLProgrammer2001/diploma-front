@@ -1,0 +1,125 @@
+@use "../../../../styles/variables" as *;
+:host-context(.rtl-on) {
+  .cr-file-control {
+    &.cr-required {
+      ::ng-deep {
+        kendo-fileselect {
+          .k-dropzone {
+            .k-dropzone-hint {
+              padding-left: 8px;
+              padding-right: 0;
+
+              &:before {
+                position: absolute;
+                content: '*';
+                color: $error-color;
+                right: initial;
+                left: 0;
+                top: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.cr-file-control {
+  position: relative;
+
+  &.cr-required {
+    ::ng-deep {
+      kendo-fileselect {
+        .k-dropzone {
+          .k-dropzone-hint {
+            padding-right: 8px;
+
+            &:before {
+              position: absolute;
+              content: '*';
+              color: $error-color;
+              right: 0;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.ng-invalid {
+    ::ng-deep {
+      kendo-fileselect {
+        border-color: $error-color;
+      }
+    }
+  }
+
+  ::ng-deep {
+    .k-upload .k-upload-files {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      margin: 0;
+      border: none;
+      display: flex;
+      align-items: center;
+      height: 46px;
+      z-index: 1;
+
+      .k-file-name-size-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+      }
+
+      .k-file {
+        box-shadow: none;
+        width: 100%;
+        padding: 0 8px;
+
+        .k-button-icon {
+          &:after {
+            box-shadow: none !important;
+            background: none !important;
+          }
+        }
+      }
+    }
+
+    kendo-fileselect {
+      line-height: 1;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      height: 48px;
+      list-style: none;
+      border: 1px solid #E9E9E9;
+      background: white;
+      border-radius: 5px;
+
+      .k-dropzone {
+        padding: 8px 12px;
+        transition: .3s all ease-in-out;
+        background: #fff;
+
+        &.k-dropzone-hover {
+          background: #eee;
+        }
+
+        .k-dropzone-hint {
+          position: relative;
+          font-size: 18px;
+          color: $control-color-text-primary;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}

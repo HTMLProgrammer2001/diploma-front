@@ -1,0 +1,60 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  .cr-small-nav-menu {
+    height: calc(100% - 50px);
+    background: $main-menu-background-color;
+    .k-item {
+      box-shadow: none!important;
+    }
+    .cr-menu-icon {
+      display: flex;
+      align-items: center;
+      flex-basis: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    svg {
+      display: flex;
+    }
+    .svg-icon-style {
+      transition: .3s all ease-in-out;
+      fill: $main-menu-text-color;
+      width: 30px;
+      &.sub-menu {
+        width: 25px;
+      }
+    }
+    .k-menu-vertical > .k-menu-item > .k-menu-link {
+      transition: .3s all ease-in-out;
+      .k-icon {
+        display: none;
+        &:before {
+          content: '>';
+        }
+      }
+      cursor: default;
+      &.cr-nav-menu-small-link {
+        cursor: pointer;
+        &:hover,&.k-state-active {
+          background: #3c3c3c;
+          .svg-icon-style {
+            fill: $base-color-root;
+          }
+        }
+      }
+      padding: 5px;
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+    }
+    .k-menu-vertical > .k-menu-item {
+      .k-menu-item {
+        .k-menu-link {
+          .k-icon {
+            display: initial;
+          }
+        }
+      }
+    }
+  }
+}

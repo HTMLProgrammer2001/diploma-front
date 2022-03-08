@@ -1,0 +1,40 @@
+<div
+  *ngIf="_parsedPermissionSettings.isAccessRead"
+  kendoTooltip tooltipClass="cr-tooltip"
+  position="top"
+  class="cr-numeric-control"
+  [ngClass]="customClass"
+  [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+  [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+  [class.ng-invalid]="validationResult?.isValid === false || validationMessage"
+>
+  <div title="{{validationResult?.messages | validationMessageTranslate}}{{validationMessage}}">
+    <kendo-label text="{{dataLabel || (translateKeys | translate)}}"
+                 [optional]="requiredRule?.isActive"
+                 [attr.data-translate]="translateKeys">
+      <kendo-label-messages optional="*">
+      </kendo-label-messages>
+      <kendo-numerictextbox
+        [attr.data-element-name]="dataElementName"
+        #numericComponent
+        [step]="0"
+        [spinners]="false"
+        [(value)]="dataValue"
+        (valueChange)="onInput($event)"
+        [readonly]="isReadOnly"
+        [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+        (blur)="onBlur($event)"
+        [min]="min"
+        [max]="max"
+        [autoCorrect]="autoCorrectMinMax"
+        [format]="format"
+        [decimals]="decimals"
+      >
+      </kendo-numerictextbox>
+    </kendo-label>
+  </div>
+</div>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

@@ -1,0 +1,8 @@
+<svg id="icon-calendar" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+    <g transform="translate(-766.49 -420.99)">
+        <path transform="translate(776.49 434.69)" d="M0 0h2v2H0z"/>
+        <path d="M788.49 427.19h-1v-1a1 1 0 0 0-2 0v1h-8v-1a1 1 0 0 0-2 0v1h-1a2 2 0 0 0-2 2v14a1.993 1.993 0 0 0 2 2h14a2 2 0 0 0 2-2v-14a2.006 2.006 0 0 0-2-2zm.5 15.5a1 1 0 0 1-1 1h-13a.99.99 0 0 1-1-1v-10.5h15z"/>
+        <path transform="translate(780.49 434.69)" d="M0 0h2v2H0z"/>
+        <path transform="translate(784.49 434.69)" d="M0 0h2v2H0z"/>
+    </g>
+</svg>

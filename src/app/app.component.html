@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+<div kendoWindowContainer></div>
+<div kendoDialogContainer></div>
+<cr-preloader></cr-preloader>
+
+<div id="loader" *ngIf="!translateService.store.translations[translateService.currentLang]">
+  <div class="cr-loader-wrapper">
+    <div class="cr-dbl-spinner"></div>
+  </div>
+</div>

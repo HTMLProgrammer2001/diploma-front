@@ -1,0 +1,28 @@
+<ng-container>
+  <cr-title-header
+    (buttonClickEvent)="onTitleButtonClick($event)"
+    [buttonSettings]="titleHeaderButtonSettings"
+    [titleTranslateKey]="'ADMIN_ROLE.LIST.TITLE'">
+  </cr-title-header>
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'ADMIN_ROLE.LIST.GRID.TITLE'">
+        {{ 'ADMIN_ROLE.LIST.GRID.TITLE' | translate }}
+      </p>
+    </div>
+    <div class="cr-grid-wrapper-new">
+      <cr-edit-grid-server-paging
+        (cellClickEvent)="cellClick($event)"
+        (pageChangeEvent)="changePage($event)"
+        [columnSettings]="columnSettings"
+        [dataCacheName]="'AdminRoleListGrid'"
+        [dataSource]="gridData"
+        [elementName]="'edit-grid-server-paging:Admin_role_list.Grid'"
+        [pageable]="true"
+        [resizable]="true"
+        [uniqueField]="'id'"
+      ></cr-edit-grid-server-paging>
+    </div>
+  </div>
+</ng-container>
+

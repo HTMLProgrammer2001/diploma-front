@@ -1,0 +1,19 @@
+{
+  "apiUrl": "http://172.21.10.132:61102",
+  "pagingGridSmallSize": 5,
+  "pagingGridSmallPage": 1,
+  "pagingGridMediumSize": 10,
+  "pagingGridMediumPage": 1,
+  "pagingGridBigSize": 20,
+  "pagingGridBigPage": 1,
+  "pagingDropdownSize": 5,
+  "pagingDropdownPage": 1,
+  "storeBookmarkExpirePeriodHours": 24,
+  "storeBookmarkBufferSize": 2,
+  "checkLogoffIntervalSeconds": 10,
+  "inactivityPeriodMinutes": 30,
+  "answerPeriodSeconds": 10,
+  "dateFormat" : "dd.MM.yyyy",
+  "dateTimeFormat" : "dd.MM.yyyy HH:mm",
+  "timeFormat" : "HH:mm"
+}

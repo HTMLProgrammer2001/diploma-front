@@ -1,0 +1,33 @@
+<section>
+  <section>
+    <div class="cr-nav-menu-logo">
+      <div class="svg-icon-logo">
+        <cr-svg-icon-control
+          [fill]="'#d5d5d5'"
+          [width]="'30px'"
+          [height]="'30px'"
+          [iconName]="'icon-logo'"
+        ></cr-svg-icon-control>
+      </div>
+
+      <span>Track Teacher</span>
+    </div>
+
+    <cr-nav-menu-full
+      [hidden]="hideBigMenu"
+      [level]="0"
+      [menuItems]="navigationLinksData">
+    </cr-nav-menu-full>
+
+    <cr-nav-menu-small
+      [hidden]="!hideBigMenu"
+      [menuItems]="navigationLinks"
+    ></cr-nav-menu-small>
+
+    <div *ngIf="!hideBigMenu" class="cr-nav-menu-search-wrapper">
+      <cr-control-search [dataWatermarkTranslateKeys]="'DASHBOARD.NAV_MENU.MENU_QUICK_SEARCH'"
+                         [(dataValue)]="filterText"
+                         (dataValueChange)="onFilter($event)"></cr-control-search>
+    </div>
+  </section>
+</section>

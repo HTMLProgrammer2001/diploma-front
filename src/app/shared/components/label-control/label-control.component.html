@@ -1,0 +1,23 @@
+<ul [attr.data-element-name]="dataElementName" *ngIf="_parsedPermissionSettings.isAccessRead" class='cr-label-control' [ngClass]="customClass">
+  <li>
+    <span [attr.data-translate] = "translateKeys">
+      {{dataLabel || (translateKeys | translate)}}
+    </span>
+  </li>
+  <li>
+    <div *ngIf="containsLink && link"
+         class='label-link-container'>
+      <span *ngIf="_parsedPermissionSettings.isAccessLink" class="label-link-container__link" (click)="onLinkClicked()">{{ link }}</span>
+      <span *ngIf="!_parsedPermissionSettings.isAccessLink" class="label-link-container__link__disabled">{{ link }}</span>
+      <span *ngIf="dataValue"> - </span>
+    </div>
+    <span style="font-size: 18px; height: 20px;">{{dataValue}}</span>
+  </li>
+</ul>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>
+
+
+

@@ -1,0 +1,140 @@
+<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
+  <div #contextmenutarget
+       kendoTooltip
+       position="top"
+       tooltipClass="cr-tooltip"
+       [class]="'cr-control-smart-dropdown ' + dropdownWrapperClass"
+       [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+       [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+       [ngClass]="{'ng-invalid': validationResult?.isValid === false}">
+    <div *ngIf="contextMenuItems" class="menu-icon" (click)="onShowContextMenu($event)"></div>
+    <kendo-label
+      [class.cr-icon-label]="useIconInList || useIconInValue"
+      text="{{label || (labelTranslateKey | translate)}}"
+      title="{{validationResult?.messages | validationMessageTranslate}}"
+      [optional]="requiredRule?.isActive"
+      [attr.data-translate]="labelTranslateKey | translateAttribute: additionalTranslateKeys">
+      <kendo-label-messages optional="'*'">
+      </kendo-label-messages>
+      <kendo-dropdownlist
+        [attr.data-element-name]="dataElementName"
+        #dropdownList
+        *ngIf="!!dataCacheName && dataCacheName.length > 0"
+        [popupSettings]="{popupClass : (!!groupByField ? 'cr-grouping ' : '') + 'cr-custom-dropdown-list ' + dropdownPopupClass, width: 'auto' }"
+        [data]="cache.dataSource"
+        [value]="cache.currentDataItem"
+        [textField]="textField"
+        [valueField]="valueField"
+        [readonly]="isReadOnly"
+        [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+        (open)="onDropdownOpen($event)"
+        (close)="onDropdownClose($event)"
+        (selectionChange)="onSelectionChange($event)"
+        (blur)="onBlur($event)"
+        [valuePrimitive]="false"
+        [loading]="isLoading"
+        [filterable]="true"
+        (filterChange)="onFilterChange($event)">
+        <!--      <ng-template kendoDropDownListHeaderTemplate *ngIf="useQuickSearch">-->
+        <!--        <div class="cr-quick-dropdown-search-wrapper">-->
+        <!--          <div class="cr-quick-dropdown-search">-->
+        <!--            <input #inputFilter kendoTextBox placeholder="Search"-->
+        <!--                   [(ngModel)]="this.cache.paginatorDropDown.quickSearchFilter"-->
+        <!--                   (focusout)="onDropDownDisableClose(false)"-->
+        <!--                   (focus)="onDropDownDisableClose(true)"-->
+        <!--                   (input)="onFilterChange($event.target.value)"/>-->
+        <!--            <span class="material-icons">-->
+        <!--          search-->
+        <!--        </span>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </ng-template>-->
+        <ng-template kendoDropDownListValueTemplate let-dataItem>
+
+          <div *ngIf="dataItem &&  useIconInValue" class="cr-icon-list">
+            <cr-svg-icon-control
+              [width]="'30px'"
+              [height]="'30px'"
+              [iconSet]="iconSet"
+              [iconName]="dataItem[iconField]"
+            ></cr-svg-icon-control>
+          </div>
+
+          <div [class.cr-dropdown-icon-value-wrapper]="useIconInList || useIconInValue">
+            <!-- ⁣ is U+2063 Invisible Separator -->
+            <span style="color: #c0b211"
+                  *ngIf="useCodeInValue && dataItem && dataItem[codeField]">{{dataItem && dataItem[codeField] ? dataItem[codeField] : '⁣'}}&nbsp;&nbsp;</span>
+            <span>
+              {{dataItem && dataItem[textField] ? dataItem[textField] : (dataItem && dataItem[dataTranslateKeyField] ? (dataItem[dataTranslateKeyField] | translate) : '⁣')}}
+            </span>
+          </div>
+        </ng-template>
+
+        <ng-template kendoDropDownListItemTemplate let-dataItem>
+          <div *ngIf="dataItem  && useIconInList" class="cr-icon-list">
+            <cr-svg-icon-control
+              [width]="'30px'"
+              [height]="'30px'"
+              [iconSet]="iconSet"
+              [iconName]="dataItem[iconField]"
+            ></cr-svg-icon-control>
+          </div>
+
+          <span style="white-space: nowrap; max-width: 800px" [attr.data-translate]="dataItem[dataTranslateKeyField]">
+          <span style="color: #c0b211"
+                *ngIf="useCodeInList  && dataItem && dataItem[codeField]">{{dataItem && dataItem[codeField] ? dataItem[codeField] : '⁣'}}&nbsp;&nbsp;</span>
+          <span>
+            {{dataItem && dataItem[textField] ? dataItem[textField] : (dataItem && dataItem[dataTranslateKeyField] ? (dataItem[dataTranslateKeyField] | translate) : '⁣')}}
+          </span>
+        </span>
+        </ng-template>
+
+        <ng-template kendoDropDownListFooterTemplate>
+          <div class="cr-dropdown-paginator" *ngIf="isFooterVisible">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="cr-dropdown-paginator-button-wrap">
+                  <span class="cr-button" (click)="onPrevPage()"><</span>
+                  <span> {{this.cache.paginatorDropDown.page}} / {{this.cache.paginatorDropDown.totalPages}}</span>
+                  <span class="cr-button" (click)="onNextPage()">></span>
+                  <span>(Alt+<span class="k-icon k-i-arrow-left"></span>;&nbsp;</span>
+                  <span>Alt+<span class="k-icon k-i-arrow-right"></span>)</span>
+                </div>
+              </div>
+              <!--            <div class="col-lg-6 cr-align-right">-->
+              <!--              <kendo-dropdownlist-->
+              <!--                [data]="[5,10,15]"-->
+              <!--                [(ngModel)]="this.cache.paginatorDropDown.size"-->
+              <!--                (focusout)="onDropDownDisableClose(false)"-->
+              <!--                (focus)="onDropDownDisableClose(true)"-->
+              <!--                (selectionChange)="onSelectionChangePageSize($event)">-->
+              <!--              </kendo-dropdownlist>-->
+              <!--            </div>-->
+            </div>
+          </div>
+        </ng-template>
+      </kendo-dropdownlist>
+    </kendo-label>
+  </div>
+
+  <kendo-contextmenu
+    #contextmenu
+    *ngIf="contextMenuItems"
+    [target]="contextmenutarget"
+    [items]="contextMenuItems"
+    (select)="onSelectContextMenu($event)">
+    <ng-template kendoMenuItemTemplate let-item="item">
+    <span *ngIf="item.iconSvg" class="cr-pin-icon-wrapper">
+            <cr-svg-icon-control [width]="'20px'" [height]="'20px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+    </span>
+      <span>
+          {{ item.text || item.textTranslateKey | translate }}
+    </span>
+
+    </ng-template>
+  </kendo-contextmenu>
+</ng-container>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

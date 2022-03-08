@@ -1,0 +1,103 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  .k-checkbox {
+    &:hover, &:active, &:focus {
+      border: solid 1px $control-color-label;
+    }
+
+    transition: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: solid 1px $control-color-label;
+    box-shadow: none !important;
+    color: $base-color-2 !important;
+  }
+  ul.cr-checkbox-control {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .k-label {
+      &.k-label-empty {
+        padding: 0;
+      }
+      cursor: pointer;
+      font-size: 18px;
+      padding-left: 15px;
+      display: flex;
+    }
+    &.ng-disabled {
+      .k-checkbox {
+        border-color: #000;
+        background: #eee;
+        &:checked {
+          color: #000!important;
+        }
+      }
+    }
+
+    > li {
+      margin: 0;
+      padding: 0;
+
+      &:first-child > span {
+        margin-left: 15px;
+        line-height: 1;
+        font-size: small;
+      }
+
+      &:last-child {
+        display: flex;
+        border: 0;
+        font-size: 13px;
+        align-items: center;
+        .k-checkbox {
+          height: 20px;
+          display: flex;
+          min-width: 20px;
+          flex-basis: 20px;
+        }
+      }
+
+      .k-checkbox {
+        &.invalid {
+          border: solid 1px #f60707;
+        }
+      }
+    }
+  }
+}
+
+:host {
+  //Grid checkbox styles
+  td & {
+    ::ng-deep {
+      .cr-checkbox-control {
+        justify-content: center;
+        li {
+          padding: 0 !important;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  //Global Rtl styles
+  body.rtl-on & {
+    ::ng-deep {
+      //Checkbox Rtl Styles
+      .cr-checkbox-control {
+        input {
+          float: right;
+        }
+        .k-label {
+          &.k-label-empty {
+            padding: 0;
+          }
+          padding-right: 15px;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<ng-container *ngIf="popupTabs.length > 1">
+  <ul role="tablist" class="cr-custom-tab k-reset k-tabstrip-items ng-star-inserted">
+    <li
+      *ngFor="let popupTab of popupTabs; index as i;"
+      role="tab"
+      class="k-item k-state-default ng-star-inserted"
+      [ngClass]="{'k-state-active': activePopup == i}"
+    >
+      <span (click)="changeActivePopup(i)" class="k-link">
+        <span [attr.data-translate]="popupTab.titleTranslateKey">
+          {{!!popupTab.title
+          ? (popupTab.title | replace : {value: popupTab.titleValue})
+          : (!!popupTab.titleTranslateKey
+            ? (popupTab.titleTranslateKey | translate : {value: popupTab.titleValue})
+            : '')}}
+          <!--          {{popupTab.title || (popupTab.titleTranslateKey | translate)}} -->
+        </span>
+      </span>
+<!--      <span (click)="removeLastPopup(i)" *ngIf="popupTabs.length == i + 1"-->
+<!--            class="material-icons close-icon">close</span>-->
+
+      <span (click)="removeLastPopup(i)" *ngIf="popupTabs.length == i + 1" class="close-icon">
+         <cr-svg-icon-control
+           [width]="'20px'"
+           [height]="'20px'"
+           [fill]="'#2b2b2b'"
+           [iconName]="'icon-close'">
+          </cr-svg-icon-control>
+      </span>
+    </li>
+  </ul>
+</ng-container>

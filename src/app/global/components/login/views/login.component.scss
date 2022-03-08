@@ -1,0 +1,210 @@
+@use "../../../../../styles/variables" as *;
+
+:host {
+  ::ng-deep {
+    .main-login-wrapper {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: #F8f8f8;
+
+      .k-button.cr-action-button {
+        padding: 14px 40px;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: $btn-text-secondary;
+      }
+
+      .wrapper-login {
+        height: 670px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .logo {
+          flex-basis: 50%;
+          max-width: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          text-align: center;
+
+          p {
+            position: relative;
+            color: $base-text-color-root;
+            font-size: 42px;
+            font-weight: 400;
+            line-height: 1.19;
+            padding: 10px 0 0 0;
+            margin: 10px 0 0 0;
+            display: inline-block;
+
+            &:before {
+              content: '';
+              position: absolute;
+              top: 0;
+              width: calc(100% - 7px);
+              transform: translateX(-50%);
+              left: 50%;
+              height: 1px;
+              background: $warning-color;
+            }
+          }
+        }
+
+        .vertical-line {
+          flex: 0 1 auto;
+          width: 1px;
+          height: 100%;
+          background: $base-text-color-root;
+        }
+
+        .login-form {
+          flex-basis: 50%;
+          max-width: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+
+          .login-form-line {
+            max-width: 270px;
+            width: 100%;
+
+            h1 {
+              text-align: center;
+              font-size: 44px;
+              font-weight: normal;
+              line-height: 1.18;
+              margin: 0 0 25px;
+            }
+
+            .cr-action-button {
+              width: 100%;
+            }
+
+            &.control {
+              margin-bottom: 25px;
+            }
+          }
+
+          .cr-login-form-search-company {
+            width: 100%;
+            padding: 8px;
+            border-bottom: 1px solid #E7E7E7;
+
+            cr-control-search {
+              width: 100%;
+
+              input.k-textbox {
+                border: 1px solid $base-color-1;
+                box-shadow: none !important;
+              }
+            }
+          }
+
+          .login-form-line-grid {
+            max-width: 400px;
+            width: 100%;
+
+            kendo-grid {
+              border: 1px solid #D5D5D5;
+              border-radius: 8px;
+              overflow: hidden;
+            }
+
+            &.cr-outer-wrapper {
+              box-shadow: none;
+              border: 1px solid #f7f7f7;
+
+              tr {
+                cursor: pointer;
+
+                &:hover {
+                  background-color: #f7f7f7;
+                }
+
+                td {
+                  background-color: transparent;
+                }
+              }
+            }
+
+            .k-grid-table-wrap, .k-grid-table {
+              height: 100%;
+            }
+          }
+
+          .login-form-line-buttons {
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .login-form-login-button {
+            width: 210px;
+
+            .cr-action-button {
+              width: 100%;
+            }
+          }
+
+          .login-form-reset-button {
+            width: 100px;
+
+            .cr-action-button {
+              width: 100%;
+            }
+          }
+
+          .cr-login-company-radio-button {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.cr-unselected-company {
+              border: 2px solid #E7E7E7;
+            }
+
+            &.cr-selected-company {
+              border: 2px solid #fec52e;
+
+              .cr-dot {
+                width: 8px;
+                height: 8px;
+                background-color: #fec52e;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.version {
+  position: absolute;
+  top: 20px;
+  left: 65px;
+  font-size: 13px;
+  color: #a6a6a6;
+}
+
+::ng-deep .language-switcher-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 65px;
+
+  kendo-dropdownbutton button.k-state-focused {
+    box-shadow: none !important;
+  }
+}

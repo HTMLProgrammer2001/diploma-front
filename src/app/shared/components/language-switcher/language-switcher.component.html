@@ -1,0 +1,22 @@
+<div class="cr-rtl-switcher-wrapper">
+  <kendo-dropdownbutton [data]="languages" [popupSettings]="popUpSettings">
+    <div class="svg-icon-language">
+      <cr-svg-icon-control [width]="'24px'" [height]="'24px'" [iconName]="selectedLanguageObject.icon"></cr-svg-icon-control>
+    </div>
+    <ng-template kendoDropDownButtonItemTemplate let-dataItem>
+      <div class="cr-lang-wrap"
+           [class.cr-active-language]="selectedLanguageObject.code === dataItem.code"
+           (click)="changeLanguage(dataItem)"
+      >
+        <div class="svg-icon-language">
+          <cr-svg-icon-control
+            [width]="'28px'"
+            [height]="'28px'"
+            [iconName]="dataItem.icon"
+          ></cr-svg-icon-control>
+        </div>
+        <span>{{ dataItem.name }}</span>
+      </div>
+    </ng-template>
+  </kendo-dropdownbutton>
+</div>

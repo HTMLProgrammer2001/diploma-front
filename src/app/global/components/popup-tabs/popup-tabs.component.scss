@@ -1,0 +1,72 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  .cr-custom-tab {
+    margin: 0 -25px;
+    padding: 0 15px;
+    background: $base-color-2;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+
+    &.k-tabstrip-items {
+      .k-item {
+        .close-icon {
+          position: absolute;
+          right: 0;
+          font-size: 12px;
+          color: inherit;
+          transform: translateY(-50%);
+          top: 50%;
+          cursor: pointer;
+        }
+
+        &.k-state-active {
+          color: $control-color-text-primary;
+
+          .k-link {
+            color: $control-color-text-primary;
+            border-bottom: 3px solid $border-color-primary;
+          }
+        }
+
+        .k-link {
+          font-family: inherit;
+          font-size: 17px;
+          font-weight: 500;
+          line-height: 1;
+          letter-spacing: normal;
+          text-align: left;
+          color: #6e6e6e;
+          border: none;
+          padding: 25px 20px 25px 10px;
+          border-bottom: 3px solid transparent;
+        }
+
+        color: #6e6e6e;
+        border: none;
+      }
+    }
+  }
+}
+
+:host {
+  body.rtl-on & {
+    ::ng-deep {
+      .cr-custom-tab {
+        &.k-tabstrip-items {
+          .k-item {
+            .close-icon {
+              right: initial;
+              left: 0;
+            }
+
+            .k-link {
+              padding: 25px 10px 25px 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

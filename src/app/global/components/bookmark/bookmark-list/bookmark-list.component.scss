@@ -1,0 +1,151 @@
+@use "../../../../../styles/variables" as *;
+::ng-deep {
+  //Bookmarks Styles
+  .wrapper {
+    &.cr-bookmark-wrapper {
+      height: 100%;
+      cursor: pointer;
+      overflow-y: hidden;
+      user-select: none;
+      .cr-task-bar-opener {
+        .k-icon {
+          font-size: 24px;
+        }
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        height: 65px;
+        z-index: 1;
+        justify-content: center;
+        width: 80px;
+        min-width: 80px;
+        box-shadow: 10px 0px 10px -5px rgb(0 0 0 / 16%);
+      }
+      .task-container {
+        overflow-y: hidden;
+        overflow-x: auto;
+        flex-grow: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        &__item {
+          .cr-bookmark-item-wrapper {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+
+          border-radius: 8px 8px 0 0;
+          min-width: 170px;
+          max-width: 300px;
+          padding: 5px 25px 0 25px;
+          cursor: inherit;
+          display: flex;
+          position: relative;
+          box-shadow: 0 3px 6px 0 #e1e1e1;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          border: 3px solid transparent;
+          background: #F4F4F4;
+          color: #B2B2B5;
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 1;
+
+          span {
+            &.cr-pin-icon-wrapper {
+              right: initial;
+              left: 4px;
+              color: #B2B2B5;
+              position: absolute;
+              top: 5px;
+              font-size: 16px;
+              cursor: inherit;
+              svg{
+                fill: #B2B2B5;
+              }
+            }
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 16px;
+            color: $base-text-color-root;
+            cursor: inherit;
+          }
+
+          &.active {
+            .cr-pin-icon-wrapper {
+              svg{
+                fill: $base-text-color-root;
+              }
+            }
+            .icon-wrapper {
+              fill: $base-text-color-root;
+            }
+            background: $base-color-2;
+            color: $base-text-color-root;
+            border: 3px solid transparent;
+            border-bottom: 3px solid $border-color-primary;
+            box-shadow: 2px 0 8px 0 rgba(0, 0, 0, 0.08);
+          }
+        }
+      }
+      .cr-task-bar-arrows-wrapper {
+        span {
+          font-size: 25px;
+          &.disabled {
+            opacity: 0.6;
+            filter: grayscale(0.1);
+            pointer-events: none;
+          }
+        }
+        box-shadow: -10px 5px 10px -5px rgb(0 0 0 / 16%);
+        cursor: pointer;
+        display: flex;
+        width: 80px;
+        min-width: 80px;
+        align-items: center;
+        height: 65px;
+        z-index: 2;
+        justify-content: center;
+      }
+    }
+  }
+
+  .icon-wrapper {
+    height: 30px;
+    fill: #B2B2B5;
+    width: 30px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+:host {
+  body.rtl-on & {
+    ::ng-deep {
+      //Bookmarks Styles
+      .wrapper {
+        &.cr-bookmark-wrapper {
+          .cr-task-bar-opener {
+            box-shadow: -10px 0px 10px -5px rgb(0 0 0 / 16%);
+          }
+          .cr-task-bar-arrows-wrapper {
+            flex-direction: row-reverse;
+            box-shadow: 10px 0px 10px -5px rgb(0 0 0 / 16%);
+          }
+          .task-container {
+            &__item {
+              span {
+                right: initial;
+                left: 7px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

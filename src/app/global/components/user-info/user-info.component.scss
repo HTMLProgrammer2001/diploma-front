@@ -1,0 +1,95 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  cr-user-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    .k-avatar-sm {
+      flex-basis: 28px;
+      width: 28px;
+      height: 28px;
+    }
+    .k-avatar-lg {
+      width: 80px;
+      height: 80px;
+      .k-avatar-text {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+  }
+  .cr-user-info-popup {
+    margin-top: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 16%)!important;
+    border: 1px solid $base-color-1;
+    border-radius: 0 0 8px 8px;
+    background: $base-color-2;
+    .cr-user-info-version {
+      position: absolute;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: 100%;
+      font-size: 12px;
+      left: 50%;
+      //padding-right: 25px;
+      //text-align: right;
+      text-align: center;
+    }
+    .cr-user-info-inner-wrapper {
+      padding: 0;
+      .cr-user-info-actions {
+        padding: 25px 25px 40px;
+      }
+      .cr-user-info-credentials-wrapper {
+        padding: 25px 25px 20px;
+      }
+      .cr-user-info-credentials-wrapper {
+        border-bottom: solid 1px $base-color-1;
+      }
+
+    }
+    .cr-avatar-wrapper {
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 25px;
+    }
+    .cr-user-info-name {
+      font-size: 16px;
+      text-align: center;
+      color: #000;
+      margin: 0 0 5px 0;
+      line-height: 1;
+    }
+    .cr-user-info-company {
+      text-align: center;
+      font-size: 14px;
+      margin: 0;
+      color: #B2B2B5;
+    }
+    .cr-user-info-actions {
+      text-align: center;
+      margin: 0;
+      list-style: none;
+      padding: 0;
+      ::ng-deep{
+        cr-button-control{
+          justify-content: center;
+        }
+      }
+
+      li {
+        button {
+          font-size: 18px;
+        }
+
+        a {
+          color: #4784ff;
+        }
+
+        a, span {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+::ng-deep {
+  .cr-grid-with-sorter {
+    .cr-add-row, .k-grid-content, .k-grid-header {
+      margin-right: 90px;
+    }
+  }
+
+  .action-group {
+    .k-button {
+      &.cr-icon-button {
+        box-sizing: content-box;
+        padding: 0;
+      }
+
+      margin-right: 10px;
+    }
+  }
+
+  .k-grid-remove-command, .k-grid-edit-command {
+    display: none;
+  }
+
+  .k-command-cell {
+    display: flex;
+  }
+
+  .k-state-selected {
+    .k-grid-remove-command, .k-grid-edit-command {
+      display: inline-block;
+    }
+  }
+
+  .k-grid td {
+    white-space: nowrap;
+  }
+
+  .cr-checkbox-control {
+    display: flex;
+  }
+
+  cr-date-time-picker-control kendo-label {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .k-grid-edit-row td {
+    min-width: 200px;
+  }
+}
+
+.break-line {
+  white-space: pre-wrap;
+}
+
+:host ::ng-deep .center-select .k-checkbox {
+  display: flex;
+  margin: auto;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  border: 1px solid #a6a6a6;
+  color: #fff;
+  box-shadow: none;
+
+  &:checked {
+    border: none;
+  }
+}
+
+.no-access {
+  text-align: center;
+  font-size: 18px;
+
+  padding: 20px;
+}
+
+.cr-link-disabled {
+  outline: none;
+  color: #888;
+  cursor: auto;
+}

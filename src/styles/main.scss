@@ -1,0 +1,20 @@
+//Global general styles
+@use 'variables' as *;
+@import 'fonts';
+@import 'styles';
+@import 'global-styles';
+
+//Kendo styles
+@import 'kendo-styles';
+
+//Component Styles
+@import 'components/grid-global-styles';
+
+//New styles
+@import 'styles-new';
+
+//RTL Styles
+@import 'rtl-styles';
+
+//Media Screens Styles
+@import 'media-styles';

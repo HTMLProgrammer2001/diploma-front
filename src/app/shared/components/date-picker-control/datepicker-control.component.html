@@ -1,0 +1,43 @@
+<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
+  <div kendoTooltip
+       class="cr-control-date-picker"
+       tooltipClass="cr-tooltip"
+       [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
+       [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+       [class.ng-invalid]="validationResult?.isValid === false || validationMessage">
+
+    <kendo-label text="{{dataLabel || (translateKeys | translate)}}"
+                 [optional]="isRequired"
+                 title="{{validationResult?.messages | validationMessageTranslate}}{{validationMessage}}"
+                 [attr.data-translate]="translateKeys">
+      <kendo-label-messages optional="*">
+      </kendo-label-messages>
+      <kendo-datepicker
+        [attr.data-element-name]="dataElementName"
+        #datepicker
+        placeholder=""
+        [value]="dataValue  | stringToDate: patternDateInput"
+        (valueChange)="onValueChange($event)"
+        [readonly]="isReadOnly"
+        (blur)="onBlur($event)"
+        [disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
+        [format]="selectOnlyMonth ? 'MMMM yyyy' : currentDateFormatPattern"
+        [bottomView]="selectOnlyMonth ? 'year' : 'month'"
+        [activeView]="selectOnlyMonth ? 'year' : 'month'"
+      >
+        <kendo-datepicker-messages
+          [today]="'COMMON.CALENDAR.TODAY' | translate"></kendo-datepicker-messages>
+        </kendo-datepicker>
+      <cr-svg-icon-control
+        [width]="'30px'"
+        [height]="'30px'"
+        [fill]="'#2b2b2b'"
+        [iconName]="'icon-calendar'"
+      ></cr-svg-icon-control>
+    </kendo-label>
+  </div>
+</ng-container>
+
+<div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">
+  {{'COMMON.GRID.NO_READ_ACCESS' | translate}}
+</div>

@@ -1,0 +1,57 @@
+$base-text-color-root: #2b2b2b;
+$base-background-color-root: #2b2b2b;
+$base-color-root: #f3e111;
+$base-color-1: #eeeeee;
+$base-color-2: #ffffff;
+$base-color-3: #E7E7E7;
+$base-color-4: #fec52e;
+$base-color-5: #000000;
+
+
+//Main layout variables
+
+//Header and footer
+$main-header-height: 50px;
+$main-footer-height: 65px;
+$main-header-background-color: #FFFFFF;
+$content-background-color: #F8f8f8;
+
+//Base container settings
+$main-container-width: calc(100% - 288px);
+$main-menu-width: 288px;
+
+//Base menu settings
+$main-menu-text-color: #a6a6a6;
+$main-menu-text-hover: #ffffff;
+$main-menu-background-color: #2B2B2B;
+$main-menu-hover-color: #3c3c3c;
+
+//Button variables (used mainly for cr-action-button, k-button)
+$btn-primary: #f3e111;
+$btn-text-primary: #2B2B2B;
+
+$btn-secondary: #ffffff;
+$btn-text-secondary: #2B2B2B;
+$btn-border-secondary: #f3e111;
+$btn-hover-secondary: #f3e111;
+
+//Base border colors
+$border-color-primary: #f3e111;
+
+//Base control colors
+$control-color-primary: #f3e111;
+$control-color-secondary: #f9f087;
+$control-color-tertiary: #000000;
+$control-color-text-primary: #2B2B2B;
+$control-color-required: #ff0000;
+$control-color-disabled: #eeeeee;
+$control-color-disabled-secondary: #aaaaaa;
+$control-color-label: #a6a6a6;
+$control-color-code: #c0b211;
+
+//Notification colors
+$error-color: #ff0000;
+$warning-color: #fccd09;
+$success-color: #37b400;
+
+

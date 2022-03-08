@@ -1,0 +1,83 @@
+<section
+  class="cr-small-nav-menu">
+  <kendo-menu
+    [items]="menuItems"
+    [vertical]="true"
+  >
+    <ng-template
+      kendoMenuItemLinkTemplate
+      let-item="item"
+      let-index="index">
+
+      <ng-container *ngIf="!item.isAccessGranted || (item.isAccessGranted && item.isAccessGranted())">
+        <!--section-->
+        <span [kendoMenuItemLink]="index"
+              class=" {{item.levelClass}}"
+              *ngIf="item.itemType === 'section'">
+
+        <div class="svg-icon-style" *ngIf="item.iconSvg">
+          <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+        </div>
+
+        <span *ngIf="item.levelClass !== 'main-menu'" class="cr-small-nav-menu-title">
+          <span [attr.data-translate]="item.titleTranslateKeys">
+            {{ item.title || (item.titleTranslateKeys | translate)}}
+          </span>
+        </span>
+
+      </span>
+
+        <!--header-->
+        <span [kendoMenuItemLink]="index"
+              (click)="$event.stopPropagation();"
+              class=" {{item.levelClass}}"
+              *ngIf="item.itemType === 'header'">
+
+          <span class="cr-small-nav-menu-title">
+            <span [attr.data-translate]="item.titleTranslateKeys">
+              {{ item.title || (item.titleTranslateKeys | translate)}}
+            </span>
+          </span>
+      </span>
+
+        <!--link-->
+        <span [kendoMenuItemLink]="index"
+              (click)="navigateByRoute(item)"
+              class="cr-nav-menu-small-link {{item.levelClass}}"
+              *ngIf="item.itemType === 'link'">
+
+        <div class="svg-icon-style" *ngIf="item.iconSvg">
+          <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+        </div>
+
+        <span *ngIf="item.levelClass !== 'main-menu'">
+          <span [attr.data-translate]="item.titleTranslateKeys">
+            {{ item.title || (item.titleTranslateKeys | translate)}}
+          </span>
+        </span>
+        <span *ngIf="item.items && item.items.length" [kendoMenuExpandArrow]="index"></span>
+      </span>
+
+        <!--menu-->
+        <span [kendoMenuItemLink]="index"
+              class="cr-nav-menu-small-link {{item.levelClass}}"
+              *ngIf="item.itemType === 'menu'">
+
+        <div class="svg-icon-style" *ngIf="item.iconSvg">
+          <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
+        </div>
+
+        <span *ngIf="item.levelClass !== 'main-menu'">
+          <span [attr.data-translate]="item.titleTranslateKeys">
+            {{ item.title || (item.titleTranslateKeys | translate)}}
+          </span>
+        </span>
+
+        <span *ngIf="item.items && item.items.length" [kendoMenuExpandArrow]="index"></span>
+      </span>
+      </ng-container>
+
+    </ng-template>
+  </kendo-menu>
+</section>
+

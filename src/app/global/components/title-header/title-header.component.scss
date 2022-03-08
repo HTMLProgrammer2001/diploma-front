@@ -1,0 +1,119 @@
+@use "../../../../styles/variables" as *;
+::ng-deep {
+  .cr-header-view {
+    .cr-header-text {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: $base-text-color-root;
+      font-size: 22px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .k-button.cr-action-button {
+      line-height: 0.83;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 16px 40px;
+      min-width: 160px;
+      cursor: pointer;
+    }
+    .cr-button-margin {
+      cr-button-control {
+        display: flex;
+        button {
+          padding: 0;
+        }
+      }
+      button {
+        &.cr-action-button {
+          margin-left: 25px;
+        }
+        margin-left: 25px;
+      }
+    }
+    &.is-popup {
+      top: 70px;
+    }
+
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 78px;
+    background: #f8f8f8;
+    z-index: 5;
+    width: calc(100% + 50px);
+    padding: 15px 25px 15px;
+    margin: 0 0 0 -25px;
+
+    .row {
+      width: calc(100% + 30px);
+    }
+  }
+
+  .cr-flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 15px;
+    .cr-flex-column {
+      &.cr-header-text {
+        min-width: 0;
+        display: inline-block;
+      }
+      display: flex;
+    }
+  }
+
+  //Separator styles
+  .cr-header-separator {
+    height: 44px;
+    width: 1px;
+    background: #c3c3c3;
+    margin: 0 8px 0 20px;
+  }
+
+  //Status label styles
+  .cr-status-label {
+    margin-left: 15px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    cr-svg-icon-control {
+      display: inline-block!important;
+      margin: 0 5px 0 0;
+    }
+    span {
+      padding: 0;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: $base-text-color-root;
+      line-height: 0.83;
+      letter-spacing: 0.4px;
+      font-size: 18px;
+      font-weight: 500;
+      display: inline-block;
+    }
+  }
+}
+
+:host {
+  //Global Rtl styles
+  body.rtl-on & {
+    ::ng-deep {
+      //RTL header controls on masterdata and list
+      .cr-header-view {
+        margin: 0 -25px 0 0;
+        .row {
+          flex-direction: row;
+        }
+        .cr-button-margin button {
+          margin-left: 0;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
