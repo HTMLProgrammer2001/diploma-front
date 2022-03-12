@@ -11,8 +11,6 @@ import {LayoutModule} from './layout/layout.module';
 import {ApiHttpInterceptor} from './global/services/http.interceptor';
 import {BookmarkService} from './global/services/bookmark.service';
 import {BaseViewComponent} from './global/components/base-view/base-view.component';
-import {TreeListModule} from '@progress/kendo-angular-treelist';
-import {TreeViewModule} from '@progress/kendo-angular-treeview';
 import {LoggerService} from './global/services/logger.service';
 import {DialogModule, DialogsModule, WindowModule} from '@progress/kendo-angular-dialog';
 import {NOTIFICATION_CONTAINER, NotificationModule} from '@progress/kendo-angular-notification';
@@ -36,6 +34,11 @@ import {ErrorsModule} from './errors/errors.module';
 import {CldrIntlService, IntlService} from '@progress/kendo-angular-intl';
 import {AuthService} from './global/services/auth/auth.service';
 import {CustomNotificationService} from './global/services/custom-notification.service';
+import {GraphqlCommonService} from './global/services/graphql-common.service';
+import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
+import {HttpLink} from 'apollo-angular/http';
+import {InMemoryCache} from '@apollo/client/core';
+import {ConfigService} from './global/services/config.service';
 
 export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json?v=' + Date.now());
@@ -57,6 +60,7 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
     ErrorDialogComponent,
   ],
   imports: [
+    ApolloModule,
     LayoutModule,
     ErrorsModule,
     SharedModule,
@@ -66,8 +70,6 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TreeListModule,
-    TreeViewModule,
     DialogsModule,
     NotificationModule,
     DialogModule,
@@ -83,24 +85,24 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
     MenuModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiHttpInterceptor,
-      multi: true,
-    },
-    {
-      provide: NOTIFICATION_CONTAINER,
-      useFactory: () => ({nativeElement: document.body} as ElementRef),
-    },
     LoggerService,
-    TreeListModule,
-    TreeViewModule,
     LanguageService,
     TranslateService,
+    GraphqlCommonService,
+    {provide: HTTP_INTERCEPTORS, useClass: ApiHttpInterceptor, multi: true},
+    {provide: NOTIFICATION_CONTAINER, useFactory: () => ({nativeElement: document.body} as ElementRef)},
     {provide: MessageService, useClass: LanguageService},
     {provide: ErrorService, useClass: ErrorService},
     {provide: APP_INITIALIZER, useFactory: bookmarkProviderFactory, deps: [BookmarkService], multi: true},
     {provide: LOCALE_ID, useValue: 'en'},
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink, configService: ConfigService) => ({
+        cache: new InMemoryCache(),
+        link: httpLink.create({uri: configService.getConfig().apiUrl}),
+      }),
+      deps: [HttpLink, ConfigService],
+    }
   ],
   exports: [],
   bootstrap: [AppComponent],
@@ -117,10 +119,8 @@ export class AppModule {
     this.translate.currentLang = '';
 
     this.languageService.getDefaultLanguage$().subscribe(lang => {
-        if (lang) {
-          this.translate.use(lang.code);
-          (this.intlService as CldrIntlService).localeId = lang.code;
-        }
+        this.translate.use(lang.code);
+        (this.intlService as CldrIntlService).localeId = lang.code;
       },
       error => {
         this.customNotificationService.showDialogError(this.errorService.getMessagesToShow(error.errors));

@@ -6,8 +6,6 @@ import {NavMenuContainerComponent} from './nav-menu/nav-menu-container/nav-menu-
 import {BookmarkModule} from '../global/components/bookmark/bookmark.module';
 import {SharedModule} from '../shared/shared.module';
 import {LoginLayoutComponent} from './login-layout/login-layout.component';
-import {TreeListModule} from '@progress/kendo-angular-treelist';
-import {TreeViewModule} from '@progress/kendo-angular-treeview';
 import {NavMenuFullComponent} from './nav-menu/nav-menu-full/nav-menu-full.component';
 import {NavMenuSmallComponent} from './nav-menu/nav-menu-small/nav-menu-small.component';
 import {MenuModule} from '@progress/kendo-angular-menu';
@@ -25,8 +23,6 @@ import {MenuModule} from '@progress/kendo-angular-menu';
     AppRoutingModule,
     BookmarkModule,
     SharedModule,
-    TreeListModule,
-    TreeViewModule,
     MenuModule,
   ],
   exports: [

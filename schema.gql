@@ -1,0 +1,1143 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AcademicDegreeCreateRequest {
+  name: String
+}
+
+input AcademicDegreeGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean = false
+}
+
+input AcademicDegreeGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type AcademicDegreeListResponse implements PaginatedData {
+  page: Int!
+  responseList: [AcademicDegreeResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type AcademicDegreeResponse {
+  guid: String
+  id: ID
+  isDeleted: Boolean
+  name: String
+}
+
+input AcademicDegreeUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input AcademicTitleCreateRequest {
+  name: String
+}
+
+input AcademicTitleGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean = false
+}
+
+input AcademicTitleGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type AcademicTitleListResponse implements PaginatedData {
+  page: Int!
+  responseList: [AcademicTitleResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type AcademicTitleResponse {
+  guid: String
+  id: ID
+  isDeleted: Boolean
+  name: String
+}
+
+input AcademicTitleUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input AttestationCreateRequest {
+  categoryId: ID!
+  date: String!
+  description: String
+  teacherId: ID!
+}
+
+input AttestationGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input AttestationGetListRequest {
+  categoryId: ID
+  dateLess: String
+  dateMore: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  size: Int = 5
+  teacherId: ID
+}
+
+type AttestationListResponse implements PaginatedData {
+  page: Int!
+  responseList: [AttestationResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type AttestationResponse {
+  category: IdNameResponse!
+  date: String!
+  description: String
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  teacher: IdNameResponse!
+}
+
+input AttestationUpdateRequest {
+  categoryId: ID
+  date: String
+  description: String
+  guid: String!
+  id: ID!
+  teacherId: ID
+}
+
+input CategoryCreateRequest {
+  name: String
+}
+
+input CategoryGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean = false
+}
+
+input CategoryGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type CategoryListResponse implements PaginatedData {
+  page: Int!
+  responseList: [CategoryResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type CategoryResponse {
+  guid: String
+  id: ID
+  isDeleted: Boolean
+  name: String
+}
+
+input CategoryUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input CommissionCreateRequest {
+  name: String
+}
+
+input CommissionGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean
+}
+
+input CommissionGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type CommissionListResponse implements PaginatedData {
+  page: Int!
+  responseList: [CommissionResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type CommissionResponse {
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  name: String!
+}
+
+input CommissionUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DepartmentCreateRequest {
+  name: String!
+}
+
+input DepartmentGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean
+}
+
+input DepartmentGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type DepartmentListResponse implements PaginatedData {
+  page: Int!
+  responseList: [DepartmentResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type DepartmentResponse {
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  name: String!
+}
+
+input DepartmentUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input EditProfileRequest {
+  avatar: Upload
+  email: String
+  fullName: String
+  guid: String!
+  password: String
+  phone: String
+}
+
+input EducationCreateRequest {
+  description: String
+  educationQualificationId: ID!
+  institution: String!
+  specialty: String!
+  teacherId: ID!
+  yearOfIssue: Float!
+}
+
+input EducationGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input EducationGetListRequest {
+  educationQualificationId: ID
+  institution: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  size: Int = 5
+  specialty: String
+  teacherId: ID
+  yearOfIssueLess: Float
+  yearOfIssueMore: Float
+}
+
+type EducationListResponse implements PaginatedData {
+  page: Int!
+  responseList: [EducationResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+input EducationQualificationCreateRequest {
+  name: String
+}
+
+input EducationQualificationGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean = false
+}
+
+input EducationQualificationGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type EducationQualificationListResponse implements PaginatedData {
+  page: Int!
+  responseList: [EducationQualificationResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type EducationQualificationResponse {
+  guid: String
+  id: ID
+  isDeleted: Boolean
+  name: String
+}
+
+input EducationQualificationUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+type EducationResponse {
+  description: String
+  educationQualification: IdNameResponse!
+  guid: String!
+  id: ID!
+  institution: String!
+  isDeleted: Boolean!
+  specialty: String!
+  teacher: IdNameResponse!
+  yearOfIssue: Float
+}
+
+input EducationUpdateRequest {
+  description: String
+  educationQualificationId: ID
+  guid: String!
+  id: ID!
+  institution: String
+  specialty: String
+  teacherId: ID
+  yearOfIssue: Float
+}
+
+input ExportRequest {
+  commissionId: ID
+  departmentId: ID
+  from: DateTime
+  select: [ExportSelectEnum!]!
+  teacherIds: [ID!]
+  to: DateTime
+}
+
+type ExportResponse {
+  url: String!
+}
+
+enum ExportSelectEnum {
+  ATTESTATIONS
+  HONORS
+  INTERNSHIPS
+  PUBLICATIONS
+  REBUKES
+  TEACHER_PERSONAL_INFO
+  TEACHER_PROFESSIONAL_INFO
+}
+
+input GenerateImportTemplateRequest {
+  type: ImportTypeEnum!
+}
+
+type GenerateImportTemplateResponse {
+  url: String!
+}
+
+input HonorCreateRequest {
+  date: String
+  description: String
+  isActive: Boolean = true
+  orderNumber: String
+  teacherId: ID!
+  title: String!
+}
+
+input HonorGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input HonorGetListRequest {
+  dateLess: String
+  dateMore: String
+  isDesc: Boolean
+  orderField: String = "id"
+  orderNumber: String
+  page: Int = 1
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  showInActive: Boolean
+  size: Int = 5
+  teacherId: ID
+  title: String
+}
+
+type HonorListResponse implements PaginatedData {
+  page: Int!
+  responseList: [HonorResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type HonorResponse {
+  date: String!
+  description: String
+  guid: String!
+  id: ID!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  orderNumber: String
+  teacher: IdNameResponse!
+  title: String!
+}
+
+input HonorUpdateRequest {
+  date: String
+  description: String
+  guid: String!
+  id: ID!
+  isActive: Boolean
+  orderNumber: String
+  teacherId: ID
+  title: String
+}
+
+type IdNameResponse {
+  id: ID!
+  name: String!
+}
+
+type IdResponse {
+  id: ID!
+}
+
+type ImportErrorResponse {
+  message: String!
+  property: String
+  row: Int
+}
+
+input ImportRequest {
+  file: Upload!
+  from: Int
+  ignoreErrors: Boolean = false
+  to: Int
+  type: ImportTypeEnum!
+}
+
+type ImportResponse {
+  errors: [ImportErrorResponse!]!
+  result: Boolean!
+}
+
+enum ImportTypeEnum {
+  ATTESTATION
+  EDUCATION
+  HONOR
+  INTERNSHIP
+  PUBLICATION
+  REBUKE
+  TEACHER
+  USER
+}
+
+input ImportTypeGetByIdRequest {
+  id: ID!
+}
+
+input ImportTypeGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  size: Int = 5
+}
+
+type ImportTypeListResponse implements PaginatedData {
+  page: Int!
+  responseList: [ImportTypeResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type ImportTypeResponse {
+  guid: String!
+  id: ID!
+  name: String!
+}
+
+input ImportTypeUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input InternshipCreateRequest {
+  code: String!
+  credits: Float
+  description: String
+  from: String!
+  hours: Int!
+  place: String
+  teacherId: ID!
+  title: String!
+  to: String!
+}
+
+input InternshipGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input InternshipGetHoursFromLastAttestationRequest {
+  teacherId: ID!
+}
+
+type InternshipGetHoursFromLastAttestationResponse {
+  hours: Float!
+}
+
+input InternshipGetListRequest {
+  code: String
+  dateFromMore: String
+  dateToLess: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  place: String
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  size: Int = 5
+  teacherId: ID
+  title: String
+}
+
+type InternshipListResponse implements PaginatedData {
+  page: Int!
+  responseList: [InternshipResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type InternshipResponse {
+  code: String!
+  credits: Float
+  description: String
+  from: String
+  guid: String!
+  hours: Float
+  id: ID!
+  isDeleted: Boolean!
+  place: String
+  teacher: IdNameResponse!
+  title: String!
+  to: String
+}
+
+input InternshipUpdateRequest {
+  code: String
+  credits: Float
+  description: String
+  from: String
+  guid: String!
+  hours: Int
+  id: ID!
+  place: String
+  teacherId: ID
+  title: String
+  to: String
+}
+
+input LoginRequest {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+type LoginTeacherResponse {
+  result: Boolean!
+}
+
+type Mutation {
+  createAcademicDegree(body: AcademicDegreeCreateRequest!): AcademicDegreeResponse!
+  createAcademicTitle(body: AcademicTitleCreateRequest!): AcademicTitleResponse!
+  createAttestation(body: AttestationCreateRequest!): AttestationResponse!
+  createCategory(body: CategoryCreateRequest!): CategoryResponse!
+  createCommission(body: CommissionCreateRequest!): CommissionResponse!
+  createDepartment(body: DepartmentCreateRequest!): DepartmentResponse!
+  createEducation(body: EducationCreateRequest!): EducationResponse!
+  createEducationQualification(body: EducationQualificationCreateRequest!): EducationQualificationResponse!
+  createHonor(body: HonorCreateRequest!): HonorResponse!
+  createInternship(body: InternshipCreateRequest!): InternshipResponse!
+  createPublication(body: PublicationCreateRequest!): PublicationResponse!
+  createRebuke(body: RebukeCreateRequest!): RebukeResponse!
+  createTeacher(body: TeacherCreateRequest!): TeacherResponse!
+  createTeachingRank(body: TeachingRankCreateRequest!): TeachingRankResponse!
+  createUser(body: UserCreateRequest!): UserResponse!
+  deleteAcademicDegree(guid: String!, id: Int!): IdResponse!
+  deleteAcademicTitle(guid: String!, id: Int!): IdResponse!
+  deleteAttestation(guid: String!, id: Int!): IdResponse!
+  deleteCategory(guid: String!, id: Int!): IdResponse!
+  deleteCommission(guid: String!, id: Int!): IdResponse!
+  deleteDepartment(guid: String!, id: Int!): IdResponse!
+  deleteEducation(guid: String!, id: Int!): IdResponse!
+  deleteEducationQualification(guid: String!, id: Int!): IdResponse!
+  deleteHonor(guid: String!, id: Int!): IdResponse!
+  deleteInternship(guid: String!, id: Int!): IdResponse!
+  deleteProfile(guid: String!): IdResponse!
+  deletePublication(guid: String!, id: Int!): IdResponse!
+  deleteRebuke(guid: String!, id: Int!): IdResponse!
+  deleteTeacher(guid: String!, id: Int!): IdResponse!
+  deleteTeachingRank(guid: String!, id: Int!): IdResponse!
+  deleteUser(guid: String!, id: Int!): IdResponse!
+  editProfile(body: EditProfileRequest!): ProfileResponse!
+  generateImportTemplate(body: GenerateImportTemplateRequest!): GenerateImportTemplateResponse!
+  generateReport(body: ExportRequest!): ExportResponse!
+  importData(body: ImportRequest!): ImportResponse!
+  login(body: LoginRequest!): LoginResponse!
+  loginTeacher(email: String!): LoginTeacherResponse!
+  logout(refreshToken: String!): ResultResponse!
+  refreshToken(refreshToken: String!): RefreshTokenResponse!
+  triggerNotification: ResultResponse!
+  updateAcademicDegree(body: AcademicDegreeUpdateRequest!): AcademicDegreeResponse!
+  updateAcademicTitle(body: AcademicTitleUpdateRequest!): AcademicTitleResponse!
+  updateAttestation(body: AttestationUpdateRequest!): AttestationResponse!
+  updateCategory(body: CategoryUpdateRequest!): CategoryResponse!
+  updateCommission(body: CommissionUpdateRequest!): CommissionResponse!
+  updateDepartment(body: DepartmentUpdateRequest!): DepartmentResponse!
+  updateEducation(body: EducationUpdateRequest!): EducationResponse!
+  updateEducationQualification(body: EducationQualificationUpdateRequest!): EducationQualificationResponse!
+  updateHonor(body: HonorUpdateRequest!): HonorResponse!
+  updateImportType(body: ImportTypeUpdateRequest!): ImportTypeResponse!
+  updateInternship(body: InternshipUpdateRequest!): InternshipResponse!
+  updateNotificationConfig(body: NotificationUpdateRequest!): NotificationConfigResponse!
+  updatePublication(body: PublicationUpdateRequest!): PublicationResponse!
+  updateRebuke(body: RebukeUpdateRequest!): RebukeResponse!
+  updateRole(body: RoleUpdateRequest!): RoleResponse!
+  updateTeacher(body: TeacherUpdateRequest!): TeacherResponse!
+  updateTeachingRank(body: TeachingRankUpdateRequest!): TeachingRankResponse!
+  updateUser(body: UserUpdateRequest!): UserResponse!
+}
+
+type NotificationConfigResponse {
+  adminEmails: [String!]!
+  attestationYearsPeriod: Float!
+  isNotifyAdmins: Boolean!
+  isNotifyTeachers: Boolean!
+  notifyBeforeDays: Float!
+  notifyDay: Float!
+  notifyTime: String!
+  notifyType: NotificationTypes!
+  requiredInternshipHours: Float!
+  schedule: String!
+}
+
+type NotificationTeacherModelResponse {
+  avatarUrl: String!
+  email: String!
+  id: ID!
+  name: String!
+}
+
+type NotificationTeacherResponse {
+  internshipHours: Float
+  lastAttestationDate: String
+  nextAttestationDate: String
+  teacher: NotificationTeacherModelResponse
+}
+
+enum NotificationTypes {
+  DAILY
+  MONTHLY
+  WEEKLY
+}
+
+input NotificationUpdateRequest {
+  adminEmails: [String!]
+  attestationYearsPeriod: Float
+  isNotifyAdmins: Boolean
+  isNotifyTeachers: Boolean
+  notifyBeforeDays: Float
+  notifyDay: Float
+  notifyTime: String
+  notifyType: NotificationTypes
+  requiredInternshipHours: Float
+}
+
+interface PaginatedData {
+  page: Int!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type ProfileResponse {
+  avatarUrl: String
+  email: String
+  fullName: String
+  guid: String
+  id: ID
+  isDeleted: Boolean
+  phone: String
+  role: IdNameResponse
+}
+
+input PublicationCreateRequest {
+  anotherAuthors: String
+  date: String!
+  description: String
+  publisher: String
+  teacherIds: [ID!]!
+  title: String!
+  url: String
+}
+
+input PublicationGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean
+}
+
+input PublicationGetListRequest {
+  dateLess: String
+  dateMore: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  publisher: String
+  showDeleted: Boolean
+  size: Int = 5
+  teacherIds: [ID!]
+  title: String
+}
+
+type PublicationListResponse implements PaginatedData {
+  page: Int!
+  responseList: [PublicationResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type PublicationResponse {
+  anotherAuthors: String
+  date: String!
+  description: String
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  publisher: String
+  teachers: [IdNameResponse!]
+  title: String!
+  url: String
+}
+
+input PublicationUpdateRequest {
+  anotherAuthors: String
+  date: String
+  description: String
+  guid: String!
+  id: ID!
+  publisher: String
+  teacherIds: [ID!]
+  title: String
+  url: String
+}
+
+type Query {
+  getAcademicDegreeById(query: AcademicDegreeGetByIdRequest!): AcademicDegreeResponse!
+  getAcademicDegreeList(query: AcademicDegreeGetListRequest!): AcademicDegreeListResponse!
+  getAcademicTitleById(query: AcademicTitleGetByIdRequest!): AcademicTitleResponse!
+  getAcademicTitleList(query: AcademicTitleGetListRequest!): AcademicTitleListResponse!
+  getAttestationById(query: AttestationGetByIdRequest!): AttestationResponse!
+  getAttestationList(query: AttestationGetListRequest!): AttestationListResponse!
+  getCategoryById(query: CategoryGetByIdRequest!): CategoryResponse!
+  getCategoryList(query: CategoryGetListRequest!): CategoryListResponse!
+  getCommissionById(query: CommissionGetByIdRequest!): CommissionResponse!
+  getCommissionsList(query: CommissionGetListRequest!): CommissionListResponse!
+  getDepartmentById(query: DepartmentGetByIdRequest!): DepartmentResponse!
+  getDepartmentsList(query: DepartmentGetListRequest!): DepartmentListResponse!
+  getEducationById(query: EducationGetByIdRequest!): EducationResponse!
+  getEducationList(query: EducationGetListRequest!): EducationListResponse!
+  getEducationQualificationById(query: EducationQualificationGetByIdRequest!): EducationQualificationResponse!
+  getEducationQualificationList(query: EducationQualificationGetListRequest!): EducationQualificationListResponse!
+  getHonorById(query: HonorGetByIdRequest!): HonorResponse!
+  getHonorList(query: HonorGetListRequest!): HonorListResponse!
+  getImportTypeById(query: ImportTypeGetByIdRequest!): ImportTypeResponse!
+  getImportTypeList(query: ImportTypeGetListRequest!): ImportTypeListResponse!
+  getInternshipById(query: InternshipGetByIdRequest!): InternshipResponse!
+  getInternshipHoursFromLastAttestation(query: InternshipGetHoursFromLastAttestationRequest!): InternshipGetHoursFromLastAttestationResponse!
+  getInternshipList(query: InternshipGetListRequest!): InternshipListResponse!
+  getNotificationConfig: NotificationConfigResponse!
+  getProfile: ProfileResponse!
+  getPublicationById(query: PublicationGetByIdRequest!): PublicationResponse!
+  getPublicationList(query: PublicationGetListRequest!): PublicationListResponse!
+  getRebukeById(query: RebukeGetByIdRequest!): RebukeResponse!
+  getRebukeList(query: RebukeGetListRequest!): RebukeListResponse!
+  getRoleById(query: RoleGetByIdRequest!): RoleResponse!
+  getRoleList(query: RoleGetListRequest!): RoleListResponse!
+  getTeacherById(query: TeacherGetByIdRequest!): TeacherResponse!
+  getTeacherList(query: TeacherGetListRequest!): TeacherListResponse!
+  getTeachersToNotify: [NotificationTeacherResponse!]!
+  getTeachingRankById(query: TeachingRankGetByIdRequest!): TeachingRankResponse!
+  getTeachingRankList(query: TeachingRankGetListRequest!): TeachingRankListResponse!
+  getUserById(query: UserGetByIdRequest!): UserResponse!
+  getUserList(query: UserGetListRequest!): UserListResponse!
+}
+
+input RebukeCreateRequest {
+  date: String
+  description: String
+  isActive: Boolean = true
+  orderNumber: String
+  teacherId: ID!
+  title: String!
+}
+
+input RebukeGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input RebukeGetListRequest {
+  dateLess: String
+  dateMore: String
+  isDesc: Boolean
+  orderField: String = "id"
+  orderNumber: String
+  page: Int = 1
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  showInActive: Boolean
+  size: Int = 5
+  teacherId: ID
+  title: String
+}
+
+type RebukeListResponse implements PaginatedData {
+  page: Int!
+  responseList: [RebukeResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type RebukeResponse {
+  date: String!
+  description: String
+  guid: String!
+  id: ID!
+  isActive: Boolean!
+  isDeleted: Boolean!
+  orderNumber: String
+  teacher: IdNameResponse!
+  title: String!
+}
+
+input RebukeUpdateRequest {
+  date: String
+  description: String
+  guid: String!
+  id: ID!
+  isActive: Boolean
+  orderNumber: String
+  teacherId: ID
+  title: String
+}
+
+type RefreshTokenResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+type ResultResponse {
+  result: Boolean!
+}
+
+input RoleGetByIdRequest {
+  id: ID!
+}
+
+input RoleGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  size: Int = 5
+}
+
+type RoleListResponse implements PaginatedData {
+  page: Int!
+  responseList: [RoleResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type RoleResponse {
+  guid: String!
+  id: ID!
+  name: String!
+}
+
+input RoleUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String
+}
+
+input TeacherCreateRequest {
+  academicDegreeId: ID
+  academicTitleId: ID
+  address: String
+  avatar: Upload
+  birthday: String
+  commissionId: ID!
+  departmentId: ID!
+  email: String!
+  fullName: String!
+  phone: String
+  teacherRankId: ID
+  workStartDate: DateTime
+}
+
+input TeacherGetByIdRequest {
+  id: ID!
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+}
+
+input TeacherGetListRequest {
+  academicDegreeId: ID
+  academicTitleId: ID
+  commissionId: ID
+  departmentId: ID
+  email: String
+  fullName: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  showCascadeDeletedBy: String
+  showDeleted: Boolean
+  size: Int = 5
+  teachingRankId: ID
+}
+
+type TeacherListResponse implements PaginatedData {
+  page: Int!
+  responseList: [TeacherResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type TeacherResponse {
+  academicDegree: IdNameResponse
+  academicTitle: IdNameResponse
+  address: String
+  avatarUrl: String
+  birthday: String
+  commission: IdNameResponse!
+  department: IdNameResponse!
+  email: String!
+  fullName: String!
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  phone: String
+  teacherRank: IdNameResponse
+  workStartDate: String
+}
+
+input TeacherUpdateRequest {
+  academicDegreeId: ID
+  academicTitleId: ID
+  address: String
+  avatar: Upload
+  birthday: DateTime
+  commissionId: ID
+  departmentId: ID
+  email: String
+  fullName: String
+  guid: String!
+  id: ID!
+  phone: String
+  teacherRankId: ID
+  workStartDate: DateTime
+}
+
+input TeachingRankCreateRequest {
+  name: String!
+}
+
+input TeachingRankGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean
+}
+
+input TeachingRankGetListRequest {
+  isDesc: Boolean
+  name: String
+  orderField: String = "id"
+  page: Int = 1
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type TeachingRankListResponse implements PaginatedData {
+  page: Int!
+  responseList: [TeachingRankResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type TeachingRankResponse {
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  name: String!
+}
+
+input TeachingRankUpdateRequest {
+  guid: String!
+  id: ID!
+  name: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UserCreateRequest {
+  avatar: Upload
+  email: String!
+  fullName: String!
+  password: String!
+  phone: String
+  roleId: ID!
+}
+
+input UserGetByIdRequest {
+  id: ID!
+  showDeleted: Boolean
+}
+
+input UserGetListRequest {
+  email: String
+  fullName: String
+  isDesc: Boolean
+  orderField: String = "id"
+  page: Int = 1
+  roleId: ID
+  showDeleted: Boolean
+  size: Int = 5
+}
+
+type UserListResponse implements PaginatedData {
+  page: Int!
+  responseList: [UserResponse!]!
+  size: Int!
+  skip: Int!
+  totalElements: Int!
+  totalPages: Int!
+}
+
+type UserResponse {
+  avatarUrl: String
+  email: String!
+  fullName: String!
+  guid: String!
+  id: ID!
+  isDeleted: Boolean!
+  phone: String
+  role: IdNameResponse
+}
+
+input UserUpdateRequest {
+  avatar: Upload
+  email: String
+  fullName: String
+  guid: String!
+  id: ID!
+  password: String
+  phone: String
+  roleId: ID
+}

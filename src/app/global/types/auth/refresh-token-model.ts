@@ -1,4 +1,6 @@
-export interface RefreshTokenModel {
-  login: string;
-  refreshToken: string;
+export interface IRefreshTokenModel {
+  userId: number;
+  sessionCode: string;
+  iat: number;
+  exp: number;
 }

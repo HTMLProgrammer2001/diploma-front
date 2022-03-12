@@ -1,5 +1,5 @@
 import {Component, Inject, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {ILanguageViewModel} from '../../../global/types/language/language';
+import {ILanguageViewModel} from '../../../global/types/language';
 import {LanguageService} from '../../../global/services/language.service';
 import {addRemoveClass, isLanguageRtl} from '../../utils';
 import {ErrorService} from '../../../global/services/error.service';

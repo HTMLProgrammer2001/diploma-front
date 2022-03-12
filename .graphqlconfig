@@ -1,0 +1,12 @@
+{
+  "name": "Trach teacher schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:3000/graphql",
+        "introspect": false
+      }
+    }
+  }
+}

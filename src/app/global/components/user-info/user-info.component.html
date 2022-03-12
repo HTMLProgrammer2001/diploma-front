@@ -1,6 +1,6 @@
 <div class="cr-user-info-button">
   <button #anchor (click)="toggle()" class="k-button cr-icon-button k-button-icon">
-    <kendo-avatar *ngIf="!!src else elseBlock" [shape]="'circle'" [imageSrc]="src" [size]="'small'" ></kendo-avatar>
+    <kendo-avatar *ngIf="!!avatarUrl else elseBlock" [shape]="'circle'" [imageSrc]="avatarUrl" [size]="'small'" ></kendo-avatar>
     <ng-template #elseBlock>
       <kendo-avatar [shape]="'circle'" [initials]="initials" [size]="'small'"></kendo-avatar>
     </ng-template>
@@ -16,7 +16,7 @@
     <div class="cr-user-info-inner-wrapper">
       <div class="cr-user-info-credentials-wrapper">
         <div class="cr-avatar-wrapper">
-          <kendo-avatar *ngIf="!!src else elseBlockInner" [shape]="'circle'" [imageSrc]="src" [size]="'large'" ></kendo-avatar>
+          <kendo-avatar *ngIf="!!avatarUrl else elseBlockInner" [shape]="'circle'" [imageSrc]="avatarUrl" [size]="'large'" ></kendo-avatar>
           <ng-template #elseBlockInner>
             <kendo-avatar [shape]="'circle'" [initials]="initials" [size]="'large'"></kendo-avatar>
           </ng-template>
@@ -37,7 +37,7 @@
           ></cr-button-control>
         </li>
       </ul>
-      <p class="cr-user-info-version">Version {{appVersion}} (tag: {{tagVersion}})</p>
+      <p class="cr-user-info-version">Version {{appVersion}}</p>
     </div>
   </kendo-popup>
 </div>

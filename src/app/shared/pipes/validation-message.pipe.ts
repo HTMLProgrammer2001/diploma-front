@@ -13,7 +13,7 @@ constructor(private translate: TranslateService) {
     let result = '';
     if (!isEmpty(value)){
       result = value.map(item =>
-        item.message ?? this.translate.instant(item.messageTranslateKey) ?? null).join('<br>');
+        item.message ?? this.translate.instant(item.messageTranslateKey, item.replacers) ?? null).join('<br>');
     }
     return result;
   }

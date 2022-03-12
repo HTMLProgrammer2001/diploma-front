@@ -2,9 +2,16 @@
   "LOGIN": {
     "APP_NAME": "Track teacher",
     "LOGIN_TITLE": "Login",
-    "LOGIN": "Email",
+    "EMAIL": "Email",
     "PASSWORD": "Password",
-    "LOGIN_BUTTON": "Login"
+    "LOGIN_BUTTON": "Login",
+    "VERSION": "Version: {{version}}",
+    "VALIDATION": {
+      "REQUIRED_EMAIL": "Email is required",
+      "REQUIRED_PASSWORD": "Password is required",
+      "VALIDATE_EMAIL": "Email is invalid",
+      "PASSWORD_MIN_LENGTH": "Password must contain {{minLength}} or more characters"
+    }
   },
   "COMMON": {
     "CALENDAR": {

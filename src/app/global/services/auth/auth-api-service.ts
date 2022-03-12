@@ -1,48 +1,95 @@
 import {Injectable} from '@angular/core';
 import {Config} from '../../types/config';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ConfigService} from '../config.service';
-import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {IResponse} from '../../../shared/types/response';
-import {User} from '../../types/auth/user';
-import {AuthModel} from '../../types/auth/auth-model';
+import {ILoginViewModel} from '../../types/auth/login-view-model';
 import {AuthMapperService} from './auth-mapper.service';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {AuthViewModel} from '../../types/auth/auth-view-model';
-import {RefreshTokenModel} from '../../types/auth/refresh-token-model';
+import {Apollo, gql} from 'apollo-angular';
+import {Status} from '../../../shared/constants/status';
+import {ResultResponse} from '../../../shared/types/result-response';
+import {IError} from '../../../shared/types/error';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthApiService {
   config: Config = null;
-  AUTH_CONFIG = null;
 
   constructor(
     private authMapperService: AuthMapperService,
     private http: HttpClient,
-    private configService: ConfigService) {
+    private apollo: Apollo,
+  ) {
   }
 
-  public login$(user: User): Observable<IResponse<AuthViewModel>> {
-    const headers = new HttpHeaders({preloader: 'on'});
-
-    const request = `${this.AUTH_CONFIG.requests.login.url}`;
-    return this.http.post<IResponse<AuthModel>>(request, this.authMapperService.userToUserAuthModel(user), {headers}).pipe(
-      map(value => ({...value, data: this.authMapperService.authToViewModel(value.data)}))
-    );
+  public login$(user: ILoginViewModel): Observable<IResponse<AuthViewModel>> {
+      return this.apollo.mutate<{ login: AuthViewModel }>({
+          mutation: gql`
+              mutation LoginUser($email: String!, $password: String!) {
+                  login(body: {email: $email, password: $password}) {
+                      accessToken
+                      refreshToken
+                  }
+              }
+          `,
+        variables: user,
+        context: {headers: {preloader: 'on'}}
+      }).pipe(
+        map(response => ({
+          status: Status.ok,
+          data: response.data?.login,
+          errors: [],
+        })),
+        catchError((err) => {
+          const errors: Array<IError> = [];
+          return throwError({errors: err.networkError.errors});
+        })
+      );
   }
-  public logout$(sessionId: string): Observable<IResponse<void>> {
-    const headers = new HttpHeaders({preloader: 'on'});
-    const request = `${this.AUTH_CONFIG.requests.logout.url}`;
-    return this.http.post<IResponse<void>>(request, {sessionId}, {headers});
+
+  public logout$(refreshToken: string): Observable<IResponse<ResultResponse>> {
+      return this.apollo.mutate<{logout: ResultResponse}>({
+          mutation: gql`
+              mutation LogoutUser($refreshToken: String!) {
+                  logout(refreshToken: $refreshToken) {
+                      result
+                  }
+              }
+          `,
+        variables: {refreshToken},
+        context: {headers: {preloader: 'on'}}
+      }).pipe(
+        map(response => ({
+          status: Status.ok,
+          data: response.data?.logout,
+          errors: [],
+        })),
+        catchError((err) => throwError({errors: err.networkError.errors}))
+      );
   }
 
-  public refreshToken$(refreshTokenModel: RefreshTokenModel): Observable<IResponse<AuthViewModel>> {
-    const headers = new HttpHeaders({preloader: 'on'});
-    const request = `${this.AUTH_CONFIG.requests.refresh.url}`;
-    return this.http.post<IResponse<AuthModel>>(request, refreshTokenModel, {headers}).pipe(
-      map(value => ({...value, data: this.authMapperService.authToViewModel(value.data)}))
-    );
+  public refreshToken$(refreshToken: string): Observable<IResponse<AuthViewModel>> {
+      return this.apollo.mutate<{logout: AuthViewModel}>({
+          mutation: gql`
+              mutation RefreshUserToken($refreshToken: String!) {
+                  refreshToken(refreshToken: $refreshToken) {
+                      accessToken
+                      refreshToken
+                  }
+              }
+          `,
+        variables: {refreshToken},
+        context: {headers: {preloader: 'on'}}
+      }).pipe(
+        map(response => ({
+          status: Status.ok,
+          data: response.data?.logout,
+          errors: [],
+        })),
+        catchError((err) => throwError({errors: err.networkError.errors}))
+      );
   }
 }

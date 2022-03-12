@@ -2,7 +2,7 @@
   <p [attr.data-translate]="'COMMON.VALIDATION.CONTENT'">{{'COMMON.VALIDATION.CONTENT' | translate: {count: validator?.dtoValidationResult?.messages?.length || ''} }}</p>
   <ul>
     <li [attr.data-translate]="message.messageTranslateKey" *ngFor="let message of validator.dtoValidationResult.messages">
-      <span [attr.data-translate]="message.messageTranslateKey">{{ message.message || (message.messageTranslateKey | translate) }}</span>
+      <span [attr.data-translate]="message.messageTranslateKey">{{ message.message || (message.messageTranslateKey | translate: message.replacers) }}</span>
     </li>
   </ul>
 </section>

@@ -1,13 +1,9 @@
-import {RestMethods} from './rest-methods';
-import {IPermission} from './auth/services';
+import {RolesEnum} from './auth/roles.enum';
 
 export interface RequestConfig {
-  url?: string;
+  body: any;
+  roles: Array<RolesEnum>;
   isPreloader?: boolean;
   isAuthorize?: boolean;
-  queryParams?: any;
-  body?: any;
-  restMethod?: RestMethods;
-  endpointConfiguration?: IPermission;
-  requestParams?: any;
+  additionalHeaders?: Map<string, string>;
 }

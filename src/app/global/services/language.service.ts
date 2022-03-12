@@ -4,7 +4,7 @@ import {MessageService} from '@progress/kendo-angular-l10n';
 import {map} from 'rxjs/operators';
 import {Observable, of, Subject} from 'rxjs';
 import {CldrIntlService, IntlService} from '@progress/kendo-angular-intl';
-import {ILanguageViewModel} from '../types/language/language';
+import {ILanguageViewModel} from '../types/language';
 
 enum LanguageStorageKeys {
   currentLanguage = 'currentLanguage',

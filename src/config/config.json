@@ -1,5 +1,5 @@
 {
-  "apiUrl": "http://172.21.10.132:61102",
+  "apiUrl": "http://localhost:3000/graphql",
   "pagingGridSmallSize": 5,
   "pagingGridSmallPage": 1,
   "pagingGridMediumSize": 10,

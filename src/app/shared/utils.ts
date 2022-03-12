@@ -38,8 +38,7 @@ export const transformDateToStringByType = (date: Date, value: DateTimeType): st
 
 export const uniqueId = (): string => `f${((Math.random() * 1e8)).toString(16)}`;
 
-export const convertToIResponse = <T>(data: T, status: string = Status.ok, errors: Array<IError> = []): IResponse<T> => ({
-  status,
+export const convertToIResponse = <T>(data: T, errors: Array<IError> = []): IResponse<T> => ({
   errors,
   data: data as T
 });

@@ -9,7 +9,7 @@ import {AuthService} from '../../global/services/auth/auth.service';
 import {NetworkStatusService} from '../../global/services/network-status.service';
 import {LanguageService} from '../../global/services/language.service';
 import {ErrorService} from '../../global/services/error.service';
-import {ILanguageViewModel} from '../../global/types/language/language';
+import {ILanguageViewModel} from '../../global/types/language';
 import {Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 
@@ -48,8 +48,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       languages => this.languages = languages,
       error => this.customNotificationService.showDialogError(this.errorService.getMessagesToShow(error.errors))
     );
-
-    this.title.setTitle('Track teacher');
   }
 
   ngOnDestroy(): void {

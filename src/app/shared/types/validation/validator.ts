@@ -4,7 +4,6 @@ import {ValidationRule} from './validation-rule';
 import {ValidationTypes} from './validation-types';
 import {ValidationGroupResult} from './validation-group-result';
 import {get, isEmpty, isNil, isNull, isUndefined} from 'lodash';
-import {ILanguageViewModel} from '../../../global/types/language/language';
 
 /**
  * Validator
@@ -459,7 +458,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (tmpValue && tmpValue.length && tmpValue.length < Number(rule.settingValue)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {minLength: rule.settingValue}
+      });
     }
     return result;
   }
@@ -475,7 +478,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (tmpValue && tmpValue.length && tmpValue.length > Number(rule.settingValue)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {maxLength: rule.settingValue}
+      });
     }
     return result;
   }
@@ -490,7 +497,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (value !== undefined && value !== null && value < Number(rule.settingValue)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {min: rule.settingValue}
+      });
     }
     return result;
   }
@@ -505,7 +516,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (value !== undefined && value !== null && value > Number(rule.settingValue)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {max: rule.settingValue}
+      });
     }
     return result;
   }
@@ -522,7 +537,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (value && valueDate && ruleDate && valueDate < ruleDate) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {minDate: rule.settingValue}
+      });
     }
     return result;
   }
@@ -539,7 +558,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (value && valueDate && ruleDate && valueDate > ruleDate) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {maxDate: rule.settingValue}
+      });
     }
     return result;
   }
@@ -708,7 +731,11 @@ export class Validator {
     const pattern = new RegExp(rule.settingValue);
     if (value && rule.settingValue && pattern && !pattern.test(value)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: {pattern: rule.settingValue}
+      });
     }
     return result;
   }
@@ -784,7 +811,11 @@ export class Validator {
     const result: ValidationResult = new ValidationResult();
     if (!rule.customFunction(value, this.dto)) {
       result.isValid = false;
-      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+      result.messages.push({
+        message: rule.message,
+        messageTranslateKey: rule.messageTranslateKey,
+        replacers: rule.settingValue
+      });
     }
     return result;
   }

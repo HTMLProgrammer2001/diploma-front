@@ -1,7 +1,6 @@
 import {Component, ElementRef, EventEmitter, HostListener, isDevMode, OnInit, Output, ViewChild} from '@angular/core';
 import {ConfigService} from '../../services/config.service';
 import {AuthService} from '../../services/auth/auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'cr-user-info',
@@ -9,16 +8,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  public src = '';
+  public avatarUrl = '';
   public show = false;
   public isDevelop: boolean;
   public appVersion: string;
-  public tagVersion: string;
   public userName: string;
   public initials: string;
   public companyName: string;
 
-  @Output() onLogout: EventEmitter<void> = new EventEmitter;
+  @Output() onLogout: EventEmitter<void> = new EventEmitter();
 
   @ViewChild('anchor') public anchor: ElementRef;
   @ViewChild('popup', {read: ElementRef}) public popup: ElementRef;
@@ -26,16 +24,15 @@ export class UserInfoComponent implements OnInit {
   constructor(
     private configService: ConfigService,
     private authService: AuthService) {
-    this.userName = `${authService.user.firstName || ''} ${authService.user.lastName || ''}`;
-    // eslint-disable-next-line max-len
-    this.initials = `${authService.user.firstName?.charAt(0).toUpperCase() || ''}${authService.user.lastName?.charAt(0).toUpperCase() || ''}`;
-    //this.companyName = authService.user.companyName;
+    this.userName = authService.accessTokenModel?.fullName;
+    this.avatarUrl = authService.accessTokenModel?.avatarUrl;
+    this.initials = authService.accessTokenModel?.fullName
+      .split(/\s/).reduce((acc, el) => acc + el[0].toUpperCase(), '') || '';
   }
 
   ngOnInit(): void {
     this.isDevelop = isDevMode();
     this.appVersion = this.configService.getVersion().appVersion;
-    this.tagVersion = this.configService.getVersion().currentVersion;
   }
 
   @HostListener('keydown', ['$event'])
@@ -56,6 +53,7 @@ export class UserInfoComponent implements OnInit {
     this.show = show !== undefined ? show : !this.show;
     const header = document.getElementById('main-header');
     const popupTabs = document.getElementsByClassName('cr-custom-tab');
+
     if (this.show && popupTabs.length > 0) {
       header.classList.add('cr-header-no-shadow');
     } else {

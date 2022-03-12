@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {isNil} from 'lodash';
 import {AuthModel} from '../../types/auth/auth-model';
 import {AuthViewModel} from '../../types/auth/auth-view-model';
-import {UserAuthModel} from '../../types/auth/user-auth-model';
-import {User} from '../../types/auth/user';
+import {ILoginModel} from '../../types/auth/login-model';
+import {ILoginViewModel} from '../../types/auth/login-view-model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +14,25 @@ export class AuthMapperService {
     if (!isNil(source)) {
       destination.accessToken = source.accessToken;
       destination.refreshToken = source.refreshToken;
-      destination.sessionId = source.sessionId;
-      destination.companies = source.companies;
-      destination.firstName = source.firstName;
-      destination.lastName = source.lastName;
     }
     return destination;
   }
 
-  public userToUserAuthModel(source: User): UserAuthModel {
-    const destination = {} as UserAuthModel;
+  public loginViewModelToModel(source: ILoginViewModel): ILoginModel {
+    const destination = {} as ILoginModel;
 
     if (!isNil(source)) {
       destination.password = source.password;
-      destination.login = source.login;
-      destination.firstName = source.firstName;
-      destination.lastName = source.lastName;
+      destination.email = source.email;
     }
 
     return destination;
+  }
+
+  public initializeLoginViewModel(): ILoginViewModel {
+    return {
+      email: '',
+      password: ''
+    };
   }
 }
