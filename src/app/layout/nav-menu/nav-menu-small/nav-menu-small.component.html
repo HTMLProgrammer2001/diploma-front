@@ -9,7 +9,7 @@
       let-item="item"
       let-index="index">
 
-      <ng-container *ngIf="!item.isAccessGranted || (item.isAccessGranted && item.isAccessGranted())">
+      <ng-container *ngIf="item.roles && item.roles.includes(authService.accessTokenModel.role)">
         <!--section-->
         <span [kendoMenuItemLink]="index"
               class=" {{item.levelClass}}"

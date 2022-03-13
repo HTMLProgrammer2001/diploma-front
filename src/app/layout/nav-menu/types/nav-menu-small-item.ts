@@ -1,3 +1,5 @@
+import {RolesEnum} from '../../../global/types/auth/roles.enum';
+
 export interface NavMenuSmallItem {
   iconSvg?: string;
   icon?: string;
@@ -8,5 +10,5 @@ export interface NavMenuSmallItem {
   levelClass?: 'main-menu' | 'sub-main-menu' | 'sub-menu';
   itemType?: 'menu' | 'link' | 'header' | 'section';
   items?: Array<NavMenuSmallItem>;
-  isAccessGranted?: () => boolean;
+  roles?: Array<RolesEnum>;
 }

@@ -7,8 +7,8 @@ import {isEmpty} from 'lodash';
   name: 'validationMessageTranslate'
 })
 export class ValidationMessageTranslatePipe implements PipeTransform {
-constructor(private translate: TranslateService) {
-}
+  constructor(private translate: TranslateService) {}
+
   transform(value: Array<ValidationMessage>): string {
     let result = '';
     if (!isEmpty(value)){
@@ -17,5 +17,4 @@ constructor(private translate: TranslateService) {
     }
     return result;
   }
-
 }

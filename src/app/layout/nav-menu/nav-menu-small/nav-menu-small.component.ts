@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {BookmarkService} from '../../../global/services/bookmark.service';
 import {NavMenuSmallItem} from '../types/nav-menu-small-item';
 import {cloneDeep, isNil} from 'lodash';
+import {AuthService} from '../../../global/services/auth/auth.service';
 
 @Component({
   selector: 'cr-nav-menu-small',
@@ -14,9 +15,7 @@ export class NavMenuSmallComponent implements OnInit {
   @Input() menuItems: Array<NavMenuFullItem>;
   iconStyleLarge = {'width.px': '35', fill: 'rgb(150,50,255)'};
 
-  constructor(private route: Router,
-              private bookmarkService: BookmarkService) {
-  }
+  constructor(private route: Router, public authService: AuthService) {}
 
   ngOnInit(): void {
     cloneDeep(this.menuItems).forEach(item => {
@@ -25,7 +24,6 @@ export class NavMenuSmallComponent implements OnInit {
           itemType: 'header',
           title: item.title,
           titleTranslateKeys: item.titleTranslateKeys,
-          isAccessGranted: item.isAccessGranted
         };
 
         item.items.unshift(header);
@@ -39,11 +37,5 @@ export class NavMenuSmallComponent implements OnInit {
       this.route.navigateByUrl(emptyRoutePath, {skipLocationChange: true}).then(() =>
         this.route.navigate([menuItem.task.route]).then());
     }
-  }
-
-  chooseBookmark(bookmarkId: string) {
-    this.bookmarkService.setCurrentId(bookmarkId);
-    this.route.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-      this.route.navigate([this.bookmarkService.getCurrentBookmarkTask().route]).then());
   }
 }

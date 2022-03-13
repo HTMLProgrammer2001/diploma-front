@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, ElementRef, LOCALE_ID, NgModule, Provider} from '@angular/core';
+import {APP_INITIALIZER, ElementRef, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
@@ -11,7 +11,6 @@ import {LayoutModule} from './layout/layout.module';
 import {ApiHttpInterceptor} from './global/services/http.interceptor';
 import {BookmarkService} from './global/services/bookmark.service';
 import {BaseViewComponent} from './global/components/base-view/base-view.component';
-import {LoggerService} from './global/services/logger.service';
 import {DialogModule, DialogsModule, WindowModule} from '@progress/kendo-angular-dialog';
 import {NOTIFICATION_CONTAINER, NotificationModule} from '@progress/kendo-angular-notification';
 import {PreloaderComponent} from './global/components/preloader/preloader.component';
@@ -39,6 +38,7 @@ import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
 import {ConfigService} from './global/services/config.service';
+import {LoggerService} from './global/services/logger.service';
 
 export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json?v=' + Date.now());
@@ -85,7 +85,6 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
     MenuModule,
   ],
   providers: [
-    LoggerService,
     LanguageService,
     TranslateService,
     GraphqlCommonService,
@@ -99,7 +98,7 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
       provide: APOLLO_OPTIONS,
       useFactory: (httpLink: HttpLink, configService: ConfigService) => ({
         cache: new InMemoryCache(),
-        link: httpLink.create({uri: configService.getConfig().apiUrl}),
+        link: new LoggerService().concat(httpLink.create({uri: configService.getConfig().apiUrl})),
       }),
       deps: [HttpLink, ConfigService],
     }

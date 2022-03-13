@@ -17,7 +17,6 @@ import {TitleHeaderElement} from '../../types/title-header/title-header-element'
 export class TitleHeaderComponent implements OnInit {
   @Input() public isPopup: boolean;
   @Input() public title: string;
-  //@Input() public translateKeys: string;
 
   /** Value for transaction translation */
   @Input() public titleTranslateKey: string;
@@ -51,6 +50,9 @@ export class TitleHeaderComponent implements OnInit {
         case 'create':
         case 'cancel':
         case 'refresh':
+        case 'restore':
+        case 'cancel-restore':
+        case 'confirm-restore':
         case 'close':
           this.buttonClickEvent.emit(clickedButton);
           break;
@@ -116,61 +118,5 @@ export class TitleHeaderComponent implements OnInit {
 
   public ngOnInit(): void {
     this.currentBookmarkTask = this.bookmarkService.getCurrentBookmarkTask();
-    //this.fillButtonSettingsByTemplate();
   }
-
-  // fillButtonSettingsByTemplate(): void {
-  //   if (!isEmpty(this.buttonSettings)) {
-  //     this.buttonSettings.forEach(item => {
-  //       if (item.template !== 'custom') {
-  //         switch (item.template) {
-  //           case 'pin' :
-  //             item.id = item.template;
-  //             item.appearance = 'icon-button';
-  //             break;
-  //           case 'add':
-  //             item.id = item.template;
-  //             item.iconSvg = 'icon-add';
-  //             item.appearance = 'icon-button';
-  //             break;
-  //           case 'delete':
-  //             item.id = item.template;
-  //             item.iconSvg = 'icon-delete';
-  //             item.appearance = 'icon-button';
-  //             break;
-  //           case 'update':
-  //             item.id = item.template;
-  //             item.nameTranslateKey = 'COMMON.BUTTON.SAVE';
-  //             item.appearance = 'primary-button';
-  //             break;
-  //           case 'create':
-  //             item.id = item.template;
-  //             item.nameTranslateKey = 'COMMON.BUTTON.CREATE';
-  //             item.appearance = 'primary-button';
-  //             break;
-  //           case 'cancel':
-  //             item.id = item.template;
-  //             item.nameTranslateKey = 'COMMON.BUTTON.CANCEL';
-  //             item.appearance = 'primary-button';
-  //             break;
-  //           case 'refresh':
-  //             item.id = item.template;
-  //             item.iconSvg = 'icon-refresh';
-  //             item.appearance = 'icon-button';
-  //             break;
-  //           case 'close':
-  //             item.id = item.template;
-  //             item.iconSvg = 'icon-close';
-  //             item.appearance = 'icon-button';
-  //             break;
-  //           case 'close-bookmark':
-  //             item.id = item.template;
-  //             item.iconSvg = 'icon-close';
-  //             item.appearance = 'icon-button';
-  //             break;
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
 }

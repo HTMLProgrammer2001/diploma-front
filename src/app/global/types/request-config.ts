@@ -1,9 +1,14 @@
 import {RolesEnum} from './auth/roles.enum';
+import {RequestType} from './request-type';
+import {TypedDocumentNode} from '@apollo/client/core';
 
 export interface RequestConfig {
-  body: any;
-  roles: Array<RolesEnum>;
+  query: TypedDocumentNode;
+  variables?: any;
+  roles?: Array<RolesEnum>;
+  requestType: RequestType;
   isPreloader?: boolean;
   isAuthorize?: boolean;
-  additionalHeaders?: Map<string, string>;
+  additionalHeaders?: Record<string, string>;
+  resultField?: string;
 }

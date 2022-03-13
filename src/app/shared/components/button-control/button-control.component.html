@@ -1,218 +1,156 @@
-<ng-template #kendoButtonTemplate
-             let-textTranslateKey="textTranslateKey"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
-             let-text="text">
-  <button [attr.data-element-name]="dataElementName"
-          kendoButton
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
+<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
+  <ng-container [ngSwitch]="buttonTemplateType">
+    <ng-container *ngSwitchCase="'grid-remove-command'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoGridRemoveCommand
+              class="cr-icon-button"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [type]="type || 'button'"
+              [ngClass]="classArray"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText
                       ? tooltipText
                       : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
+              (click)="buttonClick($event)">
+        <cr-svg-icon-control
+          [width]="width"
+          [height]="height"
+          [iconName]="icon || 'icon-delete'">
+        </cr-svg-icon-control>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'grid-cancel-command'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoGridCancelCommand
+              class="cr-icon-button"
+              [type]="type || 'button'"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [ngClass]="classArray"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              (click)="buttonClick($event)">
+        <cr-svg-icon-control
+          [width]="width"
+          [height]="height"
+          [iconName]="icon || 'icon-close'">
+        </cr-svg-icon-control>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'grid-save-command'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoGridSaveCommand
+              class="cr-action-button cancel-button"
+              [type]="type || 'button'"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              [ngClass]="classArray">
+        <span [attr.data-translate]="textTranslateKey">
+          {{ textTranslateKey | translate  }}
+        </span>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'grid-edit-command'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoGridEditCommand
+              class="cr-icon-button"
+              [type]="type || 'button'"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              [ngClass]="classArray"
+              (click)="buttonClick($event)">
+        <cr-svg-icon-control
+          [width]="width"
+          [height]="height"
+          [iconName]="icon || 'icon-edit'">
+        </cr-svg-icon-control>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'grid-add-command'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoGridAddCommand
+              class="cr-icon-button"
+              [type]="type || 'button'"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [ngClass]="classArray"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              (click)="buttonClick($event)">
+        <cr-svg-icon-control
+          [width]="width"
+          [height]="height"
+          [iconName]="icon || 'icon-add'">
+        </cr-svg-icon-control>
+      </button>
+
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'icon-button'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoButton
+              class="cr-icon-button"
+              [type]="type || 'button'"
+              [ngClass]="classArray"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              (click)="buttonClick($event)">
+    <span
+      *ngIf="text || textTranslateKey"
+      [attr.data-translate]="textTranslateKey"
+      [innerText]="text || (textTranslateKey | translate)"></span>
+        <cr-svg-icon-control
+          *ngIf="icon"
+          [width]="width"
+          [height]="height"
+          [iconName]="icon">
+        </cr-svg-icon-control>
+      </button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'reset-button'">
+      <button [attr.data-element-name]="dataElementName"
+              kendoButton
+              [type]="type || 'button'"
+              [ngClass]="classArray"
+              [class.cr-custom-button-reset]="true"
+              [class.k-mr-5]="true"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              (click)="buttonClick($event)">
     <span
       *ngIf="text || textTranslateKey"
       [attr.data-translate]="textTranslateKey"
       [innerText]="text || (textTranslateKey | translate)"
     ></span>
-  </button>
-</ng-template>
+      </button>
+    </ng-container>
 
-<ng-template #kendoIconButtonTemplate
-             let-width="width"
-             let-height="height"
-             let-icon="icon"
-             let-textTranslateKey="textTranslateKey"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
-             let-text="text">
-  <button [attr.data-element-name]="dataElementName"
-          kendoButton
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
+    <ng-container *ngSwitchDefault>
+      <button [attr.data-element-name]="dataElementName"
+              kendoButton
+              [type]="type || 'submit'"
+              [ngClass]="classArray"
+              [class.cr-no-read-permission]="!_parsedPermissionSettings.isAccessEdit"
+              [class.cr-action-button]="buttonTemplateType == 'primary-action-button' || buttonTemplateType == 'secondary-action-button'"
+              [class.cancel-button]="buttonTemplateType == 'secondary-action-button'"
+              [class.cr-custom-line-button]="buttonTemplateType == 'underlined-action-button'"
+              [disabled]="disabled || !_parsedPermissionSettings.isAccessEdit"
+              [title]="!!tooltipText ? tooltipText : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
+              (click)="buttonClick($event)">
     <span
       *ngIf="text || textTranslateKey"
       [attr.data-translate]="textTranslateKey"
-      [innerText]="text || (textTranslateKey | translate)"></span>
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-</ng-template>
-
-<ng-template #kendoUnderlinedActionButtonTemplate
-             let-width="width"
-             let-height="height"
-             let-textTranslateKey="textTranslateKey"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
-             let-text="text">
-  <button kendoButton
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
-    <span
-      *ngIf="text || textTranslateKey"
-      [attr.data-translate]="textTranslateKey"
-      [innerText]="text || (textTranslateKey | translate)"></span>
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-</ng-template>
-
-<ng-template #kendoGridAddCommandTemplate
-             let-width="width"
-             let-height="height"
-             let-icon="icon"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
->
-  <button [attr.data-element-name]="dataElementName"
-          kendoGridAddCommand
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-
-</ng-template>
-
-<ng-template #kendoGridEditCommandTemplate
-             let-width="width"
-             let-height="height"
-             let-icon="icon"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
->
-  <button [attr.data-element-name]="dataElementName"
-          kendoGridEditCommand
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-</ng-template>
-
-<ng-template #kendoGridSaveCommandTemplate
-             let-textTranslateKey="textTranslateKey"
-             let-classArray="classArray"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
-             let-disabled="disabled">
-  <button [attr.data-element-name]="dataElementName"
-          kendoGridSaveCommand
-          class="cr-action-button cancel-button"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          [ngClass]="classArray">
-    <span [attr.data-translate]="textTranslateKey">{{ textTranslateKey | translate  }}</span>
-  </button>
-</ng-template>
-
-<ng-template #kendoGridCancelCommandTemplate
-             let-width="width"
-             let-height="height"
-             let-icon="icon"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
->
-  <button [attr.data-element-name]="dataElementName"
-          kendoGridCancelCommand
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-</ng-template>
-
-
-<ng-template #kendoGridRemoveCommandTemplate
-             let-width="width"
-             let-height="height"
-             let-icon="icon"
-             let-classArray="classArray"
-             let-disabled="disabled"
-             let-tooltipText="tooltipText"
-             let-tooltipTranslateKey="tooltipTranslateKey"
->
-  <button [attr.data-element-name]="dataElementName"
-          kendoGridRemoveCommand
-          class="cr-icon-button"
-          [ngClass]="classArray"
-          [disabled]="disabled"
-          [title]="!!tooltipText
-                      ? tooltipText
-                      : (tooltipTranslateKey ? (tooltipTranslateKey | translate) : '')"
-          (click)="buttonClick($event)">
-    <cr-svg-icon-control
-      *ngIf="icon"
-      [width]="width"
-      [height]="height"
-      [iconName]="icon">
-    </cr-svg-icon-control>
-  </button>
-</ng-template>
-
-<ng-container *ngIf="_parsedPermissionSettings.isAccessRead">
-  <ng-container *ngTemplateOutlet="templateRef; context: buttonControlSettings"></ng-container>
+      [innerText]="text || (textTranslateKey | translate)"
+    ></span>
+      </button>
+    </ng-container>
+  </ng-container>
 </ng-container>
 
 <div *ngIf="!_parsedPermissionSettings.isAccessRead" class="cr-no-read-access">

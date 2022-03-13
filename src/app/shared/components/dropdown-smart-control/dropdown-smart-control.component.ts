@@ -20,7 +20,6 @@ import {IPaginatorBase} from '../../types/paginator-base';
 import {BookmarkService} from '../../../global/services/bookmark.service';
 import {ConfigService} from '../../../global/services/config.service';
 import {IPaginator} from '../../types/paginator';
-import {LoggerService} from '../../../global/services/logger.service';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
 import {copyToClipboard, isEmptyObject} from '../../utils';
@@ -294,7 +293,6 @@ export class DropdownSmartControlComponent implements OnInit, OnChanges, AfterVi
 
   constructor(protected bookmarkService: BookmarkService,
               private configService: ConfigService,
-              private logger: LoggerService,
               private notificationService: CustomNotificationService,
               private errorService: ErrorService,
               @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean,

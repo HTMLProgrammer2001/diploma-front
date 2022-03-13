@@ -13,7 +13,6 @@ import {
 import {DateTimePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {LoggerService} from '../../../global/services/logger.service';
 import {ConfigService} from '../../../global/services/config.service';
 import {ValidationTypes} from '../../types/validation/validation-types';
 import {DateTimeType} from '../../types/date-time-type';
@@ -117,8 +116,7 @@ export class DateTimePickerControlComponent implements OnInit, OnChanges, AfterV
   public isRequired: boolean;
   public dataElementName: string;
 
-  constructor(private logger: LoggerService,
-              private configService: ConfigService,
+  constructor(private configService: ConfigService,
               @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean,
   ) {
     this.currentDateTimeFormatPattern = this.configService.getConfig().dateTimeFormat;

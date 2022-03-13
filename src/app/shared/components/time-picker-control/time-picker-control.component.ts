@@ -13,7 +13,6 @@ import {
 import {TimePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {LoggerService} from '../../../global/services/logger.service';
 import {ConfigService} from '../../../global/services/config.service';
 import moment from 'moment';
 import {transformDateToStringZeroTimeNonTimeZone} from '../../utils';
@@ -108,8 +107,7 @@ export class TimePickerControlComponent implements OnInit, OnChanges, AfterViewI
   public dataElementName: string;
   public isRequired: boolean;
 
-  constructor(private logger: LoggerService,
-              private configService: ConfigService,
+  constructor(private configService: ConfigService,
               @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean,
   ) {
     this.currentTimeFormatPattern = this.configService.getConfig().timeFormat;

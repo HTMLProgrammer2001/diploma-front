@@ -84,6 +84,21 @@ export class TitleHeaderElementManager {
         case 'separator':
           item.appearance = 'separator';
           break;
+        case 'restore':
+          item.id = item.template;
+          item.appearance = 'primary-button';
+          item.nameTranslateKey = 'COMMON.BUTTON.RESTORE';
+          break;
+        case 'confirm-restore':
+          item.id = item.template;
+          item.appearance = 'primary-button';
+          item.nameTranslateKey = 'COMMON.BUTTON.CONFIRM_RESTORE';
+          break;
+        case 'cancel-restore':
+          item.id = item.template;
+          item.appearance = 'primary-button';
+          item.nameTranslateKey = 'COMMON.BUTTON.CANCEL_RESTORE';
+          break;
       }
     }
     return item;

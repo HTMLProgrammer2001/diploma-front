@@ -49,7 +49,10 @@
       "RESTORE": "Restore",
       "SAVE": "Save",
       "YES": "Yes",
-      "YES_INTERVAL": "Yes ({{value}})"
+      "YES_INTERVAL": "Yes ({{value}})",
+      "SEARCH": "Search",
+      "CONFIRM_RESTORE": "Confirm restore",
+      "CANCEL_RESTORE": "Cancel restore"
     },
     "TASK_BAR_MANAGER": {
       "TITLE": "Task bar manager",
@@ -94,7 +97,6 @@
       "FILTERS": "Selection criteria",
       "GENERAL": "General"
     },
-    "SEARCH": "Search",
     "CLEAN_FILTER": "Clean filter",
     "EXECUTE": "Execute",
     "RESET": "Reset",
@@ -163,13 +165,13 @@
           "BOOKMARK_DESCRIPTION": ""
         }
       },
-      "ADMIN_ROLE": {
+      "COMMISSION": {
         "LIST": {
-          "BOOKMARK_NAME": "Role list",
+          "BOOKMARK_NAME": "Commission list",
           "BOOKMARK_DESCRIPTION": ""
         },
-        "ROLE_DETAILS": {
-          "BOOKMARK_NAME": "Role: {{value}}",
+        "DETAILS": {
+          "BOOKMARK_NAME": "Commission: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
       }
@@ -179,38 +181,42 @@
     "TITLE": "Dashboard",
     "NAV_MENU": {
       "DASHBOARD": "Dashboard",
-      "ROLE": "Role",
+      "TEACHER_DATA": "Teacher data",
+      "COMMISSION": "Commission list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
-  "ADMIN_ROLE": {
+  "COMMISSION": {
     "LIST": {
-      "TITLE": "Role List",
+      "TITLE": "Commission list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
       "GRID": {
-        "TITLE": "Roles",
-        "ROLE_NAME": "Name",
-        "ROLE_CODE": "Code"
+        "TITLE": "Commissions",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
       }
     },
-    "ROLE_DETAILS": {
-      "TITLE": "Role: {{value}}",
-      "HEADER": {
-        "CODE": "Code",
-        "NAME": "Name"
-      },
-      "PANEL": {
-        "PERMISSIONS": "Permissions"
-      },
-      "NOTIFICATION": {
-        "ERROR_UPDATE": "Error while updating role",
-        "SUCCESS_DELETE": "Role successfully deleted",
-        "SUCCESS_UPDATE": "Role successfully updated",
-        "SUCCESS_CREATE": "Role successfully created",
-        "TITLE_DELETE": "Are you really want to delete role?"
+    "DETAILS": {
+      "TITLE": "Commission: {{value}}",
+      "NAME": "Name",
+      "TEACHERS_LIST": {
+        "TITLE": "Teachers",
+        "GRID": {
+          "NAME": "Name"
+        }
       },
       "VALIDATION": {
-        "REQUIRED_CODE": "Code value is required",
-        "REQUIRED_NAME": "Name value is required"
+        "REQUIRED_NAME": "Name is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Commission was successfully created",
+        "SUCCESS_DELETE": "Commission was successfully deleted",
+        "SUCCESS_UPDATE": "Commission was successfully updated"
       }
     }
   }

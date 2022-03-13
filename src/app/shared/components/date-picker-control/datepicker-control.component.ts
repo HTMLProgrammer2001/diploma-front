@@ -1,7 +1,8 @@
 import {
   AfterViewInit,
   Component,
-  EventEmitter, Inject,
+  EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -12,7 +13,6 @@ import {
 import {DatePickerComponent, DateTimePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {LoggerService} from '../../../global/services/logger.service';
 import {ConfigService} from '../../../global/services/config.service';
 import {ValidationTypes} from '../../types/validation/validation-types';
 import {DateTimeType} from '../../types/date-time-type';
@@ -122,10 +122,8 @@ export class DatepickerControlComponent implements OnInit, OnChanges, AfterViewI
   public isRequired: boolean;
   public dataElementName: string;
 
-  constructor(private logger: LoggerService,
-              private configService: ConfigService,
-              @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean,
-  ) {
+  constructor(private configService: ConfigService,
+              @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean) {
     this.currentDateFormatPattern = this.configService.getConfig().dateFormat;
   }
 

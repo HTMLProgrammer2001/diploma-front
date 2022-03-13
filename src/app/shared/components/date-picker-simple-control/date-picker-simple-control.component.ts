@@ -13,7 +13,6 @@ import {
 import {DatePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {LoggerService} from '../../../global/services/logger.service';
 import {ConfigService} from '../../../global/services/config.service';
 import {transformDateToStringZeroTimeNonTimeZone} from '../../utils';
 import {EditControlPermissions} from '../../types/edit-control-permissions';
@@ -98,10 +97,8 @@ export class DatePickerSimpleControlComponent implements OnInit, OnChanges, Afte
   public currentDateFormatPattern: string;
   public dataElementName: string;
 
-  constructor(private logger: LoggerService,
-              private configService: ConfigService,
-              @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean,
-  ) {
+  constructor(private configService: ConfigService,
+              @Inject('IS_ELEMENT_NAME_ENABLED') private isElementNameEnabled: boolean) {
     this.currentDateFormatPattern = this.configService.getConfig().dateFormat;
   }
 
@@ -116,7 +113,6 @@ export class DatePickerSimpleControlComponent implements OnInit, OnChanges, Afte
   }
 
   ngOnInit(): void {
-    this.logger.debug(`DatepickerControlComponent : ngOnInit : ${this.validator}`);
     if (!!this.validator && this.validationField) {
       this.validationResult = this.validator.getResult(this.validationField);
     }

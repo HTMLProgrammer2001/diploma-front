@@ -8,7 +8,7 @@ import {BookmarkIcon} from '../../../../shared/constants/bookmark-icon';
   selector: 'cr-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent extends BaseViewComponent implements OnInit {
+export class HomeComponent extends BaseViewComponent {
 
   constructor(
     protected router: Router,
@@ -16,14 +16,10 @@ export class HomeComponent extends BaseViewComponent implements OnInit {
     protected bookmarkService: BookmarkService,
   ) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.ADMIN_HOME.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.ADMIN_HOME.BOOKMARK_DESCRIPTION',
+      nameTranslateKey: 'COMMON.BOOKMARK.DASHBOARD.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.DASHBOARD.BOOKMARK_DESCRIPTION',
       iconSvg: BookmarkIcon.dashboard,
       allowPinning: true,
     }, bookmarkService, router, route);
   }
-
-  ngOnInit(): void {
-  }
-
 }

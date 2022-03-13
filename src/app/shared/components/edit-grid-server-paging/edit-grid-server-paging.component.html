@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <ng-template #template let-anchor>
   <span>{{ anchor.nativeElement.innerText }}</span>
 </ng-template>
@@ -74,10 +75,11 @@
         <!--Dropdown-->
         <kendo-grid-column
           *ngSwitchCase="'dropdown'"
+          [field]="column.field"
           [hidden]="column.hidden"
           class="cr-grid-code"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -257,9 +259,10 @@
         <kendo-grid-column
           *ngSwitchCase="'fieldWithCode'"
           [hidden]="column.hidden"
+          [field]="column.field"
           class="cr-grid-code"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -284,9 +287,10 @@
         <kendo-grid-column
           *ngSwitchCase="'link'"
           [hidden]="column.hidden"
+          [field]="column.field"
           class="cr-grid-navigate"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -310,6 +314,7 @@
         <!--Action Button Column-->
         <kendo-grid-column
           *ngSwitchCase="'buttonAction'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
           [autoSize]="column.autoFit"
@@ -366,9 +371,10 @@
         <!--Boolean column-->
         <kendo-grid-column
           *ngSwitchCase="'boolean'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -425,9 +431,10 @@
         <!--Decimal column-->
         <kendo-grid-column
           *ngSwitchCase="'decimal'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -473,9 +480,10 @@
         <!--Numeric column-->
         <kendo-grid-column
           *ngSwitchCase="'numeric'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -522,9 +530,10 @@
         <!--Date column-->
         <kendo-grid-column
           *ngSwitchCase="'date'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -590,9 +599,10 @@
         <!-- Date time column -->
         <kendo-grid-column
           *ngSwitchCase="'date-time'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -641,9 +651,10 @@
         <!-- Time column -->
         <kendo-grid-column
           *ngSwitchCase="'time'"
+          [field]="column.field"
           [hidden]="column.hidden"
           width="{{column.width}}"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -692,8 +703,9 @@
         <!-- Translation text column -->
         <kendo-grid-column
           *ngSwitchCase="'translate-key'"
+          [field]="column.field"
           [width]="column.width"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -740,7 +752,7 @@
           [format]="column.format"
           [filter]="column.type"
           [width]="column.width"
-          [sortable]="!!column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -793,7 +805,7 @@
           [format]="column.format"
           [filter]="column.type"
           [width]="column.width"
-          [sortable]="column.sortable"
+          [sortable]="column.sortable ?? sortable"
           [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
@@ -860,8 +872,8 @@
     </kendo-grid-column>
 
     <ng-template kendoGridNoRecordsTemplate>
-      <span [attr.data-translate]="'COMMON.GRID.NO_RECORDS'">
-        {{ 'COMMON.GRID.NO_RECORDS' | translate }}
+      <span [attr.data-translate]="'COMMON.EDIT_GRID.NO_RECORDS'">
+        {{ 'COMMON.EDIT_GRID.NO_RECORDS' | translate }}
       </span>
     </ng-template>
 
@@ -871,7 +883,7 @@
   </kendo-grid>
 </div>
 
-<div [attr.data-translate]="'COMMON.GRID.NO_READ_ACCESS'" class="no-access"
+<div [attr.data-translate]="'COMMON.EDIT_GRID.NO_READ_ACCESS'" class="no-access"
      *ngIf="!_parsedPermissionSettings.isAccessRead">
-  {{ 'COMMON.GRID.NO_READ_ACCESS' | translate }}
+  {{ 'COMMON.EDIT_GRID.NO_READ_ACCESS' | translate }}
 </div>

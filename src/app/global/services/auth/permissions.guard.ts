@@ -20,19 +20,12 @@ export class PermissionsGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const isPermission = this.checkPermissionForComponent(route.data.permissionForComponent as string);
+    const isPermited = !route.data.roles || route.data.roles.includes(this.authService.currentRole);
 
-    if (isPermission) {
+    if (isPermited) {
       return this.bookmarkProcessGuard.canActivate(route, state);
     } else {
       return this.router.parseUrl('error/403');
-    }
-  }
-
-  private checkPermissionForComponent(type: string): boolean {
-    switch (type) {
-      default:
-        return true;
     }
   }
 }

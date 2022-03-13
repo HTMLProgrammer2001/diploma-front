@@ -102,6 +102,9 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout().subscribe();
+    this.authService.logout().subscribe(
+      null,
+        error => this.customNotificationService.showDialogError(this.errorService.getMessagesToShow(error.errors))
+    );
   }
 }

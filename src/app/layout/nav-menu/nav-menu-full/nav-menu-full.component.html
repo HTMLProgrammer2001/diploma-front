@@ -4,7 +4,7 @@
       *ngFor="let item of menuItems; let i = index"
       [class.blocked-by-title]="item.itemType === 'section'"
       [class.hidden-by-filter]="!item.isFilterSuccess"
-      [class.hidden-by-access]="item.isAccessGranted && !item.isAccessGranted()"
+      [class.hidden-by-access]="item.roles && !item.roles.includes(authService.accessTokenModel.role)"
       [expanded]="item.expanded"
       [id]="item.id"
       title=""

@@ -1,7 +1,6 @@
 import moment from 'moment';
 import {isEmpty, isNil} from 'lodash';
 import {IResponse} from './types/response';
-import {Status} from './constants/status';
 import {IError} from './types/error';
 import {Validator} from './types/validation/validator';
 import {DateTimeType} from './types/date-time-type';
@@ -13,7 +12,6 @@ export const isLanguageRtl = (lang: string) => {
   const rtlCodes = ['ar', 'arc', 'ckb', 'dv', 'fa', 'ha', 'he', 'khw', 'ks', 'ps', 'sd', 'ur', 'yi'];
   return rtlCodes.some(code => lang?.toLowerCase().startsWith(code));
 };
-
 
 export const transformDate = (value: any): any => {
   const formats = [moment.ISO_8601, 'YYYY-MM-DD HH:mm:ss'];

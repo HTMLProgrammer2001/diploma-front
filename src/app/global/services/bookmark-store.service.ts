@@ -26,7 +26,6 @@ export class BookmarkStoreService {
     private sessionService: SessionService,
     private configService: ConfigService
   ) {
-    //debugger
     this.initStorage();
     this.storeBookmarkBufferSize = this.configService.getConfig().storeBookmarkBufferSize;
   }

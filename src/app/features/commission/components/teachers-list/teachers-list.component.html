@@ -1,0 +1,13 @@
+<div class="cr-grid-wrapper-new">
+  <cr-edit-grid-server-paging
+      (cellClickEvent)="cellClick($event)"
+      (pageChangeEvent)="changePage($event)"
+      [columnSettings]="columnSettings"
+      [dataCacheName]="'CommissionTeachersListGrid'"
+      [dataSource]="dataSource"
+      [elementName]="'edit-grid-server-paging:Commission_details.Teachers_Grid'"
+      [pageable]="true"
+      [resizable]="true"
+      [uniqueField]="'id'"
+  ></cr-edit-grid-server-paging>
+</div>

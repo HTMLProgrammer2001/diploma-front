@@ -3,5 +3,5 @@ export type TitleHeaderElementTemplate =
   'update' | 'create' |
   'cancel' | 'refresh' | 'close' | 'close-bookmark' | 'pin' |
   'status' | 'delete-status' |
+  'restore' | 'confirm-restore' | 'cancel-restore' |
   'separator' | 'custom';
-

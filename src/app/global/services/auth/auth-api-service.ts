@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Config} from '../../types/config';
-import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {IResponse} from '../../../shared/types/response';
 import {ILoginViewModel} from '../../types/auth/login-view-model';
@@ -18,12 +17,7 @@ import {IError} from '../../../shared/types/error';
 export class AuthApiService {
   config: Config = null;
 
-  constructor(
-    private authMapperService: AuthMapperService,
-    private http: HttpClient,
-    private apollo: Apollo,
-  ) {
-  }
+  constructor(private authMapperService: AuthMapperService, private apollo: Apollo) {}
 
   public login$(user: ILoginViewModel): Observable<IResponse<AuthViewModel>> {
       return this.apollo.mutate<{ login: AuthViewModel }>({
@@ -44,14 +38,27 @@ export class AuthApiService {
           errors: [],
         })),
         catchError((err) => {
-          const errors: Array<IError> = [];
-          return throwError({errors: err.networkError.errors});
+          let errors: Array<IError> = [];
+
+          if (err.graphQLErrors?.length) {
+            errors = errors.concat(err.graphQLErrors);
+          }
+
+          if (err.clientErrors?.length) {
+            errors = errors.concat(err.clientErrors);
+          }
+
+          if (err.networkError?.length) {
+            errors = errors.concat(err.networkError);
+          }
+
+          return throwError({errors});
         })
       );
   }
 
   public logout$(refreshToken: string): Observable<IResponse<ResultResponse>> {
-      return this.apollo.mutate<{logout: ResultResponse}>({
+      return this.apollo.mutate<{ logout: ResultResponse }>({
           mutation: gql`
               mutation LogoutUser($refreshToken: String!) {
                   logout(refreshToken: $refreshToken) {
@@ -67,12 +74,28 @@ export class AuthApiService {
           data: response.data?.logout,
           errors: [],
         })),
-        catchError((err) => throwError({errors: err.networkError.errors}))
+        catchError((err) => {
+          let errors: Array<IError> = [];
+
+          if (err.graphQLErrors?.length) {
+            errors = errors.concat(err.graphQLErrors);
+          }
+
+          if (err.clientErrors?.length) {
+            errors = errors.concat(err.clientErrors);
+          }
+
+          if (err.networkError?.length) {
+            errors = errors.concat(err.networkError);
+          }
+
+          return throwError({errors});
+        })
       );
   }
 
   public refreshToken$(refreshToken: string): Observable<IResponse<AuthViewModel>> {
-      return this.apollo.mutate<{logout: AuthViewModel}>({
+      return this.apollo.mutate<{ refreshToken: AuthViewModel }>({
           mutation: gql`
               mutation RefreshUserToken($refreshToken: String!) {
                   refreshToken(refreshToken: $refreshToken) {
@@ -82,14 +105,29 @@ export class AuthApiService {
               }
           `,
         variables: {refreshToken},
-        context: {headers: {preloader: 'on'}}
       }).pipe(
         map(response => ({
           status: Status.ok,
-          data: response.data?.logout,
+          data: response.data?.refreshToken,
           errors: [],
         })),
-        catchError((err) => throwError({errors: err.networkError.errors}))
+        catchError((err) => {
+          let errors: Array<IError> = [];
+
+          if (err.graphQLErrors?.length) {
+            errors = errors.concat(err.graphQLErrors);
+          }
+
+          if (err.clientErrors?.length) {
+            errors = errors.concat(err.clientErrors);
+          }
+
+          if (err.networkError?.length) {
+            errors = errors.concat(err.networkError);
+          }
+
+          return throwError({errors});
+        })
       );
   }
 }

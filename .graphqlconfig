@@ -1,6 +1,6 @@
 {
   "name": "Trach teacher schema",
-  "schemaPath": "schema.graphql",
+  "schemaPath": "./schema.gql",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {

@@ -1,4 +1,5 @@
 import {IBookmarkTask} from '../../../global/types/bookmark-task';
+import {RolesEnum} from '../../../global/types/auth/roles.enum';
 
 export interface NavMenuFullItem {
   id?: string;
@@ -11,5 +12,5 @@ export interface NavMenuFullItem {
   isFilterSuccess?: boolean;
   task?: IBookmarkTask;
   items?: Array<NavMenuFullItem>;
-  isAccessGranted?: () => boolean;
+  roles?: Array<RolesEnum>;
 }

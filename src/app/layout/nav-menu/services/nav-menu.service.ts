@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {NavMenuFullItem} from '../types/nav-menu-full-item';
 import {TranslateService} from '@ngx-translate/core';
+import {NavMenuFullItem} from '../types/nav-menu-full-item';
 import {BookmarkIcon} from '../../../shared/constants/bookmark-icon';
 import {AuthService} from '../../../global/services/auth/auth.service';
+import {readRoles} from '../../../shared/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -20,18 +21,18 @@ export class NavMenuService {
       },
     },
     {
-      iconSvg: 'icon-partners',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.ROLE',
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER_DATA',
+      roles: readRoles,
       items: [
         {
           iconSvg: 'icon-sub-link',
-          titleTranslateKeys: 'DASHBOARD.NAV_MENU.ROLE_LIST',
-          isAccessGranted: () => true,
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.COMMISSION',
           task: {
-            route: 'role/list',
-            nameTranslateKey: 'COMMON.BOOKMARK.ADMIN_ROLE.LIST.BOOKMARK_NAME',
-            descriptionTranslateKey: 'COMMON.BOOKMARK.ADMIN_ROLE.LIST.BOOKMARK_DESCRIPTION',
-            iconSvg: BookmarkIcon.adminRoleList,
+            route: 'commission/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.commissionList,
           },
         },
       ],

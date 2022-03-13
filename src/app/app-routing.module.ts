@@ -27,8 +27,8 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
-        path: 'role',
-        loadChildren: () => import('./features/role/role-admin.module').then(m => m.RoleAdminModule),
+        path: 'commission',
+        loadChildren: () => import('./features/commission/commission.module').then(m => m.CommissionModule),
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
     ]

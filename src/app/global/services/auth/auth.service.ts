@@ -62,6 +62,10 @@ export class AuthService {
     }
   }
 
+  get currentRole() {
+    return this.accessTokenModel?.role;
+  }
+
   get authViewModel() {
     return this._authViewModel;
   }
@@ -165,7 +169,7 @@ export class AuthService {
   }
 
   public logout() {
-    return this.authApiService.logout$('').pipe(
+    return this.authApiService.logout$(this.authViewModel.refreshToken).pipe(
       finalize(() => {
         this.closeBookmarks();
         localStorage.removeItem(this._authUserEmail);
@@ -279,7 +283,7 @@ export class AuthService {
     this._deltaServerLocalTime = Math.floor((Date.now() - this.accessTokenModel.iat * 1000));
   }
 
-  public checkAuthorization(requestConfig: RequestConfig): Observable<Map<string, string>> {
+  public checkAuthorization(requestConfig: RequestConfig): Observable<Record<string, string>> {
     this.lastActivityTime = new Date();
     if (requestConfig.isAuthorize) {
       if (!isNil(requestConfig.roles) && !requestConfig.roles.includes(this.accessTokenModel.role)) {
@@ -294,28 +298,21 @@ export class AuthService {
         if (this.isExpiredAccessToken()) {
           if (this.isExpiredRefreshToken()) {
             const error = {errors: new Array<IError>()};
-            error.errors.push({code: 19, message: null});
+            error.errors.push({code: 19, message: 'Token expired'});
             return throwError(error);
           } else {
-            return this.refreshToken().pipe(
-              map(() => {
-                let headers = new Map();
-                headers = headers.set('Authorization', this.accessToken);
-                return headers;
-              }));
+            return this.refreshToken().pipe(map(() => ({authorization: this.accessToken})));
           }
         } else {
-          let headers = new Map();
-          headers = headers.set('Authorization', this.accessToken);
-          return of(headers);
+          return of({authorization: this.accessToken});
         }
       } else {
         const error = {errors: new Array<IError>()};
-        error.errors.push({code: 19, message: null});
+        error.errors.push({code: 19, message: 'Token expired'});
         return throwError(error);
       }
     } else {
-      return of(new Map());
+      return of({});
     }
   }
 }

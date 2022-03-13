@@ -396,9 +396,13 @@ export class EditGridServerPagingComponent implements OnInit, OnChanges, AfterVi
       }
     }
 
-    if (changes.sortableState && this.grid) {
-      //parse our type to kendo SortDescriptor
-      this.grid.sort = this.sortableState.map(el => ({field: el.field, dir: el.dir}));
+    if (changes.sortableState) {
+      setTimeout(() => {
+        if(this.grid) {
+          //parse our type to kendo SortDescriptor
+          this.grid.sort = this.sortableState.map(el => ({field: el.field, dir: el.dir}));
+        }
+      });
     }
 
     if (changes.validator && !isNil(changes.validator.currentValue) && !isNil(this.cache)) {
