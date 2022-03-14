@@ -26,9 +26,9 @@ import {
 } from '@progress/kendo-angular-grid';
 import {IPaginator} from '../../types/paginator';
 import {isBoolean, isEmpty, isNil} from 'lodash';
-import {ConfigService} from '../../../global/services/config.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import {TooltipDirective} from '@progress/kendo-angular-tooltip';
-import {BookmarkService} from '../../../global/services/bookmark.service';
+import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
 import {IEditGridColumnSetting} from '../../types/edit-grid/edit-grid-column-settings';
 import {PagerSettings} from '@progress/kendo-angular-grid/dist/es2015/pager/pager-settings';
 import {RemoveEvent} from '@progress/kendo-angular-grid/dist/es2015/editing/remove-event-args.interface';

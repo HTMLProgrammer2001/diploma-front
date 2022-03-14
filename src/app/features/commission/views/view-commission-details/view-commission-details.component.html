@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container *ngIf="!viewState.isNotFound">
   <cr-title-header
       (buttonClickEvent)="onTitleButtonClick($event)"
       [buttonSettings]="titleHeaderButtonSettings"
@@ -13,7 +13,7 @@
             [(dataValue)]="commission.name"
             (dataValueChange)="changeTitle()"
             [translateKeys]="'COMMISSION.DETAILS.NAME'"
-            [isDisabled]="commission.isDeleted && !restoring"
+            [isDisabled]="commission.isDeleted && !viewState.restoring"
             [validator]="validator"
             [validationField]="'name'"
         ></cr-control-edit>
@@ -21,18 +21,15 @@
     </div>
   </div>
 
-  <div class="cr-outer-wrapper">
-    <kendo-panelbar (stateChange)="onPanelStateChange()" *ngIf="commission && !isNew">
-      <kendo-panelbar-item [expanded]="true" title="">
-        <ng-template kendoPanelBarItemTitle>
-        <span [attr.data-translate]="'COMMISSION.DETAILS.TEACHERS_LIST.TITLE'">
-          {{ 'COMMISSION.DETAILS.TEACHERS_LIST.TITLE' | translate }}
-        </span>
-        </ng-template>
-        <ng-template kendoPanelBarContent>
-          <cr-teachers-list [commission]="commission"></cr-teachers-list>
-        </ng-template>
-      </kendo-panelbar-item>
-    </kendo-panelbar>
+  <div class="cr-outer-wrapper" *ngIf="commission && !isNew">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'COMMISSION.DETAILS.TEACHERS_LIST.TITLE'">
+        {{ 'COMMISSION.LIST.GRID.TITLE' | translate }}
+      </p>
+    </div>
+
+    <cr-teachers-list [commission]="commission"></cr-teachers-list>
   </div>
 </ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound" style="height: 100%"></cr-view-page-not-found>

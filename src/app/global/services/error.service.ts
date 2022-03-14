@@ -4,6 +4,8 @@ import {ErrorViewModel} from '../../shared/types/error-view-model';
 import {isEmpty, isNil} from 'lodash';
 import {Router} from '@angular/router';
 import {CustomNotificationService} from './custom-notification.service';
+import {ErrorCodesEnum} from '../types/error-codes.enum';
+import {defer, from, Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,7 @@ export class ErrorService {
 
     if (!isEmpty(errors)) {
       errors.forEach(error => {
-        if (error.code === 0) {
+        if (error.code === ErrorCodesEnum.ARRAY_ERROR) {
           errorsToShow = [...errorsToShow, ...this.getMessagesToShow(error.errors)];
         } else {
           errorsToShow.push(error);
@@ -27,12 +29,19 @@ export class ErrorService {
     return errorsToShow;
   }
 
-  redirectIfUnauthorized(errors: Array<IError>) {
-    const errorAuth = errors.find(error => error.code === 101);
+  redirectIfUnauthorized(errors: Array<IError>): Observable<void> {
+    const errorAuth = errors.find(error => error.code === ErrorCodesEnum.UNAUTHORIZED);
 
     if (!isNil(errorAuth)) {
       this.notificationService.closeDialogs();
-      this.router.navigate(['/login']);
+      return defer<void>(() => this.router.navigate(['/login']));
     }
+    else {
+      return of(null);
+    }
+  }
+
+  isNotFound(errors: Array<IError>): boolean {
+    return !!errors.find(error => error.code === ErrorCodesEnum.NOT_FOUND);
   }
 }

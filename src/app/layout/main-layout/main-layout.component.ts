@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DialogRef} from '@progress/kendo-angular-dialog';
 import {CustomNotificationService} from '../../global/services/custom-notification.service';
-import {BookmarkService} from '../../global/services/bookmark.service';
+import {BookmarkService} from '../../global/services/bookmark/bookmark.service';
 import {fromEvent, ReplaySubject} from 'rxjs';
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';

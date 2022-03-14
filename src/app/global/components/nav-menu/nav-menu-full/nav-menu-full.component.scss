@@ -1,0 +1,214 @@
+@use "../../../../../styles/variables" as *;
+::ng-deep {
+  .cr-full-nav-menu {
+    .cr-full-nav-menu {
+      overflow: auto !important;
+      padding-bottom: 0 !important;
+      padding-right: 0 !important;
+      height: auto !important;
+    }
+
+    background: $main-menu-background-color;
+    overflow-x: hidden;
+    height: calc(100vh - 115px) !important;
+
+    .k-i-arrow-s::before {
+      transform: rotate(-90deg);
+    }
+
+    .k-i-arrow-n::before {
+      transform: rotate(180deg);
+    }
+
+    .cr-menu-icon {
+      display: flex;
+      align-items: center;
+      flex-basis: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .svg-icon-style {
+      transition: .3s all ease-in-out;
+      fill: $main-menu-text-color;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+
+      svg {
+        display: flex;
+        width: 30px;
+        height: 30px;
+      }
+
+      &.sub-menu {
+        margin-right: 5px;
+        width: 25px;
+        height: 25px;
+
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    span.k-header:hover > span .svg-icon-style {
+      fill: $base-color-root;
+    }
+
+    .k-panelbar > .k-item {
+      .cr-svg-blocker {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+
+      .k-link {
+        min-height: 50px;
+      }
+
+      svg-icon {
+        width: 30px;
+        height: 30px;
+      }
+
+      .k-panelbar > .k-item {
+        .k-link {
+          overflow: hidden;
+          min-height: 50px;
+          padding: 5px;
+        }
+
+        .cr-svg-blocker {
+          width: 25px;
+          height: 25px;
+          margin-right: 10px;
+        }
+
+        svg-icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        background: $main-menu-background-color;
+
+        .k-link {
+          position: relative;
+
+          &.k-state-selected {
+            &:hover, &:active, &:focus {
+              &:before {
+                background: #3c3c3c;
+              }
+            }
+          }
+
+          &:hover, &:active, &:focus {
+            &:before {
+              background: #3c3c3c;
+            }
+          }
+
+          &:before {
+            right: 100%;
+            height: 100%;
+            width: 200px;
+            content: '';
+            background: $main-menu-background-color;
+            position: absolute;
+            top: 0;
+            transition: .3s all ease-in-out;
+          }
+        }
+      }
+    }
+
+    .k-panelbar > .k-item > .k-link {
+      cursor: pointer;
+      padding: 5px 5px 5px 10px;
+      font-size: 16px;
+      font-weight: 400;
+      background: $main-menu-background-color;
+      color: $main-menu-text-color;
+      transition: .3s all ease-in-out;
+
+      &.k-state-selected {
+        color: $main-menu-text-color;
+        background: $main-menu-background-color;
+
+        &:hover, &:active, &:focus {
+          color: $main-menu-text-hover;
+          background: $main-menu-hover-color;
+
+          &:before {
+            background: $main-menu-hover-color;
+          }
+        }
+      }
+
+      &:hover, &:active, &:focus {
+        color: $main-menu-text-hover;
+        background: $main-menu-hover-color;
+
+        &:before {
+          background: $main-menu-hover-color;
+        }
+      }
+    }
+
+    .k-panelbar > .k-item + .k-item {
+      border: none;
+    }
+  }
+
+  .blocked-by-title {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      content: '';
+      background: transparent;
+    }
+  }
+
+  .hidden-by-filter {
+    display: none !important;
+  }
+
+  .hidden-by-access {
+    display: none !important;
+  }
+
+  .cr-menu-icon-title {
+    text-transform: uppercase;
+
+    .cr-menu-title-no-icon {
+      margin-left: 5px;
+    }
+  }
+}
+
+:host {
+  body.rtl-on & {
+    ::ng-deep {
+      .cr-full-nav-menu {
+        height: calc(100% - 115px);
+        overflow-y: scroll;
+        padding: 0 0 10px 0;
+
+        .cr-full-nav-menu {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+
+

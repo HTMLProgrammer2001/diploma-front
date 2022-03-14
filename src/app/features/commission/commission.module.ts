@@ -6,6 +6,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {ViewCommissionDetailsComponent} from './views/view-commission-details/view-commission-details.component';
 import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
+import {ErrorsModule} from '../../global/components/errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { TeachersListComponent } from './components/teachers-list/teachers-list.
     FormsModule,
     CommonModule,
     SharedModule,
+    ErrorsModule,
     CommissionRoutingModule,
   ],
 })

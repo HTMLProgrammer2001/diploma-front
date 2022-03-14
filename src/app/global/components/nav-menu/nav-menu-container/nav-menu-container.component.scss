@@ -1,0 +1,139 @@
+@use "../../../../../styles/variables" as *;
+::ng-deep {
+  .cr-nav-menu-search-wrapper {
+    overflow: hidden;
+    cr-control-search {
+      width: 100%;
+    }
+    .cr-quick-grid-search {
+      background: $control-color-text-primary;
+      > input {
+        padding: 4px 60px 4px 8px;
+        &.k-textbox {
+          border-radius: 5px;
+          border: 1px solid #a6a6a6;
+          background: transparent;
+          color: $control-color-label;
+          &::placeholder {
+            color: $control-color-label;
+          }
+        }
+      }
+    }
+    height: 65px;
+    background: $control-color-text-primary;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px 5px 10px;
+  }
+  .svg-icon-style {
+    fill: #a6a6a6;
+    width: 23px;
+  }
+
+  .cr-main-menu {
+    overflow-y: auto;
+    height: 100vh;
+    background: $main-menu-background-color;
+    padding: 10px;
+    border-radius: 0 5px 0 0;
+  }
+
+  .menu {
+    margin: 0;
+    //margin-left: -20px;
+    padding: 0;
+    z-index: 1;
+
+    .logo {
+      text-align: center;
+      color: $base-color-2;
+      height: $main-header-height;
+    }
+
+    .aside {
+      margin: 0;
+      margin-left: -20px;
+      padding: 0;
+
+      ul {
+        margin: 0;
+        margin-left: 20px;
+        padding-left: 0;
+        list-style-type: none;
+
+        p {
+          padding: 0 0 5px 0;
+          margin: 0;
+          cursor: default;
+        }
+
+        li {
+          padding: 0 0 10px 0;
+
+          ul {
+            li {
+              padding: 0 0 5px 0;
+            }
+
+            .navigation-menu-item {
+              font-size: 13px;
+            }
+          }
+
+          margin-left: 0;
+          cursor: pointer;
+          color: $main-menu-text-color;
+
+          .navigation-menu-item {
+            color: inherit; /* blue colors for links too */
+            text-decoration: inherit;
+            transition: .3s ease-in-out;
+
+            &:hover {
+              color: $main-menu-text-hover;
+
+              .svg-icon-style {
+                fill: $base-color-root;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cr-nav-menu-logo {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    color: $base-color-2;
+    background: #3c3c3c;
+
+    span {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .svg-icon-logo {
+      margin: 0 10px 0 5px;
+      width: 30px;
+
+      svg {
+        width: 35px;
+      }
+    }
+  }
+}
+
+:host {
+  body.rtl-on & {
+    //Menu container settings
+    .cr-main-menu {
+      border-radius: 5px 0 0 0;
+    }
+    .cr-nav-menu-search-wrapper {
+      padding: 5px 10px 5px 15px;
+    }
+  }
+}

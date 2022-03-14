@@ -7,12 +7,12 @@ import {IResponse} from '../../../shared/types/response';
 import jwtDecode from 'jwt-decode';
 import {finalize, map, mapTo, share, switchMap, take, tap} from 'rxjs/operators';
 import {AccessTokenModel} from '../../types/auth/access-token-model';
-import {Status} from '../../../shared/constants/status';
+import {Status} from '../../types/status';
 import {isNil} from 'lodash';
-import {ConfigService} from '../config.service';
+import {ConfigService} from '../config/config.service';
 import {Config} from '../../types/config';
 import {Router} from '@angular/router';
-import {BookmarkService} from '../bookmark.service';
+import {BookmarkService} from '../bookmark/bookmark.service';
 import {CustomNotificationService} from '../custom-notification.service';
 import {IRefreshTokenModel} from '../../types/auth/refresh-token-model';
 import {RequestConfig} from '../../types/request-config';
@@ -30,8 +30,6 @@ export class AuthService {
   private updateRequest$: Observable<IResponse<AuthViewModel>>;
   private _deltaServerLocalTime = 0;
   private _authUserEmail = 'auth-user-email';
-  private _authUserFullName = 'auth-user-full-name';
-  private _authUserAvatarUrl = 'auth-user-avatar-url';
   private _authAccessToken = 'auth-access-token';
   private _authRefreshToken = 'auth-refresh-token';
 
@@ -172,7 +170,12 @@ export class AuthService {
     return this.authApiService.logout$(this.authViewModel.refreshToken).pipe(
       finalize(() => {
         this.closeBookmarks();
+
+        this.authViewModel = new AuthViewModel();
         localStorage.removeItem(this._authUserEmail);
+        localStorage.removeItem(this._authAccessToken);
+        localStorage.removeItem(this._authRefreshToken);
+
         this.router.navigate(['/login']);
       })
     );
@@ -259,18 +262,6 @@ export class AuthService {
       localStorage.setItem(this._authUserEmail, this.accessTokenModel.email);
     } else {
       localStorage.removeItem(this._authUserEmail);
-    }
-
-    if (!isNil(this.accessTokenModel?.fullName)) {
-      localStorage.setItem(this._authUserFullName, this.accessTokenModel.fullName);
-    } else {
-      localStorage.removeItem(this._authUserFullName);
-    }
-
-    if (!isNil(this.accessTokenModel?.avatarUrl)) {
-      localStorage.setItem(this._authUserAvatarUrl, this.accessTokenModel.avatarUrl);
-    } else {
-      localStorage.removeItem(this._authUserAvatarUrl);
     }
   }
 

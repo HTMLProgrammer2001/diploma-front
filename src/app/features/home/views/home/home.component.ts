@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseViewComponent} from '../../../../global/components/base-view/base-view.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BookmarkService} from '../../../../global/services/bookmark.service';
-import {BookmarkIcon} from '../../../../shared/constants/bookmark-icon';
+import {BookmarkService} from '../../../../global/services/bookmark/bookmark.service';
+import {BookmarkIcon} from '../../../../global/types/bookmark/bookmark-icon';
 
 @Component({
   selector: 'cr-home',

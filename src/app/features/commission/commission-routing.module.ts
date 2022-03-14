@@ -1,11 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ViewCommissionListComponent} from './views/view-commission-list/view-commission-list.component';
-import {BookmarkProcessGuard} from '../../global/services/bookmark-process.guard';
+import {BookmarkProcessGuard} from '../../global/services/bookmark/bookmark-process.guard';
 import {ViewCommissionDetailsComponent} from './views/view-commission-details/view-commission-details.component';
 import {AuthGuard} from '../../global/services/auth/auth.guard';
 import {PermissionsGuard} from '../../global/services/auth/permissions.guard';
 import {readRoles, writeRoles} from '../../shared/roles';
+import {ViewPageNotFoundComponent} from '../../global/components/errors/view-page-not-found/view-page-not-found.component';
+import {matchId} from '../../shared/utils';
 
 
 export const routingPaths = {
@@ -23,7 +25,7 @@ const routes: Routes = [
     data: {allowPinning: true, roles: readRoles},
   },
   {
-    path: routingPaths.commissionDetails,
+    matcher: matchId(routingPaths.commissionDetails),
     component: ViewCommissionDetailsComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
@@ -38,7 +40,9 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/error/404',
+    component: ViewPageNotFoundComponent,
+    canActivate: [BookmarkProcessGuard, AuthGuard],
+    canDeactivate: [BookmarkProcessGuard],
   }];
 
 @NgModule({

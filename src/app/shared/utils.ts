@@ -4,6 +4,7 @@ import {IResponse} from './types/response';
 import {IError} from './types/error';
 import {Validator} from './types/validation/validator';
 import {DateTimeType} from './types/date-time-type';
+import {Route, UrlMatchResult, UrlSegment, UrlSegmentGroup} from '@angular/router';
 
 export const addRemoveClass = (element: HTMLElement, className: string, isAdd: boolean): void =>
   isAdd ? element.classList.add(className) : element.classList.remove(className);
@@ -106,4 +107,20 @@ export const isTruncated = (element: HTMLElement): boolean => {
   const computed = getComputedStyle(element.parentElement);
   const parentWidth = element.parentElement.clientWidth - parseFloat(computed.paddingLeft) - parseFloat(computed.paddingRight);
   return parentWidth < element.offsetWidth;
+};
+
+export const matchId = (urlPattern: string) => (segments: UrlSegment[]): UrlMatchResult | null => {
+  const url = segments.reduce((accUrl, segment) => accUrl + '/' + segment.path, '');
+  const regExp = new RegExp(`${urlPattern.replace(':id', '(\\d+)')}$`);
+  const matchResult = url.match(regExp);
+
+  if(matchResult) {
+    return {
+      consumed: segments,
+      posParams: {id: new UrlSegment(matchResult[1], {})}
+    };
+  }
+  else {
+    return null;
+  }
 };

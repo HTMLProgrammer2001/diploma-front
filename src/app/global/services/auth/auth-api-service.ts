@@ -7,7 +7,7 @@ import {AuthMapperService} from './auth-mapper.service';
 import {catchError, map} from 'rxjs/operators';
 import {AuthViewModel} from '../../types/auth/auth-view-model';
 import {Apollo, gql} from 'apollo-angular';
-import {Status} from '../../../shared/constants/status';
+import {Status} from '../../types/status';
 import {ResultResponse} from '../../../shared/types/result-response';
 import {IError} from '../../../shared/types/error';
 

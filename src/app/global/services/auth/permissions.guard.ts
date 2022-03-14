@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {BookmarkService} from '../bookmark.service';
-import {BookmarkProcessGuard} from '../bookmark-process.guard';
+import {BookmarkService} from '../bookmark/bookmark.service';
+import {BookmarkProcessGuard} from '../bookmark/bookmark-process.guard';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +20,14 @@ export class PermissionsGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const isPermited = !route.data.roles || route.data.roles.includes(this.authService.currentRole);
+    const isPermit = !route.data.roles || route.data.roles.includes(this.authService.currentRole);
 
-    if (isPermited) {
+    if (isPermit) {
       return this.bookmarkProcessGuard.canActivate(route, state);
     } else {
-      return this.router.parseUrl('error/403');
+      const url = route.pathFromRoot.filter(el => el.url?.length)
+        .reduce((acc, routePart) => acc + '/' + routePart.url, '');
+      return this.router.navigate(['403'], {queryParams: {url}});
     }
   }
 }

@@ -13,7 +13,7 @@ import {
 import {DateTimePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {ConfigService} from '../../../global/services/config.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import {ValidationTypes} from '../../types/validation/validation-types';
 import {DateTimeType} from '../../types/date-time-type';
 import {transformDateToStringByType} from '../../utils';

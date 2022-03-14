@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {BookmarkService} from '../../../global/services/bookmark.service';
-import {ConfigService} from '../../../global/services/config.service';
+import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import {IPaginator} from '../../../shared/types/paginator';
 import {map, tap} from 'rxjs/operators';
 import {CommissionApiService} from './commission-api.service';
@@ -13,6 +13,7 @@ import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {ICommissionFilterViewModel} from '../types/view-model/commission-filter-view-model';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
+import {ICommissionDetailsViewState} from '../types/view-model/commission-details-view-state';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +111,17 @@ export class CommissionFacadeService {
     return this.commissionApiService.deleteCommission$(commission.id, commission.guid).pipe(map(resp => resp.data));
   }
 
+  public getCommissionDetailsViewState$(): Observable<ICommissionDetailsViewState> {
+    if(isNil(this.bookmarkService.getCurrentViewState().commissionDetails)) {
+      this.bookmarkService.getCurrentViewState().commissionDetails = {
+        isNotFound: false,
+        restoring: false
+      };
+    }
+
+    return of(this.bookmarkService.getCurrentViewState().commissionDetails);
+  }
+
   // endregion
 
   // region Commission teachers
@@ -140,7 +152,7 @@ export class CommissionFacadeService {
     const filter = this.commissionMapperService.commissionViewModelToCommissionTeachersFilterModel(commission);
     return this.commissionApiService.getCommissionTeachersList$(paginator, filter)
       .pipe(
-        map(resp => resp.data),
+        map(resp => cloneDeep(resp.data)),
         tap(resp => this.bookmarkService.getCurrentDataItem().commissionTeachersList = resp)
       );
   }

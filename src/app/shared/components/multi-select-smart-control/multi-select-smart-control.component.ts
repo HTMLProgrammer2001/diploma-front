@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import {PreventableEvent} from '@progress/kendo-angular-dropdowns';
 import {IPaginatorBase} from '../../types/paginator-base';
-import {BookmarkService} from '../../../global/services/bookmark.service';
-import {ConfigService} from '../../../global/services/config.service';
+import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
 import {IPaginator} from '../../types/paginator';

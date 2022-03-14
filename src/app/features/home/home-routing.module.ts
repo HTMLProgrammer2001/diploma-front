@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './views/home/home.component';
-import {BookmarkProcessGuard} from '../../global/services/bookmark-process.guard';
+import {BookmarkProcessGuard} from '../../global/services/bookmark/bookmark-process.guard';
 import {EmptyPageComponent} from './views/empty-page/empty-page.component';
 
 export const routingPaths = {

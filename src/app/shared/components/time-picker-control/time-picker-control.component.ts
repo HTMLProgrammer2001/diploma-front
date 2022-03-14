@@ -13,7 +13,7 @@ import {
 import {TimePickerComponent} from '@progress/kendo-angular-dateinputs';
 import {Validator} from '../../types/validation/validator';
 import {ValidationResult} from '../../types/validation/validation-result';
-import {ConfigService} from '../../../global/services/config.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import moment from 'moment';
 import {transformDateToStringZeroTimeNonTimeZone} from '../../utils';
 import {EditControlPermissions} from '../../types/edit-control-permissions';

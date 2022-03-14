@@ -4,7 +4,7 @@ import {IResponse} from '../../../shared/types/response';
 import {IPaginator} from '../../../shared/types/paginator';
 import {Config} from '../../../global/types/config';
 import {AuthService} from '../../../global/services/auth/auth.service';
-import {ConfigService} from '../../../global/services/config.service';
+import {ConfigService} from '../../../global/services/config/config.service';
 import {GraphqlCommonService} from '../../../global/services/graphql-common.service';
 import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {ICommissionGetModel} from '../types/model/commission-get-model';
@@ -28,11 +28,7 @@ import {ICommissionTeachersFilterModel} from '../types/model/commission-teachers
 
 @Injectable({providedIn: 'root'})
 export class CommissionApiService {
-  private config: Config = null;
-
-  constructor(private graphqlService: GraphqlCommonService, private authService: AuthService, private configService: ConfigService) {
-    this.config = configService.getConfig();
-  }
+  constructor(private graphqlService: GraphqlCommonService) {}
 
   public getCommissionList$(paginator: IPaginatorBase, filter: ICommissionFilterModel):
     Observable<IResponse<IPaginator<ICommissionListGetModel>>> {

@@ -2,32 +2,27 @@ import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MainLayoutComponent} from './main-layout/main-layout.component';
 import {AppRoutingModule} from '../app-routing.module';
-import {NavMenuContainerComponent} from './nav-menu/nav-menu-container/nav-menu-container.component';
 import {BookmarkModule} from '../global/components/bookmark/bookmark.module';
 import {SharedModule} from '../shared/shared.module';
 import {LoginLayoutComponent} from './login-layout/login-layout.component';
-import {NavMenuFullComponent} from './nav-menu/nav-menu-full/nav-menu-full.component';
-import {NavMenuSmallComponent} from './nav-menu/nav-menu-small/nav-menu-small.component';
-import {MenuModule} from '@progress/kendo-angular-menu';
+import {NavMenuModule} from '../global/components/nav-menu/nav-menu.module';
+import {UserInfoModule} from '../global/components/user-info/user-info.module';
 
 @NgModule({
   declarations: [
     MainLayoutComponent,
-    NavMenuContainerComponent,
     LoginLayoutComponent,
-    NavMenuFullComponent,
-    NavMenuSmallComponent
   ],
   imports: [
     CommonModule,
     AppRoutingModule,
     BookmarkModule,
     SharedModule,
-    MenuModule,
+    NavMenuModule,
+    UserInfoModule,
   ],
   exports: [
     MainLayoutComponent,
-    NavMenuContainerComponent
   ],
   providers: []
 })

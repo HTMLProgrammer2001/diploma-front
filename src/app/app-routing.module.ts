@@ -1,21 +1,32 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginLayoutComponent} from './layout/login-layout/login-layout.component';
-import {ConfigLoadedGuard} from './global/services/config-loaded.guard';
+import {ConfigLoadedGuard} from './global/services/config/config-loaded.guard';
 import {AuthGuard} from './global/services/auth/auth.guard';
 import {MainLayoutComponent} from './layout/main-layout/main-layout.component';
+import {ViewPageNotFoundComponent} from './global/components/errors/view-page-not-found/view-page-not-found.component';
+import {BookmarkProcessGuard} from './global/services/bookmark/bookmark-process.guard';
+import {ViewPageForbiddenComponent} from './global/components/errors/view-page-forbidden/view-page-forbidden.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+        data: {redirectToDashboardIfAuthorized: true},
+      },
+    ],
+    runGuardsAndResolvers: 'always',
+  },
   {
     path: '',
     component: MainLayoutComponent,
     runGuardsAndResolvers: 'always',
     children: [
-      {
-        path: 'error',
-        redirectTo: 'error/404',
-        pathMatch: 'full',
-      },
       {
         path: '',
         redirectTo: '/',
@@ -31,23 +42,19 @@ const routes: Routes = [
         loadChildren: () => import('./features/commission/commission.module').then(m => m.CommissionModule),
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
-    ]
-  },
-  {
-    path: 'login',
-    component: LoginLayoutComponent,
-    children: [
       {
-        path: '',
-        loadChildren: () => import('./global/components/login/login.module').then(m => m.LoginModule),
-        canActivate: [ConfigLoadedGuard],
+        path: '403',
+        component: ViewPageForbiddenComponent,
+        canActivate: [BookmarkProcessGuard, AuthGuard],
+        canDeactivate: [BookmarkProcessGuard]
       },
-    ],
-    runGuardsAndResolvers: 'always',
-  },
-  {
-    path: '**',
-    redirectTo: 'error/404',
+      {
+        path: '**',
+        component: ViewPageNotFoundComponent,
+        canActivate: [BookmarkProcessGuard, AuthGuard],
+        canDeactivate: [BookmarkProcessGuard]
+      },
+    ]
   },
 ];
 

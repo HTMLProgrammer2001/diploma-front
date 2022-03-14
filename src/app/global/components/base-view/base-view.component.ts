@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
-import {BookmarkService} from '../../services/bookmark.service';
+import {BookmarkService} from '../../services/bookmark/bookmark.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Bookmark} from '../../types/bookmark';
-import {IBookmarkTask} from '../../types/bookmark-task';
+import {Bookmark} from '../../types/bookmark/bookmark';
+import {IBookmarkTask} from '../../types/bookmark/bookmark-task';
 import {isNil} from 'lodash';
 
 @Component({

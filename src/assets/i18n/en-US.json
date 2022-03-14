@@ -102,6 +102,7 @@
     "RESET": "Reset",
     "RESEND": "Resend",
     "WARNING": "Warning",
+    "INVALID_ID": "Invalid ID",
     "SHOW_DELETED": "Show Deleted",
     "MULTISELECT_GROUP_TAG_LABEL": "Selected: {{selected}}",
     "USER_INFO": {
@@ -125,18 +126,18 @@
       "NAVIGATE_TO": "Navigate to ..."
     },
     "ERROR_PAGE": {
-      "ERROR_HEADER": "error",
+      "ERROR_HEADER": "Error",
       "NOT_FOUND": {
         "BOOKMARK_NAME": "Page not found",
         "BOOKMARK_DESCRIPTION": "",
         "TITLE": "404",
-        "DESCRIPTION": "Page not found"
+        "DESCRIPTION": "Page {{url}} not found"
       },
       "FORBIDDEN": {
         "BOOKMARK_NAME": "Access Denied",
         "BOOKMARK_DESCRIPTION": "",
         "TITLE": "403",
-        "DESCRIPTION": "You are not allowed to access"
+        "DESCRIPTION": "You are not allowed to access {{url}}"
       }
     },
     "FILE": {

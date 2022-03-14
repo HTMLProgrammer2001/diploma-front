@@ -1,6 +1,6 @@
 import {Component, isDevMode, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {BookmarkService} from '../../../services/bookmark.service';
+import {BookmarkService} from '../../../services/bookmark/bookmark.service';
 import {DialogCloseResult, DialogRef} from '@progress/kendo-angular-dialog';
 import {MessageService} from '@progress/kendo-angular-l10n';
 import {LanguageService} from '../../../services/language.service';
@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {CustomDialogResultEnum} from '../../../../shared/types/custom-dialog-result.enum';
 import {CustomNotificationService} from '../../../services/custom-notification.service';
 import {isNil} from 'lodash';
-import {IBookmarkTask} from '../../../types/bookmark-task';
+import {IBookmarkTask} from '../../../types/bookmark/bookmark-task';
 import {ScrollPositionObject} from '../../../types/scroll-position-object';
 import {isLanguageRtl} from '../../../../shared/utils';
 

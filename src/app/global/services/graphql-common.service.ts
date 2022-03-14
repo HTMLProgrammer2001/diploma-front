@@ -6,10 +6,11 @@ import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {IResponse} from '../../shared/types/response';
 import {RequestType} from '../types/request-type';
 import {Apollo} from 'apollo-angular';
-import {Status} from '../../shared/constants/status';
+import {Status} from '../types/status';
 import {IError} from '../../shared/types/error';
 import {FetchResult} from '@apollo/client/core';
 import {LanguageService} from './language.service';
+import {ErrorCodesEnum} from '../types/error-codes.enum';
 
 export class HttpOptions {
   headers?: Record<string, string>;
@@ -100,6 +101,10 @@ export class GraphqlCommonService {
 
         if (err.errors?.length) {
           errors = errors.concat(err.errors);
+        }
+
+        if(err.message && !errors.length) {
+          errors.push({message: err.message, code: ErrorCodesEnum.REQUEST_ERROR});
         }
 
         return throwError({errors});

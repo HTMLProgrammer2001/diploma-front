@@ -1,16 +1,16 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Validator} from '../../../../shared/types/validation/validator';
-import {TitleHeaderElementManager} from '../../../../global/types/title-header/title-header-element-manager';
-import {TitleHeaderElement} from '../../../../global/types/title-header/title-header-element';
+import {TitleHeaderElementManager} from '../../../../shared/components/title-header/types/title-header-element-manager';
+import {TitleHeaderElement} from '../../../../shared/components/title-header/types/title-header-element';
 import {ReplaySubject} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
-import {BookmarkService} from '../../../../global/services/bookmark.service';
+import {BookmarkService} from '../../../../global/services/bookmark/bookmark.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {ErrorService} from '../../../../global/services/error.service';
 import {CustomNotificationService} from '../../../../global/services/custom-notification.service';
 import {AuthService} from '../../../../global/services/auth/auth.service';
-import {BookmarkIcon} from '../../../../shared/constants/bookmark-icon';
+import {BookmarkIcon} from '../../../../global/types/bookmark/bookmark-icon';
 import {BaseViewComponent} from '../../../../global/components/base-view/base-view.component';
 import {cloneDeep, isEmpty, isEqual, isNil} from 'lodash';
 import {DialogCloseResult, DialogRef} from '@progress/kendo-angular-dialog';
@@ -20,10 +20,12 @@ import {CommissionFacadeService} from '../../services/commission-facade.service'
 import {CommissionValidationService} from '../../services/commission-validation.service';
 import {ICommissionViewModel} from '../../types/view-model/commission-view-model';
 import {readRoles, writeRoles} from '../../../../shared/roles';
+import {ICommissionDetailsViewState} from '../../types/view-model/commission-details-view-state';
 
 @Component({
   selector: 'cr-view-role-details',
-  templateUrl: './view-commission-details.component.html'
+  templateUrl: './view-commission-details.component.html',
+  styleUrls: ['./view-commission-details.component.scss']
 })
 export class ViewCommissionDetailsComponent extends BaseViewComponent
   implements OnInit, OnDestroy {
@@ -34,7 +36,7 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
-  public restoring = false;
+  public viewState: ICommissionDetailsViewState;
   private onDestroy: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(
@@ -58,11 +60,15 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
     this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);
     this.initTitleHeaderButtons();
 
-    if (this.document.location.pathname.endsWith('new')) {
+    if (this.document.location.pathname.endsWith('commission/new')) {
       this.isNew = true;
     } else {
       this.commissionId = Number(this.route.snapshot.paramMap.get('id'));
     }
+
+    this.commissionFacadeService.getCommissionDetailsViewState$()
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(viewState => this.viewState = viewState);
   }
 
   //region Lifecycle hooks
@@ -139,10 +145,11 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.commissionDetail = this.commissionMapperService.commissionInitializeViewModel();
       this.currentBookmark.data.commissionDetailCopy = cloneDeep(this.currentBookmark.data.commissionDetail);
       this.setData(this.currentBookmark.data.commissionDetail);
-    } else {
+    } else if (isFinite(this.commissionId)) {
       this.commissionFacadeService.getCommission$(this.commissionId)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => this.setData(value), error => {
+          this.viewState.isNotFound = this.errorService.isNotFound(error.errors);
           const errors = this.errorService.getMessagesToShow(error.errors);
 
           if (!isEmpty(errors)) {
@@ -150,6 +157,8 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
             errorDialog.result.subscribe(() => this.errorService.redirectIfUnauthorized(error.errors));
           }
         });
+    } else {
+      this.customNotificationService.showError(this.translateService.instant('COMMON.INVALID_ID'));
     }
   }
 
@@ -223,14 +232,14 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   }
 
   restore(): void {
-    this.restoring = true;
+    this.viewState.restoring = true;
     this.refreshTitleHeaderButtons();
   }
 
   cancelRestore(): void {
     this.commission = cloneDeep(this.bookmarkService.getCurrentDataItem().commissionDetailCopy);
     this.bookmarkService.getCurrentDataItem().commissionDetail = this.commission;
-    this.restoring = false;
+    this.viewState.restoring = false;
     this.refreshTitleHeaderButtons();
   }
 
@@ -288,13 +297,15 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
       .setVisibility(!this.isNew && this.commission.isDeleted);
 
     this.titleHeaderButtonManager.getById('restore')
-      .setVisibility(!this.isNew && !this.restoring && this.commission.isDeleted && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.isNew && !this.viewState.restoring
+        && this.commission.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('confirm-restore')
-      .setVisibility(!this.isNew && this.commission.isDeleted && this.restoring && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.isNew && this.commission.isDeleted && this.viewState.restoring
+        && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('cancel-restore')
-      .setVisibility(!this.isNew && this.commission.isDeleted && this.restoring);
+      .setVisibility(!this.isNew && this.commission.isDeleted && this.viewState.restoring);
   }
 
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
@@ -331,10 +342,6 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
         this.confirmRestore();
         break;
     }
-  }
-
-  onPanelStateChange() {
-
   }
 
   // endregion

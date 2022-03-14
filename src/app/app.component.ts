@@ -2,9 +2,9 @@ import {AfterContentChecked, Component, HostListener, OnDestroy} from '@angular/
 import {TranslateService} from '@ngx-translate/core';
 import {LanguageService} from './global/services/language.service';
 import {MessageService} from '@progress/kendo-angular-l10n';
-import {ConfigService} from './global/services/config.service';
-import {BookmarkStoreService} from './global/services/bookmark-store.service';
-import {BookmarkService} from './global/services/bookmark.service';
+import {ConfigService} from './global/services/config/config.service';
+import {BookmarkStoreService} from './global/services/bookmark/bookmark-store.service';
+import {BookmarkService} from './global/services/bookmark/bookmark.service';
 import {isLanguageRtl} from './shared/utils';
 import {IntlService} from '@progress/kendo-angular-intl';
 import {AuthService} from './global/services/auth/auth.service';
