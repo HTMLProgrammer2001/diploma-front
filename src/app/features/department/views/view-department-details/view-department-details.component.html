@@ -2,18 +2,18 @@
   <cr-title-header
       (buttonClickEvent)="onTitleButtonClick($event)"
       [buttonSettings]="titleHeaderButtonSettings"
-      [titleTranslateKey]="'COMMISSION.DETAILS.TITLE'"
+      [titleTranslateKey]="'DEPARTMENT.DETAILS.TITLE'"
       [titleValue]="titleValue"
   ></cr-title-header>
 
-  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="commission">
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="department">
     <div class="row">
       <div class="col-lg-6">
         <cr-control-edit
-            [(dataValue)]="commission.name"
+            [(dataValue)]="department.name"
             (dataValueChange)="changeTitle()"
-            [translateKeys]="'COMMISSION.DETAILS.NAME'"
-            [isDisabled]="commission.isDeleted && !viewState.restoring"
+            [translateKeys]="'DEPARTMENT.DETAILS.NAME'"
+            [isDisabled]="department.isDeleted && !viewState.restoring"
             [validator]="validator"
             [validationField]="'name'"
         ></cr-control-edit>
@@ -21,14 +21,14 @@
     </div>
   </div>
 
-  <div class="cr-outer-wrapper" *ngIf="commission && !isNew">
+  <div class="cr-outer-wrapper" *ngIf="department && !isNew">
     <div class="cr-panel-header-wrapper">
-      <p [attr.data-translate]="'COMMISSION.DETAILS.TEACHERS_LIST.TITLE'">
-        {{ 'COMMISSION.LIST.GRID.TITLE' | translate }}
+      <p [attr.data-translate]="'DEPARTMENT.DETAILS.TEACHERS_LIST.TITLE'">
+        {{ 'DEPARTMENT.LIST.GRID.TITLE' | translate }}
       </p>
     </div>
 
-    <cr-commission-teachers-list [commission]="commission"></cr-commission-teachers-list>
+    <cr-department-teachers-list [department]="department"></cr-department-teachers-list>
   </div>
 </ng-container>
 

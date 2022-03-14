@@ -35,6 +35,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.commissionList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.DEPARTMENT',
+          task: {
+            route: 'department/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.departmentList,
+          },
+        },
       ],
     },
   ];

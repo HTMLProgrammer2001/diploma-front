@@ -91,13 +91,13 @@ export class CommissionFacadeService {
       );
   }
 
-  public createCommission$(role: ICommissionViewModel): Observable<IdSimpleItem> {
-    return this.commissionApiService.createCommission$(this.commissionMapperService.commissionViewModelToPostModel(role))
+  public createCommission$(commission: ICommissionViewModel): Observable<IdSimpleItem> {
+    return this.commissionApiService.createCommission$(this.commissionMapperService.commissionViewModelToPostModel(commission))
       .pipe(map(value => value.data));
   }
 
-  public updateCommission$(role: ICommissionViewModel): Observable<ICommissionViewModel> {
-    return this.commissionApiService.updateCommission$(this.commissionMapperService.commissionViewModelToPutModel(role))
+  public updateCommission$(commission: ICommissionViewModel): Observable<ICommissionViewModel> {
+    return this.commissionApiService.updateCommission$(this.commissionMapperService.commissionViewModelToPutModel(commission))
       .pipe(
         map(value => this.commissionMapperService.commissionGetModelToViewModel(value.data)),
         tap(value => {
@@ -113,10 +113,8 @@ export class CommissionFacadeService {
 
   public getCommissionDetailsViewState$(): Observable<ICommissionDetailsViewState> {
     if(isNil(this.bookmarkService.getCurrentViewState().commissionDetails)) {
-      this.bookmarkService.getCurrentViewState().commissionDetails = {
-        isNotFound: false,
-        restoring: false
-      };
+      this.bookmarkService.getCurrentViewState().commissionDetails = this.commissionMapperService
+        .commissionInitializeDetailsViewState();
     }
 
     return of(this.bookmarkService.getCurrentViewState().commissionDetails);

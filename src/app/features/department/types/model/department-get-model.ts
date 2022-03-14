@@ -1,4 +1,4 @@
-export interface ICommissionGetModel {
+export interface IDepartmentGetModel {
   id: number;
   name: string;
   guid: string;

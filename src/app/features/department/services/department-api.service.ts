@@ -4,35 +4,35 @@ import {IResponse} from '../../../shared/types/response';
 import {IPaginator} from '../../../shared/types/paginator';
 import {GraphqlCommonService} from '../../../global/services/graphql-common.service';
 import {IdSimpleItem} from '../../../shared/types/id-simple-item';
-import {ICommissionGetModel} from '../types/model/commission-get-model';
-import {ICommissionPostModel} from '../types/model/commission-post-model';
-import {ICommissionPutModel} from '../types/model/commission-put-model';
+import {IDepartmentGetModel} from '../types/model/department-get-model';
+import {IDepartmentPostModel} from '../types/model/department-post-model';
+import {IDepartmentPutModel} from '../types/model/department-put-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
 import {readRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
-  createCommissionQuery,
-  deleteCommissionQuery,
-  getCommissionByIdQuery,
-  getCommissionListQuery,
-  getCommissionTeachersListQuery,
-  updateCommissionQuery
-} from './commission-queries';
-import {ICommissionListGetModel} from '../types/model/commission-list-get-model';
-import {ICommissionFilterModel} from '../types/model/commission-filter-model';
+  createDepartmentQuery,
+  deleteDepartmentQuery,
+  getDepartmentByIdQuery,
+  getDepartmentListQuery,
+  getDepartmentTeachersListQuery,
+  updateDepartmentQuery
+} from './department-queries';
+import {IDepartmentListGetModel} from '../types/model/department-list-get-model';
+import {IDepartmentFilterModel} from '../types/model/department-filter-model';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
-import {ICommissionTeachersFilterModel} from '../types/model/commission-teachers-filter-model';
+import {IDepartmentTeachersFilterModel} from '../types/model/department-teachers-filter-model';
 
 @Injectable({providedIn: 'root'})
-export class CommissionApiService {
+export class DepartmentApiService {
   constructor(private graphqlService: GraphqlCommonService) {}
 
-  public getCommissionList$(paginator: IPaginatorBase, filter: ICommissionFilterModel):
-    Observable<IResponse<IPaginator<ICommissionListGetModel>>> {
+  public getDepartmentList$(paginator: IPaginatorBase, filter: IDepartmentFilterModel):
+    Observable<IResponse<IPaginator<IDepartmentListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getCommissionListQuery,
+      query: getDepartmentListQuery,
       variables: {
         query: {
           page: paginator.page,
@@ -45,74 +45,74 @@ export class CommissionApiService {
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'getCommissionsList'
+      resultField: 'getDepartmentsList'
     };
 
-    return this.graphqlService.requestToApi<IPaginator<ICommissionListGetModel>>(config);
+    return this.graphqlService.requestToApi<IPaginator<IDepartmentListGetModel>>(config);
   }
 
-  public getCommission$(id: number): Observable<IResponse<ICommissionGetModel>> {
+  public getDepartment$(id: number): Observable<IResponse<IDepartmentGetModel>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getCommissionByIdQuery,
+      query: getDepartmentByIdQuery,
       variables: {id},
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'getCommissionById'
+      resultField: 'getDepartmentById'
     };
 
-    return this.graphqlService.requestToApi<ICommissionGetModel>(config);
+    return this.graphqlService.requestToApi<IDepartmentGetModel>(config);
   }
 
-  public createCommission$(body: ICommissionPostModel): Observable<IResponse<IdSimpleItem>> {
+  public createDepartment$(body: IDepartmentPostModel): Observable<IResponse<IdSimpleItem>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: createCommissionQuery,
+      query: createDepartmentQuery,
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'createCommission'
+      resultField: 'createDepartment'
     };
 
-    return this.graphqlService.requestToApi<ICommissionGetModel>(config);
+    return this.graphqlService.requestToApi<IDepartmentGetModel>(config);
   }
 
-  public updateCommission$(body: ICommissionPutModel): Observable<IResponse<ICommissionGetModel>> {
+  public updateDepartment$(body: IDepartmentPutModel): Observable<IResponse<IDepartmentGetModel>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: updateCommissionQuery,
+      query: updateDepartmentQuery,
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'updateCommission'
+      resultField: 'updateDepartment'
     };
 
-    return this.graphqlService.requestToApi<ICommissionGetModel>(config);
+    return this.graphqlService.requestToApi<IDepartmentGetModel>(config);
   }
 
-  public deleteCommission$(id: number, guid: string): Observable<IResponse<IdSimpleItem>> {
+  public deleteDepartment$(id: number, guid: string): Observable<IResponse<IdSimpleItem>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: deleteCommissionQuery,
+      query: deleteDepartmentQuery,
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'deleteCommission'
+      resultField: 'deleteDepartment'
     };
 
-    return this.graphqlService.requestToApi<ICommissionGetModel>(config);
+    return this.graphqlService.requestToApi<IDepartmentGetModel>(config);
   }
 
-  public getCommissionTeachersList$(paginator: IPaginatorBase, filter: ICommissionTeachersFilterModel):
+  public getDepartmentTeachersList$(paginator: IPaginatorBase, filter: IDepartmentTeachersFilterModel):
     Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
 
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getCommissionTeachersListQuery,
+      query: getDepartmentTeachersListQuery,
       variables: {
         query: {
           page: paginator.page,

@@ -9,6 +9,7 @@ import {ICommissionPostModel} from '../types/model/commission-post-model';
 import {ICommissionFilterViewModel} from '../types/view-model/commission-filter-view-model';
 import {ICommissionFilterModel} from '../types/model/commission-filter-model';
 import {ICommissionTeachersFilterModel} from '../types/model/commission-teachers-filter-model';
+import {ICommissionDetailsViewState} from '../types/view-model/commission-details-view-state';
 
 @Injectable({
   providedIn: 'root',
@@ -82,6 +83,13 @@ export class CommissionMapperService {
     return {
       name: '',
       showDeleted: false
+    };
+  }
+
+  public commissionInitializeDetailsViewState(): ICommissionDetailsViewState {
+    return {
+      isNotFound: false,
+      restoring: false
     };
   }
 

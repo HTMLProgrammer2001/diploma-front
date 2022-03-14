@@ -175,6 +175,16 @@
           "BOOKMARK_NAME": "Commission: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "DEPARTMENT": {
+        "LIST": {
+          "BOOKMARK_NAME": "Department list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Department: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -184,6 +194,7 @@
       "DASHBOARD": "Dashboard",
       "TEACHER_DATA": "Teacher data",
       "COMMISSION": "Commission list",
+      "DEPARTMENT": "Department list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -218,6 +229,40 @@
         "SUCCESS_CREATE": "Commission was successfully created",
         "SUCCESS_DELETE": "Commission was successfully deleted",
         "SUCCESS_UPDATE": "Commission was successfully updated"
+      }
+    }
+  },
+  "DEPARTMENT": {
+    "LIST": {
+      "TITLE": "Department list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Departments",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Department: {{value}}",
+      "NAME": "Name",
+      "TEACHERS_LIST": {
+        "TITLE": "Teachers",
+        "GRID": {
+          "NAME": "Name"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Name is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Department was successfully created",
+        "SUCCESS_DELETE": "Department was successfully deleted",
+        "SUCCESS_UPDATE": "Department was successfully updated"
       }
     }
   }

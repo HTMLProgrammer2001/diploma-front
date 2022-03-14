@@ -5,14 +5,14 @@ import {CommissionRoutingModule} from './commission-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {ViewCommissionDetailsComponent} from './views/view-commission-details/view-commission-details.component';
-import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
+import { CommissionTeachersListComponent } from './components/commission-teachers-list/commission-teachers-list.component';
 import {ErrorsModule} from '../../global/components/errors/errors.module';
 
 @NgModule({
   declarations: [
     ViewCommissionListComponent,
     ViewCommissionDetailsComponent,
-    TeachersListComponent,
+    CommissionTeachersListComponent,
   ],
   imports: [
     FormsModule,

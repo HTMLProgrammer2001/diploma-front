@@ -6,7 +6,7 @@ import {CustomNotificationService} from '../../../../global/services/custom-noti
 import {BookmarkIcon} from '../../../../global/types/bookmark/bookmark-icon';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BookmarkService} from '../../../../global/services/bookmark/bookmark.service';
-import {CommissionFacadeService} from '../../services/commission-facade.service';
+import {DepartmentFacadeService} from '../../services/department-facade.service';
 import {IPaginator} from '../../../../shared/types/paginator';
 import {IPaginatorBase} from '../../../../shared/types/paginator-base';
 import {TitleHeaderElementManager} from '../../../../shared/components/title-header/types/title-header-element-manager';
@@ -15,25 +15,25 @@ import {AuthService} from '../../../../global/services/auth/auth.service';
 import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-grid-column-settings';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
-import {ICommissionListViewModel} from '../../types/view-model/commission-list-view-model';
+import {IDepartmentListViewModel} from '../../types/view-model/department-list-view-model';
 import {isEmpty} from 'lodash';
-import {ICommissionFilterViewModel} from '../../types/view-model/commission-filter-view-model';
+import {IDepartmentFilterViewModel} from '../../types/view-model/department-filter-view-model';
 
 @Component({
-  selector: 'cr-view-commission-list',
-  templateUrl: './view-commission-list.component.html',
+  selector: 'cr-view-department-list',
+  templateUrl: './view-department-list.component.html',
 })
-export class ViewCommissionListComponent extends BaseViewComponent implements OnInit, OnDestroy {
-  public dataSource: IPaginator<ICommissionListViewModel>;
+export class ViewDepartmentListComponent extends BaseViewComponent implements OnInit, OnDestroy {
+  public dataSource: IPaginator<IDepartmentListViewModel>;
   public paginator: IPaginatorBase;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
-  public filter: ICommissionFilterViewModel;
+  public filter: IDepartmentFilterViewModel;
   private onDestroy = new ReplaySubject(1);
 
   private deletedColumn: IEditGridColumnSetting = {
     field: 'isDeleted',
-    titleTranslateKey: 'COMMISSION.LIST.GRID.DELETED',
+    titleTranslateKey: 'DEPARTMENT.LIST.GRID.DELETED',
     type: 'boolean',
     autoFit: true,
     hidden: true,
@@ -43,13 +43,13 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
   public columnSettings: Array<IEditGridColumnSetting> = [
     {
       field: 'id',
-      titleTranslateKey: 'COMMISSION.LIST.GRID.ID',
+      titleTranslateKey: 'DEPARTMENT.LIST.GRID.ID',
       type: 'link',
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
     {
       field: 'name',
-      titleTranslateKey: 'COMMISSION.LIST.GRID.NAME',
+      titleTranslateKey: 'DEPARTMENT.LIST.GRID.NAME',
       type: 'text',
     },
     this.deletedColumn,
@@ -59,21 +59,21 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
     protected router: Router,
     protected route: ActivatedRoute,
     protected bookmarkService: BookmarkService,
-    private commissionFacadeService: CommissionFacadeService,
+    private departmentFacadeService: DepartmentFacadeService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
     public authService: AuthService,
   ) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.commissionList,
+      nameTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.departmentList,
       allowPinning: true,
     }, bookmarkService, router, route);
     this.initTitleHeaderButtons();
     this.refreshTitleHeaderButtons();
 
-    this.commissionFacadeService.getViewStateCommissionFilter$()
+    this.departmentFacadeService.getViewStateDepartmentFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
   }
@@ -93,16 +93,16 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   // region Get and create data
   createNewData(): Promise<boolean> {
-    const route = `/commission/new`;
+    const route = `/department/new`;
     return this.router.navigate([route]);
   }
 
   getDataList(): void {
-    forkJoin({paginator: this.commissionFacadeService.getViewStateCommissionListPaginator$()}).pipe(
+    forkJoin({paginator: this.departmentFacadeService.getViewStateDepartmentListPaginator$()}).pipe(
       takeUntil(this.onDestroy),
       switchMap(values => {
         this.paginator = values.paginator;
-        return this.commissionFacadeService.getCommissionList$(this.paginator, this.filter);
+        return this.departmentFacadeService.getDepartmentList$(this.paginator, this.filter);
       })
     ).subscribe(dataSource => {
       this.dataSource = dataSource;
@@ -120,7 +120,7 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
   }
 
   loadDataList() {
-    this.commissionFacadeService.loadCommissionList$(this.paginator, this.filter).subscribe(value => {
+    this.departmentFacadeService.loadDepartmentList$(this.paginator, this.filter).subscribe(value => {
       this.dataSource = value;
       this.paginator.page = value.page;
       this.paginator.size = value.size;
@@ -139,8 +139,8 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   //region Work with grid
 
-  cellClick(event: ICommissionListViewModel): Promise<boolean> {
-    const route = `commission/details/${event.id}`;
+  cellClick(event: IDepartmentListViewModel): Promise<boolean> {
+    const route = `department/details/${event.id}`;
     return this.router.navigate([route]);
   }
 

@@ -16,10 +16,10 @@ import {isEmpty} from 'lodash';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 @Component({
-  selector: 'cr-teachers-list',
-  templateUrl: './teachers-list.component.html',
+  selector: 'cr-commission-teachers-list',
+  templateUrl: './commission-teachers-list.component.html',
 })
-export class TeachersListComponent implements OnInit, OnDestroy, OnChanges {
+export class CommissionTeachersListComponent implements OnInit, OnDestroy, OnChanges {
   @Input() commission: ICommissionViewModel;
 
   public dataSource: IPaginator<IdNameSimpleItem>;

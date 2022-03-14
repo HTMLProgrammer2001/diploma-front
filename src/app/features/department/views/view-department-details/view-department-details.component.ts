@@ -15,28 +15,28 @@ import {BaseViewComponent} from '../../../../global/components/base-view/base-vi
 import {cloneDeep, isEmpty, isEqual, isNil} from 'lodash';
 import {DialogCloseResult, DialogRef} from '@progress/kendo-angular-dialog';
 import {takeUntil} from 'rxjs/operators';
-import {CommissionMapperService} from '../../services/commission-mapper.service';
-import {CommissionFacadeService} from '../../services/commission-facade.service';
-import {CommissionValidationService} from '../../services/commission-validation.service';
-import {ICommissionViewModel} from '../../types/view-model/commission-view-model';
+import {DepartmentMapperService} from '../../services/department-mapper.service';
+import {DepartmentFacadeService} from '../../services/department-facade.service';
+import {DepartmentValidationService} from '../../services/department-validation.service';
+import {IDepartmentViewModel} from '../../types/view-model/department-view-model';
 import {readRoles, writeRoles} from '../../../../shared/roles';
-import {ICommissionDetailsViewState} from '../../types/view-model/commission-details-view-state';
+import {IDepartmentDetailsViewState} from '../../types/view-model/department-details-view-state';
 
 @Component({
-  selector: 'cr-view-commission-details',
-  templateUrl: './view-commission-details.component.html',
-  styleUrls: ['./view-commission-details.component.scss']
+  selector: 'cr-view-department-details',
+  templateUrl: './view-department-details.component.html',
+  styleUrls: ['./view-department-details.component.scss']
 })
-export class ViewCommissionDetailsComponent extends BaseViewComponent
+export class ViewDepartmentDetailsComponent extends BaseViewComponent
   implements OnInit, OnDestroy {
-  public commissionId: number;
-  public commission: ICommissionViewModel;
+  public departmentId: number;
+  public department: IDepartmentViewModel;
   public titleValue = '';
   public isNew = false;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
-  public viewState: ICommissionDetailsViewState;
+  public viewState: IDepartmentDetailsViewState;
   private onDestroy: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(
@@ -47,26 +47,26 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
     protected translateService: TranslateService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
-    protected commissionValidationService: CommissionValidationService,
-    private commissionFacadeService: CommissionFacadeService,
-    private commissionMapperService: CommissionMapperService,
+    protected departmentValidationService: DepartmentValidationService,
+    private departmentFacadeService: DepartmentFacadeService,
+    private departmentMapperService: DepartmentMapperService,
     public authService: AuthService) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.COMMISSION.DETAILS.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.COMMISSION.DETAILS.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.commissionDetails,
+      nameTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.DETAILS.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.DETAILS.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.departmentDetails,
     }, bookmarkService, router, route);
 
     this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);
     this.initTitleHeaderButtons();
 
-    if (this.document.location.pathname.endsWith('commission/new')) {
+    if (this.document.location.pathname.endsWith('department/new')) {
       this.isNew = true;
     } else {
-      this.commissionId = Number(this.route.snapshot.paramMap.get('id'));
+      this.departmentId = Number(this.route.snapshot.paramMap.get('id'));
     }
 
-    this.commissionFacadeService.getCommissionDetailsViewState$()
+    this.departmentFacadeService.getDepartmentDetailsViewState$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(viewState => this.viewState = viewState);
   }
@@ -90,15 +90,15 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   // region Refresh and set data
 
   checkDataChanged(): boolean {
-    return !isEqual(this.currentBookmark.data.commissionDetail, this.currentBookmark.data.commissionDetailCopy);
+    return !isEqual(this.currentBookmark.data.departmentDetail, this.currentBookmark.data.departmentDetailCopy);
   }
 
   createData(): void {
-    this.validator.validateDto(this.commission);
+    this.validator.validateDto(this.department);
     if (this.validator.dtoValidationResult.isValid) {
-      this.commissionFacadeService.createCommission$(this.commission)
+      this.departmentFacadeService.createDepartment$(this.department)
         .subscribe(value => {
-          this.customNotificationService.showSuccess(this.translateService.instant('COMMISSION.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
+          this.customNotificationService.showSuccess(this.translateService.instant('DEPARTMENT.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
           this.navigateToDataPageAfterCreating(value.id);
         }, error => {
           const errors = this.errorService.getMessagesToShow(error.errors);
@@ -120,13 +120,13 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
       if (result instanceof DialogCloseResult) {
       } else {
         if (result.text === this.translateService.instant('COMMON.BUTTON.YES')) {
-          this.commissionFacadeService.deleteCommission$(this.commission)
+          this.departmentFacadeService.deleteDepartment$(this.department)
             .pipe(takeUntil(this.onDestroy))
             .subscribe(() => {
-              this.bookmarkService.getCurrentDataItem().commissionDetail.isDeleted = true;
-              this.bookmarkService.getCurrentDataItem().commissionDetailCopy.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().departmentDetail.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().departmentDetailCopy.isDeleted = true;
               this.refreshTitleHeaderButtons();
-              this.customNotificationService.showSuccess(this.translateService.instant('COMMISSION.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
+              this.customNotificationService.showSuccess(this.translateService.instant('DEPARTMENT.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
             }, error => {
               const errors = this.errorService.getMessagesToShow(error.errors);
 
@@ -142,11 +142,11 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
 
   getData(): void {
     if (this.isNew && isNil(this.currentBookmark.data.commissionDetail)) {
-      this.currentBookmark.data.commissionDetail = this.commissionMapperService.commissionInitializeViewModel();
+      this.currentBookmark.data.commissionDetail = this.departmentMapperService.departmentInitializeViewModel();
       this.currentBookmark.data.commissionDetailCopy = cloneDeep(this.currentBookmark.data.commissionDetail);
       this.setData(this.currentBookmark.data.commissionDetail);
-    } else if (isFinite(this.commissionId)) {
-      this.commissionFacadeService.getCommission$(this.commissionId)
+    } else if (isFinite(this.departmentId)) {
+      this.departmentFacadeService.getDepartment$(this.departmentId)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => this.setData(value), error => {
           this.viewState.isNotFound = this.errorService.isNotFound(error.errors);
@@ -164,26 +164,26 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
 
   navigateToDataPageAfterCreating(id: number): any {
     this.bookmarkService.deleteBookmarkById(this.bookmarkService.getCurrentId()).subscribe(_ => {
-      const route = `commission/details/${id}`;
+      const route = `department/details/${id}`;
       return this.router.navigate([route]);
     });
   }
 
-  setData(value: ICommissionViewModel): void {
+  setData(value: IDepartmentViewModel): void {
     this.validator.setDto(value);
-    this.commission = value;
+    this.department = value;
     this.changeTitle();
     this.refreshTitleHeaderButtons();
   }
 
   updateData(): void {
-    this.validator.validateDto(this.commission);
+    this.validator.validateDto(this.department);
 
     if (this.validator.dtoValidationResult.isValid) {
-      this.commissionFacadeService.updateCommission$(this.commission)
+      this.departmentFacadeService.updateDepartment$(this.department)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => {
-          this.customNotificationService.showSuccess(this.translateService.instant('COMMISSION.DETAILS.NOTIFICATION.SUCCESS_UPDATE'));
+          this.customNotificationService.showSuccess(this.translateService.instant('DEPARTMENT.DETAILS.NOTIFICATION.SUCCESS_UPDATE'));
           this.setData(value);
         }, error => {
           const errors = this.errorService.getMessagesToShow(error.errors);
@@ -203,26 +203,26 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   // region Initials
 
   initValidator(): void {
-    const initialCommissionValidator = this.commissionValidationService.getCommissionValidator();
+    const initialDepartmentValidator = this.departmentValidationService.getDepartmentValidator();
 
-    if (!isNil(this.currentBookmark.viewState.commissionValidator)) {
-      initialCommissionValidator.initValidatorResultStates(this.currentBookmark.viewState.commissionValidator);
+    if (!isNil(this.currentBookmark.viewState.departmentValidator)) {
+      initialDepartmentValidator.initValidatorResultStates(this.currentBookmark.viewState.departmentValidator);
     }
 
-    this.currentBookmark.viewState.commissionValidator = initialCommissionValidator;
-    this.validator = this.currentBookmark.viewState.commissionValidator;
+    this.currentBookmark.viewState.departmentValidator = initialDepartmentValidator;
+    this.validator = this.currentBookmark.viewState.departmentValidator;
   }
 
   // endregion
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.commission.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.department.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 
   openNewData(): Promise<boolean> {
-    const route = `/commission/new`;
+    const route = `/department/new`;
     return this.router.navigate([route]);
   }
 
@@ -237,8 +237,8 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   }
 
   cancelRestore(): void {
-    this.commission = cloneDeep(this.bookmarkService.getCurrentDataItem().commissionDetailCopy);
-    this.bookmarkService.getCurrentDataItem().commissionDetail = this.commission;
+    this.department = cloneDeep(this.bookmarkService.getCurrentDataItem().departmentDetailCopy);
+    this.bookmarkService.getCurrentDataItem().departmentDetail = this.department;
     this.viewState.restoring = false;
     this.refreshTitleHeaderButtons();
     this.changeTitle();
@@ -280,13 +280,13 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
 
   refreshTitleHeaderButtons(): void {
     this.titleHeaderButtonManager.getById('delete')
-      .setVisibility(!this.commission.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.department.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('add')
       .setVisibility(!this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('update')
-      .setVisibility(!this.isNew && !this.commission.isDeleted && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.isNew && !this.department.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('refresh')
       .setVisibility(!this.isNew && readRoles.includes(this.authService.currentRole));
@@ -295,18 +295,18 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
       .setVisibility(this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('delete-status')
-      .setVisibility(!this.isNew && this.commission.isDeleted);
+      .setVisibility(!this.isNew && this.department.isDeleted);
 
     this.titleHeaderButtonManager.getById('restore')
       .setVisibility(!this.isNew && !this.viewState.restoring
-        && this.commission.isDeleted && writeRoles.includes(this.authService.currentRole));
+        && this.department.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('confirm-restore')
-      .setVisibility(!this.isNew && this.commission.isDeleted && this.viewState.restoring
+      .setVisibility(!this.isNew && this.department.isDeleted && this.viewState.restoring
         && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('cancel-restore')
-      .setVisibility(!this.isNew && this.commission.isDeleted && this.viewState.restoring);
+      .setVisibility(!this.isNew && this.department.isDeleted && this.viewState.restoring);
   }
 
   onTitleButtonClick(clickedButton: TitleHeaderElement) {

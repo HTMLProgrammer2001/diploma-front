@@ -67,14 +67,14 @@ export class GraphqlCommonService {
         mutation: requestConfig.query,
         variables: requestConfig.variables,
         context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}},
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
       });
     } else {
       request = this.apollo.query<T>({
         query: requestConfig.query,
         variables: requestConfig.variables,
         context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}},
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
       });
     }
 
