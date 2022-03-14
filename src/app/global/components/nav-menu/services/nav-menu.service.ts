@@ -45,6 +45,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.departmentList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.ACADEMIC_DEGREE',
+          task: {
+            route: 'academic-degree/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_DEGREE.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_DEGREE.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.academicDegreeList,
+          },
+        },
       ],
     },
   ];

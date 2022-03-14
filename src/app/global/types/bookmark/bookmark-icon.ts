@@ -4,4 +4,6 @@ export class BookmarkIcon {
   static commissionDetails = null;
   static departmentList = null;
   static departmentDetails = null;
+  static academicDegreeList = null;
+  static academicDegreeDetails = null;
 }

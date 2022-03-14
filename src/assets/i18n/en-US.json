@@ -185,6 +185,16 @@
           "BOOKMARK_NAME": "Department: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "ACADEMIC_DEGREE": {
+        "LIST": {
+          "BOOKMARK_NAME": "Academic degree list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Academic degree: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -195,6 +205,7 @@
       "TEACHER_DATA": "Teacher data",
       "COMMISSION": "Commission list",
       "DEPARTMENT": "Department list",
+      "ACADEMIC_DEGREE": "Academic degree list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -263,6 +274,40 @@
         "SUCCESS_CREATE": "Department was successfully created",
         "SUCCESS_DELETE": "Department was successfully deleted",
         "SUCCESS_UPDATE": "Department was successfully updated"
+      }
+    }
+  },
+  "ACADEMIC_DEGREE": {
+    "LIST": {
+      "TITLE": "Academic degree list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Academic degrees",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Academic degree: {{value}}",
+      "NAME": "Name",
+      "TEACHERS_LIST": {
+        "TITLE": "Teachers",
+        "GRID": {
+          "NAME": "Name"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Name is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Academic degree was successfully created",
+        "SUCCESS_DELETE": "Academic degree was successfully deleted",
+        "SUCCESS_UPDATE": "Academic degree was successfully updated"
       }
     }
   }
