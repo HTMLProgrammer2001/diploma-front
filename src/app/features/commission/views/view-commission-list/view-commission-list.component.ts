@@ -80,7 +80,10 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   // region Component lifecycle
   ngOnInit(): void {
+    this.filter.name = this.route.snapshot.queryParamMap.get('name') || '';
+    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
     this.deletedColumn.hidden = !this.filter.showDeleted;
+
     this.getDataList();
   }
 
@@ -154,6 +157,8 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
+    this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
+    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
     this.loadDataList();
   }
 

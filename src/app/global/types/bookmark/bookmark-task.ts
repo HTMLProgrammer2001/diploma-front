@@ -12,5 +12,5 @@ export interface IBookmarkTask {
   descriptionTranslateKey?: string;
   iconSvg?: string;
   route?: string;
-  params?: Record<string, string>;
+  params?: any;
 }
