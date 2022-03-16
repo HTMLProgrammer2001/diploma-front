@@ -8,6 +8,8 @@ import {IDepartmentListViewModel} from '../../../features/department/types/view-
 import {IDepartmentViewModel} from '../../../features/department/types/view-model/department-view-model';
 import {IAcademicDegreeListViewModel} from '../../../features/academic-degree/types/view-model/academic-degree-list-view-model';
 import {IAcademicDegreeViewModel} from '../../../features/academic-degree/types/view-model/academic-degree-view-model';
+import {IAcademicTitleViewModel} from '../../../features/academic-title/types/view-model/academic-title-view-model';
+import {IAcademicTitleListViewModel} from '../../../features/academic-title/types/view-model/academic-title-list-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -30,4 +32,10 @@ export interface IBookmarkData {
   academicDegreeDetail?: IAcademicDegreeViewModel;
   academicDegreeDetailCopy?: IAcademicDegreeViewModel;
   academicDegreeTeachersList?: IPaginator<IdNameSimpleItem>;
+
+  /** Academic degree **/
+  academicTitleList?: IPaginator<IAcademicTitleListViewModel>;
+  academicTitleDetail?: IAcademicTitleViewModel;
+  academicTitleDetailCopy?: IAcademicTitleViewModel;
+  academicTitleTeachersList?: IPaginator<IdNameSimpleItem>;
 }

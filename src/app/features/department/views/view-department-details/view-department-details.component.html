@@ -24,11 +24,11 @@
   <div class="cr-outer-wrapper" *ngIf="department && !isNew">
     <div class="cr-panel-header-wrapper">
       <p [attr.data-translate]="'DEPARTMENT.DETAILS.TEACHERS_LIST.TITLE'">
-        {{ 'DEPARTMENT.LIST.GRID.TITLE' | translate }}
+        {{ 'DEPARTMENT.DETAILS.TEACHERS_LIST.TITLE' | translate }}
       </p>
     </div>
 
-    <cr-academic-degree-teachers-list [department]="department"></cr-academic-degree-teachers-list>
+    <cr-department-teachers-list [department]="department"></cr-department-teachers-list>
   </div>
 </ng-container>
 

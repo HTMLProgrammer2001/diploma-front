@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IError} from '../../shared/types/error';
 import {ErrorViewModel} from '../../shared/types/error-view-model';
 import {isEmpty, isNil} from 'lodash';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CustomNotificationService} from './custom-notification.service';
 import {ErrorCodesEnum} from '../types/error-codes.enum';
 import {defer, from, Observable, of} from 'rxjs';
@@ -11,7 +11,7 @@ import {defer, from, Observable, of} from 'rxjs';
   providedIn: 'root',
 })
 export class ErrorService {
-  constructor(private router: Router, private notificationService: CustomNotificationService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private notificationService: CustomNotificationService) {}
 
   getMessagesToShow(errors: Array<IError>): Array<ErrorViewModel> {
     let errorsToShow: Array<ErrorViewModel> = [];
@@ -34,7 +34,10 @@ export class ErrorService {
 
     if (!isNil(errorAuth)) {
       this.notificationService.closeDialogs();
-      return defer<void>(() => this.router.navigate(['/login']));
+      return defer<void>(() => this.router.navigate(['/login'], {
+          queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+          queryParamsHandling: 'merge'
+        }));
     }
     else {
       return of(null);

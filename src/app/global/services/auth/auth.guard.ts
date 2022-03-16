@@ -21,7 +21,10 @@ export class AuthGuard implements CanActivate {
       }
     } else {
       if (!route.data.redirectToDashboardIfAuthorized) {
-        return this.router.parseUrl('/login');
+        return this.router.navigate(['/login'], {
+          queryParams: {...state.root.queryParams, redirect: state.url.split('?')[0]},
+          queryParamsHandling: 'merge'
+        });
       } else {
         return true;
       }

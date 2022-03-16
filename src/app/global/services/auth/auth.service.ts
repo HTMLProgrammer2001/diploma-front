@@ -11,7 +11,7 @@ import {Status} from '../../types/status';
 import {isNil} from 'lodash';
 import {ConfigService} from '../config/config.service';
 import {Config} from '../../types/config';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BookmarkService} from '../bookmark/bookmark.service';
 import {CustomNotificationService} from '../custom-notification.service';
 import {IRefreshTokenModel} from '../../types/auth/refresh-token-model';
@@ -42,13 +42,23 @@ export class AuthService {
     private authApiService: AuthApiService,
     private configService: ConfigService,
     public bookmarksService: BookmarkService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     window.addEventListener('storage', event => {
       if (event.key === this._authAccessToken && !localStorage.getItem(this._authAccessToken)) {
         this.closeBookmarks();
         this.notificationService.closeDialogs();
-        router.navigate(['/login']);
+
+        this.authViewModel = new AuthViewModel();
+        localStorage.removeItem(this._authUserEmail);
+        localStorage.removeItem(this._authAccessToken);
+        localStorage.removeItem(this._authRefreshToken);
+
+        this.router.navigate(['/login'], {
+          queryParams: {...this.route.root.queryParams, redirect: this.router.url.split('?')[0]},
+          queryParamsHandling: 'merge'
+        });
       }
     });
 
@@ -81,7 +91,11 @@ export class AuthService {
         this._authViewModel.refreshToken = localStorage.getItem(this._authRefreshToken);
       } catch {
         this.closeBookmarks();
-        this.router.navigate(['/login']);
+
+        this.router.navigate(['/login'], {
+          queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+          queryParamsHandling: 'merge'
+        });
       }
       if (!isNil(this.authViewModel.accessToken) && !isNil(this.authViewModel.accessToken)) {
         this.updateToken(this.authViewModel);
@@ -120,7 +134,11 @@ export class AuthService {
         dialogRef.result.subscribe((result: any) => {
           if (!result.primary) {
             this.notificationService.closeDialogs();
-            this.router.navigate(['/login']);
+
+            this.router.navigate(['/login'], {
+              queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+              queryParamsHandling: 'merge'
+            });
           } else {
             this.lastActivityTime = new Date();
             this.restartLogoffTimer();
@@ -156,7 +174,11 @@ export class AuthService {
             const userEmail = localStorage.getItem(this._authUserEmail);
             if (userEmail !== user.email) {
               this.closeBookmarks();
-              this.router.navigate(['/login']);
+
+              this.router.navigate(['/login'], {
+                queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+                queryParamsHandling: 'merge'
+              });
             }
           } catch {
             this.closeBookmarks();
@@ -176,7 +198,10 @@ export class AuthService {
         localStorage.removeItem(this._authAccessToken);
         localStorage.removeItem(this._authRefreshToken);
 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], {
+          queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+          queryParamsHandling: 'merge'
+        });
       })
     );
   }
@@ -237,7 +262,11 @@ export class AuthService {
     } catch {
       this.closeBookmarks();
       this.notificationService.closeDialogs();
-      this.router.navigate(['/login']);
+
+      this.router.navigate(['/login'], {
+        queryParams: {...this.route.snapshot.queryParams, redirect: this.router.url.split('?')[0]},
+        queryParamsHandling: 'merge'
+      });
     }
 
     this.calculateDeltaServerLocalTime();

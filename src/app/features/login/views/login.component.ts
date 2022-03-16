@@ -6,7 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {CustomNotificationService} from '../../../global/services/custom-notification.service';
 import {AuthService} from '../../../global/services/auth/auth.service';
 import {Status} from '../../../global/types/status';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
 import {DialogRef} from '@progress/kendo-angular-dialog/dist/es2015/dialog/dialog-settings';
 import {ConfigService} from '../../../global/services/config/config.service';
@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     private authMapper: AuthMapperService,
     private translate: TranslateService,
     private router: Router,
+    private route: ActivatedRoute,
     private bookmarkService: BookmarkService,
     private customNotificationService: CustomNotificationService,
     private configService: ConfigService,
@@ -104,8 +105,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.user).subscribe(value => {
         if (value.status === Status.ok) {
           this.languageService.getLanguages$().subscribe(languages => {
-            this.router.navigate(['/'])
-              .then(() => {
+            this.router.navigate([this.route.snapshot.queryParamMap.get('redirect') ?? '/'], {
+              queryParams: {
+                ...this.route.snapshot.queryParams,
+                redirect: null,
+              }
+            }).then(() => {
                 if (languages.some(lang => lang.code === this.languageService.getCurrentLanguageCode())) {
                   this.translate.use(this.languageService.getCurrentLanguageCode());
                 } else {

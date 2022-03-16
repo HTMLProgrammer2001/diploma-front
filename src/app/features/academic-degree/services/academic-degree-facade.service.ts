@@ -31,15 +31,15 @@ export class AcademicDegreeFacadeService {
   //region Commission
 
   public getViewStateAcademicDegreeListPaginator$(): Observable<IPaginatorBase> {
-    if (isNil(this.bookmarkService.getCurrentViewState().departmentListPaginator)) {
-      this.bookmarkService.getCurrentViewState().departmentListPaginator = {
+    if (isNil(this.bookmarkService.getCurrentViewState().academicDegreeListPaginator)) {
+      this.bookmarkService.getCurrentViewState().academicDegreeListPaginator = {
         page: this.configService.getConfig().pagingGridBigPage,
         size: this.configService.getConfig().pagingGridBigSize,
         sort: [{field: 'id', dir: 'asc'}]
       };
     }
 
-    return of(this.bookmarkService.getCurrentViewState().departmentListPaginator);
+    return of(this.bookmarkService.getCurrentViewState().academicDegreeListPaginator);
   }
 
   public getViewStateAcademicDegreeFilter$(): Observable<IAcademicDegreeFilterViewModel> {
@@ -92,12 +92,14 @@ export class AcademicDegreeFacadeService {
   }
 
   public createAcademicDegree$(department: IAcademicDegreeViewModel): Observable<IdSimpleItem> {
-    return this.academicDegreeApiService.createAcademicDegree$(this.academicDegreeMapperService.academicDegreeViewModelToPostModel(department))
+    const body = this.academicDegreeMapperService.academicDegreeViewModelToPostModel(department);
+    return this.academicDegreeApiService.createAcademicDegree$(body)
       .pipe(map(value => value.data));
   }
 
   public updateAcademicDegree$(department: IAcademicDegreeViewModel): Observable<IAcademicDegreeViewModel> {
-    return this.academicDegreeApiService.updateAcademicDegree$(this.academicDegreeMapperService.academicDegreeViewModelToPutModel(department))
+    const body = this.academicDegreeMapperService.academicDegreeViewModelToPutModel(department);
+    return this.academicDegreeApiService.updateAcademicDegree$(body)
       .pipe(
         map(value => this.academicDegreeMapperService.academicDegreeGetModelToViewModel(value.data)),
         tap(value => {

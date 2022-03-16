@@ -141,10 +141,10 @@ export class ViewDepartmentDetailsComponent extends BaseViewComponent
   }
 
   getData(): void {
-    if (this.isNew && isNil(this.currentBookmark.data.commissionDetail)) {
-      this.currentBookmark.data.commissionDetail = this.departmentMapperService.departmentInitializeViewModel();
-      this.currentBookmark.data.commissionDetailCopy = cloneDeep(this.currentBookmark.data.commissionDetail);
-      this.setData(this.currentBookmark.data.commissionDetail);
+    if (this.isNew && isNil(this.currentBookmark.data.departmentDetail)) {
+      this.currentBookmark.data.departmentDetail = this.departmentMapperService.departmentInitializeViewModel();
+      this.currentBookmark.data.departmentDetailCopy = cloneDeep(this.currentBookmark.data.departmentDetail);
+      this.setData(this.currentBookmark.data.departmentDetail);
     } else if (isFinite(this.departmentId)) {
       this.departmentFacadeService.getDepartment$(this.departmentId)
         .pipe(takeUntil(this.onDestroy))

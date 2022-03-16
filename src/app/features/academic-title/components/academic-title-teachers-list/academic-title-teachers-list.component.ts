@@ -1,13 +1,13 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {IAcademicDegreeViewModel} from '../../types/view-model/academic-degree-view-model';
+import {IAcademicTitleViewModel} from '../../types/view-model/academic-title-view-model';
 import {IPaginator} from '../../../../shared/types/paginator';
-import {IAcademicDegreeListViewModel} from '../../types/view-model/academic-degree-list-view-model';
+import {IAcademicTitleListViewModel} from '../../types/view-model/academic-title-list-view-model';
 import {IPaginatorBase} from '../../../../shared/types/paginator-base';
 import {forkJoin, ReplaySubject} from 'rxjs';
 import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-grid-column-settings';
 import {readRoles} from '../../../../shared/roles';
 import {Router} from '@angular/router';
-import {AcademicDegreeFacadeService} from '../../services/academic-degree-facade.service';
+import {AcademicTitleFacadeService} from '../../services/academic-title-facade.service';
 import {ErrorService} from '../../../../global/services/error.service';
 import {CustomNotificationService} from '../../../../global/services/custom-notification.service';
 import {AuthService} from '../../../../global/services/auth/auth.service';
@@ -16,11 +16,11 @@ import {isEmpty} from 'lodash';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 @Component({
-  selector: 'cr-academic-degree-teachers-list',
-  templateUrl: './academic-degree-teachers-list.component.html',
+  selector: 'cr-academic-title-teachers-list',
+  templateUrl: './academic-title-teachers-list.component.html',
 })
-export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() academicDegree: IAcademicDegreeViewModel;
+export class AcademicTitleTeachersListComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() academicTitle: IAcademicTitleViewModel;
 
   public dataSource: IPaginator<IdNameSimpleItem>;
   public paginator: IPaginatorBase;
@@ -29,7 +29,7 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
   public columnSettings: Array<IEditGridColumnSetting> = [
     {
       field: 'name',
-      titleTranslateKey: 'ACADEMIC_DEGREE.DETAILS.TEACHERS_LIST.GRID.NAME',
+      titleTranslateKey: 'ACADEMIC_TITLE.DETAILS.TEACHERS_LIST.GRID.NAME',
       type: 'link',
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
@@ -37,7 +37,7 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
 
   constructor(
     protected router: Router,
-    private academicDegreeFacadeService: AcademicDegreeFacadeService,
+    private academicTitleFacadeService: AcademicTitleFacadeService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
     public authService: AuthService,
@@ -50,8 +50,8 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.academicDegree && !changes.academicDegree.firstChange
-      && changes.academicDegree.previousValue.id !== changes.academicDegree.currentValue.id) {
+    if (changes.academicTitle && !changes.academicTitle.firstChange
+      && changes.academicTitle.previousValue.id !== changes.academicTitle.currentValue.id) {
       this.loadDataList();
     }
   }
@@ -65,11 +65,11 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
 
   // region Get and create data
   getDataList(): void {
-    forkJoin({paginator: this.academicDegreeFacadeService.getViewStateAcademicDegreeTeachersListPaginator$()}).pipe(
+    forkJoin({paginator: this.academicTitleFacadeService.getViewStateAcademicTitleTeachersListPaginator$()}).pipe(
       takeUntil(this.onDestroy),
       switchMap(values => {
         this.paginator = values.paginator;
-        return this.academicDegreeFacadeService.getAcademicDegreeTeachersList$(this.paginator, this.academicDegree);
+        return this.academicTitleFacadeService.getAcademicTitleTeachersList$(this.paginator, this.academicTitle);
       })
     ).subscribe(dataSource => {
       this.dataSource = dataSource;
@@ -86,7 +86,7 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
   }
 
   loadDataList() {
-    this.academicDegreeFacadeService.loadAcademicDegreeTeachersList$(this.paginator, this.academicDegree).subscribe(value => {
+    this.academicTitleFacadeService.loadAcademicTitleTeachersList$(this.paginator, this.academicTitle).subscribe(value => {
       this.dataSource = value;
       this.paginator.page = value.page;
       this.paginator.size = value.size;
@@ -104,7 +104,7 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
 
   //region Work with grid
 
-  cellClick(event: IAcademicDegreeListViewModel): Promise<boolean> {
+  cellClick(event: IAcademicTitleListViewModel): Promise<boolean> {
     const route = `teacher/details/${event.id}`;
     return this.router.navigate([route]);
   }

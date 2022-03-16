@@ -35,7 +35,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
-        canActivate: [ConfigLoadedGuard, AuthGuard],
+        canActivate: [ConfigLoadedGuard],
       },
       {
         path: 'commission',
@@ -50,6 +50,11 @@ const routes: Routes = [
       {
         path: 'academic-degree',
         loadChildren: () => import('./features/academic-degree/academic-degree.module').then(m => m.AcademicDegreeModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
+        path: 'academic-title',
+        loadChildren: () => import('./features/academic-title/academic-title.module').then(m => m.AcademicTitleModule),
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {

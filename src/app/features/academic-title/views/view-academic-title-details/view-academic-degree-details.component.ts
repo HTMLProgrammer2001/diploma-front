@@ -15,28 +15,28 @@ import {BaseViewComponent} from '../../../../global/components/base-view/base-vi
 import {cloneDeep, isEmpty, isEqual, isNil} from 'lodash';
 import {DialogCloseResult, DialogRef} from '@progress/kendo-angular-dialog';
 import {takeUntil} from 'rxjs/operators';
-import {AcademicDegreeMapperService} from '../../services/academic-degree-mapper.service';
-import {AcademicDegreeFacadeService} from '../../services/academic-degree-facade.service';
-import {AcademicDegreeValidationService} from '../../services/academic-degree-validation.service';
-import {IAcademicDegreeViewModel} from '../../types/view-model/academic-degree-view-model';
+import {AcademicTitleMapperService} from '../../services/academic-title-mapper.service';
+import {AcademicTitleFacadeService} from '../../services/academic-title-facade.service';
+import {AcademicTitleValidationService} from '../../services/academic-title-validation.service';
+import {IAcademicTitleViewModel} from '../../types/view-model/academic-title-view-model';
 import {readRoles, writeRoles} from '../../../../shared/roles';
-import {IAcademicDegreeDetailsViewState} from '../../types/view-model/academic-degree-details-view-state';
+import {IAcademicTitleDetailsViewState} from '../../types/view-model/academic-title-details-view-state';
 
 @Component({
-  selector: 'cr-view-academic-degree-details',
+  selector: 'cr-view-academic-title-details',
   templateUrl: './view-academic-degree-details.component.html',
   styleUrls: ['./view-academic-degree-details.component.scss']
 })
 export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   implements OnInit, OnDestroy {
-  public academicDegreeId: number;
-  public academicDegree: IAcademicDegreeViewModel;
+  public academicTitleId: number;
+  public academicTitle: IAcademicTitleViewModel;
   public titleValue = '';
   public isNew = false;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
-  public viewState: IAcademicDegreeDetailsViewState;
+  public viewState: IAcademicTitleDetailsViewState;
   private onDestroy: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(
@@ -47,26 +47,26 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
     protected translateService: TranslateService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
-    protected academicDegreeValidationService: AcademicDegreeValidationService,
-    private academicDegreeFacadeService: AcademicDegreeFacadeService,
-    private academicDegreeMapperService: AcademicDegreeMapperService,
+    protected academicTitleValidationService: AcademicTitleValidationService,
+    private academicTitleFacadeService: AcademicTitleFacadeService,
+    private academicTitleMapperService: AcademicTitleMapperService,
     public authService: AuthService) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_DEGREE.DETAILS.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_DEGREE.DETAILS.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.academicDegreeDetails,
+      nameTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_TITLE.DETAILS.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.ACADEMIC_TITLE.DETAILS.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.academicTitleDetails,
     }, bookmarkService, router, route);
 
     this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);
     this.initTitleHeaderButtons();
 
-    if (this.document.location.pathname.endsWith('academic-degree/new')) {
+    if (this.document.location.pathname.endsWith('academic-title/new')) {
       this.isNew = true;
     } else {
-      this.academicDegreeId = Number(this.route.snapshot.paramMap.get('id'));
+      this.academicTitleId = Number(this.route.snapshot.paramMap.get('id'));
     }
 
-    this.academicDegreeFacadeService.getAcademicDegreeDetailsViewState$()
+    this.academicTitleFacadeService.getAcademicTitleDetailsViewState$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(viewState => this.viewState = viewState);
   }
@@ -90,15 +90,15 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   // region Refresh and set data
 
   checkDataChanged(): boolean {
-    return !isEqual(this.currentBookmark.data.academicDegreeDetail, this.currentBookmark.data.academicDegreeDetailCopy);
+    return !isEqual(this.currentBookmark.data.academicTitleDetail, this.currentBookmark.data.academicTitleDetailCopy);
   }
 
   createData(): void {
-    this.validator.validateDto(this.academicDegree);
+    this.validator.validateDto(this.academicTitle);
     if (this.validator.dtoValidationResult.isValid) {
-      this.academicDegreeFacadeService.createAcademicDegree$(this.academicDegree)
+      this.academicTitleFacadeService.createAcademicTitle$(this.academicTitle)
         .subscribe(value => {
-          this.customNotificationService.showSuccess(this.translateService.instant('ACADEMIC_DEGREE.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
+          this.customNotificationService.showSuccess(this.translateService.instant('ACADEMIC_TITLE.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
           this.navigateToDataPageAfterCreating(value.id);
         }, error => {
           const errors = this.errorService.getMessagesToShow(error.errors);
@@ -120,14 +120,14 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
       if (result instanceof DialogCloseResult) {
       } else {
         if (result.text === this.translateService.instant('COMMON.BUTTON.YES')) {
-          this.academicDegreeFacadeService.deleteAcademicDegree$(this.academicDegree)
+          this.academicTitleFacadeService.deleteAcademicTitle$(this.academicTitle)
             .pipe(takeUntil(this.onDestroy))
             .subscribe(() => {
-              this.bookmarkService.getCurrentDataItem().academicDegreeDetail.isDeleted = true;
-              this.bookmarkService.getCurrentDataItem().academicDegreeDetailCopy.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().academicTitleDetail.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().academicTitleDetailCopy.isDeleted = true;
               this.refreshTitleHeaderButtons();
               this.customNotificationService.showSuccess(this.translateService
-                .instant('ACADEMIC_DEGREE.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
+                .instant('ACADEMIC_TITLE.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
             }, error => {
               const errors = this.errorService.getMessagesToShow(error.errors);
 
@@ -142,12 +142,12 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   }
 
   getData(): void {
-    if (this.isNew && isNil(this.currentBookmark.data.academicDegreeDetail)) {
-      this.currentBookmark.data.academicDegreeDetail = this.academicDegreeMapperService.academicDegreeInitializeViewModel();
-      this.currentBookmark.data.academicDegreeDetailCopy = cloneDeep(this.currentBookmark.data.academicDegreeDetail);
-      this.setData(this.currentBookmark.data.academicDegreeDetail);
-    } else if (isFinite(this.academicDegreeId)) {
-      this.academicDegreeFacadeService.getAcademicDegree$(this.academicDegreeId)
+    if (this.isNew && isNil(this.currentBookmark.data.academicTitleDetail)) {
+      this.currentBookmark.data.academicTitleDetail = this.academicTitleMapperService.academicTitleInitializeViewModel();
+      this.currentBookmark.data.academicTitleDetailCopy = cloneDeep(this.currentBookmark.data.academicTitleDetail);
+      this.setData(this.currentBookmark.data.academicTitleDetail);
+    } else if (isFinite(this.academicTitleId)) {
+      this.academicTitleFacadeService.getAcademicTitle$(this.academicTitleId)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => this.setData(value), error => {
           this.viewState.isNotFound = this.errorService.isNotFound(error.errors);
@@ -165,23 +165,23 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
 
   navigateToDataPageAfterCreating(id: number): any {
     this.bookmarkService.deleteBookmarkById(this.bookmarkService.getCurrentId()).subscribe(_ => {
-      const route = `academic-degree/details/${id}`;
+      const route = `academic-title/details/${id}`;
       return this.router.navigate([route]);
     });
   }
 
-  setData(value: IAcademicDegreeViewModel): void {
+  setData(value: IAcademicTitleViewModel): void {
     this.validator.setDto(value);
-    this.academicDegree = value;
+    this.academicTitle = value;
     this.changeTitle();
     this.refreshTitleHeaderButtons();
   }
 
   updateData(): void {
-    this.validator.validateDto(this.academicDegree);
+    this.validator.validateDto(this.academicTitle);
 
     if (this.validator.dtoValidationResult.isValid) {
-      this.academicDegreeFacadeService.updateAcademicDegree$(this.academicDegree)
+      this.academicTitleFacadeService.updateAcademicTitle$(this.academicTitle)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => {
           this.customNotificationService.showSuccess(this.translateService
@@ -205,26 +205,26 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   // region Initials
 
   initValidator(): void {
-    const initialAcademicDegreeValidator = this.academicDegreeValidationService.getAcademicDegreeValidator();
+    const initialAcademicTitleValidator = this.academicTitleValidationService.getAcademicTitleValidator();
 
-    if (!isNil(this.currentBookmark.viewState.academicDegreeValidator)) {
-      initialAcademicDegreeValidator.initValidatorResultStates(this.currentBookmark.viewState.academicDegreeValidator);
+    if (!isNil(this.currentBookmark.viewState.academicTitleValidator)) {
+      initialAcademicTitleValidator.initValidatorResultStates(this.currentBookmark.viewState.academicTitleValidator);
     }
 
-    this.currentBookmark.viewState.academicDegreeValidator = initialAcademicDegreeValidator;
-    this.validator = this.currentBookmark.viewState.academicDegreeValidator;
+    this.currentBookmark.viewState.academicTitleValidator = initialAcademicTitleValidator;
+    this.validator = this.currentBookmark.viewState.academicTitleValidator;
   }
 
   // endregion
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.academicDegree.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.academicTitle.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 
   openNewData(): Promise<boolean> {
-    const route = `/academic-degree/new`;
+    const route = `/academic-title/new`;
     return this.router.navigate([route]);
   }
 
@@ -239,8 +239,8 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   }
 
   cancelRestore(): void {
-    this.academicDegree = cloneDeep(this.bookmarkService.getCurrentDataItem().academicDegreeDetailCopy);
-    this.bookmarkService.getCurrentDataItem().academicDegreeDetail = this.academicDegree;
+    this.academicTitle = cloneDeep(this.bookmarkService.getCurrentDataItem().academicTitleDetailCopy);
+    this.bookmarkService.getCurrentDataItem().academicTitleDetail = this.academicTitle;
     this.viewState.restoring = false;
     this.refreshTitleHeaderButtons();
     this.changeTitle();
@@ -282,13 +282,13 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
 
   refreshTitleHeaderButtons(): void {
     this.titleHeaderButtonManager.getById('delete')
-      .setVisibility(!this.academicDegree.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.academicTitle.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('add')
       .setVisibility(!this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('update')
-      .setVisibility(!this.isNew && !this.academicDegree.isDeleted && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.isNew && !this.academicTitle.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('refresh')
       .setVisibility(!this.isNew && readRoles.includes(this.authService.currentRole));
@@ -297,18 +297,18 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
       .setVisibility(this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('delete-status')
-      .setVisibility(!this.isNew && this.academicDegree.isDeleted);
+      .setVisibility(!this.isNew && this.academicTitle.isDeleted);
 
     this.titleHeaderButtonManager.getById('restore')
       .setVisibility(!this.isNew && !this.viewState.restoring
-        && this.academicDegree.isDeleted && writeRoles.includes(this.authService.currentRole));
+        && this.academicTitle.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('confirm-restore')
-      .setVisibility(!this.isNew && this.academicDegree.isDeleted && this.viewState.restoring
+      .setVisibility(!this.isNew && this.academicTitle.isDeleted && this.viewState.restoring
         && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('cancel-restore')
-      .setVisibility(!this.isNew && this.academicDegree.isDeleted && this.viewState.restoring);
+      .setVisibility(!this.isNew && this.academicTitle.isDeleted && this.viewState.restoring);
   }
 
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
