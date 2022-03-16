@@ -8,6 +8,8 @@ import {IAcademicDegreeFilterModel} from '../../../features/academic-degree/type
 import {IAcademicDegreeDetailsViewState} from '../../../features/academic-degree/types/view-model/academic-degree-details-view-state';
 import {IAcademicTitleDetailsViewState} from '../../../features/academic-title/types/view-model/academic-title-details-view-state';
 import {IAcademicTitleFilterViewModel} from '../../../features/academic-title/types/view-model/academic-title-filter-view-model';
+import {ITeachingRankFilterViewModel} from '../../../features/teaching-rank/types/view-model/teaching-rank-filter-view-model';
+import {ITeachingRankDetailsViewState} from '../../../features/teaching-rank/types/view-model/teaching-rank-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -37,4 +39,11 @@ export interface IBookmarkViewState {
   academicTitleValidator?: Validator;
   academicTitleDetails?: IAcademicTitleDetailsViewState;
   academicTitleTeachersListPaginator?: IPaginatorBase;
+
+  /** Teaching rank  **/
+  teachingRankListPaginator?: IPaginatorBase;
+  teachingRankFilter?: ITeachingRankFilterViewModel;
+  teachingRankValidator?: Validator;
+  teachingRankDetails?: ITeachingRankDetailsViewState;
+  teachingRankTeachersListPaginator?: IPaginatorBase;
 }

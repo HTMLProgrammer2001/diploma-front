@@ -112,7 +112,6 @@ export class DepartmentMapperService {
     if (!isNil(source)) {
       destination = {
         departmentId: source.id,
-        showDeleted: source.isDeleted,
         showCascadeDeletedBy: source.isDeleted ? 'department' : undefined
       };
     }

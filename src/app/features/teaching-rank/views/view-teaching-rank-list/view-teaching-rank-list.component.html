@@ -1,0 +1,64 @@
+<ng-container>
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'TEACHING_RANK.LIST.TITLE'">
+  </cr-title-header>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'TEACHING_RANK.LIST.FILTER.TITLE'">
+        {{ 'TEACHING_RANK.LIST.FILTER.TITLE' | translate }}
+      </p>
+    </div>
+
+    <form>
+      <div class="row">
+        <div class="col-lg-2">
+          <cr-control-edit
+              [(dataValue)]="filter.name"
+              [translateKeys]="'TEACHING_RANK.LIST.FILTER.NAME'"
+          ></cr-control-edit>
+        </div>
+
+        <div class="col-lg-2">
+          <cr-checkbox-control
+              [(dataValue)]="filter.showDeleted"
+              [translateKeys]="'TEACHING_RANK.LIST.FILTER.SHOW_DELETED'"
+          ></cr-checkbox-control>
+        </div>
+
+        <div class="col-lg-8 cr-search-button-column">
+          <cr-button-control
+              [buttonTemplateType]="'underlined-action-button'"
+              [type]="'submit'"
+              [textTranslateKey]="'COMMON.BUTTON.SEARCH'"
+              (buttonClickEvent)="onFilter()"
+          ></cr-button-control>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'TEACHING_RANK.LIST.GRID.TITLE'">
+        {{ 'TEACHING_RANK.LIST.GRID.TITLE' | translate }}
+      </p>
+    </div>
+    <div class="cr-grid-wrapper-new">
+      <cr-edit-grid-server-paging
+          (cellClickEvent)="cellClick($event)"
+          (pageChangeEvent)="changePage($event)"
+          [columnSettings]="columnSettings"
+          [dataCacheName]="'TeachingRankListGrid'"
+          [dataSource]="dataSource"
+          [pageable]="true"
+          [resizable]="true"
+          [uniqueField]="'id'"
+          [sortable]="{allowUnsort: false}"
+          [sortableState]="paginator.sort"
+      ></cr-edit-grid-server-paging>
+    </div>
+  </div>
+</ng-container>

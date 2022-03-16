@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
 import {ConfigService} from '../../../global/services/config/config.service';
 import {IPaginator} from '../../../shared/types/paginator';
@@ -19,6 +19,7 @@ import {ICommissionDetailsViewState} from '../types/view-model/commission-detail
   providedIn: 'root'
 })
 export class CommissionFacadeService {
+  public refreshDetails$: Subject<void> = new Subject<void>();
 
   constructor(
     private configService: ConfigService,

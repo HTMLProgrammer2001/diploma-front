@@ -1,5 +1,4 @@
 export interface IAcademicTitleTeachersFilterModel {
-  academicDegreeId: number;
-  showDeleted: boolean;
+  academicTitleId: number;
   showCascadeDeletedBy: string;
 }

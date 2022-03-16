@@ -205,6 +205,16 @@
           "BOOKMARK_NAME": "Academic title: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "TEACHING_RANK": {
+        "LIST": {
+          "BOOKMARK_NAME": "Teaching rank list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Teaching rank: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -217,6 +227,7 @@
       "DEPARTMENT": "Department list",
       "ACADEMIC_DEGREE": "Academic degree list",
       "ACADEMIC_TITLE": "Academic title list",
+      "TEACHING_RANK": "Teaching rank list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -353,6 +364,40 @@
         "SUCCESS_CREATE": "Academic title was successfully created",
         "SUCCESS_DELETE": "Academic title was successfully deleted",
         "SUCCESS_UPDATE": "Academic title was successfully updated"
+      }
+    }
+  },
+  "TEACHING_RANK": {
+    "LIST": {
+      "TITLE": "Teaching rank list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Teaching ranks",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Teaching rank: {{value}}",
+      "NAME": "Name",
+      "TEACHERS_LIST": {
+        "TITLE": "Teachers",
+        "GRID": {
+          "NAME": "Name"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Name is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Teaching rank was successfully created",
+        "SUCCESS_DELETE": "Teaching rank was successfully deleted",
+        "SUCCESS_UPDATE": "Teaching rank was successfully updated"
       }
     }
   }

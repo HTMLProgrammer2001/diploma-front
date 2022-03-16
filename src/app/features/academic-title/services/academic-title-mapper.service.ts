@@ -9,12 +9,13 @@ import {IAcademicTitlePostModel} from '../types/model/academic-title-post-model'
 import {IAcademicTitleDetailsViewState} from '../types/view-model/academic-title-details-view-state';
 import {IAcademicTitleFilterModel} from '../types/model/academic-title-filter-model';
 import {IAcademicTitleTeachersFilterModel} from '../types/model/academic-title-teachers-filter-model';
+import {IAcademicTitleListGetModel} from '../types/model/academic-title-list-get-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AcademicTitleMapperService {
-  public academicTitleListGetModelToViewModel(source: IAcademicTitleGetModel): IAcademicTitleListViewModel {
+  public academicTitleListGetModelToViewModel(source: IAcademicTitleListGetModel): IAcademicTitleListViewModel {
     let destination = {} as IAcademicTitleListViewModel;
 
     if (!isNil(source)) {
@@ -110,8 +111,7 @@ export class AcademicTitleMapperService {
 
     if (!isNil(source)) {
       destination = {
-        academicDegreeId: source.id,
-        showDeleted: source.isDeleted,
+        academicTitleId: source.id,
         showCascadeDeletedBy: source.isDeleted ? 'academicTitle' : undefined
       };
     }

@@ -58,6 +58,11 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
+        path: 'teaching-rank',
+        loadChildren: () => import('./features/teaching-rank/teaching-rank.module').then(m => m.TeachingRankModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
         path: '403',
         component: ViewPageForbiddenComponent,
         canActivate: [BookmarkProcessGuard, AuthGuard],

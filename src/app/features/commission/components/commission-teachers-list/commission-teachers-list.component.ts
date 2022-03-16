@@ -47,6 +47,11 @@ export class CommissionTeachersListComponent implements OnInit, OnDestroy, OnCha
   // region Component lifecycle
   ngOnInit(): void {
     this.getDataList();
+
+
+    this.commissionFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.loadDataList());
   }
 
   ngOnChanges(changes: SimpleChanges) {

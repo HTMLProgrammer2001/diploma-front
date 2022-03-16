@@ -76,6 +76,10 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   ngOnInit(): void {
     this.initValidator();
     this.getData();
+
+    this.academicDegreeFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.refresh());
   }
 
   ngOnDestroy(): void {
@@ -314,7 +318,7 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
     switch (clickedButton.id) {
       case 'refresh':
-        this.refresh();
+        this.academicDegreeFacadeService.refreshDetails$.next();
         break;
 
       case 'delete':

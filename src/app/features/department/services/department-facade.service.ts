@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
 import {ConfigService} from '../../../global/services/config/config.service';
 import {IPaginator} from '../../../shared/types/paginator';
@@ -19,6 +19,7 @@ import {IDepartmentDetailsViewState} from '../types/view-model/department-detail
   providedIn: 'root'
 })
 export class DepartmentFacadeService {
+  public refreshDetails$: Subject<void> = new Subject<void>();
 
   constructor(
     private configService: ConfigService,
@@ -112,7 +113,7 @@ export class DepartmentFacadeService {
   }
 
   public getDepartmentDetailsViewState$(): Observable<IDepartmentDetailsViewState> {
-    if(isNil(this.bookmarkService.getCurrentViewState().departmentDetails)) {
+    if (isNil(this.bookmarkService.getCurrentViewState().departmentDetails)) {
       this.bookmarkService.getCurrentViewState().departmentDetails = this.departmentMapperService
         .departmentInitializeDetailsViewState();
     }

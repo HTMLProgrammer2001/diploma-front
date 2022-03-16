@@ -47,6 +47,10 @@ export class AcademicDegreeTeachersListComponent implements OnInit, OnDestroy, O
   // region Component lifecycle
   ngOnInit(): void {
     this.getDataList();
+
+    this.academicDegreeFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.loadDataList());
   }
 
   ngOnChanges(changes: SimpleChanges) {

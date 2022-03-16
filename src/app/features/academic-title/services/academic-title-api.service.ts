@@ -22,13 +22,14 @@ import {IAcademicTitleFilterModel} from '../types/model/academic-title-filter-mo
 import {IAcademicTitlePostModel} from '../types/model/academic-title-post-model';
 import {IAcademicTitlePutModel} from '../types/model/academic-title-put-model';
 import {IAcademicTitleTeachersFilterModel} from '../types/model/academic-title-teachers-filter-model';
+import {IAcademicTitleListGetModel} from '../types/model/academic-title-list-get-model';
 
 @Injectable({providedIn: 'root'})
 export class AcademicTitleApiService {
   constructor(private graphqlService: GraphqlCommonService) {}
 
   public getAcademicTitleList$(paginator: IPaginatorBase, filter: IAcademicTitleFilterModel):
-    Observable<IResponse<IPaginator<IAcademicTitleGetModel>>> {
+    Observable<IResponse<IPaginator<IAcademicTitleListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
       query: getAcademicTitleListQuery,

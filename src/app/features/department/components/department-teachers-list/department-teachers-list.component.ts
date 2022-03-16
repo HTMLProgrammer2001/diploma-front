@@ -47,6 +47,10 @@ export class DepartmentTeachersListComponent implements OnInit, OnDestroy, OnCha
   // region Component lifecycle
   ngOnInit(): void {
     this.getDataList();
+
+    this.departmentFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.loadDataList());
   }
 
   ngOnChanges(changes: SimpleChanges) {

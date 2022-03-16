@@ -65,6 +65,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.academicTitleList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHING_RANK',
+          task: {
+            route: 'teaching-rank/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.TEACHING_RANK.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.TEACHING_RANK.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.teachingRankList,
+          },
+        },
       ],
     },
   ];

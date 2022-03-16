@@ -76,6 +76,10 @@ export class ViewDepartmentDetailsComponent extends BaseViewComponent
   ngOnInit(): void {
     this.initValidator();
     this.getData();
+
+    this.departmentFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.refresh());
   }
 
   ngOnDestroy(): void {
@@ -312,7 +316,7 @@ export class ViewDepartmentDetailsComponent extends BaseViewComponent
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
     switch (clickedButton.id) {
       case 'refresh':
-        this.refresh();
+        this.departmentFacadeService.refreshDetails$.next();
         break;
 
       case 'delete':

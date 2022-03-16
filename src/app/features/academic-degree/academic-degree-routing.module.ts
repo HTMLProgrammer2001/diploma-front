@@ -11,28 +11,28 @@ import {matchId} from '../../shared/utils';
 
 
 export const routingPaths = {
-  commissionList: 'list',
-  commissionDetails: 'details/:id',
-  commissionNew: 'new',
+  list: 'list',
+  details: 'details/:id',
+  new: 'new',
 };
 
 const routes: Routes = [
   {
-    path: routingPaths.commissionList,
+    path: routingPaths.list,
     component: ViewAcademicDegreeListComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
     data: {allowPinning: true, roles: readRoles},
   },
   {
-    matcher: matchId(routingPaths.commissionDetails),
+    matcher: matchId(routingPaths.details),
     component: ViewAcademicDegreeDetailsComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
     data: {roles: readRoles}
   },
   {
-    path: routingPaths.commissionNew,
+    path: routingPaths.new,
     component: ViewAcademicDegreeDetailsComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],

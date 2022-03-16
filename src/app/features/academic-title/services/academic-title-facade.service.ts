@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {BookmarkService} from '../../../global/services/bookmark/bookmark.service';
 import {ConfigService} from '../../../global/services/config/config.service';
 import {IPaginator} from '../../../shared/types/paginator';
@@ -19,6 +19,7 @@ import {IAcademicTitleDetailsViewState} from '../types/view-model/academic-title
   providedIn: 'root'
 })
 export class AcademicTitleFacadeService {
+  public refreshDetails$: Subject<void> = new Subject<void>();
 
   constructor(
     private configService: ConfigService,
@@ -116,7 +117,7 @@ export class AcademicTitleFacadeService {
   }
 
   public getAcademicTitleDetailsViewState$(): Observable<IAcademicTitleDetailsViewState> {
-    if(isNil(this.bookmarkService.getCurrentViewState().academicTitleDetails)) {
+    if (isNil(this.bookmarkService.getCurrentViewState().academicTitleDetails)) {
       this.bookmarkService.getCurrentViewState().academicTitleDetails = this.academicTitleMapperService
         .academicTitleInitializeDetailsViewState();
     }

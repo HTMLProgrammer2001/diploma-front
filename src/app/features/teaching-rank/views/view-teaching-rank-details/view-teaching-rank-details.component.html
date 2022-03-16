@@ -1,0 +1,35 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'TEACHING_RANK.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="teachingRank">
+    <div class="row">
+      <div class="col-lg-6">
+        <cr-control-edit
+            [(dataValue)]="teachingRank.name"
+            (dataValueChange)="changeTitle()"
+            [translateKeys]="'TEACHING_RANK.DETAILS.NAME'"
+            [isDisabled]="teachingRank.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'name'"
+        ></cr-control-edit>
+      </div>
+    </div>
+  </div>
+
+  <div class="cr-outer-wrapper" *ngIf="teachingRank && !isNew">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'TEACHING_RANK.DETAILS.TEACHERS_LIST.TITLE'">
+        {{ 'TEACHING_RANK.DETAILS.TEACHERS_LIST.TITLE' | translate }}
+      </p>
+    </div>
+
+    <cr-teaching-rank-teachers-list [teachingRank]="teachingRank"></cr-teaching-rank-teachers-list>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

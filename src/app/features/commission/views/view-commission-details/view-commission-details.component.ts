@@ -76,6 +76,10 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   ngOnInit(): void {
     this.initValidator();
     this.getData();
+
+    this.commissionFacadeService.refreshDetails$
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe(() => this.refresh());
   }
 
   ngOnDestroy(): void {
@@ -312,7 +316,7 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
     switch (clickedButton.id) {
       case 'refresh':
-        this.refresh();
+        this.commissionFacadeService.refreshDetails$.next();
         break;
 
       case 'delete':
