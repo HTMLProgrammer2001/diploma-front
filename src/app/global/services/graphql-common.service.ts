@@ -66,14 +66,14 @@ export class GraphqlCommonService {
       request = this.apollo.mutate<T>({
         mutation: requestConfig.query,
         variables: requestConfig.variables,
-        context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}},
+        context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}, useMultipart: !!requestConfig.useMultipart},
         fetchPolicy: 'no-cache',
       });
     } else {
       request = this.apollo.query<T>({
         query: requestConfig.query,
         variables: requestConfig.variables,
-        context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}},
+        context: {headers: {...httpOptions.headers, ...requestConfig.additionalHeaders}, useMultipart: !!requestConfig.useMultipart},
         fetchPolicy: 'no-cache',
       });
     }

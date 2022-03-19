@@ -166,7 +166,6 @@ export class Validator {
           this.validationGroups.set(ruleItem.fieldName, groupItem);
         }
 
-        // for required, maxLength, minLength, email replace last added rule
         let isRuleFound = false;
 
         if (ruleItem.type === ValidationTypes.required
@@ -182,7 +181,8 @@ export class Validator {
           || ruleItem.type === ValidationTypes.dateTimeLessThan
           || ruleItem.type === ValidationTypes.numberGreaterThan
           || ruleItem.type === ValidationTypes.numberLessThan
-          || ruleItem.type === ValidationTypes.email) {
+          || ruleItem.type === ValidationTypes.email
+          || ruleItem.type === ValidationTypes.phone) {
           for (let i = 0; i < groupItem.validationRules.length; i++) {
             if (groupItem.validationRules[i].type === ruleItem.type) {
               groupItem.validationRules[i] = ruleItem;
@@ -792,6 +792,24 @@ export class Validator {
   email(value: string, rule: ValidationRule): ValidationResult {
     // eslint-disable-next-line max-len
     const pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const result: ValidationResult = new ValidationResult();
+
+    if (!!value && value.length > 0 && !pattern.test(value)) {
+      result.isValid = false;
+      result.messages.push({message: rule.message, messageTranslateKey: rule.messageTranslateKey});
+    }
+    return result;
+  }
+
+  /**
+   * Make validation of "phone" type.
+   *
+   * @param value - data for validation
+   * @param rule - validation settings
+   */
+  phone(value: string, rule: ValidationRule): ValidationResult {
+    // eslint-disable-next-line max-len
+    const pattern = /^(?:\+380)?[ .-]?\(?[0-9]{2}\)?[ .-]?[0-9]{2}[ .-]?[0-9]{2}[ .-]?[0-9]{3}$/;
     const result: ValidationResult = new ValidationResult();
 
     if (!!value && value.length > 0 && !pattern.test(value)) {

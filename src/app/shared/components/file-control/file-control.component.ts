@@ -61,7 +61,7 @@ export class FileControlComponent implements OnInit, OnChanges {
   @Input() translateKeys: string;
 
   // dataDropzoneMessage - translation for dropzone message
-  @Input() dataDropzoneMessage: string;
+  @Input() dataDropzoneMessage: string = 'COMMON.DROPZONE';
 
 
   /**

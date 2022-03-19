@@ -98,6 +98,7 @@
       "GENERAL": "General"
     },
     "CLEAN_FILTER": "Clean filter",
+    "DROPZONE": "Drop files to select",
     "EXECUTE": "Execute",
     "RESET": "Reset",
     "RESEND": "Resend",
@@ -215,6 +216,16 @@
           "BOOKMARK_NAME": "Teaching rank: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "TEACHER": {
+        "LIST": {
+          "BOOKMARK_NAME": "Teacher list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Teacher: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -228,6 +239,7 @@
       "ACADEMIC_DEGREE": "Academic degree list",
       "ACADEMIC_TITLE": "Academic title list",
       "TEACHING_RANK": "Teaching rank list",
+      "TEACHER": "Teacher list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -398,6 +410,133 @@
         "SUCCESS_CREATE": "Teaching rank was successfully created",
         "SUCCESS_DELETE": "Teaching rank was successfully deleted",
         "SUCCESS_UPDATE": "Teaching rank was successfully updated"
+      }
+    }
+  },
+  "TEACHER": {
+    "LIST": {
+      "TITLE": "Teacher list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "COMMISSION": "Commission",
+        "DEPARTMENT": "Department",
+        "TEACHING_RANK": "Teaching rank",
+        "ACADEMIC_DEGREE": "Academic degree",
+        "ACADEMIC_TITLE": "Academic title",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Teachers",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "COMMISSION": "Commission",
+        "DEPARTMENT": "Department",
+        "TEACHING_RANK": "Teaching rank",
+        "ACADEMIC_DEGREE": "Academic degree",
+        "ACADEMIC_TITLE": "Academic title",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Teacher: {{value}}",
+      "PERSONAL": {
+        "TITLE": "Personal",
+        "FULL_NAME": "Name",
+        "EMAIL": "Email",
+        "PHONE": "Phone",
+        "BIRTHDAY": "Birthday",
+        "ADDRESS": "Address",
+        "AVATAR": "Select photo",
+        "PHOTO": "Photo of {{name}}"
+      },
+      "PROFESSIONAL": {
+        "TITLE": "Professional",
+        "COMMISSION": "Commission",
+        "DEPARTMENT": "Department",
+        "TEACHING_RANK": "Teaching rank",
+        "ACADEMIC_DEGREE": "Academic degree",
+        "ACADEMIC_TITLE": "Academic title",
+        "WORK_START_DATE": "Work start date"
+      },
+      "ATTESTATIONS_LIST": {
+        "TITLE": "Attestations",
+        "GRID": {
+          "ID": "ID",
+          "CATEGORY": "Category",
+          "DATE": "Date"
+        },
+        "LAST_ATTESTATION_DATE": "Last attestation date",
+        "NEXT_ATTESTATION_DATE": "Next attestation date"
+      },
+      "INTERNSHIPS_LIST": {
+        "TITLE": "Internships",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Title",
+          "PLACE": "Place",
+          "HOURS": "Hours",
+          "CREDITS": "Credits",
+          "FROM": "From",
+          "TO": "To"
+        },
+        "INTERNSHIP_HOURS_FROM_LAST_ATTESTATION": "Internship hours from last attestation"
+      },
+      "PUBLICATIONS_LIST": {
+        "TITLE": "Publications",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Title",
+          "DATE": "Date"
+        }
+      },
+      "HONORS_LIST": {
+        "TITLE": "Honors",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Title",
+          "DATE": "Date",
+          "ORDER_NUMBER": "Order number",
+          "IS_ACTIVE": "Is active"
+        }
+      },
+      "REBUKES_LIST": {
+        "TITLE": "Rebukes",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Title",
+          "DATE": "Date",
+          "ORDER_NUMBER": "Order number",
+          "IS_ACTIVE": "Is active"
+        }
+      },
+      "EDUCATIONS_LIST": {
+        "TITLE": "Educations",
+        "GRID": {
+          "ID": "ID",
+          "EDUCATION_QUALIFICATION": "Education qualification",
+          "INSTITUTION": "Institution",
+          "SPECIALTY": "Specialty",
+          "YEAR_OF_ISSUE": "Year of issue"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Full name is required",
+        "INVALID_EMAIL": "Email is invalid",
+        "INVALID_PHONE": "Phone is invalid",
+        "INVALID_MIN_BIRTHDAY": "Birthday year must be more than 1970",
+        "INVALID_MAX_BIRTHDAY": "You cannot select birthday from future",
+        "REQUIRED_COMMISSION": "Commission is required",
+        "REQUIRED_DEPARTMENT": "Department is required",
+        "INVALID_MIN_WORK_START_DATE": "Work start date year must be more than 1970",
+        "INVALID_MAX_WORK_START_DATE": "You cannot select work start date from future"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Teacher was successfully created",
+        "SUCCESS_DELETE": "Teacher was successfully deleted",
+        "SUCCESS_UPDATE": "Teacher was successfully updated"
       }
     }
   }

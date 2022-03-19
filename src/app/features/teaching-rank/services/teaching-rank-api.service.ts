@@ -23,6 +23,7 @@ import {ITeachingRankPostModel} from '../types/model/teaching-rank-post-model';
 import {ITeachingRankPutModel} from '../types/model/teaching-rank-put-model';
 import {ITeachingRankTeachersFilterModel} from '../types/model/teaching-rank-teachers-filter-model';
 import {ITeachingRankListGetModel} from '../types/model/teaching-rank-list-get-model';
+import {TeachingRankOrderMap} from '../types/common/teaching-rank-order-map';
 
 @Injectable({providedIn: 'root'})
 export class TeachingRankApiService {
@@ -37,7 +38,7 @@ export class TeachingRankApiService {
         query: {
           page: paginator.page,
           size: paginator.size,
-          orderField: paginator.sort?.[0].field ?? 'id',
+          orderField: TeachingRankOrderMap[paginator.sort?.[0].field ?? 'id'],
           isDesc: paginator.sort?.[0].dir === 'desc' ?? false,
           ...filter,
         }

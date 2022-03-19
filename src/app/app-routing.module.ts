@@ -63,6 +63,11 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
+        path: 'teacher',
+        loadChildren: () => import('./features/teacher/teacher.module').then(m => m.TeacherModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
         path: '403',
         component: ViewPageForbiddenComponent,
         canActivate: [BookmarkProcessGuard, AuthGuard],

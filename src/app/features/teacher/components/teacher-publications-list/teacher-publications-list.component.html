@@ -1,0 +1,12 @@
+<div class="cr-grid-wrapper-new">
+  <cr-edit-grid-server-paging
+      (cellClickEvent)="cellClick($event)"
+      (pageChangeEvent)="changePage($event)"
+      [columnSettings]="columnSettings"
+      [dataCacheName]="'TeacherPublicationListGrid'"
+      [dataSource]="dataSource"
+      [pageable]="true"
+      [resizable]="true"
+      [uniqueField]="'id'"
+  ></cr-edit-grid-server-paging>
+</div>

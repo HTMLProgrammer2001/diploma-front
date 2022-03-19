@@ -1,0 +1,23 @@
+<div class="cr-grid-wrapper-new">
+  <cr-edit-grid-server-paging
+      (cellClickEvent)="cellClick($event)"
+      (pageChangeEvent)="changePage($event)"
+      [columnSettings]="columnSettings"
+      [dataCacheName]="'TeacherInternshipListGrid'"
+      [dataSource]="dataSource"
+      [pageable]="true"
+      [resizable]="true"
+      [uniqueField]="'id'"
+  ></cr-edit-grid-server-paging>
+</div>
+
+<div class="row justify-content-end">
+  <div class="col-lg-4">
+    <cr-numeric-control
+      [translateKeys]="'TEACHER.DETAILS.INTERNSHIPS_LIST.INTERNSHIP_HOURS_FROM_LAST_ATTESTATION'"
+      [dataValue]="dataSource?.lastAttestationInternshipHours"
+      [isDisabled]="true"
+      [format]="'#'"
+    ></cr-numeric-control>
+  </div>
+</div>

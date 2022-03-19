@@ -59,6 +59,7 @@ import {GetByKeyPipe} from './pipes/get-by-key.pipe';
 import {GridPaginatorComponent} from './components/grid-paginator/grid-paginator.component';
 import {LanguageSwitcherComponent} from './components/language-switcher/language-switcher.component';
 import {TranslateAttributePipe} from './pipes/translate-attribute.pipe';
+import {MaskedEditControlComponent} from './components/masked-edit-control/masked-edit-control.component';
 
 export const enableRtl = () => isLanguageRtl(sessionStorage.getItem('currentLanguage'));
 
@@ -91,6 +92,7 @@ export const enableRtl = () => isLanguageRtl(sessionStorage.getItem('currentLang
     GridPaginatorComponent,
     LanguageSwitcherComponent,
     TranslateAttributePipe,
+    MaskedEditControlComponent,
   ],
   imports: [
     CommonModule,
@@ -175,6 +177,7 @@ export const enableRtl = () => isLanguageRtl(sessionStorage.getItem('currentLang
     GridPaginatorComponent,
     LanguageSwitcherComponent,
     TranslateAttributePipe,
+    MaskedEditControlComponent
   ],
   providers: [{
     provide: RTL,

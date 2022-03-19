@@ -1,0 +1,352 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'TEACHER.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <ng-template #customTooltipTemplate let-anchor>
+    <div [innerHTML]="anchor.nativeElement.getAttribute('custom')"></div>
+  </ng-template>
+
+  <ng-container *ngIf="teacher">
+    <div class="cr-outer-wrapper">
+      <!--Personal-->
+      <kendo-panelbar (stateChange)="panelStateChange('personal', $event)">
+        <kendo-panelbar-item
+            [class.ng-invalid]="!personalValidationGroupResult.isValid"
+            [expanded]="viewState.panels.personal"
+            [tooltipTemplate]="customTooltipTemplate"
+            filter=".customTooltip"
+            kendoTooltip
+            position="top"
+            title=""
+            tooltipClass="cr-tooltip">
+          <ng-template kendoPanelBarItemTitle>
+            <div [attr.custom]="personalValidationGroupResult.messages | validationMessageTranslate"
+                 [class.customTooltip]="!personalValidationGroupResult.isValid">
+              <span [attr.data-translate]="'TEACHER.DETAILS.PERSONAL.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.PERSONAL.TITLE' | translate}}
+              </span>
+              <span style="color: red">&nbsp;*</span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <div class="row cr-bottom-row-border">
+              <div class="col-lg-4">
+                <cr-control-edit
+                    [translateKeys]="'TEACHER.DETAILS.PERSONAL.FULL_NAME'"
+                    [(dataValue)]="teacher.fullName"
+                    [validator]="validator"
+                    [validationField]="'fullName'"
+                ></cr-control-edit>
+              </div>
+              <div class="col-lg-4">
+                <cr-control-edit
+                    [translateKeys]="'TEACHER.DETAILS.PERSONAL.EMAIL'"
+                    [(dataValue)]="teacher.email"
+                    [validator]="validator"
+                    [validationField]="'email'"
+                ></cr-control-edit>
+              </div>
+              <div class="col-lg-4">
+                <cr-control-masked-edit
+                    [translateKeys]="'TEACHER.DETAILS.PERSONAL.PHONE'"
+                    [(dataValue)]="teacher.phone"
+                    [validator]="validator"
+                    [validationField]="'phone'"
+                    [mask]="'+38\\0 (00) 00-00-000'"
+                ></cr-control-masked-edit>
+              </div>
+            </div>
+
+            <div class="row cr-bottom-row-border">
+              <div class="col-lg-4">
+                <cr-control-datepicker
+                    [translateKeys]="'TEACHER.DETAILS.PERSONAL.BIRTHDAY'"
+                    [(dataValue)]="teacher.birthday"
+                    [validator]="validator"
+                    [validationField]="'birthday'"
+                ></cr-control-datepicker>
+              </div>
+              <div class="col-lg-4">
+                <cr-control-edit
+                    [translateKeys]="'TEACHER.DETAILS.PERSONAL.ADDRESS'"
+                    [(dataValue)]="teacher.address"
+                ></cr-control-edit>
+              </div>
+              <div class="col-lg-4">
+                <cr-file-control
+                    [dataLabel]="'TEACHER.DETAILS.PERSONAL.AVATAR'"
+                    [(dataValue)]="teacher.avatar"
+                    (dataValueChange)="onAvatarChange($event)"
+                    [maxFileSize]="50 * 1024 * 1024"
+                    [allowedExtensions]="['.png', '.jpeg', '.jpg']"
+                ></cr-file-control>
+              </div>
+            </div>
+
+            <div class="row" *ngIf="teacher.avatarUrl">
+              <div class="cr-teacher-photo-wrapper">
+                <div>
+                  <img
+                      class="cr-teacher-photo-image"
+                      [src]="sanitizeUrl(teacher.avatarUrl)"
+                      [alt]="'TEACHER.DETAILS.PERSONAL.PHOTO' | translate:{name: teacher.fullName}"
+                      [title]="'TEACHER.DETAILS.PERSONAL.PHOTO' | translate:{name: teacher.fullName}"
+                  >
+                </div>
+
+                <div class="cr-teacher-photo-title" [attr.data-translate]="'TEACHER.DETAILS.PERSONAL.PHOTO'">
+                  {{'TEACHER.DETAILS.PERSONAL.PHOTO' | translate:{name: teacher.fullName} }}
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="teacher">
+    <div class="cr-outer-wrapper">
+      <!--Professional-->
+      <kendo-panelbar (stateChange)="panelStateChange('professional', $event)">
+        <kendo-panelbar-item
+            [class.ng-invalid]="!professionalValidationGroupResult.isValid"
+            [expanded]="viewState.panels.professional"
+            [tooltipTemplate]="customTooltipTemplate"
+            filter=".customTooltip"
+            kendoTooltip
+            position="top"
+            title=""
+            tooltipClass="cr-tooltip">
+          <ng-template kendoPanelBarItemTitle>
+            <div [attr.custom]="professionalValidationGroupResult.messages | validationMessageTranslate"
+                 [class.customTooltip]="!professionalValidationGroupResult.isValid">
+              <span [attr.data-translate]="'TEACHER.DETAILS.PROFESSIONAL.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.PROFESSIONAL.TITLE' | translate}}
+              </span>
+              <span style="color: red">&nbsp;*</span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <div class="row cr-bottom-row-border">
+              <div class="col-lg-4">
+                <cr-dropdown-smart-control
+                    [(currentItemValue)]="teacher.commission"
+                    [value]="teacher.commission?.id"
+                    [dataCacheName]="'TeacherCommissionDropdown'"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [labelTranslateKey]="'TEACHER.DETAILS.PROFESSIONAL.COMMISSION'"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [valueField]="'id'"
+                    [textField]="'name'"
+                    [getListItemsFunction]="getCommissionDropdownList"
+                    [validator]="validator"
+                    [validationField]="'commission.id'"
+                ></cr-dropdown-smart-control>
+              </div>
+              <div class="col-lg-4">
+                <cr-dropdown-smart-control
+                    [(currentItemValue)]="teacher.department"
+                    [value]="teacher.department?.id"
+                    [dataCacheName]="'TeacherDepartmentDropdown'"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [labelTranslateKey]="'TEACHER.DETAILS.PROFESSIONAL.DEPARTMENT'"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [valueField]="'id'"
+                    [textField]="'name'"
+                    [getListItemsFunction]="getDepartmentDropdownList"
+                    [validator]="validator"
+                    [validationField]="'department.id'"
+                ></cr-dropdown-smart-control>
+              </div>
+              <div class="col-lg-4">
+                <cr-dropdown-smart-control
+                    [(currentItemValue)]="teacher.teacherRank"
+                    [value]="teacher.teacherRank?.id"
+                    [dataCacheName]="'TeacherTeachingRankDropdown'"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [labelTranslateKey]="'TEACHER.DETAILS.PROFESSIONAL.TEACHING_RANK'"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [valueField]="'id'"
+                    [textField]="'name'"
+                    [getListItemsFunction]="getTeachingRankDropdownList"
+                ></cr-dropdown-smart-control>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4">
+                <cr-dropdown-smart-control
+                    [(currentItemValue)]="teacher.academicTitle"
+                    [value]="teacher.academicTitle?.id"
+                    [dataCacheName]="'TeacherAcademicTitleDropdown'"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [labelTranslateKey]="'TEACHER.DETAILS.PROFESSIONAL.ACADEMIC_TITLE'"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [valueField]="'id'"
+                    [textField]="'name'"
+                    [getListItemsFunction]="getAcademicTitleDropdownList"
+                ></cr-dropdown-smart-control>
+              </div>
+              <div class="col-lg-4">
+                <cr-dropdown-smart-control
+                    [(currentItemValue)]="teacher.academicDegree"
+                    [value]="teacher.academicDegree?.id"
+                    [dataCacheName]="'TeacherAcademicDegreeDropdown'"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [labelTranslateKey]="'TEACHER.DETAILS.PROFESSIONAL.ACADEMIC_DEGREE'"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [valueField]="'id'"
+                    [textField]="'name'"
+                    [getListItemsFunction]="getAcademicDegreeDropdownList"
+                ></cr-dropdown-smart-control>
+              </div>
+              <div class="col-lg-4">
+                <cr-control-datepicker
+                    [translateKeys]="'TEACHER.DETAILS.PROFESSIONAL.WORK_START_DATE'"
+                    [(dataValue)]="teacher.workStartDate"
+                    [validator]="validator"
+                    [validationField]="'workStartDate'"
+                ></cr-control-datepicker>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Attestations-->
+      <kendo-panelbar (stateChange)="panelStateChange('attestations', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.attestations">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.ATTESTATIONS_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.ATTESTATIONS_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-attestations-list [teacher]="teacher"></cr-teacher-attestations-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Internships-->
+      <kendo-panelbar (stateChange)="panelStateChange('internships', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.internships">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.INTERNSHIPS_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.INTERNSHIPS_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-internships-list [teacher]="teacher"></cr-teacher-internships-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Publications-->
+      <kendo-panelbar (stateChange)="panelStateChange('publications', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.publications">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.PUBLICATIONS_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.PUBLICATIONS_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-publications-list [teacher]="teacher"></cr-teacher-publications-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Honors-->
+      <kendo-panelbar (stateChange)="panelStateChange('honors', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.honors">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.HONORS_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.HONORS_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-honors-list [teacher]="teacher"></cr-teacher-honors-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Rebukes-->
+      <kendo-panelbar (stateChange)="panelStateChange('rebukes', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.rebukes">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.REBUKES_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.REBUKES_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-rebukes-list [teacher]="teacher"></cr-teacher-rebukes-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isNew && teacher">
+    <div class="cr-outer-wrapper">
+      <!--Educations-->
+      <kendo-panelbar (stateChange)="panelStateChange('educations', $event)">
+        <kendo-panelbar-item [expanded]="viewState.panels.educations">
+          <ng-template kendoPanelBarItemTitle>
+            <div>
+              <span [attr.data-translate]="'TEACHER.DETAILS.EDUCATIONS_LIST.TITLE'" class="groupTitle">
+                {{'TEACHER.DETAILS.EDUCATIONS_LIST.TITLE' | translate}}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template kendoPanelBarContent>
+            <cr-teacher-educations-list [teacher]="teacher"></cr-teacher-educations-list>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+  </ng-container>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

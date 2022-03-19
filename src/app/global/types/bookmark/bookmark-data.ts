@@ -12,6 +12,16 @@ import {IAcademicTitleViewModel} from '../../../features/academic-title/types/vi
 import {IAcademicTitleListViewModel} from '../../../features/academic-title/types/view-model/academic-title-list-view-model';
 import {ITeachingRankListViewModel} from '../../../features/teaching-rank/types/view-model/teaching-rank-list-view-model';
 import {ITeachingRankViewModel} from '../../../features/teaching-rank/types/view-model/teaching-rank-view-model';
+import {ITeacherListViewModel} from '../../../features/teacher/types/view-model/teacher-list-view-model';
+import {ITeacherViewModel} from '../../../features/teacher/types/view-model/teacher-view-model';
+import {ITeacherAttestationListViewModel} from '../../../features/teacher/types/view-model/teacher-attestation-list-view-model';
+import {ITeacherInternshipListViewModel} from '../../../features/teacher/types/view-model/teacher-internship-list-view-model';
+import {ITeacherPublicationListViewModel} from '../../../features/teacher/types/view-model/teacher-publication-list-view-model';
+import {ITeacherHonorListViewModel} from '../../../features/teacher/types/view-model/teacher-honor-list-view-model';
+import {ITeacherRebukeListViewModel} from '../../../features/teacher/types/view-model/teacher-rebuke-list-view-model';
+import {ITeacherEducationListViewModel} from '../../../features/teacher/types/view-model/teacher-education-list-view-model';
+import {ITeacherInternshipListResponseViewModel} from '../../../features/teacher/types/view-model/teacher-internship-list-response-view-model';
+import {ITeacherAttestationListResponseViewModel} from '../../../features/teacher/types/view-model/teacher-attestation-list-response-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -46,4 +56,15 @@ export interface IBookmarkData {
   teachingRankDetail?: ITeachingRankViewModel;
   teachingRankDetailCopy?: ITeachingRankViewModel;
   teachingRankTeachersList?: IPaginator<IdNameSimpleItem>;
+
+  /** Teacher **/
+  teacherList?: IPaginator<ITeacherListViewModel>;
+  teacherDetail?: ITeacherViewModel;
+  teacherDetailCopy?: ITeacherViewModel;
+  teacherAttestationList?: ITeacherAttestationListResponseViewModel;
+  teacherInternshipList?: ITeacherInternshipListResponseViewModel;
+  teacherPublicationList?: IPaginator<ITeacherPublicationListViewModel>;
+  teacherHonorList?: IPaginator<ITeacherHonorListViewModel>;
+  teacherRebukeList?: IPaginator<ITeacherRebukeListViewModel>;
+  teacherEducationList?: IPaginator<ITeacherEducationListViewModel>;
 }

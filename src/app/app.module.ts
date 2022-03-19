@@ -2,6 +2,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, ElementRef, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+// @ts-ignore
+import extractFiles from 'extract-files/extractFiles.mjs';
+// @ts-ignore
+import isExtractable from 'extract-files/isExtractableFile.mjs';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -99,7 +103,10 @@ export const bookmarkProviderFactory = (provider: BookmarkService): any => () =>
       provide: APOLLO_OPTIONS,
       useFactory: (httpLink: HttpLink, configService: ConfigService) => ({
         cache: new InMemoryCache(),
-        link: new LoggerService().concat(httpLink.create({uri: configService.getConfig().apiUrl})),
+        link: new LoggerService().concat(httpLink.create({
+          uri: configService.getConfig().apiUrl,
+          extractFiles: body => extractFiles(body, isExtractable)
+        })),
       }),
       deps: [HttpLink, ConfigService],
     }

@@ -10,6 +10,8 @@ import {IAcademicTitleDetailsViewState} from '../../../features/academic-title/t
 import {IAcademicTitleFilterViewModel} from '../../../features/academic-title/types/view-model/academic-title-filter-view-model';
 import {ITeachingRankFilterViewModel} from '../../../features/teaching-rank/types/view-model/teaching-rank-filter-view-model';
 import {ITeachingRankDetailsViewState} from '../../../features/teaching-rank/types/view-model/teaching-rank-details-view-state';
+import {ITeacherFilterViewModel} from '../../../features/teacher/types/view-model/teacher-filter-view-model';
+import {ITeacherDetailsViewState} from '../../../features/teacher/types/view-model/teacher-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -46,4 +48,16 @@ export interface IBookmarkViewState {
   teachingRankValidator?: Validator;
   teachingRankDetails?: ITeachingRankDetailsViewState;
   teachingRankTeachersListPaginator?: IPaginatorBase;
+
+  /** Teacher  **/
+  teacherListPaginator?: IPaginatorBase;
+  teacherFilter?: ITeacherFilterViewModel;
+  teacherValidator?: Validator;
+  teacherDetails?: ITeacherDetailsViewState;
+  teacherAttestationListPaginator?: IPaginatorBase;
+  teacherInternshipListPaginator?: IPaginatorBase;
+  teacherPublicationListPaginator?: IPaginatorBase;
+  teacherHonorListPaginator?: IPaginatorBase;
+  teacherRebukeListPaginator?: IPaginatorBase;
+  teacherEducationListPaginator?: IPaginatorBase;
 }

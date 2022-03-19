@@ -23,6 +23,7 @@ import {ICommissionListGetModel} from '../types/model/commission-list-get-model'
 import {ICommissionFilterModel} from '../types/model/commission-filter-model';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 import {ICommissionTeachersFilterModel} from '../types/model/commission-teachers-filter-model';
+import {CommissionOrderMap} from '../types/common/commission-order-map';
 
 @Injectable({providedIn: 'root'})
 export class CommissionApiService {
@@ -37,7 +38,7 @@ export class CommissionApiService {
         query: {
           page: paginator.page,
           size: paginator.size,
-          orderField: paginator.sort?.[0].field ?? 'id',
+          orderField: CommissionOrderMap[paginator.sort?.[0].field ?? 'id'],
           isDesc: paginator.sort?.[0].dir === 'desc' ?? false,
           ...filter,
         }

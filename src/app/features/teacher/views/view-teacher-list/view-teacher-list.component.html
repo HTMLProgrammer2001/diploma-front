@@ -1,0 +1,134 @@
+<ng-container>
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'TEACHER.LIST.TITLE'">
+  </cr-title-header>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'TEACHER.LIST.FILTER.TITLE'">
+        {{ 'TEACHER.LIST.FILTER.TITLE' | translate }}
+      </p>
+    </div>
+
+    <form>
+      <div class="row">
+        <div class="col-lg-4">
+          <cr-control-edit
+              [(dataValue)]="filter.fullName"
+              [translateKeys]="'TEACHER.LIST.FILTER.NAME'"
+          ></cr-control-edit>
+        </div>
+
+        <div class="col-lg-4">
+          <cr-control-edit
+              [(dataValue)]="filter.email"
+              [translateKeys]="'TEACHER.LIST.FILTER.EMAIL'"
+          ></cr-control-edit>
+        </div>
+
+        <div class="col-lg-4">
+          <cr-checkbox-control
+              [(dataValue)]="filter.showDeleted"
+              [translateKeys]="'TEACHER.LIST.FILTER.SHOW_DELETED'"
+          ></cr-checkbox-control>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <cr-dropdown-smart-control
+            [(value)]="filter.commissionId"
+            [dataCacheName]="'TeacherFilterCommissionDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'TEACHER.LIST.FILTER.COMMISSION'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getCommissionDropdownList"
+          ></cr-dropdown-smart-control>
+        </div>
+        <div class="col-lg-4">
+          <cr-dropdown-smart-control
+              [(value)]="filter.departmentId"
+              [dataCacheName]="'TeacherFilterDepartmentDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'TEACHER.LIST.FILTER.DEPARTMENT'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getDepartmentDropdownList"
+          ></cr-dropdown-smart-control>
+        </div>
+        <div class="col-lg-4">
+          <cr-dropdown-smart-control
+              [(value)]="filter.teachingRankId"
+              [dataCacheName]="'TeacherFilterTeachingRankDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'TEACHER.LIST.FILTER.TEACHING_RANK'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getTeachingRankDropdownList"
+          ></cr-dropdown-smart-control>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <cr-dropdown-smart-control
+              [(value)]="filter.academicTitleId"
+              [dataCacheName]="'TeacherFilterAcademicTitleDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'TEACHER.LIST.FILTER.ACADEMIC_TITLE'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getAcademicTitleDropdownList"
+          ></cr-dropdown-smart-control>
+        </div>
+        <div class="col-lg-4">
+          <cr-dropdown-smart-control
+              [(value)]="filter.academicDegreeId"
+              [dataCacheName]="'TeacherFilterAcademicDegreeDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'TEACHER.LIST.FILTER.ACADEMIC_DEGREE'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getAcademicDegreeDropdownList"
+          ></cr-dropdown-smart-control>
+        </div>
+        <div class="col-lg-4 cr-search-button-column">
+          <cr-button-control
+              [buttonTemplateType]="'underlined-action-button'"
+              [type]="'submit'"
+              [textTranslateKey]="'COMMON.BUTTON.SEARCH'"
+              (buttonClickEvent)="onFilter()"
+          ></cr-button-control>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'TEACHER.LIST.GRID.TITLE'">
+        {{ 'TEACHER.LIST.GRID.TITLE' | translate }}
+      </p>
+    </div>
+    <div class="cr-grid-wrapper-new">
+      <cr-edit-grid-server-paging
+          (cellClickEvent)="cellClick($event)"
+          (pageChangeEvent)="changePage($event)"
+          [columnSettings]="columnSettings"
+          [dataCacheName]="'TeacherListGrid'"
+          [dataSource]="dataSource"
+          [pageable]="true"
+          [resizable]="true"
+          [uniqueField]="'id'"
+          [sortable]="{allowUnsort: false}"
+          [sortableState]="paginator.sort"
+      ></cr-edit-grid-server-paging>
+    </div>
+  </div>
+</ng-container>

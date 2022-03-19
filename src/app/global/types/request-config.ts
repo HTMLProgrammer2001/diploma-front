@@ -11,4 +11,5 @@ export interface RequestConfig {
   isAuthorize?: boolean;
   additionalHeaders?: Record<string, string>;
   resultField?: string;
+  useMultipart?: boolean;
 }

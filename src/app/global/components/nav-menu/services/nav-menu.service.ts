@@ -75,6 +75,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.teachingRankList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER',
+          task: {
+            route: 'teacher/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.teachingRankList,
+          },
+        },
       ],
     },
   ];

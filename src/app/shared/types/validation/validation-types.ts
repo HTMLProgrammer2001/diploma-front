@@ -12,6 +12,7 @@ export enum ValidationTypes {
   dateLessThan = 'dateLessThan',
   dateTimeLessThan = 'dateTimeLessThan',
   pattern = 'pattern',
+  phone = 'phone',
   passport = 'passport',
   customValidationWithFunction = 'customValidationWithFunction',
   numberGreaterThan = 'numberGreaterThan',
