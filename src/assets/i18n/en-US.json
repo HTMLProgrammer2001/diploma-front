@@ -226,6 +226,16 @@
           "BOOKMARK_NAME": "Teacher: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "EDUCATION_QUALIFICATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Education qualification list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Education qualification: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -240,6 +250,8 @@
       "ACADEMIC_TITLE": "Academic title list",
       "TEACHING_RANK": "Teaching rank list",
       "TEACHER": "Teacher list",
+      "EDUCATION_DATA": "Education data",
+      "EDUCATION_QUALIFICATION": "Education qualification list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -524,6 +536,7 @@
       },
       "VALIDATION": {
         "REQUIRED_NAME": "Full name is required",
+        "REQUIRED_EMAIL": "Email is required",
         "INVALID_EMAIL": "Email is invalid",
         "INVALID_PHONE": "Phone is invalid",
         "INVALID_MIN_BIRTHDAY": "Birthday year must be more than 1970",
@@ -537,6 +550,44 @@
         "SUCCESS_CREATE": "Teacher was successfully created",
         "SUCCESS_DELETE": "Teacher was successfully deleted",
         "SUCCESS_UPDATE": "Teacher was successfully updated"
+      }
+    }
+  },
+  "EDUCATION_QUALIFICATION": {
+    "LIST": {
+      "TITLE": "Education qualification list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Education qualifications",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Education qualification: {{value}}",
+      "NAME": "Name",
+      "EDUCATIONS_LIST": {
+        "TITLE": "Educations",
+        "GRID": {
+          "ID": "ID",
+          "INSTITUTION": "Institution",
+          "SPECIALTY": "Specialty",
+          "TEACHER": "Teacher",
+          "YEAR_OF_ISSUE": "Year of issue"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Name is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Education qualification was successfully created",
+        "SUCCESS_DELETE": "Education qualification was successfully deleted",
+        "SUCCESS_UPDATE": "Education qualification was successfully updated"
       }
     }
   }

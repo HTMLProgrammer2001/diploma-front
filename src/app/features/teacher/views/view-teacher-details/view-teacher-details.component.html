@@ -39,8 +39,10 @@
                 <cr-control-edit
                     [translateKeys]="'TEACHER.DETAILS.PERSONAL.FULL_NAME'"
                     [(dataValue)]="teacher.fullName"
+                    (dataValueChange)="changeTitle()"
                     [validator]="validator"
                     [validationField]="'fullName'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -49,6 +51,7 @@
                     [(dataValue)]="teacher.email"
                     [validator]="validator"
                     [validationField]="'email'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -58,6 +61,7 @@
                     [validator]="validator"
                     [validationField]="'phone'"
                     [mask]="'+38\\0 (00) 00-00-000'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-masked-edit>
               </div>
             </div>
@@ -69,12 +73,14 @@
                     [(dataValue)]="teacher.birthday"
                     [validator]="validator"
                     [validationField]="'birthday'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-datepicker>
               </div>
               <div class="col-lg-4">
                 <cr-control-edit
                     [translateKeys]="'TEACHER.DETAILS.PERSONAL.ADDRESS'"
                     [(dataValue)]="teacher.address"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -84,6 +90,7 @@
                     (dataValueChange)="onAvatarChange($event)"
                     [maxFileSize]="50 * 1024 * 1024"
                     [allowedExtensions]="['.png', '.jpeg', '.jpg']"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-file-control>
               </div>
             </div>
@@ -148,6 +155,7 @@
                     [getListItemsFunction]="getCommissionDropdownList"
                     [validator]="validator"
                     [validationField]="'commission.id'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -163,6 +171,7 @@
                     [getListItemsFunction]="getDepartmentDropdownList"
                     [validator]="validator"
                     [validationField]="'department.id'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -176,6 +185,7 @@
                     [valueField]="'id'"
                     [textField]="'name'"
                     [getListItemsFunction]="getTeachingRankDropdownList"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-dropdown-smart-control>
               </div>
             </div>
@@ -192,6 +202,7 @@
                     [valueField]="'id'"
                     [textField]="'name'"
                     [getListItemsFunction]="getAcademicTitleDropdownList"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -205,6 +216,7 @@
                     [valueField]="'id'"
                     [textField]="'name'"
                     [getListItemsFunction]="getAcademicDegreeDropdownList"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -213,6 +225,7 @@
                     [(dataValue)]="teacher.workStartDate"
                     [validator]="validator"
                     [validationField]="'workStartDate'"
+                    [isDisabled]="teacher.isDeleted && !viewState.restoring"
                 ></cr-control-datepicker>
               </div>
             </div>

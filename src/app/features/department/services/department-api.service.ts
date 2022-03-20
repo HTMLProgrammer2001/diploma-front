@@ -24,6 +24,7 @@ import {IDepartmentFilterModel} from '../types/model/department-filter-model';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 import {IDepartmentTeachersFilterModel} from '../types/model/department-teachers-filter-model';
 import {DepartmentOrderMap} from '../types/common/department-order-map';
+import {TeacherOrderMap} from '../../teacher/types/common/teacher-order-map';
 
 @Injectable({providedIn: 'root'})
 export class DepartmentApiService {
@@ -118,7 +119,7 @@ export class DepartmentApiService {
         query: {
           page: paginator.page,
           size: paginator.size,
-          orderField: 'fullName',
+          orderField: TeacherOrderMap.name,
           isDesc: false,
           ...filter,
         }

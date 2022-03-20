@@ -24,6 +24,7 @@ import {IAcademicTitlePutModel} from '../types/model/academic-title-put-model';
 import {IAcademicTitleTeachersFilterModel} from '../types/model/academic-title-teachers-filter-model';
 import {IAcademicTitleListGetModel} from '../types/model/academic-title-list-get-model';
 import {AcademicDegreeOrderMap} from '../../academic-degree/types/common/academic-degree-order-map';
+import {TeacherOrderMap} from '../../teacher/types/common/teacher-order-map';
 
 @Injectable({providedIn: 'root'})
 export class AcademicTitleApiService {
@@ -118,7 +119,7 @@ export class AcademicTitleApiService {
         query: {
           page: paginator.page,
           size: paginator.size,
-          orderField: 'fullName',
+          orderField: TeacherOrderMap.name,
           isDesc: false,
           ...filter,
         }

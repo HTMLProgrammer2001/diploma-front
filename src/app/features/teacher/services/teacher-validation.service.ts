@@ -13,6 +13,12 @@ export class TeacherValidationService {
         messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.REQUIRED_NAME'
       },
       {
+        type: ValidationTypes.required,
+        fieldName: 'email',
+        groupResultName: 'personal',
+        messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.REQUIRED_EMAIL'
+      },
+      {
         type: ValidationTypes.email,
         fieldName: 'email',
         groupResultName: 'personal',

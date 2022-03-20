@@ -87,13 +87,30 @@ export class NavMenuService {
         },
       ],
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.EDUCATION_DATA',
+      roles: readRoles,
+      items: [
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.EDUCATION_QUALIFICATION',
+          task: {
+            route: 'education-qualification/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.EDUCATION_QUALIFICATION.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.EDUCATION_QUALIFICATION.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.educationQualificationDetails,
+          },
+        },
+      ],
+    },
   ];
 
   constructor(
     protected translate: TranslateService,
     protected authService: AuthService
-  ) { }
-
+  ) {
+  }
 
   getAllLinks(): Array<NavMenuFullItem> {
     return this.links;

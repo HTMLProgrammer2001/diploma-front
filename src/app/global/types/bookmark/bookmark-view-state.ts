@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {Validator} from '../../../shared/types/validation/validator';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {ICommissionFilterViewModel} from '../../../features/commission/types/view-model/commission-filter-view-model';
@@ -12,6 +13,8 @@ import {ITeachingRankFilterViewModel} from '../../../features/teaching-rank/type
 import {ITeachingRankDetailsViewState} from '../../../features/teaching-rank/types/view-model/teaching-rank-details-view-state';
 import {ITeacherFilterViewModel} from '../../../features/teacher/types/view-model/teacher-filter-view-model';
 import {ITeacherDetailsViewState} from '../../../features/teacher/types/view-model/teacher-details-view-state';
+import {IEducationQualificationFilterViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-filter-view-model';
+import {IEducationQualificationDetailsViewState} from '../../../features/education-qualification/types/view-model/education-qualification-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -60,4 +63,11 @@ export interface IBookmarkViewState {
   teacherHonorListPaginator?: IPaginatorBase;
   teacherRebukeListPaginator?: IPaginatorBase;
   teacherEducationListPaginator?: IPaginatorBase;
+
+  /** Education qualification  **/
+  educationQualificationListPaginator?: IPaginatorBase;
+  educationQualificationFilter?: IEducationQualificationFilterViewModel;
+  educationQualificationValidator?: Validator;
+  educationQualificationDetails?: IEducationQualificationDetailsViewState;
+  educationQualificationEducationsListPaginator?: IPaginatorBase;
 }

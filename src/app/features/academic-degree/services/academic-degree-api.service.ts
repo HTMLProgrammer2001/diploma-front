@@ -25,6 +25,7 @@ import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 import {IAcademicDegreeTeachersFilterModel} from '../types/model/academic-degree-teachers-filter-model';
 import {IAcademicDegreeViewModel} from '../types/view-model/academic-degree-view-model';
 import {AcademicDegreeOrderMap} from '../types/common/academic-degree-order-map';
+import {TeacherOrderMap} from '../../teacher/types/common/teacher-order-map';
 
 @Injectable({providedIn: 'root'})
 export class AcademicDegreeApiService {
@@ -119,7 +120,7 @@ export class AcademicDegreeApiService {
         query: {
           page: paginator.page,
           size: paginator.size,
-          orderField: 'fullName',
+          orderField: TeacherOrderMap.name,
           isDesc: false,
           ...filter,
         }

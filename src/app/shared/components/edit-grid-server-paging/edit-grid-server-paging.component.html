@@ -491,7 +491,9 @@
           </ng-template>
 
           <ng-template #numericRead let-dataItem>
-            <span *ngIf="dataItem[column.field]" class="tooltip">{{ dataItem[column.field] }}</span>
+            <span *ngIf="dataItem[column.field] !== null && dataItem[column.field] !== undefined" class="tooltip">
+              {{ dataItem[column.field] }}
+            </span>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">

@@ -23,7 +23,6 @@ import {ITeacherRebukeListViewModel} from '../types/view-model/teacher-rebuke-li
 import {ITeacherEducationListGetModel} from '../types/model/teacher-education-list-get-model';
 import {ITeacherEducationListViewModel} from '../types/view-model/teacher-education-list-view-model';
 import {ITeacherInternshipListResponseModel} from '../types/model/teacher-internship-list-response-model';
-import {IPaginator} from '../../../shared/types/paginator';
 import {ITeacherInternshipListResponseViewModel} from '../types/view-model/teacher-internship-list-response-view-model';
 import {ITeacherAttestationListResponseModel} from '../types/model/teacher-attestation-list-response-model';
 import {ITeacherAttestationListResponseViewModel} from '../types/view-model/teacher-attestation-list-response-view-model';
@@ -246,7 +245,7 @@ export class TeacherMapperService {
       destination = {
         id: source.id,
         date: source.date,
-        category: source.category?.name
+        category: source.category?.name ?? '--'
       };
     }
 
@@ -276,9 +275,9 @@ export class TeacherMapperService {
         id: source.id,
         from: source.from,
         hours: source.hours,
-        place: source.place,
+        place: source.place ?? '--',
         to: source.to,
-        credits: source.credits,
+        credits: source.credits ?? 0,
         title: source.title
       };
     }
@@ -338,10 +337,10 @@ export class TeacherMapperService {
     if (!isNil(source)) {
       destination = {
         id: source.id,
-        educationQualification: source.educationQualification?.name,
-        institution: source.institution,
-        specialty: source.specialty,
-        yearOfIssue: source.yearOfIssue
+        educationQualification: source.educationQualification?.name ?? '--',
+        institution: source.institution ?? '--',
+        specialty: source.specialty ?? '--',
+        yearOfIssue: source.yearOfIssue ?? '--'
       };
     }
 
