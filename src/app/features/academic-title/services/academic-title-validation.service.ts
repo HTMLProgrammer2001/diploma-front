@@ -10,6 +10,13 @@ export class AcademicTitleValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'ACADEMIC_TITLE.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'ACADEMIC_TITLE.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

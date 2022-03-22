@@ -7,7 +7,7 @@ import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {IEducationQualificationGetModel} from '../types/model/education-qualification-get-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createEducationQualificationQuery,
@@ -73,7 +73,7 @@ export class EducationQualificationApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createEducationQualification'
     };
 
@@ -87,7 +87,7 @@ export class EducationQualificationApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateEducationQualification'
     };
 
@@ -101,7 +101,7 @@ export class EducationQualificationApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteEducationQualification'
     };
 

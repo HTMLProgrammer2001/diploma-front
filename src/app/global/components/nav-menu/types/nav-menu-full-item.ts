@@ -7,7 +7,7 @@ export interface NavMenuFullItem {
   title?: string;
   titleTranslateKeys?: string;
   levelClass?: 'main-menu' | 'sub-main-menu' | 'sub-menu';
-  itemType?: 'menu' | 'link' | 'header' | 'section';
+  itemType?: 'menu' | 'link' | 'header' | 'link-header' | 'section';
   expanded?: boolean;
   isFilterSuccess?: boolean;
   task?: IBookmarkTask;

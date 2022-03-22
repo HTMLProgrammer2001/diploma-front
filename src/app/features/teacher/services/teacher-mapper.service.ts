@@ -38,11 +38,11 @@ export class TeacherMapperService {
       destination = {
         id: source.id,
         name: source.fullName,
-        teacherRank: source.teacherRank?.name ?? '--',
-        academicDegree: source.academicDegree?.name ?? '--',
-        academicTitle: source.academicTitle?.name ?? '--',
-        commission: source.commission.name,
-        department: source.department.name,
+        teacherRank: source.teacherRank,
+        academicDegree: source.academicDegree,
+        academicTitle: source.academicTitle,
+        commission: source.commission,
+        department: source.department,
         email: source.email,
         isDeleted: source.isDeleted
       };
@@ -245,7 +245,7 @@ export class TeacherMapperService {
       destination = {
         id: source.id,
         date: source.date,
-        category: source.category?.name ?? '--'
+        category: source.category
       };
     }
 
@@ -275,7 +275,7 @@ export class TeacherMapperService {
         id: source.id,
         from: source.from,
         hours: source.hours,
-        place: source.place ?? '--',
+        place: source.place,
         to: source.to,
         credits: source.credits ?? 0,
         title: source.title
@@ -337,10 +337,10 @@ export class TeacherMapperService {
     if (!isNil(source)) {
       destination = {
         id: source.id,
-        educationQualification: source.educationQualification?.name ?? '--',
-        institution: source.institution ?? '--',
-        specialty: source.specialty ?? '--',
-        yearOfIssue: source.yearOfIssue ?? '--'
+        educationQualification: source.educationQualification,
+        institution: source.institution,
+        specialty: source.specialty,
+        yearOfIssue: source.yearOfIssue
       };
     }
 

@@ -10,6 +10,13 @@ export class TeachingRankValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'TEACHING_RANK.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'TEACHING_RANK.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

@@ -99,7 +99,17 @@ export class NavMenuService {
             route: 'education-qualification/list',
             nameTranslateKey: 'COMMON.BOOKMARK.EDUCATION_QUALIFICATION.LIST.BOOKMARK_NAME',
             descriptionTranslateKey: 'COMMON.BOOKMARK.EDUCATION_QUALIFICATION.LIST.BOOKMARK_DESCRIPTION',
-            iconSvg: BookmarkIcon.educationQualificationDetails,
+            iconSvg: BookmarkIcon.educationQualificationList,
+          },
+        },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.EDUCATION',
+          task: {
+            route: 'education/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.EDUCATION.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.EDUCATION.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.educationList,
           },
         },
       ],

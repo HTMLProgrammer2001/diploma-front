@@ -13,8 +13,6 @@ import {isEmpty} from 'lodash';
 import {TeacherFacadeService} from '../../services/teacher-facade.service';
 import {ITeacherViewModel} from '../../types/view-model/teacher-view-model';
 import {ITeacherAttestationListViewModel} from '../../types/view-model/teacher-attestation-list-view-model';
-import {ITeacherPublicationListViewModel} from '../../types/view-model/teacher-publication-list-view-model';
-import {ITeacherHonorListViewModel} from '../../types/view-model/teacher-honor-list-view-model';
 import {ITeacherEducationListViewModel} from '../../types/view-model/teacher-education-list-view-model';
 
 @Component({
@@ -36,9 +34,9 @@ export class TeacherEducationsListComponent implements OnInit, OnDestroy, OnChan
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
     {
-      field: 'educationQualification',
+      field: 'educationQualification.name',
       titleTranslateKey: 'TEACHER.DETAILS.EDUCATIONS_LIST.GRID.EDUCATION_QUALIFICATION',
-      type: 'text'
+      type: 'link'
     },
     {
       field: 'institution',
@@ -132,9 +130,15 @@ export class TeacherEducationsListComponent implements OnInit, OnDestroy, OnChan
 
   //region Work with grid
 
-  cellClick(event: ITeacherAttestationListViewModel): Promise<boolean> {
-    const route = `education/details/${event.id}`;
-    return this.router.navigate([route]);
+  cellClick(event: ITeacherEducationListViewModel & {linkField: string}): Promise<boolean> {
+    if(event.linkField === 'id') {
+      const route = `education/details/${event.id}`;
+      return this.router.navigate([route]);
+    }
+    else {
+      const route = `education-qualification/details/${event.educationQualification.id}`;
+      return this.router.navigate([route]);
+    }
   }
 
   changePage(paginator: IPaginatorBase): void {

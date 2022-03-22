@@ -33,9 +33,9 @@ export class TeacherAttestationsListComponent implements OnInit, OnDestroy, OnCh
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
     {
-      field: 'category',
+      field: 'category.name',
       titleTranslateKey: 'TEACHER.DETAILS.ATTESTATIONS_LIST.GRID.CATEGORY',
-      type: 'text'
+      type: 'link'
     },
     {
       field: 'date',
@@ -119,9 +119,15 @@ export class TeacherAttestationsListComponent implements OnInit, OnDestroy, OnCh
 
   //region Work with grid
 
-  cellClick(event: ITeacherAttestationListViewModel): Promise<boolean> {
-    const route = `attestation/details/${event.id}`;
-    return this.router.navigate([route]);
+  cellClick(event: ITeacherAttestationListViewModel & {linkField: string}): Promise<boolean> {
+    if(event.linkField === 'id') {
+      const route = `attestation/details/${event.id}`;
+      return this.router.navigate([route]);
+    }
+    else {
+      const route = `category/details/${event.category.id}`;
+      return this.router.navigate([route]);
+    }
   }
 
   changePage(paginator: IPaginatorBase): void {

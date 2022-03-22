@@ -8,7 +8,7 @@ export interface NavMenuSmallItem {
   route?: string;
   isMainLevel?: boolean;
   levelClass?: 'main-menu' | 'sub-main-menu' | 'sub-menu';
-  itemType?: 'menu' | 'link' | 'header' | 'section';
+  itemType?: 'menu' | 'link' | 'header' | 'link-header' | 'section';
   items?: Array<NavMenuSmallItem>;
   roles?: Array<RolesEnum>;
 }

@@ -70,6 +70,18 @@ export class TeacherValidationService {
         groupResultName: 'personal',
         messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.INVALID_MAX_WORK_START_DATE'
       },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'fullName',
+        settingValue: 255,
+        messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'address',
+        settingValue: 255,
+        messageTranslateKey: 'COMMISSION.DETAILS.VALIDATION.MAX_LENGTH_ADDRESS'
+      }
     );
   }
 }

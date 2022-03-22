@@ -4,7 +4,7 @@
   tooltipClass="cr-tooltip"
   position="top"
   class="cr-text-area-control"
-  [class.cr-textarea-no-label]="!dataLabel"
+  [class.cr-textarea-no-label]="!dataLabel && !translateKeys"
   [class.ng-disabled]="!_parsedPermissionSettings.isAccessEdit || isDisabled"
   [class.cr-no-permission]="!_parsedPermissionSettings.isAccessEdit"
   [class.ng-invalid]="validationResult?.isValid === false">

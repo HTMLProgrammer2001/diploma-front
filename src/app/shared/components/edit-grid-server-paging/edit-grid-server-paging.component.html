@@ -13,28 +13,28 @@
      (mousemove)="onFilterTooltip($event)"
      [tooltipTemplate]="template">
   <kendo-grid
-    [attr.data-element-name]="dataElementName"
-    [data]="gridView"
-    [skip]="skip || 0"
-    [pageSize]="this.dataSource?.size || 5"
-    [pageable]="pageableSettings"
-    (pageChange)="pageChange($event)"
-    (add)="addHandler($event)"
-    (cancel)="cancelHandler($event)"
-    (save)="saveHandler($event)"
-    (remove)="removeHandler($event)"
-    (edit)="editHandler($event)"
+      [attr.data-element-name]="dataElementName"
+      [data]="gridView"
+      [skip]="skip || 0"
+      [pageSize]="this.dataSource?.size || 5"
+      [pageable]="pageableSettings"
+      (pageChange)="pageChange($event)"
+      (add)="addHandler($event)"
+      (cancel)="cancelHandler($event)"
+      (save)="saveHandler($event)"
+      (remove)="removeHandler($event)"
+      (edit)="editHandler($event)"
 
-    [selectable]="getSelectionOptions()"
-    [rowSelected]="onIsRowSelected"
-    (selectionChange)="onSelectionChange($event)"
-    (sortChange)="onSortChange($event)"
+      [selectable]="getSelectionOptions()"
+      [rowSelected]="onIsRowSelected"
+      (selectionChange)="onSelectionChange($event)"
+      (sortChange)="onSortChange($event)"
 
-    [resizable]="resizable"
-    [loading]="isLoading"
-    [sortable]="sortable"
-    [autoSize]="autoFitColumns"
-    [class.cr-grid-with-sorter]="hasSorter"
+      [resizable]="resizable"
+      [loading]="isLoading"
+      [sortable]="sortable"
+      [autoSize]="autoFitColumns"
+      [class.cr-grid-with-sorter]="hasSorter"
   >
     <kendo-grid-checkbox-column [width]="95" *ngIf="allowMultiSelect" class="center-select">
       <ng-template kendoGridHeaderTemplate>
@@ -49,8 +49,8 @@
         <div class="row cr-row-padding-revert cr-add-row">
           <div class="col-lg-12 cr-col-content-align-right cr-col-no-padding">
             <cr-button-control
-              [buttonTemplateType]="'grid-add-command'"
-              [disabled]="cache?.isEditModeInProgress"
+                [buttonTemplateType]="'grid-add-command'"
+                [disabled]="cache?.isEditModeInProgress"
             >
             </cr-button-control>
           </div>
@@ -60,12 +60,12 @@
 
     <ng-template #header let-column>
       <span
-        [attr.data-translate]="column.titleTranslateKey"
-        class="tooltip"
-        [class.break-line]="!!column.headerWrap"
+          [attr.data-translate]="column.titleTranslateKey"
+          class="tooltip"
+          [class.break-line]="!!column.headerWrap"
       >
         {{column.title ? column.title :
-        (column.titleTranslateKey ? (column.titleTranslateKey | translate) : '')}}
+          (column.titleTranslateKey ? (column.titleTranslateKey | translate) : '')}}
       </span>
     </ng-template>
 
@@ -74,13 +74,13 @@
 
         <!--Dropdown-->
         <kendo-grid-column
-          *ngSwitchCase="'dropdown'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          class="cr-grid-code"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'dropdown'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            class="cr-grid-code"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -94,7 +94,7 @@
                     {{getDropdownItemById(dataItem[column.field], column, column.dropdownOptions.codeField)}}
                   </span>
 
-                  {{getDropdownItemById(dataItem[column.field], column, column.dropdownOptions.textField)}}
+                  {{getDropdownItemById(dataItem[column.field], column, column.dropdownOptions.textField) ?? '--'}}
                 </span>
 
                 <span *ngIf="!column.dropdownOptions.usePrimitiveForBinding">
@@ -103,7 +103,7 @@
                       {{dataItem[column.field][column.dropdownOptions.codeField]}}
                     </span>
 
-                    {{dataItem[column.field][column.dropdownOptions.textField]}}
+                    {{dataItem[column.field][column.dropdownOptions.textField] ?? '--'}}
                   </span>
 
                   <span *ngIf="!dataItem[column.field]">
@@ -116,74 +116,74 @@
 
           <ng-template #dropdownCellEdit let-dataItem>
             <cr-dropdown-smart-control
-              *ngIf="column.dropdownOptions.usePrimitiveForBinding"
-              [value]="dataItem[column.field]"
-              [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
-              [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
-              [listItemsFunctionAdditionalParameter]="dataItem"
+                *ngIf="column.dropdownOptions.usePrimitiveForBinding"
+                [value]="dataItem[column.field]"
+                [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
+                [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
+                [listItemsFunctionAdditionalParameter]="dataItem"
 
-              dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
-              [useCache]="false"
-              [useCodeInValue]="!!column.dropdownOptions.codeField"
-              [useCodeInList]="!!column.dropdownOptions.codeField"
-              [valueField]="column.dropdownOptions.valueField"
-              [textField]="column.dropdownOptions.textField"
-              [codeField]="column.dropdownOptions.codeField"
+                dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
+                [useCache]="false"
+                [useCodeInValue]="!!column.dropdownOptions.codeField"
+                [useCodeInList]="!!column.dropdownOptions.codeField"
+                [valueField]="column.dropdownOptions.valueField"
+                [textField]="column.dropdownOptions.textField"
+                [codeField]="column.dropdownOptions.codeField"
 
-              [label]="column.title"
-              [labelTranslateKey]="column.titleTranslateKey"
+                [label]="column.title"
+                [labelTranslateKey]="column.titleTranslateKey"
 
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.dropdownOptions.validationFieldName || column.field"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.dropdownOptions.validationFieldName || column.field"
 
-              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-              [dataTranslateKeyField]="'translateKey'"
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
+                [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                [dataTranslateKeyField]="'translateKey'"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
 
-              (valueChange)="inCellDataChange(column.field, $event, dataItem)"
+                (valueChange)="inCellDataChange(column.field, $event, dataItem)"
             ></cr-dropdown-smart-control>
 
             <cr-dropdown-smart-control
-              *ngIf="!column.dropdownOptions.usePrimitiveForBinding"
-              [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
-              [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
-              [listItemsFunctionAdditionalParameter]="dataItem"
+                *ngIf="!column.dropdownOptions.usePrimitiveForBinding"
+                [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
+                [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
+                [listItemsFunctionAdditionalParameter]="dataItem"
 
-              dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
-              [useCache]="false"
-              [useCodeInValue]="!!column.dropdownOptions.codeField"
-              [useCodeInList]="!!column.dropdownOptions.codeField"
-              [valueField]="column.dropdownOptions.valueField"
-              [textField]="column.dropdownOptions.textField"
-              [codeField]="column.dropdownOptions.codeField"
+                dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
+                [useCache]="false"
+                [useCodeInValue]="!!column.dropdownOptions.codeField"
+                [useCodeInList]="!!column.dropdownOptions.codeField"
+                [valueField]="column.dropdownOptions.valueField"
+                [textField]="column.dropdownOptions.textField"
+                [codeField]="column.dropdownOptions.codeField"
 
-              [label]="column.title"
-              [labelTranslateKey]="column.titleTranslateKey"
+                [label]="column.title"
+                [labelTranslateKey]="column.titleTranslateKey"
 
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.dropdownOptions.validationFieldName || column.field"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.dropdownOptions.validationFieldName || column.field"
 
-              [currentItemValue]="dataItem[column.field]"
-              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-              [dataTranslateKeyField]="'translateKey'"
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
+                [currentItemValue]="dataItem[column.field]"
+                [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                [dataTranslateKeyField]="'translateKey'"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
 
-              (currentItemValueChange)="inCellDataChange(column.field, $event, dataItem)"
+                (currentItemValueChange)="inCellDataChange(column.field, $event, dataItem)"
             ></cr-dropdown-smart-control>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem>
             <ng-container
-              *ngIf="column.isReadOnly || !column.allowInCellEditing"
-              [ngTemplateOutlet]="dropdownRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                *ngIf="column.isReadOnly || !column.allowInCellEditing"
+                [ngTemplateOutlet]="dropdownRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField]))
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField]))
                 && column.allowInCellEditing && !column.isReadOnly"
-              [ngTemplateOutlet]="dropdownCellEdit"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="dropdownCellEdit"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
@@ -192,64 +192,64 @@
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))">
               <ng-container *ngIf="!column.isReadOnly">
                 <cr-dropdown-smart-control
-                  *ngIf="column.dropdownOptions.usePrimitiveForBinding"
-                  [(value)]="cache.changeItem[column.field]"
-                  (valueChange)="onValueChange()"
-                  [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
-                  [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
-                  [listItemsFunctionAdditionalParameter]="dataItem"
+                    *ngIf="column.dropdownOptions.usePrimitiveForBinding"
+                    [(value)]="cache.changeItem[column.field]"
+                    (valueChange)="onValueChange()"
+                    [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
+                    [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
+                    [listItemsFunctionAdditionalParameter]="dataItem"
 
-                  dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
-                  [useCache]="false"
-                  [useCodeInValue]="!!column.dropdownOptions.codeField"
-                  [useCodeInList]="!!column.dropdownOptions.codeField"
-                  [valueField]="column.dropdownOptions.valueField"
-                  [textField]="column.dropdownOptions.textField"
-                  [codeField]="column.dropdownOptions.codeField"
+                    dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
+                    [useCache]="false"
+                    [useCodeInValue]="!!column.dropdownOptions.codeField"
+                    [useCodeInList]="!!column.dropdownOptions.codeField"
+                    [valueField]="column.dropdownOptions.valueField"
+                    [textField]="column.dropdownOptions.textField"
+                    [codeField]="column.dropdownOptions.codeField"
 
-                  [label]="column.title"
-                  [labelTranslateKey]="column.titleTranslateKey"
+                    [label]="column.title"
+                    [labelTranslateKey]="column.titleTranslateKey"
 
-                  [validator]="column.isNotUseValidation ? null : validator"
-                  [validationField]="column.dropdownOptions.validationFieldName || column.field"
-                  [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-                  [dataTranslateKeyField]="'translateKey'"
-                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                    [validator]="column.isNotUseValidation ? null : validator"
+                    [validationField]="column.dropdownOptions.validationFieldName || column.field"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
                 ></cr-dropdown-smart-control>
 
                 <cr-dropdown-smart-control
-                  *ngIf="!column.dropdownOptions.usePrimitiveForBinding"
-                  [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
-                  [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
-                  [listItemsFunctionAdditionalParameter]="dataItem"
+                    *ngIf="!column.dropdownOptions.usePrimitiveForBinding"
+                    [getListItemsFunction]="column.dropdownOptions.getListItemsFunction"
+                    [getOneItemFunction]="column.dropdownOptions.getOneItemFunction"
+                    [listItemsFunctionAdditionalParameter]="dataItem"
 
-                  dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
-                  [useCache]="false"
-                  [useCodeInValue]="!!column.dropdownOptions.codeField"
-                  [useCodeInList]="!!column.dropdownOptions.codeField"
-                  [valueField]="column.dropdownOptions.valueField"
-                  [textField]="column.dropdownOptions.textField"
-                  [codeField]="column.dropdownOptions.codeField"
+                    dataCacheName="{{dataCacheName}}_{{column.field}}Cache"
+                    [useCache]="false"
+                    [useCodeInValue]="!!column.dropdownOptions.codeField"
+                    [useCodeInList]="!!column.dropdownOptions.codeField"
+                    [valueField]="column.dropdownOptions.valueField"
+                    [textField]="column.dropdownOptions.textField"
+                    [codeField]="column.dropdownOptions.codeField"
 
-                  [label]="column.title"
-                  [labelTranslateKey]="column.titleTranslateKey"
+                    [label]="column.title"
+                    [labelTranslateKey]="column.titleTranslateKey"
 
-                  [validator]="column.isNotUseValidation ? null : validator"
-                  [validationField]="column.dropdownOptions.validationFieldName || column.field"
+                    [validator]="column.isNotUseValidation ? null : validator"
+                    [validationField]="column.dropdownOptions.validationFieldName || column.field"
 
-                  [(currentItemValue)]="cache.changeItem[column.field]"
-                  (currentItemValueChange)="onValueChange()"
-                  [value]="cache.changeItem[column.field]?.[column.dropdownOptions.valueField]"
-                  [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-                  [dataTranslateKeyField]="'translateKey'"
-                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                    [(currentItemValue)]="cache.changeItem[column.field]"
+                    (currentItemValueChange)="onValueChange()"
+                    [value]="cache.changeItem[column.field]?.[column.dropdownOptions.valueField]"
+                    [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+                    [dataTranslateKeyField]="'translateKey'"
+                    [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
                 ></cr-dropdown-smart-control>
               </ng-container>
 
               <ng-container
-                *ngIf="column.isReadOnly"
-                [ngTemplateOutlet]="dropdownRead"
-                [ngTemplateOutletContext]="{$implicit: dataItem}"
+                  *ngIf="column.isReadOnly"
+                  [ngTemplateOutlet]="dropdownRead"
+                  [ngTemplateOutletContext]="{$implicit: dataItem}"
               ></ng-container>
             </ng-container>
           </ng-template>
@@ -257,13 +257,13 @@
 
         <!--Field with code-->
         <kendo-grid-column
-          *ngSwitchCase="'fieldWithCode'"
-          [hidden]="column.hidden"
-          [field]="column.field"
-          class="cr-grid-code"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'fieldWithCode'"
+            [hidden]="column.hidden"
+            [field]="column.field"
+            class="cr-grid-code"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -277,7 +277,7 @@
               </span>
 
               <span>
-                {{dataItem[column.field]}}
+                {{dataItem[column.field] ?? '--'}}
               </span>
             </div>
           </ng-template>
@@ -285,13 +285,13 @@
 
         <!--Link column-->
         <kendo-grid-column
-          *ngSwitchCase="'link'"
-          [hidden]="column.hidden"
-          [field]="column.field"
-          class="cr-grid-navigate"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'link'"
+            [hidden]="column.hidden"
+            [field]="column.field"
+            class="cr-grid-navigate"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -302,22 +302,29 @@
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))">
 
                 <span
-                  (click)="cellClick(dataItem, column, isNew)"
-                  class="tooltip"
-                  [class.cr-link-disabled]="column.isLinkDisabled || (column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column, isNew))">
+                    *ngIf="(dataItem | getByKey:column.field) != null; else noLink"
+                    (click)="cellClick(dataItem, column, isNew)"
+                    class="tooltip"
+                    [class.cr-link-disabled]="column.isLinkDisabled || (column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column, isNew))">
                   {{dataItem | getByKey:column.field}}
                 </span>
+
+                <ng-template #noLink>
+                  <div class="cr-grid-navigate-empty">
+                    --
+                  </div>
+                </ng-template>
             </ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Action Button Column-->
         <kendo-grid-column
-          *ngSwitchCase="'buttonAction'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'buttonAction'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <span [attr.data-translate]="column.titleTranslateKey" class="tooltip">
@@ -331,37 +338,37 @@
               <span>
                 <ng-template #button let-icon="icon">
                   <cr-button-control
-                    [buttonTemplateType]="column.buttonActionSettings?.buttonTemplateType ?? 'icon-button'"
-                    [classArray]="column.buttonActionSettings?.classArray"
-                    [textTranslateKey]="column.buttonActionSettings?.textTranslateKey"
-                    [text]="column.buttonActionSettings?.text"
-                    [disabled]="column.buttonActionSettings?.disabledIf && column.buttonActionSettings.disabledIf(dataItem, isNew)"
-                    [icon]="icon"
-                    (buttonClickEvent)="cellClick(dataItem, column, isNew)"
+                      [buttonTemplateType]="column.buttonActionSettings?.buttonTemplateType ?? 'icon-button'"
+                      [classArray]="column.buttonActionSettings?.classArray"
+                      [textTranslateKey]="column.buttonActionSettings?.textTranslateKey"
+                      [text]="column.buttonActionSettings?.text"
+                      [disabled]="column.buttonActionSettings?.disabledIf && column.buttonActionSettings.disabledIf(dataItem, isNew)"
+                      [icon]="icon"
+                      (buttonClickEvent)="cellClick(dataItem, column, isNew)"
                   ></cr-button-control>
                 </ng-template>
 
                 <ng-container
-                  *ngIf="column.buttonActionSettings?.iconFunction"
-                  [ngTemplateOutlet]="button"
-                  [ngTemplateOutletContext]="{icon: column.buttonActionSettings?.iconFunction(dataItem, column, isNew)}"
+                    *ngIf="column.buttonActionSettings?.iconFunction"
+                    [ngTemplateOutlet]="button"
+                    [ngTemplateOutletContext]="{icon: column.buttonActionSettings?.iconFunction(dataItem, column, isNew)}"
                 ></ng-container>
 
                 <ng-container
-                  *ngIf="!column.buttonActionSettings?.iconFunction && column.buttonActionSettings?.iconField"
-                  [ngTemplateOutlet]="button"
-                  [ngTemplateOutletContext]="{icon: dataItem[column.buttonActionSettings.iconField]}"
+                    *ngIf="!column.buttonActionSettings?.iconFunction && column.buttonActionSettings?.iconField"
+                    [ngTemplateOutlet]="button"
+                    [ngTemplateOutletContext]="{icon: dataItem[column.buttonActionSettings.iconField]}"
                 ></ng-container>
 
                 <ng-container
-                  *ngIf="!column.buttonActionSettings?.iconFunction && !column.buttonActionSettings?.iconField && column.buttonActionSettings?.icon"
-                  [ngTemplateOutlet]="button"
-                  [ngTemplateOutletContext]="{icon: column.buttonActionSettings.icon}"
+                    *ngIf="!column.buttonActionSettings?.iconFunction && !column.buttonActionSettings?.iconField && column.buttonActionSettings?.icon"
+                    [ngTemplateOutlet]="button"
+                    [ngTemplateOutletContext]="{icon: column.buttonActionSettings.icon}"
                 ></ng-container>
 
                 <ng-container
-                  *ngIf="!column.buttonActionSettings?.iconFunction && !column.buttonActionSettings?.iconField && !column.buttonActionSettings?.icon"
-                  [ngTemplateOutlet]="button"
+                    *ngIf="!column.buttonActionSettings?.iconFunction && !column.buttonActionSettings?.iconField && !column.buttonActionSettings?.icon"
+                    [ngTemplateOutlet]="button"
                 ></ng-container>
               </span>
             </div>
@@ -370,12 +377,12 @@
 
         <!--Boolean column-->
         <kendo-grid-column
-          *ngSwitchCase="'boolean'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'boolean'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -383,28 +390,28 @@
 
           <ng-template let-dataItem #booleanRead>
             <cr-checkbox-control
-              [dataValue]="dataItem[column.field]"
-              [isDisabled]="true"
+                [dataValue]="dataItem[column.field]"
+                [isDisabled]="true"
             >
             </cr-checkbox-control>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" let-isNew="isNew">
             <ng-container
-              *ngIf="(!column.allowInCellEditing || column.isReadOnly) && (!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.allowInCellEditing || column.isReadOnly) && (!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="booleanRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="booleanRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
 
             <cr-checkbox-control
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) &&
                 column.allowInCellEditing && !column.isReadOnly"
 
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column, isNew))"
-              [dataValue]="dataItem[column.field]"
-              (dataValueChange)="inCellDataChange(column.field, $event, dataItem)"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column, isNew))"
+                [dataValue]="dataItem[column.field]"
+                (dataValueChange)="inCellDataChange(column.field, $event, dataItem)"
             >
             </cr-checkbox-control>
           </ng-template>
@@ -413,78 +420,85 @@
             <ng-container *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly">
               <cr-checkbox-control
-                [(dataValue)]="cache.changeItem[column.field]"
-                (dataValueChange)="onValueChange()"
-                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                  [(dataValue)]="cache.changeItem[column.field]"
+                  (dataValueChange)="onValueChange()"
+                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
               ></cr-checkbox-control>
             </ng-container>
 
             <ng-container
-              *ngIf="column.isReadOnly && (!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="column.isReadOnly && (!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="booleanRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="booleanRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Decimal column-->
         <kendo-grid-column
-          *ngSwitchCase="'decimal'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'decimal'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template #decimalRead let-dataItem>
-            <span *ngIf="dataItem[column.field] !== null && dataItem[column.field] !== undefined" class="tooltip">{{ dataItem[column.field] | number:'1.2-2'}}</span>
+            <span *ngIf="dataItem[column.field] !== null && dataItem[column.field] !== undefined; else noContent"
+                  class="tooltip">{{ dataItem[column.field] | number:'1.2-2'}}</span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="decimalRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="decimalRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
           <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex" let-isNew="isNew">
             <cr-numeric-control
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly"
-              [(dataValue)]="cache.changeItem[column.field]"
-              (dataValueChange)="onValueChange()"
-              [dataLabel]="column.title"
-              [translateKeys]="column.titleTranslateKey"
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.field"
-              [format]="'0.00'"
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                [(dataValue)]="cache.changeItem[column.field]"
+                (dataValueChange)="onValueChange()"
+                [dataLabel]="column.title"
+                [translateKeys]="column.titleTranslateKey"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.field"
+                [format]="'0.00'"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
             ></cr-numeric-control>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="decimalRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="decimalRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Numeric column-->
         <kendo-grid-column
-          *ngSwitchCase="'numeric'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'numeric'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -494,81 +508,93 @@
             <span *ngIf="dataItem[column.field] !== null && dataItem[column.field] !== undefined" class="tooltip">
               {{ dataItem[column.field] }}
             </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="numericRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="numericRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
           <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex" let-isNew="isNew">
             <cr-numeric-control
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly"
-              [(dataValue)]="cache.changeItem[column.field]"
-              (dataValueChange)="onValueChange()"
-              [dataLabel]="column.title"
-              [translateKeys]="column.titleTranslateKey"
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.field"
-              [format]="column.format"
-              [decimals]="column.decimals"
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                [(dataValue)]="cache.changeItem[column.field]"
+                (dataValueChange)="onValueChange()"
+                [dataLabel]="column.title"
+                [translateKeys]="column.titleTranslateKey"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.field"
+                [format]="column.format"
+                [decimals]="column.decimals"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
             ></cr-numeric-control>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="numericRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="numericRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Date column-->
         <kendo-grid-column
-          *ngSwitchCase="'date'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'date'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template #dateRead let-dataItem>
-            <span class="tooltip">
+            <span class="tooltip" *ngIf="dataItem[column.field] != null; else noContent">
               {{ dataItem[column.field] | stringToDate | date:currentDateFormatPattern}}
             </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) &&
                 (!column.allowInCellEditing || column.isReadOnly)"
 
-              [ngTemplateOutlet]="dateRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="dateRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
 
             <cr-date-picker-simple-control
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) &&
                 column.allowInCellEditing && !column.isReadOnly"
 
-              [dataValue]="dataItem[column.field]"
-              (dataValueChange)="inCellDataChange(column.field, $event, dataItem)"
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.field"
-              [validationMessage]="inCellValidator ? inCellValidator(dataItem)[column.field] : null"
-              [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
+                [dataValue]="dataItem[column.field]"
+                (dataValueChange)="inCellDataChange(column.field, $event, dataItem)"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.field"
+                [validationMessage]="inCellValidator ? inCellValidator(dataItem)[column.field] : null"
+                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(dataItem, column))"
             >
             </cr-date-picker-simple-control>
           </ng-template>
@@ -578,21 +604,21 @@
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))">
               <ng-container *ngIf="!column.isReadOnly">
                 <cr-control-datepicker
-                  [(dataValue)]="cache.changeItem[column.field]"
-                  (dataValueChange)="onValueChange()"
-                  [dataLabel]="column.title"
-                  [translateKeys]="column.titleTranslateKey"
-                  [validator]="column.isNotUseValidation ? null : validator"
-                  [validationField]="column.field"
-                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                    [(dataValue)]="cache.changeItem[column.field]"
+                    (dataValueChange)="onValueChange()"
+                    [dataLabel]="column.title"
+                    [translateKeys]="column.titleTranslateKey"
+                    [validator]="column.isNotUseValidation ? null : validator"
+                    [validationField]="column.field"
+                    [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
                 >
                 </cr-control-datepicker>
               </ng-container>
 
               <ng-container
-                *ngIf="column.isReadOnly"
-                [ngTemplateOutlet]="dateRead"
-                [ngTemplateOutletContext]="{$implicit: dataItem}"
+                  *ngIf="column.isReadOnly"
+                  [ngTemplateOutlet]="dateRead"
+                  [ngTemplateOutletContext]="{$implicit: dataItem}"
               ></ng-container>
             </ng-container>
           </ng-template>
@@ -600,29 +626,35 @@
 
         <!-- Date time column -->
         <kendo-grid-column
-          *ngSwitchCase="'date-time'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'date-time'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template let-dataItem #dateTimeRead>
-            <span *ngIf="dataItem[column.field]" class="tooltip">
+            <span *ngIf="dataItem[column.field]; else noContent" class="tooltip">
                 {{ dataItem[column.field] | stringToDate | date:currentDateTimeFormatPattern}}
               </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="dateTimeRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="dateTimeRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
@@ -630,51 +662,57 @@
             <ng-container *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly">
               <cr-date-time-picker-control
-                [(dataValue)]="cache.changeItem[column.field]"
-                (dataValueChange)="onValueChange()"
-                [dataLabel]="column.title"
-                [translateKeys]="column.titleTranslateKey"
-                [validator]="column.isNotUseValidation ? null : validator"
-                [validationField]="column.field"
-                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                  [(dataValue)]="cache.changeItem[column.field]"
+                  (dataValueChange)="onValueChange()"
+                  [dataLabel]="column.title"
+                  [translateKeys]="column.titleTranslateKey"
+                  [validator]="column.isNotUseValidation ? null : validator"
+                  [validationField]="column.field"
+                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
               >
               </cr-date-time-picker-control>
             </ng-container>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="dateTimeRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="dateTimeRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!-- Time column -->
         <kendo-grid-column
-          *ngSwitchCase="'time'"
-          [field]="column.field"
-          [hidden]="column.hidden"
-          width="{{column.width}}"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'time'"
+            [field]="column.field"
+            [hidden]="column.hidden"
+            width="{{column.width}}"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template let-dataItem #timeRead>
-            <span *ngIf="dataItem[column.field]" class="tooltip">
+            <span *ngIf="dataItem[column.field]; else noContent" class="tooltip">
                 {{ dataItem[column.field] }}
               </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="timeRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="timeRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
@@ -682,133 +720,147 @@
             <ng-container *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly">
               <cr-time-picker-control
-                [(dataValue)]="cache.changeItem[column.field]"
-                (dataValueChange)="onValueChange()"
-                [dataLabel]="column.title"
-                [translateKeys]="column.titleTranslateKey"
-                [validator]="column.isNotUseValidation ? null : validator"
-                [validationField]="column.field"
-                [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
+                  [(dataValue)]="cache.changeItem[column.field]"
+                  (dataValueChange)="onValueChange()"
+                  [dataLabel]="column.title"
+                  [translateKeys]="column.titleTranslateKey"
+                  [validator]="column.isNotUseValidation ? null : validator"
+                  [validationField]="column.field"
+                  [isDisabled]="(column.disabledField && dataItem[column.disabledField]) || (column.disabledIf && column.disabledIf(cache.changeItem, column, isNew))"
               >
               </cr-time-picker-control>
             </ng-container>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="timeRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="timeRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!-- Translation text column -->
         <kendo-grid-column
-          *ngSwitchCase="'translate-key'"
-          [field]="column.field"
-          [width]="column.width"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'translate-key'"
+            [field]="column.field"
+            [width]="column.width"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template let-dataItem #translateKeyRead>
-            <span class="tooltip">{{dataItem[column.field] | translate}}</span>
+            <span class="tooltip" *ngIf="dataItem[column.field]; else noContent">
+              {{dataItem[column.field] | translate}}
+            </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="translateKeyRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="translateKeyRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
           <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex" let-isNew="isNew">
             <cr-control-edit
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly"
-              [dataValue]="cache.changeItem[column.field] | translate"
-              [dataLabel]="column.title"
-              [translateKeys]="column.titleTranslateKey"
-              [isDisabled]="true"
+                [dataValue]="cache.changeItem[column.field] | translate"
+                [dataLabel]="column.title"
+                [translateKeys]="column.titleTranslateKey"
+                [isDisabled]="true"
             ></cr-control-edit>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="translateKeyRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="translateKeyRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Text column-->
         <kendo-grid-column
-          *ngSwitchCase="'text'"
-          [hidden]="column.hidden"
-          [field]="column.field"
-          [format]="column.format"
-          [filter]="column.type"
-          [width]="column.width"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchCase="'text'"
+            [hidden]="column.hidden"
+            [field]="column.field"
+            [format]="column.format"
+            [filter]="column.type"
+            [width]="column.width"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
           </ng-template>
 
           <ng-template let-dataItem #textRead>
-            <span
-              class="tooltip"
-            >{{dataItem | getByKey:column.field}}</span>
+            <span class="tooltip" *ngIf="(dataItem | getByKey:column.field) != null; else noContent">
+              {{dataItem | getByKey:column.field}}
+            </span>
+
+            <ng-template #noContent>
+              <div class="cr-no-content">
+                --
+              </div>
+            </ng-template>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="textRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="textRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
 
           <ng-template kendoGridEditTemplate let-dataItem="dataItem" let-rowIndex="rowIndex" let-isNew="isNew">
             <cr-control-edit
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && !column.isReadOnly"
-              [(dataValue)]="cache.changeItem[column.field]"
-              (dataValueChange)="onValueChange()"
-              [dataLabel]="column.title"
-              [translateKeys]="column.titleTranslateKey"
-              [validator]="column.isNotUseValidation ? null : validator"
-              [validationField]="column.field"
-              [isDisabled]="column.disabledIf && column.disabledIf(cache.changeItem, column, isNew)"
+                [(dataValue)]="cache.changeItem[column.field]"
+                (dataValueChange)="onValueChange()"
+                [dataLabel]="column.title"
+                [translateKeys]="column.titleTranslateKey"
+                [validator]="column.isNotUseValidation ? null : validator"
+                [validationField]="column.field"
+                [isDisabled]="column.disabledIf && column.disabledIf(cache.changeItem, column, isNew)"
             >
             </cr-control-edit>
 
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex})) && column.isReadOnly"
-              [ngTemplateOutlet]="textRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="textRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
 
         <!--Default column-->
         <kendo-grid-column
-          *ngSwitchDefault
-          [hidden]="column.hidden"
-          [field]="column.field"
-          [format]="column.format"
-          [filter]="column.type"
-          [width]="column.width"
-          [sortable]="column.sortable ?? sortable"
-          [autoSize]="column.autoFit"
+            *ngSwitchDefault
+            [hidden]="column.hidden"
+            [field]="column.field"
+            [format]="column.format"
+            [filter]="column.type"
+            [width]="column.width"
+            [sortable]="column.sortable ?? sortable"
+            [autoSize]="column.autoFit"
         >
           <ng-template kendoGridHeaderTemplate>
             <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{$implicit: column}"></ng-container>
@@ -816,16 +868,16 @@
 
           <ng-template let-dataItem #defaultRead>
             <span
-              class="tooltip"
+                class="tooltip"
             >{{dataItem[column.field]}}</span>
           </ng-template>
 
           <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <ng-container
-              *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
+                *ngIf="(!column.visibilityField || (cache.isEditModeInProgress ? cache.changeItem && cache.changeItem[column.visibilityField] : dataItem[column.visibilityField])) &&
                 (!column.visibleOnSelect || onIsRowSelected({dataItem: dataItem, index: rowIndex}))"
-              [ngTemplateOutlet]="defaultRead"
-              [ngTemplateOutletContext]="{$implicit: dataItem}"
+                [ngTemplateOutlet]="defaultRead"
+                [ngTemplateOutletContext]="{$implicit: dataItem}"
             ></ng-container>
           </ng-template>
         </kendo-grid-column>
@@ -835,39 +887,39 @@
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex" let-isNew="isNew">
         <!-- Start edit mode for row (pencil button) -->
         <cr-button-control
-          *ngIf="_parsedPermissionSettings.isAccessUpdate && allowUpdateAction
+            *ngIf="_parsedPermissionSettings.isAccessUpdate && allowUpdateAction
             && (!disableRowUpdateIf || !disableRowUpdateIf(dataItem, rowIndex, isNew))"
 
-          [buttonTemplateType]="'grid-edit-command'"
-          [disabled]="cache?.isEditModeInProgress"
+            [buttonTemplateType]="'grid-edit-command'"
+            [disabled]="cache?.isEditModeInProgress"
         ></cr-button-control>
 
         <!-- Delete row (trash button) -->
         <cr-button-control
-          *ngIf="_parsedPermissionSettings.isAccessDelete && allowDeleteAction
+            *ngIf="_parsedPermissionSettings.isAccessDelete && allowDeleteAction
             && (!disableRowDeleteIf || !disableRowDeleteIf(dataItem, rowIndex, isNew))"
-          [buttonTemplateType]="'grid-remove-command'"
-          [disabled]="cache?.isEditModeInProgress"
+            [buttonTemplateType]="'grid-remove-command'"
+            [disabled]="cache?.isEditModeInProgress"
         ></cr-button-control>
 
         <!-- Update row (Save button) -->
         <cr-button-control
-          *ngIf="allowUpdateAction && cache?.isEditModeInProgress && !cache?.isNew"
-          [buttonTemplateType]="'grid-save-command'"
-          [textTranslateKey]="'COMMON.EDIT_GRID.UPDATE'"
+            *ngIf="allowUpdateAction && cache?.isEditModeInProgress && !cache?.isNew"
+            [buttonTemplateType]="'grid-save-command'"
+            [textTranslateKey]="'COMMON.EDIT_GRID.UPDATE'"
         ></cr-button-control>
         <!-- Add row (Add button) -->
 
         <cr-button-control
-          *ngIf="allowCreateAction && cache?.isEditModeInProgress  && cache?.isNew"
-          [buttonTemplateType]="'grid-save-command'"
-          [textTranslateKey]="'COMMON.EDIT_GRID.ADD'"
+            *ngIf="allowCreateAction && cache?.isEditModeInProgress  && cache?.isNew"
+            [buttonTemplateType]="'grid-save-command'"
+            [textTranslateKey]="'COMMON.EDIT_GRID.ADD'"
         ></cr-button-control>
 
         <!-- Cancel edit mode for row (cross button) -->
         <cr-button-control
-          *ngIf="cache?.isEditModeInProgress"
-          [buttonTemplateType]="'grid-cancel-command'"
+            *ngIf="cache?.isEditModeInProgress"
+            [buttonTemplateType]="'grid-cancel-command'"
         >
         </cr-button-control>
       </ng-template>

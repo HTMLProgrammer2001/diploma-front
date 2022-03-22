@@ -236,6 +236,16 @@
           "BOOKMARK_NAME": "Education qualification: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "EDUCATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Education list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Education: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -252,6 +262,7 @@
       "TEACHER": "Teacher list",
       "EDUCATION_DATA": "Education data",
       "EDUCATION_QUALIFICATION": "Education qualification list",
+      "EDUCATION": "Education list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -280,7 +291,8 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Commission was successfully created",
@@ -314,7 +326,8 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Department was successfully created",
@@ -348,7 +361,8 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Academic degree was successfully created",
@@ -382,7 +396,8 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Academic title was successfully created",
@@ -416,7 +431,8 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Teaching rank was successfully created",
@@ -544,7 +560,9 @@
         "REQUIRED_COMMISSION": "Commission is required",
         "REQUIRED_DEPARTMENT": "Department is required",
         "INVALID_MIN_WORK_START_DATE": "Work start date year must be more than 1970",
-        "INVALID_MAX_WORK_START_DATE": "You cannot select work start date from future"
+        "INVALID_MAX_WORK_START_DATE": "You cannot select work start date from future",
+        "MAX_LENGTH_NAME": "Full name max length is {{maxLength}}",
+        "MAX_LENGTH_ADDRESS": "Address max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Teacher was successfully created",
@@ -582,12 +600,64 @@
         }
       },
       "VALIDATION": {
-        "REQUIRED_NAME": "Name is required"
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
       },
       "NOTIFICATION": {
         "SUCCESS_CREATE": "Education qualification was successfully created",
         "SUCCESS_DELETE": "Education qualification was successfully deleted",
         "SUCCESS_UPDATE": "Education qualification was successfully updated"
+      }
+    }
+  },
+  "EDUCATION": {
+    "LIST": {
+      "TITLE": "Education list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "TEACHER": "Teacher",
+        "EDUCATION_QUALIFICATION": "Education qualification",
+        "INSTITUTION": "Institution",
+        "SPECIALTY": "Specialty",
+        "ISSUE_YEAR_MORE": "Issue year more than",
+        "ISSUE_YEAR_LESS": "Issue year less than",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Educations",
+        "DELETED": "Deleted",
+        "TEACHER": "Teacher",
+        "EDUCATION_QUALIFICATION": "Education qualification",
+        "INSTITUTION": "Institution",
+        "SPECIALTY": "Specialty",
+        "YEAR_OF_ISSUE": "Issue year",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Education: {{value}}",
+      "TEACHER": "Teacher",
+      "EDUCATION_QUALIFICATION": "Education qualification",
+      "INSTITUTION": "Institution",
+      "SPECIALTY": "Specialty",
+      "YEAR_OF_ISSUE": "Issue year",
+      "DESCRIPTION": "Description",
+      "VALIDATION": {
+        "REQUIRED_TEACHER": "Teacher is required",
+        "REQUIRED_EDUCATION_QUALIFICATION": "Education qualification is required",
+        "REQUIRED_INSTITUTION": "Institution is required",
+        "MAX_LENGTH_INSTITUTION": "Institution max length is {{maxLength}}",
+        "REQUIRED_SPECIALTY": "Specialty is required",
+        "MAX_LENGTH_SPECIALTY": "Specialty max length is {{maxLength}}",
+        "MAX_LENGTH_DESCRIPTION": "Description max length is {{maxLength}}",
+        "REQUIRED_YEAR_OF_ISSUE": "Year of issue is required",
+        "MIN_YEAR_OF_ISSUE": "Year of issue is {{min}}",
+        "MAX_YEAR_OF_ISSUE": "Year of issue is {{max}}"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Education was successfully created",
+        "SUCCESS_DELETE": "Education was successfully deleted",
+        "SUCCESS_UPDATE": "Education was successfully updated"
       }
     }
   }

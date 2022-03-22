@@ -7,7 +7,7 @@ import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {IAcademicTitleGetModel} from '../types/model/academic-title-get-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createAcademicTitleQuery,
@@ -74,7 +74,7 @@ export class AcademicTitleApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createAcademicTitle'
     };
 
@@ -88,7 +88,7 @@ export class AcademicTitleApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateAcademicTitle'
     };
 
@@ -102,7 +102,7 @@ export class AcademicTitleApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteAcademicTitle'
     };
 

@@ -9,7 +9,7 @@ import {ICommissionPostModel} from '../types/model/commission-post-model';
 import {ICommissionPutModel} from '../types/model/commission-put-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createCommissionQuery,
@@ -74,7 +74,7 @@ export class CommissionApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createCommission'
     };
 
@@ -88,7 +88,7 @@ export class CommissionApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateCommission'
     };
 
@@ -102,7 +102,7 @@ export class CommissionApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteCommission'
     };
 

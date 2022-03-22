@@ -14,18 +14,23 @@ export const getTeacherListQuery = gql`
                 fullName
                 email
                 department {
+                    id
                     name
                 }
                 commission {
+                    id
                     name
                 }
                 academicTitle {
+                    id
                     name
                 }
                 academicDegree {
+                    id
                     name
                 }
                 teacherRank {
+                    id
                     name
                 }
             }
@@ -123,7 +128,7 @@ export const deleteTeacherQuery = gql`
     }
 `;
 
-export const getCommissionDropdown = gql`
+export const getCommissionDropdownQuery = gql`
     query GetCommissionDropdown($page: Int, $size: Int, $name: String) {
         getCommissionsList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
             size
@@ -139,7 +144,16 @@ export const getCommissionDropdown = gql`
     }
 `;
 
-export const getDepartmentDropdown = gql`
+export const getCommissionDropdownItemQuery = gql`
+    query GetCommissionDropdownItem($id: ID!) {
+        getCommissionById(query: {id: $id, showDeleted: true}) {
+            id
+            name
+        }
+    }
+`;
+
+export const getDepartmentDropdownQuery = gql`
     query GetDepartmentDropdown($page: Int, $size: Int, $name: String) {
         getDepartmentsList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
             size
@@ -155,7 +169,16 @@ export const getDepartmentDropdown = gql`
     }
 `;
 
-export const getTeachingRankDropdown = gql`
+export const getDepartmentDropdownItemQuery = gql`
+    query GetDepartmentDropdownItem($id: ID!) {
+        getDepartmentById(query: {id: $id, showDeleted: true}) {
+            id
+            name
+        }
+    }
+`;
+
+export const getTeachingRankDropdownQuery = gql`
     query GetTeachingRankDropdown($page: Int, $size: Int, $name: String) {
         getTeachingRankList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
             size
@@ -171,7 +194,16 @@ export const getTeachingRankDropdown = gql`
     }
 `;
 
-export const getAcademicDegreeDropdown = gql`
+export const getTeachingRankDropdownItemQuery = gql`
+    query GetTeachingRankDropdownItem($id: ID!) {
+        getTeachingRankById(query: {id: $id, showDeleted: true}) {
+            id
+            name
+        }
+    }
+`;
+
+export const getAcademicDegreeDropdownQuery = gql`
     query GetAcademicDegreeDropdown($page: Int, $size: Int, $name: String) {
         getAcademicDegreeList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
             size
@@ -187,7 +219,25 @@ export const getAcademicDegreeDropdown = gql`
     }
 `;
 
-export const getAcademicTitleDropdown = gql`
+export const getAcademicDegreeDropdownItemQuery = gql`
+    query GetAcademicDegreeDropdownItem($id: ID!) {
+        getAcademicDegreeById(query: {id: $id, showDeleted: true}) {
+            id
+            name
+        }
+    }
+`;
+
+export const getAcademicTitleDropdownItemQuery = gql`
+    query GetAcademicTitleDropdownItem($id: ID!) {
+        getAcademicTitleById(query: {id: $id, showDeleted: true}) {
+            id
+            name
+        }
+    }
+`;
+
+export const getAcademicTitleDropdownQuery = gql`
     query GetAcademicTitleDropdown($page: Int, $size: Int, $name: String) {
         getAcademicTitleList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
             size
@@ -203,7 +253,7 @@ export const getAcademicTitleDropdown = gql`
     }
 `;
 
-export const getTeacherAttestationList = gql`
+export const getTeacherAttestationListQuery = gql`
     query GetTeacherAttestationList($query: AttestationGetListRequest!, $teacherId: ID!) {
         attestationList: getAttestationList(query: $query) {
             size
@@ -214,6 +264,7 @@ export const getTeacherAttestationList = gql`
             responseList {
                 id
                 category {
+                    id
                     name
                 }
                 date
@@ -227,7 +278,7 @@ export const getTeacherAttestationList = gql`
     }
 `;
 
-export const getTeacherHonorList = gql`
+export const getTeacherHonorListQuery = gql`
     query GetTeacherHonorList($query: HonorGetListRequest!) {
         getHonorList(query: $query) {
             size
@@ -246,7 +297,7 @@ export const getTeacherHonorList = gql`
     }
 `;
 
-export const getTeacherRebukeList = gql`
+export const getTeacherRebukeListQuery = gql`
     query GetTeacherRebukeList($query: RebukeGetListRequest!) {
         getRebukeList(query: $query) {
             size
@@ -265,7 +316,7 @@ export const getTeacherRebukeList = gql`
     }
 `;
 
-export const getTeacherEducationList = gql`
+export const getTeacherEducationListQuery = gql`
     query GetTeacherEducationList($query: EducationGetListRequest!) {
         getEducationList(query: $query) {
             size
@@ -276,6 +327,7 @@ export const getTeacherEducationList = gql`
             responseList {
                 id
                 educationQualification {
+                    id
                     name
                 }
                 institution
@@ -286,7 +338,7 @@ export const getTeacherEducationList = gql`
     }
 `;
 
-export const getTeacherInternshipList = gql`
+export const getTeacherInternshipListQuery = gql`
     query GetTeacherInternshipList($query: InternshipGetListRequest!, $teacherId: ID!) {
         internshipList: getInternshipList(query: $query) {
             size
@@ -311,7 +363,7 @@ export const getTeacherInternshipList = gql`
     }
 `;
 
-export const getTeacherPublicationList = gql`
+export const getTeacherPublicationListQuery = gql`
     query GetTeacherPublicationList($query: PublicationGetListRequest!) {
         getPublicationList(query: $query) {
             size

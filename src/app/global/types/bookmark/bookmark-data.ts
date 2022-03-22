@@ -23,6 +23,8 @@ import {ITeacherAttestationListResponseViewModel} from '../../../features/teache
 import {IEducationQualificationListViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-list-view-model';
 import {IEducationQualificationViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-view-model';
 import {IEducationQualificationEducationViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-education-view-model';
+import {IEducationListViewModel} from '../../../features/education/types/view-model/education-list-view-model';
+import {IEducationViewModel} from '../../../features/education/types/view-model/education-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -74,4 +76,9 @@ export interface IBookmarkData {
   educationQualificationDetail?: IEducationQualificationViewModel;
   educationQualificationDetailCopy?: IEducationQualificationViewModel;
   educationQualificationEducationsList?: IPaginator<IEducationQualificationEducationViewModel>;
+
+  /** Education **/
+  educationList?: IPaginator<IEducationListViewModel>;
+  educationDetail?: IEducationViewModel;
+  educationDetailCopy?: IEducationViewModel;
 }

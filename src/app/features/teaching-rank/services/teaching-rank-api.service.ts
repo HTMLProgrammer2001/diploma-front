@@ -7,7 +7,7 @@ import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {ITeachingRankGetModel} from '../types/model/teaching-rank-get-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createTeachingRankQuery,
@@ -74,7 +74,7 @@ export class TeachingRankApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createTeachingRank'
     };
 
@@ -88,7 +88,7 @@ export class TeachingRankApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateTeachingRank'
     };
 
@@ -102,7 +102,7 @@ export class TeachingRankApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteTeachingRank'
     };
 

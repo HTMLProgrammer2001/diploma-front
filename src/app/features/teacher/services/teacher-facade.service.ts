@@ -142,20 +142,40 @@ export class TeacherFacadeService {
     return this.teacherApiService.getCommissionDropdownList$(paginator).pipe(map(resp => resp.data));
   }
 
+  public getCommissionDropdownItem$(id: number): Observable<IdNameSimpleItem> {
+    return this.teacherApiService.getCommissionDropdownItem$(id).pipe(map(resp => resp.data));
+  }
+
   public getDepartmentDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
     return this.teacherApiService.getDepartmentDropdownList$(paginator).pipe(map(resp => resp.data));
+  }
+
+  public getDepartmentDropdownItem$(id: number): Observable<IdNameSimpleItem> {
+    return this.teacherApiService.getDepartmentDropdownItem$(id).pipe(map(resp => resp.data));
   }
 
   public getTeachingRankDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
     return this.teacherApiService.getTeachingRankDropdownList$(paginator).pipe(map(resp => resp.data));
   }
 
+  public getTeachingRankDropdownItem$(id: number): Observable<IdNameSimpleItem> {
+    return this.teacherApiService.getTeachingRankDropdownItem$(id).pipe(map(resp => resp.data));
+  }
+
   public getAcademicDegreeDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
     return this.teacherApiService.getAcademicDegreeDropdownList$(paginator).pipe(map(resp => resp.data));
   }
 
+  public getAcademicDegreeDropdownItem$(id: number): Observable<IdNameSimpleItem> {
+    return this.teacherApiService.getAcademicDegreeDropdownItem$(id).pipe(map(resp => resp.data));
+  }
+
   public getAcademicTitleDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
     return this.teacherApiService.getAcademicTitleDropdownList$(paginator).pipe(map(resp => resp.data));
+  }
+
+  public getAcademicTitleDropdownItem$(id: number): Observable<IdNameSimpleItem> {
+    return this.teacherApiService.getAcademicTitleDropdownItem$(id).pipe(map(resp => resp.data));
   }
 
   // endregion

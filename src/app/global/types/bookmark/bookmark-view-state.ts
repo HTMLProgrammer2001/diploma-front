@@ -15,6 +15,8 @@ import {ITeacherFilterViewModel} from '../../../features/teacher/types/view-mode
 import {ITeacherDetailsViewState} from '../../../features/teacher/types/view-model/teacher-details-view-state';
 import {IEducationQualificationFilterViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-filter-view-model';
 import {IEducationQualificationDetailsViewState} from '../../../features/education-qualification/types/view-model/education-qualification-details-view-state';
+import {IEducationFilterViewModel} from '../../../features/education/types/view-model/education-filter-view-model';
+import {IEducationDetailsViewState} from '../../../features/education/types/view-model/education-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -70,4 +72,10 @@ export interface IBookmarkViewState {
   educationQualificationValidator?: Validator;
   educationQualificationDetails?: IEducationQualificationDetailsViewState;
   educationQualificationEducationsListPaginator?: IPaginatorBase;
+
+  /** Education  **/
+  educationListPaginator?: IPaginatorBase;
+  educationFilter?: IEducationFilterViewModel;
+  educationValidator?: Validator;
+  educationDetails?: IEducationDetailsViewState;
 }

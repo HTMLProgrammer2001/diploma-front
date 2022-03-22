@@ -169,6 +169,7 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
   initTitleHeaderButtons(): void {
     this.titleHeaderButtonManager = new TitleHeaderElementManager();
     this.titleHeaderButtonManager
+      .addElement('pin')
       .addElement('add')
       .setVisibility(false)
       .addElement('close-bookmark');

@@ -10,6 +10,13 @@ export class CommissionValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'COMMISSION.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'COMMISSION.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

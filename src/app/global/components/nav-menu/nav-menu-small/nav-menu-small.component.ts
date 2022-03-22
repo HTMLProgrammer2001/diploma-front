@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NavMenuFullItem} from '../types/nav-menu-full-item';
 import {Router} from '@angular/router';
-import {BookmarkService} from '../../../services/bookmark/bookmark.service';
 import {NavMenuSmallItem} from '../types/nav-menu-small-item';
 import {cloneDeep, isNil} from 'lodash';
 import {AuthService} from '../../../services/auth/auth.service';
@@ -15,10 +14,13 @@ export class NavMenuSmallComponent implements OnInit {
   @Input() menuItems: Array<NavMenuFullItem>;
   iconStyleLarge = {'width.px': '35', fill: 'rgb(150,50,255)'};
 
-  constructor(private route: Router, public authService: AuthService) {}
+  constructor(private route: Router, public authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    cloneDeep(this.menuItems).forEach(item => {
+    this.menuItems = cloneDeep(this.menuItems);
+
+    this.menuItems.forEach(item => {
       if (item.items) {
         const header: NavMenuSmallItem = {
           itemType: 'header',
@@ -27,6 +29,13 @@ export class NavMenuSmallComponent implements OnInit {
         };
 
         item.items.unshift(header);
+      } else {
+        const header: NavMenuSmallItem = {
+          ...item,
+          itemType: 'link-header',
+        };
+
+        item.items = [header];
       }
     });
   }

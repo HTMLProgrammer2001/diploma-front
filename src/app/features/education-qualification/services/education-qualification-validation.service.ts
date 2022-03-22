@@ -10,6 +10,13 @@ export class EducationQualificationValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'EDUCATION_QUALIFICATION.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'EDUCATION_QUALIFICATION.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

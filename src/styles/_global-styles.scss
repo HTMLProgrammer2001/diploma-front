@@ -30,6 +30,12 @@ td {
       cursor: pointer;
       text-decoration: underline;
     }
+
+    .cr-grid-navigate-empty {
+      color: black;
+      cursor: auto;
+      text-decoration: none;
+    }
   }
   &.cr-grid-button-action {
     cursor: pointer;

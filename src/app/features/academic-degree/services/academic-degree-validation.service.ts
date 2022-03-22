@@ -10,6 +10,13 @@ export class AcademicDegreeValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'ACADEMIC_DEGREE.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'ACADEMIC_DEGREE.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

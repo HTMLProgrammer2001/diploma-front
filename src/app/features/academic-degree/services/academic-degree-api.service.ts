@@ -9,7 +9,7 @@ import {IAcademicDegreePostModel} from '../types/model/academic-degree-post-mode
 import {IAcademicDegreePutModel} from '../types/model/academic-degree-put-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createAcademicDegreeQuery,
@@ -75,7 +75,7 @@ export class AcademicDegreeApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createAcademicDegree'
     };
 
@@ -89,7 +89,7 @@ export class AcademicDegreeApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateAcademicDegree'
     };
 
@@ -103,7 +103,7 @@ export class AcademicDegreeApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteAcademicDegree'
     };
 

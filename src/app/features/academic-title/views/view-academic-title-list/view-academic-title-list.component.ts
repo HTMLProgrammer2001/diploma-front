@@ -169,6 +169,7 @@ export class ViewAcademicTitleListComponent extends BaseViewComponent implements
   initTitleHeaderButtons(): void {
     this.titleHeaderButtonManager = new TitleHeaderElementManager();
     this.titleHeaderButtonManager
+      .addElement('pin')
       .addElement('add')
       .setVisibility(false)
       .addElement('close-bookmark');

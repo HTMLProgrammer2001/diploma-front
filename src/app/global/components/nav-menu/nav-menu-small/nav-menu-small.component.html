@@ -8,16 +8,11 @@
       kendoMenuItemLinkTemplate
       let-item="item"
       let-index="index">
-
-      <ng-container *ngIf="item.roles && item.roles.includes(authService.accessTokenModel.role)">
+      <ng-container *ngIf="!item.roles || item.roles.includes(authService.accessTokenModel.role)">
         <!--section-->
         <span [kendoMenuItemLink]="index"
               class=" {{item.levelClass}}"
               *ngIf="item.itemType === 'section'">
-
-        <div class="svg-icon-style" *ngIf="item.iconSvg">
-          <cr-svg-icon-control [width]="'30px'" [height]="'30px'" [iconName]="item.iconSvg"></cr-svg-icon-control>
-        </div>
 
         <span *ngIf="item.levelClass !== 'main-menu'" class="cr-small-nav-menu-title">
           <span [attr.data-translate]="item.titleTranslateKeys">
@@ -27,11 +22,25 @@
 
       </span>
 
+
         <!--header-->
         <span [kendoMenuItemLink]="index"
-              (click)="$event.stopPropagation();"
-              class=" {{item.levelClass}}"
+              (click)="$event.stopPropagation()"
+              class="{{item.levelClass}}"
               *ngIf="item.itemType === 'header'">
+          <span class="cr-small-nav-menu-title">
+            <span [attr.data-translate]="item.titleTranslateKeys">
+              {{ item.title || (item.titleTranslateKeys | translate)}}
+            </span>
+          </span>
+      </span>
+
+        <!--link header-->
+        <span [kendoMenuItemLink]="index"
+              (click)="navigateByRoute(item)"
+              class="{{item.levelClass}}"
+              [class.cr-nav-menu-small-link]="!!item.task?.route"
+              *ngIf="item.itemType === 'link-header'">
 
           <span class="cr-small-nav-menu-title">
             <span [attr.data-translate]="item.titleTranslateKeys">

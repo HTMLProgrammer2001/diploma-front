@@ -10,6 +10,13 @@ export class DepartmentValidationService {
         type: ValidationTypes.required,
         fieldName: 'name',
         messageTranslateKey: 'DEPARTMENT.DETAILS.VALIDATION.REQUIRED_NAME'
-      });
+      },
+      {
+        type: ValidationTypes.maxLength,
+        fieldName: 'name',
+        settingValue: 255,
+        messageTranslateKey: 'DEPARTMENT.DETAILS.VALIDATION.MAX_LENGTH_NAME'
+      }
+    );
   }
 }

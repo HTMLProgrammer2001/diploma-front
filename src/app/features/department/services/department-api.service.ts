@@ -9,7 +9,7 @@ import {IDepartmentPostModel} from '../types/model/department-post-model';
 import {IDepartmentPutModel} from '../types/model/department-put-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createDepartmentQuery,
@@ -74,7 +74,7 @@ export class DepartmentApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createDepartment'
     };
 
@@ -88,7 +88,7 @@ export class DepartmentApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateDepartment'
     };
 
@@ -102,7 +102,7 @@ export class DepartmentApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteDepartment'
     };
 

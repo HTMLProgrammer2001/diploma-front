@@ -1,8 +1,8 @@
-import {NameSimpleItem} from '../../../../shared/types/name-simple-item';
+import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 export interface ITeacherEducationListGetModel {
   id: number;
-  educationQualification: NameSimpleItem;
+  educationQualification: IdNameSimpleItem;
   institution: string;
   specialty: string;
   yearOfIssue: string;

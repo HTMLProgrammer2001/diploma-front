@@ -1,7 +1,7 @@
-import {NameSimpleItem} from '../../../../shared/types/name-simple-item';
+import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 export interface ITeacherAttestationListGetModel {
   id: number;
-  category: NameSimpleItem;
+  category: IdNameSimpleItem;
   date: string;
 }

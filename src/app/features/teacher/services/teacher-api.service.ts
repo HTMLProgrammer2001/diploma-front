@@ -7,19 +7,19 @@ import {IdSimpleItem} from '../../../shared/types/id-simple-item';
 import {ITeacherGetModel} from '../types/model/teacher-get-model';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createTeacherQuery,
   deleteTeacherQuery,
-  getAcademicDegreeDropdown,
-  getAcademicTitleDropdown,
-  getCommissionDropdown,
-  getDepartmentDropdown,
-  getTeacherAttestationList,
-  getTeacherByIdQuery, getTeacherEducationList, getTeacherHonorList, getTeacherInternshipList,
-  getTeacherListQuery, getTeacherPublicationList, getTeacherRebukeList,
-  getTeachingRankDropdown,
+  getAcademicDegreeDropdownQuery, getAcademicDegreeDropdownItemQuery,
+  getAcademicTitleDropdownQuery, getAcademicTitleDropdownItemQuery, getCommissionDropdownItemQuery,
+  getCommissionDropdownQuery,
+  getDepartmentDropdownQuery, getDepartmentDropdownItemQuery,
+  getTeacherAttestationListQuery,
+  getTeacherByIdQuery, getTeacherEducationListQuery, getTeacherHonorListQuery, getTeacherInternshipListQuery,
+  getTeacherListQuery, getTeacherPublicationListQuery, getTeacherRebukeListQuery,
+  getTeachingRankDropdownQuery, getTeachingRankDropdownItemQuery,
   updateTeacherQuery
 } from './teacher-queries';
 import {ITeacherFilterModel} from '../types/model/teacher-filter-model';
@@ -87,7 +87,7 @@ export class TeacherApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'createTeacher',
       useMultipart: true
     };
@@ -102,7 +102,7 @@ export class TeacherApiService {
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'updateTeacher',
       useMultipart: true
     };
@@ -117,7 +117,7 @@ export class TeacherApiService {
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'deleteTeacher'
     };
 
@@ -127,7 +127,7 @@ export class TeacherApiService {
   public getCommissionDropdownList$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getCommissionDropdown,
+      query: getCommissionDropdownQuery,
       variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
       isPreloader: true,
       isAuthorize: true,
@@ -138,10 +138,24 @@ export class TeacherApiService {
     return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
   }
 
+  public getCommissionDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
+    const config: RequestConfig = {
+      requestType: RequestType.QUERY,
+      query: getCommissionDropdownItemQuery,
+      variables: {id},
+      isPreloader: true,
+      isAuthorize: true,
+      roles: readRoles,
+      resultField: 'getCommissionById'
+    };
+
+    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
+  }
+
   public getDepartmentDropdownList$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getDepartmentDropdown,
+      query: getDepartmentDropdownQuery,
       variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
       isPreloader: true,
       isAuthorize: true,
@@ -152,10 +166,24 @@ export class TeacherApiService {
     return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
   }
 
+  public getDepartmentDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
+    const config: RequestConfig = {
+      requestType: RequestType.QUERY,
+      query: getDepartmentDropdownItemQuery,
+      variables: {id},
+      isPreloader: true,
+      isAuthorize: true,
+      roles: readRoles,
+      resultField: 'getDepartmentById'
+    };
+
+    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
+  }
+
   public getTeachingRankDropdownList$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeachingRankDropdown,
+      query: getTeachingRankDropdownQuery,
       variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
       isPreloader: true,
       isAuthorize: true,
@@ -166,10 +194,24 @@ export class TeacherApiService {
     return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
   }
 
+  public getTeachingRankDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
+    const config: RequestConfig = {
+      requestType: RequestType.QUERY,
+      query: getTeachingRankDropdownItemQuery,
+      variables: {id},
+      isPreloader: true,
+      isAuthorize: true,
+      roles: readRoles,
+      resultField: 'getTeachingRankById'
+    };
+
+    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
+  }
+
   public getAcademicDegreeDropdownList$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getAcademicDegreeDropdown,
+      query: getAcademicDegreeDropdownQuery,
       variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
       isPreloader: true,
       isAuthorize: true,
@@ -180,10 +222,24 @@ export class TeacherApiService {
     return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
   }
 
+  public getAcademicDegreeDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
+    const config: RequestConfig = {
+      requestType: RequestType.QUERY,
+      query: getAcademicDegreeDropdownItemQuery,
+      variables: {id},
+      isPreloader: true,
+      isAuthorize: true,
+      roles: readRoles,
+      resultField: 'getAcademicDegreeById'
+    };
+
+    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
+  }
+
   public getAcademicTitleDropdownList$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getAcademicTitleDropdown,
+      query: getAcademicTitleDropdownQuery,
       variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
       isPreloader: true,
       isAuthorize: true,
@@ -194,11 +250,25 @@ export class TeacherApiService {
     return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
   }
 
+  public getAcademicTitleDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
+    const config: RequestConfig = {
+      requestType: RequestType.QUERY,
+      query: getAcademicTitleDropdownItemQuery,
+      variables: {id},
+      isPreloader: true,
+      isAuthorize: true,
+      roles: readRoles,
+      resultField: 'getAcademicTitleById'
+    };
+
+    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
+  }
+
   public getTeacherAttestationList(paginator: IPaginatorBase, filter: ICommonTeacherDataFilterGetModel):
     Observable<IResponse<ITeacherAttestationListResponseModel>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherAttestationList,
+      query: getTeacherAttestationListQuery,
       variables: {query: {page: paginator.page, size: paginator.size, ...filter}, teacherId: filter.teacherId},
       isPreloader: true,
       isAuthorize: true,
@@ -212,7 +282,7 @@ export class TeacherApiService {
     Observable<IResponse<IPaginator<ITeacherHonorListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherHonorList,
+      query: getTeacherHonorListQuery,
       variables: {query: {page: paginator.page, size: paginator.size, ...filter}},
       isPreloader: true,
       isAuthorize: true,
@@ -227,7 +297,7 @@ export class TeacherApiService {
     Observable<IResponse<IPaginator<ITeacherRebukeListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherRebukeList,
+      query: getTeacherRebukeListQuery,
       variables: {query: {page: paginator.page, size: paginator.size, ...filter}},
       isPreloader: true,
       isAuthorize: true,
@@ -242,7 +312,7 @@ export class TeacherApiService {
     Observable<IResponse<ITeacherInternshipListResponseModel>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherInternshipList,
+      query: getTeacherInternshipListQuery,
       variables: {query: {page: paginator.page, size: paginator.size, ...filter}, teacherId: filter.teacherId},
       isPreloader: true,
       isAuthorize: true,
@@ -256,7 +326,7 @@ export class TeacherApiService {
     Observable<IResponse<IPaginator<ITeacherEducationListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherEducationList,
+      query: getTeacherEducationListQuery,
       variables: {query: {page: paginator.page, size: paginator.size, ...filter}},
       isPreloader: true,
       isAuthorize: true,
@@ -271,7 +341,7 @@ export class TeacherApiService {
     Observable<IResponse<IPaginator<ITeacherPublicationListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getTeacherPublicationList,
+      query: getTeacherPublicationListQuery,
       variables: {
         query: {
           page: paginator.page,

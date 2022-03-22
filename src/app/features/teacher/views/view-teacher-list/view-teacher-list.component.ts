@@ -33,10 +33,15 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
   private onDestroy = new ReplaySubject(1);
 
   public getCommissionDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getCommissionDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
   public getDepartmentDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getDepartmentDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
   public getTeachingRankDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getTeachingRankDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
   public getAcademicDegreeDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getAcademicDegreeDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
   public getAcademicTitleDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getAcademicTitleDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
 
   private deletedColumn: IEditGridColumnSetting = {
     field: 'isDeleted',
@@ -65,29 +70,29 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
       type: 'text',
     },
     {
-      field: 'commission',
+      field: 'commission.name',
       titleTranslateKey: 'TEACHER.LIST.GRID.COMMISSION',
-      type: 'text',
+      type: 'link',
     },
     {
-      field: 'department',
+      field: 'department.name',
       titleTranslateKey: 'TEACHER.LIST.GRID.DEPARTMENT',
-      type: 'text',
+      type: 'link',
     },
     {
-      field: 'teacherRank',
+      field: 'teacherRank.name',
       titleTranslateKey: 'TEACHER.LIST.GRID.TEACHING_RANK',
-      type: 'text',
+      type: 'link',
     },
     {
-      field: 'academicTitle',
+      field: 'academicTitle.name',
       titleTranslateKey: 'TEACHER.LIST.GRID.ACADEMIC_TITLE',
-      type: 'text',
+      type: 'link',
     },
     {
-      field: 'academicDegree',
+      field: 'academicDegree.name',
       titleTranslateKey: 'TEACHER.LIST.GRID.ACADEMIC_DEGREE',
-      type: 'text',
+      type: 'link',
     },
     this.deletedColumn,
   ];
@@ -118,10 +123,15 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
 
   initDropdowns() {
     this.getCommissionDropdownList = this.teacherFacadeService.getCommissionDropdownList$.bind(this.teacherFacadeService);
+    this.getCommissionDropdownItem = this.teacherFacadeService.getCommissionDropdownItem$.bind(this.teacherFacadeService);
     this.getDepartmentDropdownList = this.teacherFacadeService.getDepartmentDropdownList$.bind(this.teacherFacadeService);
+    this.getDepartmentDropdownItem = this.teacherFacadeService.getDepartmentDropdownItem$.bind(this.teacherFacadeService);
     this.getTeachingRankDropdownList = this.teacherFacadeService.getTeachingRankDropdownList$.bind(this.teacherFacadeService);
+    this.getTeachingRankDropdownItem = this.teacherFacadeService.getTeachingRankDropdownItem$.bind(this.teacherFacadeService);
     this.getAcademicDegreeDropdownList = this.teacherFacadeService.getAcademicDegreeDropdownList$.bind(this.teacherFacadeService);
+    this.getAcademicDegreeDropdownItem = this.teacherFacadeService.getAcademicDegreeDropdownItem$.bind(this.teacherFacadeService);
     this.getAcademicTitleDropdownList = this.teacherFacadeService.getAcademicTitleDropdownList$.bind(this.teacherFacadeService);
+    this.getAcademicTitleDropdownItem = this.teacherFacadeService.getAcademicTitleDropdownItem$.bind(this.teacherFacadeService);
   }
 
   // region Component lifecycle
@@ -205,9 +215,32 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
 
   //region Work with grid
 
-  cellClick(event: ITeacherListViewModel): Promise<boolean> {
-    const route = `teacher/details/${event.id}`;
-    return this.router.navigate([route]);
+  cellClick(event: ITeacherListViewModel & {linkField: string}): Promise<boolean> {
+    debugger
+    if(event.linkField === 'id') {
+      const route = `teacher/details/${event.id}`;
+      return this.router.navigate([route]);
+    }
+    else if(event.linkField === 'commission.name') {
+      const route = `commission/details/${event.commission.id}`;
+      return this.router.navigate([route]);
+    }
+    else if(event.linkField === 'department.name') {
+      const route = `department/details/${event.department.id}`;
+      return this.router.navigate([route]);
+    }
+    else if(event.linkField === 'teacherRank.name') {
+      const route = `teaching-rank/details/${event.teacherRank.id}`;
+      return this.router.navigate([route]);
+    }
+    else if(event.linkField === 'academicDegree.name') {
+      const route = `academic-degree/details/${event.academicDegree.id}`;
+      return this.router.navigate([route]);
+    }
+    else {
+      const route = `academic-title/details/${event.academicTitle.id}`;
+      return this.router.navigate([route]);
+    }
   }
 
   changePage(paginator: IPaginatorBase): void {
@@ -232,6 +265,7 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
   initTitleHeaderButtons(): void {
     this.titleHeaderButtonManager = new TitleHeaderElementManager();
     this.titleHeaderButtonManager
+      .addElement('pin')
       .addElement('add')
       .setVisibility(false)
       .addElement('close-bookmark');
