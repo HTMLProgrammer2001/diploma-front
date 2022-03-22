@@ -114,6 +114,23 @@ export class NavMenuService {
         },
       ],
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.ATTESTATION_DATA',
+      roles: readRoles,
+      items: [
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.CATEGORY',
+          task: {
+            route: 'category/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.CATEGORY.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.CATEGORY.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.categoryList,
+          },
+        },
+      ]
+    }
   ];
 
   constructor(

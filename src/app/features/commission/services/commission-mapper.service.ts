@@ -112,7 +112,7 @@ export class CommissionMapperService {
     if (!isNil(source)) {
       destination = {
         commissionId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'commission' : undefined
+        showCascadeDeletedBy: source.isDeleted ? 'COMMISSION' : undefined
       };
     }
 

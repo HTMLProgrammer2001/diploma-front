@@ -215,7 +215,7 @@ export class TeacherMapperService {
     if (!isNil(source)) {
       destination = {
         teacherId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'teacher' : null
+        showCascadeDeletedBy: source.isDeleted ? 'TEACHER' : null
       };
     }
 

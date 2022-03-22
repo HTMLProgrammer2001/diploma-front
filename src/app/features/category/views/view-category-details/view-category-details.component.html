@@ -2,18 +2,18 @@
   <cr-title-header
       (buttonClickEvent)="onTitleButtonClick($event)"
       [buttonSettings]="titleHeaderButtonSettings"
-      [titleTranslateKey]="'TEACHING_RANK.DETAILS.TITLE'"
+      [titleTranslateKey]="'CATEGORY.DETAILS.TITLE'"
       [titleValue]="titleValue"
   ></cr-title-header>
 
-  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="teachingRank">
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="category">
     <div class="row">
       <div class="col-lg-6">
         <cr-control-edit
-            [(dataValue)]="teachingRank.name"
+            [(dataValue)]="category.name"
             (dataValueChange)="changeTitle()"
-            [translateKeys]="'TEACHING_RANK.DETAILS.NAME'"
-            [isDisabled]="teachingRank.isDeleted && !viewState.restoring"
+            [translateKeys]="'CATEGORY.DETAILS.NAME'"
+            [isDisabled]="category.isDeleted && !viewState.restoring"
             [validator]="validator"
             [validationField]="'name'"
         ></cr-control-edit>
@@ -21,14 +21,14 @@
     </div>
   </div>
 
-  <div class="cr-outer-wrapper" *ngIf="teachingRank && !isNew">
+  <div class="cr-outer-wrapper" *ngIf="category && !isNew">
     <div class="cr-panel-header-wrapper">
-      <p [attr.data-translate]="'TEACHING_RANK.DETAILS.TEACHERS_LIST.TITLE'">
-        {{ 'TEACHING_RANK.DETAILS.TEACHERS_LIST.TITLE' | translate }}
+      <p [attr.data-translate]="'CATEGORY.DETAILS.ATTESTATIONS_LIST.TITLE'">
+        {{ 'CATEGORY.DETAILS.ATTESTATIONS_LIST.TITLE' | translate }}
       </p>
     </div>
 
-    <cr-category-attestations-list [category]="teachingRank"></cr-category-attestations-list>
+    <cr-category-attestations-list [category]="category"></cr-category-attestations-list>
   </div>
 </ng-container>
 

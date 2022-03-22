@@ -25,6 +25,9 @@ import {IEducationQualificationViewModel} from '../../../features/education-qual
 import {IEducationQualificationEducationViewModel} from '../../../features/education-qualification/types/view-model/education-qualification-education-view-model';
 import {IEducationListViewModel} from '../../../features/education/types/view-model/education-list-view-model';
 import {IEducationViewModel} from '../../../features/education/types/view-model/education-view-model';
+import {ICategoryListViewModel} from '../../../features/category/types/view-model/category-list-view-model';
+import {ICategoryViewModel} from '../../../features/category/types/view-model/category-view-model';
+import {ICategoryAttestationViewModel} from '../../../features/category/types/view-model/category-attestation-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -81,4 +84,10 @@ export interface IBookmarkData {
   educationList?: IPaginator<IEducationListViewModel>;
   educationDetail?: IEducationViewModel;
   educationDetailCopy?: IEducationViewModel;
+
+  /** Category **/
+  categoryList?: IPaginator<ICategoryListViewModel>;
+  categoryDetail?: ICategoryViewModel;
+  categoryDetailCopy?: ICategoryViewModel;
+  categoryAttestationsList?: IPaginator<ICategoryAttestationViewModel>;
 }

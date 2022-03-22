@@ -246,6 +246,16 @@
           "BOOKMARK_NAME": "Education: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "CATEGORY": {
+        "LIST": {
+          "BOOKMARK_NAME": "Category list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Category: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -263,6 +273,8 @@
       "EDUCATION_DATA": "Education data",
       "EDUCATION_QUALIFICATION": "Education qualification list",
       "EDUCATION": "Education list",
+      "ATTESTATION_DATA": "Attestation data",
+      "CATEGORY": "Category list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -658,6 +670,43 @@
         "SUCCESS_CREATE": "Education was successfully created",
         "SUCCESS_DELETE": "Education was successfully deleted",
         "SUCCESS_UPDATE": "Education was successfully updated"
+      }
+    }
+  },
+  "CATEGORY": {
+    "LIST": {
+      "TITLE": "Category list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "NAME": "Name",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Categories",
+        "DELETED": "Deleted",
+        "NAME": "Name",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Category: {{value}}",
+      "NAME": "Name",
+      "ATTESTATIONS_LIST": {
+        "TITLE": "Attestations",
+        "GRID": {
+          "ID": "ID",
+          "TEACHER": "Teacher",
+          "DATE": "Date"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Name is required",
+        "MAX_LENGTH_NAME": "Name max length is {{maxLength}}"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Category was successfully created",
+        "SUCCESS_DELETE": "Category was successfully deleted",
+        "SUCCESS_UPDATE": "Category was successfully updated"
       }
     }
   }

@@ -112,7 +112,7 @@ export class TeachingRankMapperService {
     if (!isNil(source)) {
       destination = {
         teachingRankId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'teachingRank' : undefined
+        showCascadeDeletedBy: source.isDeleted ? 'TEACHING_RANK' : undefined
       };
     }
 

@@ -112,7 +112,7 @@ export class AcademicDegreeMapperService {
     if (!isNil(source)) {
       destination = {
         academicDegreeId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'academicDegree' : undefined
+        showCascadeDeletedBy: source.isDeleted ? 'ACADEMIC_DEGREE' : undefined
       };
     }
 

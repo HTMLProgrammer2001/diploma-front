@@ -17,6 +17,8 @@ import {IEducationQualificationFilterViewModel} from '../../../features/educatio
 import {IEducationQualificationDetailsViewState} from '../../../features/education-qualification/types/view-model/education-qualification-details-view-state';
 import {IEducationFilterViewModel} from '../../../features/education/types/view-model/education-filter-view-model';
 import {IEducationDetailsViewState} from '../../../features/education/types/view-model/education-details-view-state';
+import {ICategoryFilterViewModel} from '../../../features/category/types/view-model/category-filter-view-model';
+import {ICategoryDetailsViewState} from '../../../features/category/types/view-model/category-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -78,4 +80,11 @@ export interface IBookmarkViewState {
   educationFilter?: IEducationFilterViewModel;
   educationValidator?: Validator;
   educationDetails?: IEducationDetailsViewState;
+
+  /** Category  **/
+  categoryListPaginator?: IPaginatorBase;
+  categoryFilter?: ICategoryFilterViewModel;
+  categoryValidator?: Validator;
+  categoryDetails?: ICategoryDetailsViewState;
+  categoryAttestationsListPaginator?: IPaginatorBase;
 }

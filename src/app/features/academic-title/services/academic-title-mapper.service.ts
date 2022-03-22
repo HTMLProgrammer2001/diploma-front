@@ -112,7 +112,7 @@ export class AcademicTitleMapperService {
     if (!isNil(source)) {
       destination = {
         academicTitleId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'academicTitle' : undefined
+        showCascadeDeletedBy: source.isDeleted ? 'ACADEMIC_TITLE' : undefined
       };
     }
 

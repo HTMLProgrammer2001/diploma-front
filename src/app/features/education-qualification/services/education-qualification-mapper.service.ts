@@ -116,7 +116,7 @@ export class EducationQualificationMapperService {
     if (!isNil(source)) {
       destination = {
         educationQualificationId: source.id,
-        showCascadeDeletedBy: source.isDeleted ? 'educationQualification' : undefined
+        showCascadeDeletedBy: source.isDeleted ? 'EDUCATION_QUALIFICATION' : undefined
       };
     }
 
