@@ -26,14 +26,14 @@ import {IPaginator} from '../../../../shared/types/paginator';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 @Component({
-  selector: 'cr-view-education-details',
-  templateUrl: './view-education-details.component.html',
-  styleUrls: ['./view-education-details.component.scss']
+  selector: 'cr-view-internship-details',
+  templateUrl: './view-internship-details.component.html',
+  styleUrls: ['./view-internship-details.component.scss']
 })
-export class ViewEducationDetailsComponent extends BaseViewComponent
+export class ViewInternshipDetailsComponent extends BaseViewComponent
   implements OnInit, OnDestroy {
-  public educationId: number;
-  public education: IInternshipViewModel;
+  public internshipId: number;
+  public internship: IInternshipViewModel;
   public titleValue = '';
   public isNew = false;
   public validator: Validator;
@@ -44,8 +44,6 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
 
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
   public getTeacherDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
-  public getEducationQualificationDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
-  public getEducationQualificationDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -55,44 +53,34 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
     protected translateService: TranslateService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
-    protected educationValidationService: InternshipValidationService,
-    private educationFacadeService: InternshipFacadeService,
-    private educationMapperService: InternshipMapperService,
+    protected internshipValidationService: InternshipValidationService,
+    private internshipFacadeService: InternshipFacadeService,
+    private internshipMapperService: InternshipMapperService,
     public authService: AuthService) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.EDUCATION.DETAILS.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.EDUCATION.DETAILS.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.educationDetails,
+      nameTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.DETAILS.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.DETAILS.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.internshipDetails,
     }, bookmarkService, router, route);
 
     this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);
     this.initTitleHeaderButtons();
     this.initDropdowns();
 
-    if (this.document.location.pathname.endsWith('education/new')) {
+    if (this.document.location.pathname.endsWith('internship/new')) {
       this.isNew = true;
     } else {
-      this.educationId = Number(this.route.snapshot.paramMap.get('id'));
+      this.internshipId = Number(this.route.snapshot.paramMap.get('id'));
     }
 
-    this.educationFacadeService.getInternshipDetailsViewState$()
+    this.internshipFacadeService.getInternshipDetailsViewState$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(viewState => this.viewState = viewState);
   }
 
   initDropdowns() {
-    this.getTeacherDropdownList = this.educationFacadeService.getTeacherDropdownList$.bind(this.educationFacadeService);
-    this.getTeacherDropdownItem = this.educationFacadeService.getTeacherDropdownItem$.bind(this.educationFacadeService);
-
-    this.getEducationQualificationDropdownList = this.educationFacadeService.getEducationQualificationDropdownList$
-      .bind(this.educationFacadeService);
-
-    this.getEducationQualificationDropdownItem = this.educationFacadeService.getEducationQualificationDropdownItem$
-      .bind(this.educationFacadeService);
-  }
-
-  get currentYear() {
-    return new Date().getFullYear();
+    this.getTeacherDropdownList = this.internshipFacadeService.getTeacherDropdownList$.bind(this.internshipFacadeService);
+    this.getTeacherDropdownItem = this.internshipFacadeService.getTeacherDropdownItem$.bind(this.internshipFacadeService);
   }
 
   //region Lifecycle hooks
@@ -101,7 +89,7 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
     this.initValidator();
     this.getData();
 
-    this.educationFacadeService.refreshDetails$
+    this.internshipFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
   }
@@ -118,15 +106,15 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
   // region Refresh and set data
 
   checkDataChanged(): boolean {
-    return !isEqual(this.currentBookmark.data.educationDetail, this.currentBookmark.data.educationDetailCopy);
+    return !isEqual(this.currentBookmark.data.internshipDetail, this.currentBookmark.data.internshipDetailCopy);
   }
 
   createData(): void {
-    this.validator.validateDto(this.education);
+    this.validator.validateDto(this.internship);
     if (this.validator.dtoValidationResult.isValid) {
-      this.educationFacadeService.createInternship$(this.education)
+      this.internshipFacadeService.createInternship$(this.internship)
         .subscribe(value => {
-          this.customNotificationService.showSuccess(this.translateService.instant('EDUCATION.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
+          this.customNotificationService.showSuccess(this.translateService.instant('INTERNSHIP.DETAILS.NOTIFICATION.SUCCESS_CREATE'));
           this.navigateToDataPageAfterCreating(value.id);
         }, error => {
           const errors = this.errorService.getMessagesToShow(error.errors);
@@ -148,13 +136,13 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
       if (result instanceof DialogCloseResult) {
       } else {
         if (result.text === this.translateService.instant('COMMON.BUTTON.YES')) {
-          this.educationFacadeService.deleteInternship$(this.education)
+          this.internshipFacadeService.deleteInternship$(this.internship)
             .pipe(takeUntil(this.onDestroy))
             .subscribe(() => {
-              this.bookmarkService.getCurrentDataItem().educationDetail.isDeleted = true;
-              this.bookmarkService.getCurrentDataItem().educationDetailCopy.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().internshipDetail.isDeleted = true;
+              this.bookmarkService.getCurrentDataItem().internshipDetailCopy.isDeleted = true;
               this.refreshTitleHeaderButtons();
-              this.customNotificationService.showSuccess(this.translateService.instant('EDUCATION.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
+              this.customNotificationService.showSuccess(this.translateService.instant('INTERNSHIP.DETAILS.NOTIFICATION.SUCCESS_DELETE'));
             }, error => {
               const errors = this.errorService.getMessagesToShow(error.errors);
 
@@ -169,12 +157,12 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
   }
 
   getData(): void {
-    if (this.isNew && isNil(this.currentBookmark.data.educationDetail)) {
-      this.currentBookmark.data.educationDetail = this.educationMapperService.internshipInitializeViewModel();
-      this.currentBookmark.data.educationDetailCopy = cloneDeep(this.currentBookmark.data.educationDetail);
-      this.setData(this.currentBookmark.data.educationDetail);
-    } else if (isFinite(this.educationId)) {
-      this.educationFacadeService.getInternship$(this.educationId)
+    if (this.isNew && isNil(this.currentBookmark.data.internshipDetail)) {
+      this.currentBookmark.data.internshipDetail = this.internshipMapperService.internshipInitializeViewModel();
+      this.currentBookmark.data.internshipDetailCopy = cloneDeep(this.currentBookmark.data.internshipDetail);
+      this.setData(this.currentBookmark.data.internshipDetail);
+    } else if (isFinite(this.internshipId)) {
+      this.internshipFacadeService.getInternship$(this.internshipId)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => this.setData(value), error => {
           this.viewState.isNotFound = this.errorService.isNotFound(error.errors);
@@ -192,26 +180,26 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
 
   navigateToDataPageAfterCreating(id: number): any {
     this.bookmarkService.deleteBookmarkById(this.bookmarkService.getCurrentId()).subscribe(_ => {
-      const route = `education/details/${id}`;
+      const route = `internship/details/${id}`;
       return this.router.navigate([route]);
     });
   }
 
   setData(value: IInternshipViewModel): void {
     this.validator.setDto(value);
-    this.education = value;
+    this.internship = value;
     this.changeTitle();
     this.refreshTitleHeaderButtons();
   }
 
   updateData(): void {
-    this.validator.validateDto(this.education);
+    this.validator.validateDto(this.internship);
 
     if (this.validator.dtoValidationResult.isValid) {
-      this.educationFacadeService.updateInternship$(this.education)
+      this.internshipFacadeService.updateInternship$(this.internship)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(value => {
-          this.customNotificationService.showSuccess(this.translateService.instant('EDUCATION.DETAILS.NOTIFICATION.SUCCESS_UPDATE'));
+          this.customNotificationService.showSuccess(this.translateService.instant('INTERNSHIP.DETAILS.NOTIFICATION.SUCCESS_UPDATE'));
           this.setData(value);
         }, error => {
           const errors = this.errorService.getMessagesToShow(error.errors);
@@ -231,13 +219,13 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
   // region Initials
 
   initValidator(): void {
-    const initialEducationValidator = this.educationValidationService.getInternshipValidator();
+    const initialInternshipValidator = this.internshipValidationService.getInternshipValidator();
 
     if (!isNil(this.currentBookmark.viewState.educationValidator)) {
-      initialEducationValidator.initValidatorResultStates(this.currentBookmark.viewState.educationValidator);
+      initialInternshipValidator.initValidatorResultStates(this.currentBookmark.viewState.educationValidator);
     }
 
-    this.currentBookmark.viewState.educationValidator = initialEducationValidator;
+    this.currentBookmark.viewState.educationValidator = initialInternshipValidator;
     this.validator = this.currentBookmark.viewState.educationValidator;
   }
 
@@ -245,12 +233,12 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.education.teacher?.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.internship.title || (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 
   openNewData(): Promise<boolean> {
-    const route = `/education/new`;
+    const route = `/internship/new`;
     return this.router.navigate([route]);
   }
 
@@ -265,8 +253,8 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
   }
 
   cancelRestore(): void {
-    this.education = cloneDeep(this.bookmarkService.getCurrentDataItem().educationDetailCopy);
-    this.bookmarkService.getCurrentDataItem().educationDetail = this.education;
+    this.internship = cloneDeep(this.bookmarkService.getCurrentDataItem().internshipDetailCopy);
+    this.bookmarkService.getCurrentDataItem().internshipDetail = this.internship;
     this.viewState.restoring = false;
     this.refreshTitleHeaderButtons();
     this.changeTitle();
@@ -308,13 +296,13 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
 
   refreshTitleHeaderButtons(): void {
     this.titleHeaderButtonManager.getById('delete')
-      .setVisibility(!this.education.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.internship.isDeleted && !this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('add')
       .setVisibility(!this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('update')
-      .setVisibility(!this.isNew && !this.education.isDeleted && writeRoles.includes(this.authService.currentRole));
+      .setVisibility(!this.isNew && !this.internship.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('refresh')
       .setVisibility(!this.isNew && readRoles.includes(this.authService.currentRole));
@@ -323,24 +311,24 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
       .setVisibility(this.isNew && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('delete-status')
-      .setVisibility(!this.isNew && this.education.isDeleted);
+      .setVisibility(!this.isNew && this.internship.isDeleted);
 
     this.titleHeaderButtonManager.getById('restore')
       .setVisibility(!this.isNew && !this.viewState.restoring
-        && this.education.isDeleted && writeRoles.includes(this.authService.currentRole));
+        && this.internship.isDeleted && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('confirm-restore')
-      .setVisibility(!this.isNew && this.education.isDeleted && this.viewState.restoring
+      .setVisibility(!this.isNew && this.internship.isDeleted && this.viewState.restoring
         && writeRoles.includes(this.authService.currentRole));
 
     this.titleHeaderButtonManager.getById('cancel-restore')
-      .setVisibility(!this.isNew && this.education.isDeleted && this.viewState.restoring);
+      .setVisibility(!this.isNew && this.internship.isDeleted && this.viewState.restoring);
   }
 
   onTitleButtonClick(clickedButton: TitleHeaderElement) {
     switch (clickedButton.id) {
       case 'refresh':
-        this.educationFacadeService.refreshDetails$.next();
+        this.internshipFacadeService.refreshDetails$.next();
         break;
 
       case 'delete':

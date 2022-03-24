@@ -10,16 +10,14 @@ import {RequestType} from '../../../global/types/request-type';
 import {readRoles, writeRoles} from '../../../shared/roles';
 import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
-  createEducationQuery,
-  deleteEducationQuery,
-  getEducationByIdQuery,
-  getEducationListQuery,
-  getEducationQualificationDropdownItemQuery,
-  getEducationQualificationDropdownQuery,
+  createInternshipQuery,
+  deleteInternshipQuery,
+  getInternshipByIdQuery,
+  getInternshipListQuery,
   getTeacherDropdownItemQuery,
   getTeacherDropdownQuery,
-  updateEducationQuery
-} from './education-queries';
+  updateInternshipQuery
+} from './internship-queries';
 import {IInternshipFilterModel} from '../types/model/internship-filter-model';
 import {IInternshipPostModel} from '../types/model/internship-post-model';
 import {IInternshipPutModel} from '../types/model/internship-put-model';
@@ -28,15 +26,15 @@ import {InternshipOrderMap} from '../types/common/internship-order-map';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 
 @Injectable({providedIn: 'root'})
-export class EducationApiService {
+export class InternshipApiService {
   constructor(private graphqlService: GraphqlCommonService) {
   }
 
-  public getEducationList$(paginator: IPaginatorBase, filter: IInternshipFilterModel):
+  public getInternshipList$(paginator: IPaginatorBase, filter: IInternshipFilterModel):
     Observable<IResponse<IPaginator<IInternshipListGetModel>>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getEducationListQuery,
+      query: getInternshipListQuery,
       variables: {
         query: {
           page: paginator.page,
@@ -49,63 +47,63 @@ export class EducationApiService {
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'getEducationList'
+      resultField: 'getInternshipList'
     };
 
-    return this.graphqlService.requestToApi<IPaginator<IInternshipGetModel>>(config);
+    return this.graphqlService.requestToApi<IPaginator<IInternshipListGetModel>>(config);
   }
 
-  public getEducation$(id: number): Observable<IResponse<IInternshipGetModel>> {
+  public getInternship$(id: number): Observable<IResponse<IInternshipGetModel>> {
     const config: RequestConfig = {
       requestType: RequestType.QUERY,
-      query: getEducationByIdQuery,
+      query: getInternshipByIdQuery,
       variables: {id},
       isPreloader: true,
       isAuthorize: true,
       roles: readRoles,
-      resultField: 'getEducationById'
+      resultField: 'getInternshipById'
     };
 
     return this.graphqlService.requestToApi<IInternshipGetModel>(config);
   }
 
-  public createEducation$(body: IInternshipPostModel): Observable<IResponse<IdSimpleItem>> {
+  public createInternship$(body: IInternshipPostModel): Observable<IResponse<IdSimpleItem>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: createEducationQuery,
+      query: createInternshipQuery,
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
       roles: writeRoles,
-      resultField: 'createEducation'
+      resultField: 'createInternship'
     };
 
     return this.graphqlService.requestToApi<IInternshipGetModel>(config);
   }
 
-  public updateEducation$(body: IInternshipPutModel): Observable<IResponse<IInternshipGetModel>> {
+  public updateInternship$(body: IInternshipPutModel): Observable<IResponse<IInternshipGetModel>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: updateEducationQuery,
+      query: updateInternshipQuery,
       variables: {body},
       isPreloader: true,
       isAuthorize: true,
       roles: writeRoles,
-      resultField: 'updateEducation'
+      resultField: 'updateInternship'
     };
 
     return this.graphqlService.requestToApi<IInternshipGetModel>(config);
   }
 
-  public deleteEducation$(id: number, guid: string): Observable<IResponse<IdSimpleItem>> {
+  public deleteInternship$(id: number, guid: string): Observable<IResponse<IdSimpleItem>> {
     const config: RequestConfig = {
       requestType: RequestType.MUTATION,
-      query: deleteEducationQuery,
+      query: deleteInternshipQuery,
       variables: {id, guid},
       isPreloader: true,
       isAuthorize: true,
       roles: writeRoles,
-      resultField: 'deleteEducation'
+      resultField: 'deleteInternship'
     };
 
     return this.graphqlService.requestToApi<IInternshipGetModel>(config);
@@ -134,34 +132,6 @@ export class EducationApiService {
       isAuthorize: true,
       roles: readRoles,
       resultField: 'getTeacherById'
-    };
-
-    return this.graphqlService.requestToApi<IdNameSimpleItem>(config);
-  }
-
-  public getEducationQualificationDropdown$(paginator: IPaginatorBase): Observable<IResponse<IPaginator<IdNameSimpleItem>>> {
-    const config: RequestConfig = {
-      requestType: RequestType.QUERY,
-      query: getEducationQualificationDropdownQuery,
-      variables: {page: paginator.page, size: paginator.size, name: paginator.quickSearchFilter},
-      isPreloader: true,
-      isAuthorize: true,
-      roles: readRoles,
-      resultField: 'getEducationQualificationList'
-    };
-
-    return this.graphqlService.requestToApi<IPaginator<IdNameSimpleItem>>(config);
-  }
-
-  public getEducationQualificationDropdownItem$(id: number): Observable<IResponse<IdNameSimpleItem>> {
-    const config: RequestConfig = {
-      requestType: RequestType.QUERY,
-      query: getEducationQualificationDropdownItemQuery,
-      variables: {id},
-      isPreloader: true,
-      isAuthorize: true,
-      roles: readRoles,
-      resultField: 'getEducationQualificationById'
     };
 
     return this.graphqlService.requestToApi<IdNameSimpleItem>(config);

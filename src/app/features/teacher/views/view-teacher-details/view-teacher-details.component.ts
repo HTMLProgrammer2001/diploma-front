@@ -272,7 +272,7 @@ export class ViewTeacherDetailsComponent extends BaseViewComponent
   }
 
   changeTitle(): void {
-    this.titleValue = this.teacher.fullName ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.teacher.fullName || (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 

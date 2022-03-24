@@ -1,4 +1,4 @@
-export interface IEducationDetailsViewState {
+export interface IInternshipDetailsViewState {
   restoring: boolean;
   isNotFound: boolean;
 }

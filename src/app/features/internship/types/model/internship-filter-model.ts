@@ -1,9 +1,9 @@
-export interface IEducationFilterModel {
-  educationQualificationId: number;
-  institution: string;
-  specialty: string;
+export interface IInternshipFilterModel {
+  title: string;
+  code: string;
+  place: string;
+  dateFromMore: string;
+  dateToLess: string;
   teacherId: number;
-  yearOfIssueLess: number;
-  yearOfIssueMore: number;
   showDeleted: boolean;
 }

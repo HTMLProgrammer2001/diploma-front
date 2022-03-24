@@ -256,6 +256,16 @@
           "BOOKMARK_NAME": "Category: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "INTERNSHIP": {
+        "LIST": {
+          "BOOKMARK_NAME": "Internship list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Internship: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -275,6 +285,7 @@
       "EDUCATION": "Education list",
       "ATTESTATION_DATA": "Attestation data",
       "CATEGORY": "Category list",
+      "INTERNSHIP": "Internship list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -707,6 +718,69 @@
         "SUCCESS_CREATE": "Category was successfully created",
         "SUCCESS_DELETE": "Category was successfully deleted",
         "SUCCESS_UPDATE": "Category was successfully updated"
+      }
+    }
+  },
+  "INTERNSHIP": {
+    "LIST": {
+      "TITLE": "Internship list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "TEACHER": "Teacher",
+        "CODE": "Code",
+        "TITLE_FILTER": "Title",
+        "PLACE": "Place",
+        "FROM": "From",
+        "TO": "To",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Internships",
+        "DELETED": "Deleted",
+        "ID": "ID",
+        "CODE": "Code",
+        "TITLE_GRID": "Title",
+        "FROM": "From",
+        "TO": "To",
+        "HOURS": "Hours",
+        "PLACE": "Place"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Internship: {{value}}",
+      "TEACHER": "Teacher",
+      "CODE": "Code",
+      "TITLE_DETAILS": "Title",
+      "PLACE": "Place",
+      "HOURS": "Hours",
+      "CREDITS": "Credits",
+      "FROM": "From",
+      "TO": "To",
+      "DESCRIPTION": "Description",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Title is required",
+        "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
+        "REQUIRED_FROM": "From is required",
+        "REQUIRED_TO": "To is required",
+        "INVALID_MIN_FROM": "From min date is {{minDate}}",
+        "INVALID_MAX_FROM": "From max date is {{maxDate}}",
+        "INVALID_MIN_TO": "To min date is {{minDate}}",
+        "INVALID_MAX_TO": "To max date is {{maxDate}}",
+        "FROM_LESS": "From must be less than to",
+        "TO_GREATER": "To must be greater than from",
+        "REQUIRED_CODE": "Code is required",
+        "MAX_LENGTH_CODE": "Code max length is {{maxLength}}",
+        "MAX_LENGTH_PLACE": "Place max length is {{maxLength}}",
+        "MAX_LENGTH_DESCRIPTION": "Description max length is {{maxLength}}",
+        "REQUIRED_HOURS": "Hours is required",
+        "MIN_HOURS": "Hours min value is {{min}}",
+        "MIN_CREDITS": "Credits min value is {{min}}",
+        "REQUIRED_TEACHER": "Teacher is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Internship was successfully created",
+        "SUCCESS_DELETE": "Internship was successfully deleted",
+        "SUCCESS_UPDATE": "Internship was successfully updated"
       }
     }
   }

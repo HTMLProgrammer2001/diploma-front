@@ -1,10 +1,13 @@
-export interface IEducationPutModel {
+export interface IInternshipPutModel {
   id: number;
   guid: string;
-  description?: string;
-  educationQualificationId: number;
-  institution: string;
-  specialty: string;
+  title: string;
+  from: string;
+  to: string;
+  code: string;
+  place: string;
+  description: string;
+  hours: number;
+  credits: number;
   teacherId: number;
-  yearOfIssue: number;
 }

@@ -21,10 +21,10 @@ import {IInternshipFilterViewModel} from '../../types/view-model/internship-filt
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 @Component({
-  selector: 'cr-view-education-list',
-  templateUrl: './view-education-list.component.html',
+  selector: 'cr-view-internship-list',
+  templateUrl: './view-internship-list.component.html',
 })
-export class ViewEducationListComponent extends BaseViewComponent implements OnInit, OnDestroy {
+export class ViewInternshipListComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public dataSource: IPaginator<IInternshipListViewModel>;
   public paginator: IPaginatorBase;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -34,12 +34,10 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
 
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
   public getTeacherDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
-  public getEducationQualificationDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
-  public getEducationQualificationDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
 
   private deletedColumn: IEditGridColumnSetting = {
     field: 'isDeleted',
-    titleTranslateKey: 'EDUCATION.LIST.GRID.DELETED',
+    titleTranslateKey: 'INTERNSHIP.LIST.GRID.DELETED',
     type: 'boolean',
     autoFit: true,
     hidden: true,
@@ -49,38 +47,46 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
   public columnSettings: Array<IEditGridColumnSetting> = [
     {
       field: 'id',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.ID',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.ID',
       type: 'link',
       disabledIf: () => !readRoles.includes(this.authService.currentRole),
       autoFit: true
     },
     {
       field: 'teacher.name',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.TEACHER',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.TEACHER',
       type: 'link',
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
     {
-      field: 'educationQualification.name',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.EDUCATION_QUALIFICATION',
-      type: 'link',
-      disabledIf: () => !readRoles.includes(this.authService.currentRole)
-    },
-    {
-      field: 'institution',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.INSTITUTION',
+      field: 'code',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.CODE',
       type: 'text',
     },
     {
-      field: 'specialty',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.SPECIALTY',
+      field: 'title',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.TITLE_GRID',
       type: 'text',
     },
     {
-      field: 'yearOfIssue',
-      titleTranslateKey: 'EDUCATION.LIST.GRID.YEAR_OF_ISSUE',
+      field: 'from',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.FROM',
+      type: 'date',
+    },
+    {
+      field: 'to',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.TO',
+      type: 'date',
+    },
+    {
+      field: 'hours',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.HOURS',
+      type: 'numeric',
+    },
+    {
+      field: 'place',
+      titleTranslateKey: 'INTERNSHIP.LIST.GRID.PLACE',
       type: 'text',
-      autoFit: true
     },
     this.deletedColumn,
   ];
@@ -89,51 +95,38 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
     protected router: Router,
     protected route: ActivatedRoute,
     protected bookmarkService: BookmarkService,
-    private educationFacadeService: InternshipFacadeService,
+    private internshipFacadeService: InternshipFacadeService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
     public authService: AuthService,
   ) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.EDUCATION.LIST.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.EDUCATION.LIST.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.educationList,
+      nameTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.LIST.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.LIST.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.internshipList,
       allowPinning: true,
     }, bookmarkService, router, route);
     this.initTitleHeaderButtons();
     this.refreshTitleHeaderButtons();
     this.initDropdowns();
 
-    this.educationFacadeService.getViewStateInternshipFilter$()
+    this.internshipFacadeService.getViewStateInternshipFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
   }
 
   initDropdowns() {
-    this.getTeacherDropdownList = this.educationFacadeService.getTeacherDropdownList$.bind(this.educationFacadeService);
-    this.getTeacherDropdownItem = this.educationFacadeService.getTeacherDropdownItem$.bind(this.educationFacadeService);
-
-    this.getEducationQualificationDropdownList = this.educationFacadeService.getEducationQualificationDropdownList$
-      .bind(this.educationFacadeService);
-
-    this.getEducationQualificationDropdownItem = this.educationFacadeService.getEducationQualificationDropdownItem$
-      .bind(this.educationFacadeService);
+    this.getTeacherDropdownList = this.internshipFacadeService.getTeacherDropdownList$.bind(this.internshipFacadeService);
+    this.getTeacherDropdownItem = this.internshipFacadeService.getTeacherDropdownItem$.bind(this.internshipFacadeService);
   }
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.institution = this.route.snapshot.queryParamMap.get('institution') || '';
-    this.filter.specialty = this.route.snapshot.queryParamMap.get('specialty') || '';
-
-    this.filter.yearOfIssueMore = this.route.snapshot.queryParamMap.get('yearOfIssueMore') ?
-      Number(this.route.snapshot.queryParamMap.get('yearOfIssueMore')) : undefined;
-
-    this.filter.yearOfIssueLess = this.route.snapshot.queryParamMap.get('yearOfIssueLess') ?
-      Number(this.route.snapshot.queryParamMap.get('yearOfIssueLess')) : undefined;
-
-    this.filter.educationQualificationId = this.route.snapshot.queryParamMap.get('educationQualificationId') ?
-      Number(this.route.snapshot.queryParamMap.get('educationQualificationId')) : undefined;
-
+    this.filter.title = this.route.snapshot.queryParamMap.get('title') || '';
+    this.filter.place = this.route.snapshot.queryParamMap.get('place') || '';
+    this.filter.dateFromMore = this.route.snapshot.queryParamMap.get('dateFromMore') || '';
+    this.filter.dateToLess = this.route.snapshot.queryParamMap.get('dateToLess') || '';
+    this.filter.code = this.route.snapshot.queryParamMap.get('code') || '';
     this.filter.teacherId = this.route.snapshot.queryParamMap.get('teacherId') ?
       Number(this.route.snapshot.queryParamMap.get('teacherId')) : undefined;
 
@@ -152,16 +145,16 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
 
   // region Get and create data
   createNewData(): Promise<boolean> {
-    const route = `/education/new`;
+    const route = `/internship/new`;
     return this.router.navigate([route]);
   }
 
   getDataList(): void {
-    forkJoin({paginator: this.educationFacadeService.getViewStateEducationListPaginator$()}).pipe(
+    forkJoin({paginator: this.internshipFacadeService.getViewStateInternshipListPaginator$()}).pipe(
       takeUntil(this.onDestroy),
       switchMap(values => {
         this.paginator = values.paginator;
-        return this.educationFacadeService.getInternshipList$(this.paginator, this.filter);
+        return this.internshipFacadeService.getInternshipList$(this.paginator, this.filter);
       })
     ).subscribe(dataSource => {
       this.dataSource = dataSource;
@@ -179,7 +172,7 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
   }
 
   loadDataList() {
-    this.educationFacadeService.loadInternshipList$(this.paginator, this.filter).subscribe(value => {
+    this.internshipFacadeService.loadInternshipList$(this.paginator, this.filter).subscribe(value => {
       this.dataSource = value;
       this.paginator.page = value.page;
       this.paginator.size = value.size;
@@ -200,13 +193,10 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
 
   cellClick(event: IInternshipListViewModel & { linkField: string }): Promise<boolean> {
     if (event.linkField === 'id') {
-      const route = `education/details/${event.id}`;
-      return this.router.navigate([route]);
-    } else if (event.linkField === 'teacher.name') {
-      const route = `teacher/details/${event.teacher?.id}`;
+      const route = `internship/details/${event.id}`;
       return this.router.navigate([route]);
     } else {
-      const route = `education-qualification/details/${event.educationQualification?.id}`;
+      const route = `teacher/details/${event.teacher?.id}`;
       return this.router.navigate([route]);
     }
   }

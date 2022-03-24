@@ -2,13 +2,13 @@
   <cr-title-header
       (buttonClickEvent)="onTitleButtonClick($event)"
       [buttonSettings]="titleHeaderButtonSettings"
-      [titleTranslateKey]="'EDUCATION.LIST.TITLE'">
+      [titleTranslateKey]="'INTERNSHIP.LIST.TITLE'">
   </cr-title-header>
 
   <div class="cr-outer-wrapper">
     <div class="cr-panel-header-wrapper">
-      <p [attr.data-translate]="'EDUCATION.LIST.FILTER.TITLE'">
-        {{ 'EDUCATION.LIST.FILTER.TITLE' | translate }}
+      <p [attr.data-translate]="'INTERNSHIP.LIST.FILTER.TITLE'">
+        {{ 'INTERNSHIP.LIST.FILTER.TITLE' | translate }}
       </p>
     </div>
 
@@ -17,9 +17,9 @@
         <div class="col-lg-3">
           <cr-dropdown-smart-control
               [(value)]="filter.teacherId"
-              [dataCacheName]="'EducationFilterTeacherDropdown'"
+              [dataCacheName]="'InternshipFilterTeacherDropdown'"
               [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-              [labelTranslateKey]="'EDUCATION.LIST.FILTER.TEACHER'"
+              [labelTranslateKey]="'INTERNSHIP.LIST.FILTER.TEACHER'"
               [dataTranslateKeyField]="'translateKey'"
               [valueField]="'id'"
               [textField]="'name'"
@@ -27,56 +27,47 @@
               [getOneItemFunction]="getTeacherDropdownItem"
           ></cr-dropdown-smart-control>
         </div>
-
-        <div class="col-lg-3">
-          <cr-dropdown-smart-control
-              [(value)]="filter.educationQualificationId"
-              [dataCacheName]="'EducationFilterEducationQualificationDropdown'"
-              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-              [labelTranslateKey]="'EDUCATION.LIST.FILTER.EDUCATION_QUALIFICATION'"
-              [dataTranslateKeyField]="'translateKey'"
-              [valueField]="'id'"
-              [textField]="'name'"
-              [getListItemsFunction]="getEducationQualificationDropdownList"
-              [getOneItemFunction]="getEducationQualificationDropdownItem"
-          ></cr-dropdown-smart-control>
-        </div>
-
         <div class="col-lg-3">
           <cr-control-edit
-            [translateKeys]="'EDUCATION.LIST.FILTER.INSTITUTION'"
-            [(dataValue)]="filter.institution"
+              [(dataValue)]="filter.code"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.CODE'"
           ></cr-control-edit>
         </div>
-
         <div class="col-lg-3">
           <cr-control-edit
-              [translateKeys]="'EDUCATION.LIST.FILTER.SPECIALTY'"
-              [(dataValue)]="filter.specialty"
+              [(dataValue)]="filter.title"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.TITLE_FILTER'"
+          ></cr-control-edit>
+        </div>
+        <div class="col-lg-3">
+          <cr-control-edit
+              [(dataValue)]="filter.place"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.PLACE'"
           ></cr-control-edit>
         </div>
       </div>
-
       <div class="row">
-        <div class="col-lg-3">
-          <cr-numeric-control
-              [translateKeys]="'EDUCATION.LIST.FILTER.ISSUE_YEAR_MORE'"
-              [(dataValue)]="filter.yearOfIssueMore"
-          ></cr-numeric-control>
+        <div class="col-lg-6">
+          <cr-control-datepicker
+              [(dataValue)]="filter.dateFromMore"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.FROM'"
+          ></cr-control-datepicker>
         </div>
-        <div class="col-lg-3">
-          <cr-numeric-control
-              [translateKeys]="'EDUCATION.LIST.FILTER.ISSUE_YEAR_LESS'"
-              [(dataValue)]="filter.yearOfIssueLess"
-          ></cr-numeric-control>
+        <div class="col-lg-6">
+          <cr-control-datepicker
+              [(dataValue)]="filter.dateToLess"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.TO'"
+          ></cr-control-datepicker>
         </div>
-        <div class="col-lg-3">
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
           <cr-checkbox-control
-              [translateKeys]="'EDUCATION.LIST.FILTER.SHOW_DELETED'"
               [(dataValue)]="filter.showDeleted"
+              [translateKeys]="'INTERNSHIP.LIST.FILTER.SHOW_DELETED'"
           ></cr-checkbox-control>
         </div>
-        <div class="col-lg-3 cr-search-button-column">
+        <div class="col-lg-8 cr-search-button-column">
           <cr-button-control
               [buttonTemplateType]="'underlined-action-button'"
               [type]="'submit'"
@@ -90,8 +81,8 @@
 
   <div class="cr-outer-wrapper">
     <div class="cr-panel-header-wrapper">
-      <p [attr.data-translate]="'EDUCATION.LIST.GRID.TITLE'">
-        {{ 'EDUCATION.LIST.GRID.TITLE' | translate }}
+      <p [attr.data-translate]="'INTERNSHIP.LIST.GRID.TITLE'">
+        {{ 'INTERNSHIP.LIST.GRID.TITLE' | translate }}
       </p>
     </div>
     <div class="cr-grid-wrapper-new">
@@ -99,7 +90,7 @@
           (cellClickEvent)="cellClick($event)"
           (pageChangeEvent)="changePage($event)"
           [columnSettings]="columnSettings"
-          [dataCacheName]="'EducationListGrid'"
+          [dataCacheName]="'InternshipListGrid'"
           [dataSource]="dataSource"
           [pageable]="true"
           [resizable]="true"

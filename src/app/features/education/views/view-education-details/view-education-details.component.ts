@@ -245,7 +245,7 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.education.teacher?.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.education.teacher?.name || (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 

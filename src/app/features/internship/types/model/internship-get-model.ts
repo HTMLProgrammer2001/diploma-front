@@ -1,13 +1,16 @@
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
-export interface IEducationGetModel {
+export interface IInternshipGetModel {
   id: number;
   guid: string;
-  description: string;
-  educationQualification: IdNameSimpleItem;
-  institution: string;
-  isDeleted: boolean;
-  specialty: string;
+  code: string;
+  title: string;
+  from: string;
+  to: string;
   teacher: IdNameSimpleItem;
-  yearOfIssue: number;
+  place: string;
+  hours: number;
+  credits: number;
+  description: string;
+  isDeleted: boolean;
 }

@@ -224,7 +224,7 @@ export class ViewCategoryDetailsComponent extends BaseViewComponent
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.category.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.category.name || (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 

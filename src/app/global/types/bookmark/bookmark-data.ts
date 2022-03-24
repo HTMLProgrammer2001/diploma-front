@@ -28,6 +28,8 @@ import {IEducationViewModel} from '../../../features/education/types/view-model/
 import {ICategoryListViewModel} from '../../../features/category/types/view-model/category-list-view-model';
 import {ICategoryViewModel} from '../../../features/category/types/view-model/category-view-model';
 import {ICategoryAttestationViewModel} from '../../../features/category/types/view-model/category-attestation-view-model';
+import {IInternshipListViewModel} from '../../../features/internship/types/view-model/internship-list-view-model';
+import {IInternshipViewModel} from '../../../features/internship/types/view-model/internship-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -90,4 +92,9 @@ export interface IBookmarkData {
   categoryDetail?: ICategoryViewModel;
   categoryDetailCopy?: ICategoryViewModel;
   categoryAttestationsList?: IPaginator<ICategoryAttestationViewModel>;
+
+  /** Internship **/
+  internshipList?: IPaginator<IInternshipListViewModel>;
+  internshipDetail?: IInternshipViewModel;
+  internshipDetailCopy?: IInternshipViewModel;
 }

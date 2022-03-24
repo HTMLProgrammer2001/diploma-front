@@ -2,19 +2,19 @@
   <cr-title-header
       (buttonClickEvent)="onTitleButtonClick($event)"
       [buttonSettings]="titleHeaderButtonSettings"
-      [titleTranslateKey]="'EDUCATION.DETAILS.TITLE'"
+      [titleTranslateKey]="'INTERNSHIP.DETAILS.TITLE'"
       [titleValue]="titleValue"
   ></cr-title-header>
 
-  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="education">
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="internship">
     <div class="row cr-bottom-row-border">
-      <div class="col-lg-6">
+      <div class="col-lg-3">
         <cr-dropdown-smart-control
-            [(currentItemValue)]="education.teacher"
-            [value]="education.teacher.id"
-            [dataCacheName]="'EducationDetailsTeacherDropdown'"
+            [(currentItemValue)]="internship.teacher"
+            [value]="internship.teacher.id"
+            [dataCacheName]="'InternshipDetailsTeacherDropdown'"
             [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-            [labelTranslateKey]="'EDUCATION.DETAILS.TEACHER'"
+            [labelTranslateKey]="'INTERNSHIP.DETAILS.TEACHER'"
             [dataTranslateKeyField]="'translateKey'"
             [valueField]="'id'"
             [textField]="'name'"
@@ -22,62 +22,89 @@
             [getOneItemFunction]="getTeacherDropdownItem"
             [validator]="validator"
             [validationField]="'teacher.id'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
         ></cr-dropdown-smart-control>
       </div>
-      <div class="col-lg-6">
-        <cr-dropdown-smart-control
-            [(currentItemValue)]="education.educationQualification"
-            [value]="education.educationQualification.id"
-            [dataCacheName]="'EducationDetailsEducationQualificationDropdown'"
-            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
-            [labelTranslateKey]="'EDUCATION.DETAILS.EDUCATION_QUALIFICATION'"
-            [dataTranslateKeyField]="'translateKey'"
-            [valueField]="'id'"
-            [textField]="'name'"
-            [getListItemsFunction]="getEducationQualificationDropdownList"
-            [getOneItemFunction]="getEducationQualificationDropdownItem"
+      <div class="col-lg-3">
+        <cr-control-edit
+            [(dataValue)]="internship.code"
+            [translateKeys]="'INTERNSHIP.DETAILS.CODE'"
             [validator]="validator"
-            [validationField]="'educationQualification.id'"
-        ></cr-dropdown-smart-control>
+            [validationField]="'code'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-3">
+        <cr-control-edit
+            [(dataValue)]="internship.title"
+            [translateKeys]="'INTERNSHIP.DETAILS.TITLE_DETAILS'"
+            [validator]="validator"
+            [validationField]="'title'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-3">
+        <cr-control-edit
+            [(dataValue)]="internship.place"
+            [translateKeys]="'INTERNSHIP.DETAILS.PLACE'"
+            [validator]="validator"
+            [validationField]="'place'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
       </div>
     </div>
     <div class="row cr-bottom-row-border">
-      <div class="col-lg-4">
-        <cr-control-edit
-          [(dataValue)]="education.institution"
-          [translateKeys]="'EDUCATION.DETAILS.INSTITUTION'"
-          [validator]="validator"
-          [validationField]="'institution'"
-        ></cr-control-edit>
-      </div>
-      <div class="col-lg-4">
-        <cr-control-edit
-            [(dataValue)]="education.specialty"
-            [translateKeys]="'EDUCATION.DETAILS.SPECIALTY'"
+      <div class="col-lg-3">
+        <cr-control-datepicker
+            [(dataValue)]="internship.from"
+            [translateKeys]="'INTERNSHIP.DETAILS.FROM'"
             [validator]="validator"
-            [validationField]="'specialty'"
-        ></cr-control-edit>
+            [validationField]="'from'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-control-datepicker>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-3">
+        <cr-control-datepicker
+            [(dataValue)]="internship.to"
+            [translateKeys]="'INTERNSHIP.DETAILS.TO'"
+            [validator]="validator"
+            [validationField]="'to'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-control-datepicker>
+      </div>
+      <div class="col-lg-3">
         <cr-numeric-control
-            [(dataValue)]="education.yearOfIssue"
-            [translateKeys]="'EDUCATION.DETAILS.YEAR_OF_ISSUE'"
-            [min]="1970"
-            [max]="currentYear"
-            [autoCorrectMinMax]="true"
+            [(dataValue)]="internship.hours"
+            [translateKeys]="'INTERNSHIP.DETAILS.HOURS'"
             [format]="'#'"
             [validator]="validator"
-            [validationField]="'yearOfIssue'"
+            [validationField]="'hours'"
+            [min]="1"
+            [autoCorrectMinMax]="true"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
+        ></cr-numeric-control>
+      </div>
+      <div class="col-lg-3">
+        <cr-numeric-control
+            [(dataValue)]="internship.credits"
+            [translateKeys]="'INTERNSHIP.DETAILS.CREDITS'"
+            [format]="'#'"
+            [validator]="validator"
+            [validationField]="'credits'"
+            [min]="0"
+            [autoCorrectMinMax]="true"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
         ></cr-numeric-control>
       </div>
     </div>
     <div class="row cr-bottom-row-border">
       <div class="col-lg-12">
         <cr-text-area-control
-          [(dataValue)]="education.description"
-          [translateKeys]="'EDUCATION.DETAILS.DESCRIPTION'"
-          [validator]="validator"
-          [validationField]="'description'"
+            [(dataValue)]="internship.description"
+            [translateKeys]="'INTERNSHIP.DETAILS.DESCRIPTION'"
+            [validator]="validator"
+            [validationField]="'description'"
+            [isDisabled]="internship.isDeleted && !viewState.restoring"
         ></cr-text-area-control>
       </div>
     </div>

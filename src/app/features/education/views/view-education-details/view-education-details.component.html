@@ -22,6 +22,7 @@
             [getOneItemFunction]="getTeacherDropdownItem"
             [validator]="validator"
             [validationField]="'teacher.id'"
+            [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-dropdown-smart-control>
       </div>
       <div class="col-lg-6">
@@ -38,6 +39,7 @@
             [getOneItemFunction]="getEducationQualificationDropdownItem"
             [validator]="validator"
             [validationField]="'educationQualification.id'"
+            [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-dropdown-smart-control>
       </div>
     </div>
@@ -48,6 +50,7 @@
           [translateKeys]="'EDUCATION.DETAILS.INSTITUTION'"
           [validator]="validator"
           [validationField]="'institution'"
+          [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-control-edit>
       </div>
       <div class="col-lg-4">
@@ -56,6 +59,7 @@
             [translateKeys]="'EDUCATION.DETAILS.SPECIALTY'"
             [validator]="validator"
             [validationField]="'specialty'"
+            [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-control-edit>
       </div>
       <div class="col-lg-4">
@@ -68,6 +72,7 @@
             [format]="'#'"
             [validator]="validator"
             [validationField]="'yearOfIssue'"
+            [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-numeric-control>
       </div>
     </div>
@@ -78,6 +83,7 @@
           [translateKeys]="'EDUCATION.DETAILS.DESCRIPTION'"
           [validator]="validator"
           [validationField]="'description'"
+          [isDisabled]="education.isDeleted && !viewState.restoring"
         ></cr-text-area-control>
       </div>
     </div>

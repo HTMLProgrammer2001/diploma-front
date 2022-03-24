@@ -19,6 +19,8 @@ import {IEducationFilterViewModel} from '../../../features/education/types/view-
 import {IEducationDetailsViewState} from '../../../features/education/types/view-model/education-details-view-state';
 import {ICategoryFilterViewModel} from '../../../features/category/types/view-model/category-filter-view-model';
 import {ICategoryDetailsViewState} from '../../../features/category/types/view-model/category-details-view-state';
+import {IInternshipDetailsViewState} from '../../../features/internship/types/view-model/internship-details-view-state';
+import {IInternshipFilterViewModel} from '../../../features/internship/types/view-model/internship-filter-view-model';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -87,4 +89,10 @@ export interface IBookmarkViewState {
   categoryValidator?: Validator;
   categoryDetails?: ICategoryDetailsViewState;
   categoryAttestationsListPaginator?: IPaginatorBase;
+
+  /** Internship  **/
+  internshipListPaginator?: IPaginatorBase;
+  internshipFilter?: IInternshipFilterViewModel;
+  internshipValidator?: Validator;
+  internshipDetails?: IInternshipDetailsViewState;
 }

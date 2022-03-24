@@ -1,8 +1,8 @@
 import {gql} from 'apollo-angular';
 
-export const getEducationListQuery = gql`
-    query GetEducationList($query: EducationGetListRequest!) {
-        getEducationList(query: $query) {
+export const getInternshipListQuery = gql`
+    query GetInternshipList($query: InternshipGetListRequest!) {
+        getInternshipList(query: $query) {
             size
             page
             skip
@@ -10,78 +10,76 @@ export const getEducationListQuery = gql`
             totalPages
             responseList {
                 id
-                isDeleted
                 teacher {
                     id
                     name
                 }
-                yearOfIssue
-                institution
-                specialty
-                educationQualification {
-                    name
-                    id
-                }
+                hours
+                title
+                place
+                from
+                to
+                code
             }
         }
     }
 `;
 
-export const getEducationByIdQuery = gql`
-    query GetEducationById($id: ID!) {
-        getEducationById(query: {id: $id, showDeleted: true}) {
+export const getInternshipByIdQuery = gql`
+    query GetInternshipById($id: ID!) {
+        getInternshipById(query: {id: $id, showDeleted: true}) {
             id
-            specialty
-            institution
-            yearOfIssue
-            educationQualification {
-                id
-                name
-            }
             teacher {
                 id
                 name
             }
             description
+            place
+            code
+            from
+            to
+            hours
+            title
+            credits
             isDeleted
             guid
         }
     }
 `;
 
-export const createEducationQuery = gql`
-    mutation CreateEducation($body: EducationCreateRequest!) {
-        createEducation(body: $body) {
+export const createInternshipQuery = gql`
+    mutation CreateInternship($body: InternshipCreateRequest!) {
+        createInternship(body: $body) {
             id
         }
     }
 `;
 
-export const updateEducationQuery = gql`
-    mutation UpdateEducation($body: EducationUpdateRequest!) {
-        updateEducation(body: $body) {
+export const updateInternshipQuery = gql`
+    mutation UpdateInternship($body: InternshipUpdateRequest!) {
+        updateInternship(body: $body) {
             id
-            specialty
-            institution
-            yearOfIssue
-            educationQualification {
-                id
-                name
-            }
             teacher {
                 id
                 name
             }
             description
+            place
+            code
+            title
+            from
+            to
+            hours
+            credits
             isDeleted
             guid
         }
     }
 `;
 
-export const deleteEducationQuery = gql`
-    mutation DeleteEducation($id: ID!, $guid: String!) {
-        deleteEducation(id: $id, guid: $guid) {
+export const deleteInternshipQuery = gql`
+    mutation DeleteInternship($id: ID!, $guid: String!) {
+        deleteInternship(id: $id, guid: $guid) {
             id
         }
     }
@@ -108,31 +106,6 @@ export const getTeacherDropdownItemQuery = gql`
         getTeacherById(query: {id: $id, showDeleted: false}) {
             id
             name: fullName
-        }
-    }
-`;
-
-export const getEducationQualificationDropdownQuery = gql`
-    query GetEducationQualificationDropdown($page: Int, $size: Int, $name: String) {
-        getEducationQualificationList(query: {page: $page, size: $size, name: $name, showDeleted: false}) {
-            size
-            page
-            skip
-            totalPages
-            totalElements
-            responseList {
-                id
-                name
-            }
-        }
-    }
-`;
-
-export const getEducationQualificationDropdownItemQuery = gql`
-    query GetEducationQualificationDropdownItem($id: ID!) {
-        getEducationQualificationById(query: {id: $id, showDeleted: false}) {
-            id
-            name
         }
     }
 `;

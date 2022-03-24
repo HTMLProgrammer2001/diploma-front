@@ -1,7 +1,9 @@
-export const EducationOrderMap = {
+export const InternshipOrderMap = {
   id: 'ID',
-  institution: 'INSTITUTION',
+  code: 'CODE',
+  title: 'TITLE',
+  dateFrom: 'DATE_FROM',
+  dateTo: 'DATE_TO',
   teacher: 'TEACHER',
-  educationQualification: 'EDUCATION_QUALIFICATION',
-  yearOfIssue: 'YEAR_OF_ISSUE'
+  hours: 'HOURS'
 };

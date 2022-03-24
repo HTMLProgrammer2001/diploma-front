@@ -13,18 +13,20 @@ import {IInternshipListGetModel} from '../types/model/internship-list-get-model'
 @Injectable({
   providedIn: 'root',
 })
-export class EducationMapperService {
-  public educationListGetModelToViewModel(source: IInternshipListGetModel): IInternshipListViewModel {
+export class InternshipMapperService {
+  public internshipListGetModelToViewModel(source: IInternshipListGetModel): IInternshipListViewModel {
     let destination = {} as IInternshipListViewModel;
 
     if (!isNil(source)) {
       destination = {
         id: source.id,
-        educationQualification: source.educationQualification,
         teacher: source.teacher,
-        specialty: source.specialty,
-        yearOfIssue: source.yearOfIssue,
-        institution: source.institution,
+        code: source.code,
+        to: source.to,
+        from: source.from,
+        hours: source.hours,
+        place: source.place,
+        title: source.title,
         isDeleted: source.isDeleted
       };
     }
@@ -32,19 +34,22 @@ export class EducationMapperService {
     return destination;
   }
 
-  public educationGetModelToViewModel(source: IInternshipGetModel): IInternshipViewModel {
+  public internshipGetModelToViewModel(source: IInternshipGetModel): IInternshipViewModel {
     let destination = {} as IInternshipViewModel;
 
     if (!isNil(source)) {
       destination = {
         id: source.id,
-        educationQualification: source.educationQualification,
-        teacher: source.teacher,
-        institution: source.institution,
-        specialty: source.specialty,
-        yearOfIssue: source.yearOfIssue,
-        description: source.description,
+        to: source.to,
+        from: source.from,
         guid: source.guid,
+        teacher: source.teacher,
+        code: source.code,
+        description: source.description,
+        place: source.place,
+        credits: source.credits,
+        title: source.title,
+        hours: source.hours,
         isDeleted: source.isDeleted
       };
     }
@@ -52,93 +57,99 @@ export class EducationMapperService {
     return destination;
   }
 
-  public educationViewModelToPutModel(source: IInternshipViewModel): IInternshipPutModel {
+  public internshipViewModelToPutModel(source: IInternshipViewModel): IInternshipPutModel {
     let destination = {} as IInternshipPutModel;
 
     if (!isNil(source)) {
       destination = {
         id: source.id,
-        educationQualificationId: source.educationQualification?.id,
-        institution: source.institution,
-        specialty: source.specialty,
-        yearOfIssue: source.yearOfIssue,
+        to: source.to,
+        from: source.from,
+        guid: source.guid,
         description: source.description,
-        teacherId: source.teacher?.id,
-        guid: source.guid
+        teacherId: source.teacher.id,
+        code: source.code,
+        hours: source.hours,
+        place: source.place,
+        title: source.title,
+        credits: source.credits,
       };
     }
 
     return destination;
   }
 
-  public educationViewModelToPostModel(source: IInternshipViewModel): IInternshipPostModel {
+  public internshipViewModelToPostModel(source: IInternshipViewModel): IInternshipPostModel {
     let destination = {} as IInternshipPostModel;
 
     if (!isNil(source)) {
       destination = {
-        educationQualificationId: source.educationQualification?.id,
+        to: source.to,
+        from: source.from,
         description: source.description,
-        teacherId: source.teacher?.id,
-        institution: source.institution,
-        specialty: source.specialty,
-        yearOfIssue: source.yearOfIssue
+        teacherId: source.teacher.id,
+        code: source.code,
+        hours: source.hours,
+        place: source.place,
+        title: source.title,
+        credits: source.credits,
       };
     }
 
     return destination;
   }
 
-  public educationInitializeViewModel(): IInternshipViewModel {
+  public internshipInitializeViewModel(): IInternshipViewModel {
     return {
       id: null,
-      educationQualification: {
-        id: null,
-        name: ''
-      },
       teacher: {
         id: null,
         name: ''
       },
-      specialty: '',
-      description: '',
-      yearOfIssue: null,
-      institution: '',
+      hours: 0,
       guid: null,
+      description: '',
+      title: '',
+      place: '',
+      from: null,
+      to: null,
+      code: '',
+      credits: 0,
       isDeleted: false
     };
   }
 
-  public educationInitializeFilterViewModel(): IInternshipFilterViewModel {
+  public internshipInitializeFilterViewModel(): IInternshipFilterViewModel {
     return {
-      educationQualificationId: null,
+      code: '',
+      place: '',
+      title: '',
       teacherId: null,
-      institution: '',
-      specialty: '',
-      yearOfIssueLess: null,
-      yearOfIssueMore: null,
-      showDeleted: false
+      showDeleted: false,
+      dateFromMore: '',
+      dateToLess: ''
     };
   }
 
-  public educationInitializeDetailsViewState(): IInternshipDetailsViewState {
+  public internshipInitializeDetailsViewState(): IInternshipDetailsViewState {
     return {
       isNotFound: false,
       restoring: false
     };
   }
 
-  public educationFilterViewModelToModel(source: IInternshipFilterViewModel):
+  public internshipFilterViewModelToModel(source: IInternshipFilterViewModel):
     IInternshipFilterModel {
     let destination = {} as IInternshipFilterModel;
 
     if (!isNil(source)) {
       destination = {
-        educationQualificationId: source.educationQualificationId,
-        specialty: source.specialty,
+        code: source.code,
         teacherId: source.teacherId,
-        yearOfIssueLess: source.yearOfIssueLess,
-        yearOfIssueMore: source.yearOfIssueMore,
-        institution: source.institution,
+        place: source.place,
+        title: source.title,
+        dateToLess: source.dateToLess || null,
+        dateFromMore: source.dateFromMore || null,
         showDeleted: source.showDeleted
       };
     }

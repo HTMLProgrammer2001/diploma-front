@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ViewEducationListComponent} from './views/view-education-list/view-education-list.component';
+import {ViewInternshipListComponent} from './views/view-internship-list/view-internship-list.component';
 import {BookmarkProcessGuard} from '../../global/services/bookmark/bookmark-process.guard';
-import {ViewEducationDetailsComponent} from './views/view-education-details/view-education-details.component';
+import {ViewInternshipDetailsComponent} from './views/view-internship-details/view-internship-details.component';
 import {AuthGuard} from '../../global/services/auth/auth.guard';
 import {PermissionsGuard} from '../../global/services/auth/permissions.guard';
 import {readRoles, writeRoles} from '../../shared/roles';
@@ -19,21 +19,21 @@ export const routingPaths = {
 const routes: Routes = [
   {
     path: routingPaths.list,
-    component: ViewEducationListComponent,
+    component: ViewInternshipListComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
     data: {allowPinning: true, roles: readRoles},
   },
   {
     matcher: matchId(routingPaths.details),
-    component: ViewEducationDetailsComponent,
+    component: ViewInternshipDetailsComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
     data: {roles: readRoles}
   },
   {
     path: routingPaths.new,
-    component: ViewEducationDetailsComponent,
+    component: ViewInternshipDetailsComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
     data: {roles: writeRoles}
@@ -49,5 +49,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EducationRoutingModule {
+export class InternshipRoutingModule {
 }

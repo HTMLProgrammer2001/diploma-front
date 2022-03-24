@@ -4,8 +4,8 @@ import {BookmarkService} from '../../../global/services/bookmark/bookmark.servic
 import {ConfigService} from '../../../global/services/config/config.service';
 import {IPaginator} from '../../../shared/types/paginator';
 import {map, tap} from 'rxjs/operators';
-import {EducationApiService} from './education-api.service';
-import {EducationMapperService} from './education-mapper.service';
+import {InternshipApiService} from './internship-api.service';
+import {InternshipMapperService} from './internship-mapper.service';
 import {cloneDeep, isNil} from 'lodash';
 import {IInternshipListViewModel} from '../types/view-model/internship-list-view-model';
 import {IInternshipViewModel} from '../types/view-model/internship-view-model';
@@ -18,134 +18,126 @@ import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 @Injectable({
   providedIn: 'root'
 })
-export class EducationFacadeService {
+export class InternshipFacadeService {
   public refreshDetails$: Subject<void> = new Subject<void>();
 
   constructor(
     private configService: ConfigService,
     private bookmarkService: BookmarkService,
-    private educationMapperService: EducationMapperService,
-    private educationApiService: EducationApiService,
+    private internshipMapperService: InternshipMapperService,
+    private internshipApiService: InternshipApiService,
   ) {
   }
 
-  //region Education
+  //region Internship
 
-  public getViewStateEducationListPaginator$(): Observable<IPaginatorBase> {
-    if (isNil(this.bookmarkService.getCurrentViewState().educationListPaginator)) {
-      this.bookmarkService.getCurrentViewState().educationListPaginator = {
+  public getViewStateInternshipListPaginator$(): Observable<IPaginatorBase> {
+    if (isNil(this.bookmarkService.getCurrentViewState().internshipListPaginator)) {
+      this.bookmarkService.getCurrentViewState().internshipListPaginator = {
         page: this.configService.getConfig().pagingGridBigPage,
         size: this.configService.getConfig().pagingGridBigSize,
         sort: [{field: 'id', dir: 'asc'}]
       };
     }
 
-    return of(this.bookmarkService.getCurrentViewState().educationListPaginator);
+    return of(this.bookmarkService.getCurrentViewState().internshipListPaginator);
   }
 
-  public getViewStateEducationFilter$(): Observable<IInternshipFilterViewModel> {
-    if (isNil(this.bookmarkService.getCurrentViewState().educationFilter)) {
-      this.bookmarkService.getCurrentViewState().educationFilter = this.educationMapperService
-        .educationInitializeFilterViewModel();
+  public getViewStateInternshipFilter$(): Observable<IInternshipFilterViewModel> {
+    if (isNil(this.bookmarkService.getCurrentViewState().internshipFilter)) {
+      this.bookmarkService.getCurrentViewState().internshipFilter = this.internshipMapperService
+        .internshipInitializeFilterViewModel();
     }
 
-    return of(this.bookmarkService.getCurrentViewState().educationFilter);
+    return of(this.bookmarkService.getCurrentViewState().internshipFilter);
   }
 
-  public getEducationList$(paginator: IPaginatorBase, filter: IInternshipFilterViewModel):
+  public getInternshipList$(paginator: IPaginatorBase, filter: IInternshipFilterViewModel):
     Observable<IPaginator<IInternshipListViewModel>> {
-    if (!!this.bookmarkService.getCurrentDataItem().educationList) {
-      return of(this.bookmarkService.getCurrentDataItem().educationList);
+    if (!!this.bookmarkService.getCurrentDataItem().internshipList) {
+      return of(this.bookmarkService.getCurrentDataItem().internshipList);
     } else {
-      return this.loadEducationList$(paginator, filter);
+      return this.loadInternshipList$(paginator, filter);
     }
   }
 
-  public loadEducationList$(paginator: IPaginatorBase, filter: IInternshipFilterViewModel):
+  public loadInternshipList$(paginator: IPaginatorBase, filter: IInternshipFilterViewModel):
     Observable<IPaginator<IInternshipListViewModel>> {
-    const filterModel = this.educationMapperService.educationFilterViewModelToModel(filter);
-    return this.educationApiService.getEducationList$(paginator, filterModel).pipe(
+    const filterModel = this.internshipMapperService.internshipFilterViewModelToModel(filter);
+    return this.internshipApiService.getInternshipList$(paginator, filterModel).pipe(
       map(value => ({
         ...value.data,
-        responseList: value.data.responseList.map(item => this.educationMapperService
-          .educationListGetModelToViewModel(item)),
+        responseList: value.data.responseList.map(item => this.internshipMapperService
+          .internshipListGetModelToViewModel(item)),
       })),
-      tap(value => this.bookmarkService.getCurrentDataItem().educationList = value),
+      tap(value => this.bookmarkService.getCurrentDataItem().internshipList = value),
     );
   }
 
-  public getEducation$(id: number): Observable<IInternshipViewModel> {
-    if (!!this.bookmarkService.getCurrentDataItem().educationDetail) {
-      return of(this.bookmarkService.getCurrentDataItem().educationDetail);
+  public getInternship$(id: number): Observable<IInternshipViewModel> {
+    if (!!this.bookmarkService.getCurrentDataItem().internshipDetail) {
+      return of(this.bookmarkService.getCurrentDataItem().internshipDetail);
     } else {
-      return this.loadEducation$(id);
+      return this.loadInternship$(id);
     }
   }
 
-  public loadEducation$(id: number): Observable<IInternshipViewModel> {
-    return this.educationApiService.getEducation$(id)
+  public loadInternship$(id: number): Observable<IInternshipViewModel> {
+    return this.internshipApiService.getInternship$(id)
       .pipe(
-        map(value => this.educationMapperService.educationGetModelToViewModel(value.data)),
+        map(value => this.internshipMapperService.internshipGetModelToViewModel(value.data)),
         tap(value => {
-          this.bookmarkService.getCurrentDataItem().educationDetail = value;
-          this.bookmarkService.getCurrentDataItem().educationDetailCopy = cloneDeep(value);
+          this.bookmarkService.getCurrentDataItem().internshipDetail = value;
+          this.bookmarkService.getCurrentDataItem().internshipDetailCopy = cloneDeep(value);
         })
       );
   }
 
-  public createEducation$(education: IInternshipViewModel): Observable<IdSimpleItem> {
-    const body = this.educationMapperService.educationViewModelToPostModel(education);
-    return this.educationApiService.createEducation$(body)
+  public createInternship$(internship: IInternshipViewModel): Observable<IdSimpleItem> {
+    const body = this.internshipMapperService.internshipViewModelToPostModel(internship);
+    return this.internshipApiService.createInternship$(body)
       .pipe(map(value => value.data));
   }
 
-  public updateEducation$(education: IInternshipViewModel):
+  public updateInternship$(internship: IInternshipViewModel):
     Observable<IInternshipViewModel> {
-    const body = this.educationMapperService.educationViewModelToPutModel(education);
-    return this.educationApiService.updateEducation$(body)
+    const body = this.internshipMapperService.internshipViewModelToPutModel(internship);
+    return this.internshipApiService.updateInternship$(body)
       .pipe(
-        map(value => this.educationMapperService.educationGetModelToViewModel(value.data)),
+        map(value => this.internshipMapperService.internshipGetModelToViewModel(value.data)),
         tap(value => {
-          this.bookmarkService.getCurrentDataItem().educationDetail = value;
-          this.bookmarkService.getCurrentDataItem().educationDetailCopy = cloneDeep(value);
+          this.bookmarkService.getCurrentDataItem().internshipDetail = value;
+          this.bookmarkService.getCurrentDataItem().internshipDetailCopy = cloneDeep(value);
         })
       );
   }
 
-  public deleteEducation$(education: IInternshipViewModel): Observable<IdSimpleItem> {
-    return this.educationApiService.deleteEducation$(
-      education.id,
-      education.guid
+  public deleteInternship$(internship: IInternshipViewModel): Observable<IdSimpleItem> {
+    return this.internshipApiService.deleteInternship$(
+      internship.id,
+      internship.guid
     ).pipe(map(resp => resp.data));
   }
 
-  public getEducationDetailsViewState$(): Observable<IInternshipDetailsViewState> {
-    if (isNil(this.bookmarkService.getCurrentViewState().educationDetails)) {
-      this.bookmarkService.getCurrentViewState().educationDetails = this.educationMapperService
-        .educationInitializeDetailsViewState();
+  public getInternshipDetailsViewState$(): Observable<IInternshipDetailsViewState> {
+    if (isNil(this.bookmarkService.getCurrentViewState().internshipDetails)) {
+      this.bookmarkService.getCurrentViewState().internshipDetails = this.internshipMapperService
+        .internshipInitializeDetailsViewState();
     }
 
-    return of(this.bookmarkService.getCurrentViewState().educationDetails);
+    return of(this.bookmarkService.getCurrentViewState().internshipDetails);
   }
 
   // endregion
 
-  // region Education dropdowns
+  // region Internship dropdowns
 
   public getTeacherDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
-    return this.educationApiService.getTeacherDropdown$(paginator).pipe(map(resp => resp.data));
+    return this.internshipApiService.getTeacherDropdown$(paginator).pipe(map(resp => resp.data));
   }
 
   public getTeacherDropdownItem$(id: number): Observable<IdNameSimpleItem> {
-    return this.educationApiService.getTeacherDropdownItem$(id).pipe(map(resp => resp.data));
-  }
-
-  public getEducationQualificationDropdownList$(paginator: IPaginatorBase): Observable<IPaginator<IdNameSimpleItem>> {
-    return this.educationApiService.getEducationQualificationDropdown$(paginator).pipe(map(resp => resp.data));
-  }
-
-  public getEducationQualificationDropdownItem$(id: number): Observable<IdNameSimpleItem> {
-    return this.educationApiService.getEducationQualificationDropdownItem$(id).pipe(map(resp => resp.data));
+    return this.internshipApiService.getTeacherDropdownItem$(id).pipe(map(resp => resp.data));
   }
 
   // endregion

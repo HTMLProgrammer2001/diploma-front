@@ -18,4 +18,6 @@ export class BookmarkIcon {
   static educationDetails = null;
   static categoryList = null;
   static categoryDetails = null;
+  static internshipList = null;
+  static internshipDetails = null;
 }

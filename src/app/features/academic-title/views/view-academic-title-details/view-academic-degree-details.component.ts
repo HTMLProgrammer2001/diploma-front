@@ -223,7 +223,7 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
 
   // region Event handler
   changeTitle(): void {
-    this.titleValue = this.academicTitle.name ?? (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
+    this.titleValue = this.academicTitle.name || (this.isNew ? this.translateService.instant('COMMON.NEW') : '');
     this.currentBookmarkTask.nameValue = this.titleValue;
   }
 

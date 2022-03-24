@@ -129,6 +129,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.categoryList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.INTERNSHIP',
+          task: {
+            route: 'internship/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.INTERNSHIP.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.internshipList,
+          },
+        },
       ]
     }
   ];
