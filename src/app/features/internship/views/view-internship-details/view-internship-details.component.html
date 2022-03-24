@@ -1,0 +1,87 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'EDUCATION.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="education">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="education.teacher"
+            [value]="education.teacher.id"
+            [dataCacheName]="'EducationDetailsTeacherDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'EDUCATION.DETAILS.TEACHER'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getTeacherDropdownList"
+            [getOneItemFunction]="getTeacherDropdownItem"
+            [validator]="validator"
+            [validationField]="'teacher.id'"
+        ></cr-dropdown-smart-control>
+      </div>
+      <div class="col-lg-6">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="education.educationQualification"
+            [value]="education.educationQualification.id"
+            [dataCacheName]="'EducationDetailsEducationQualificationDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'EDUCATION.DETAILS.EDUCATION_QUALIFICATION'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getEducationQualificationDropdownList"
+            [getOneItemFunction]="getEducationQualificationDropdownItem"
+            [validator]="validator"
+            [validationField]="'educationQualification.id'"
+        ></cr-dropdown-smart-control>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-4">
+        <cr-control-edit
+          [(dataValue)]="education.institution"
+          [translateKeys]="'EDUCATION.DETAILS.INSTITUTION'"
+          [validator]="validator"
+          [validationField]="'institution'"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-4">
+        <cr-control-edit
+            [(dataValue)]="education.specialty"
+            [translateKeys]="'EDUCATION.DETAILS.SPECIALTY'"
+            [validator]="validator"
+            [validationField]="'specialty'"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-4">
+        <cr-numeric-control
+            [(dataValue)]="education.yearOfIssue"
+            [translateKeys]="'EDUCATION.DETAILS.YEAR_OF_ISSUE'"
+            [min]="1970"
+            [max]="currentYear"
+            [autoCorrectMinMax]="true"
+            [format]="'#'"
+            [validator]="validator"
+            [validationField]="'yearOfIssue'"
+        ></cr-numeric-control>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-12">
+        <cr-text-area-control
+          [(dataValue)]="education.description"
+          [translateKeys]="'EDUCATION.DETAILS.DESCRIPTION'"
+          [validator]="validator"
+          [validationField]="'description'"
+        ></cr-text-area-control>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>
