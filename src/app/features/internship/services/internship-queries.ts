@@ -20,6 +20,7 @@ export const getInternshipListQuery = gql`
                 from
                 to
                 code
+                isDeleted
             }
         }
     }

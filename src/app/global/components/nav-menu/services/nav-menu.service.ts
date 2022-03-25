@@ -139,6 +139,16 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.internshipList,
           },
         },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.ATTESTATION',
+          task: {
+            route: 'attestation/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.ATTESTATION.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.ATTESTATION.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.attestationList,
+          },
+        },
       ]
     }
   ];

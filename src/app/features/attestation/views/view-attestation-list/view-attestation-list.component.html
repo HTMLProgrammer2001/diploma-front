@@ -1,0 +1,101 @@
+<ng-container>
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'ATTESTATION.LIST.TITLE'">
+  </cr-title-header>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'ATTESTATION.LIST.FILTER.TITLE'">
+        {{ 'ATTESTATION.LIST.FILTER.TITLE' | translate }}
+      </p>
+    </div>
+
+    <form>
+      <div class="row">
+        <div class="col-lg-6">
+          <cr-dropdown-smart-control
+              [(value)]="filter.teacherId"
+              [dataCacheName]="'AttestationFilterTeacherDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'ATTESTATION.LIST.FILTER.TEACHER'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getTeacherDropdownList"
+              [getOneItemFunction]="getTeacherDropdownItem"
+          ></cr-dropdown-smart-control>
+        </div>
+
+        <div class="col-lg-6">
+          <cr-dropdown-smart-control
+              [(value)]="filter.categoryId"
+              [dataCacheName]="'AttestationFilterCategoryDropdown'"
+              [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+              [labelTranslateKey]="'ATTESTATION.LIST.FILTER.TEACHER'"
+              [dataTranslateKeyField]="'translateKey'"
+              [valueField]="'id'"
+              [textField]="'name'"
+              [getListItemsFunction]="getCategoryDropdownList"
+              [getOneItemFunction]="getCategoryDropdownItem"
+          ></cr-dropdown-smart-control>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <cr-control-datepicker
+            [translateKeys]="'ATTESTATION.LIST.FILTER.DATE_MORE'"
+            [(dataValue)]="filter.dateMore"
+          ></cr-control-datepicker>
+        </div>
+        <div class="col-lg-6">
+          <cr-control-datepicker
+              [translateKeys]="'ATTESTATION.LIST.FILTER.DATE_LESS'"
+              [(dataValue)]="filter.dateLess"
+          ></cr-control-datepicker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <cr-checkbox-control
+              [(dataValue)]="filter.showDeleted"
+              [translateKeys]="'ATTESTATION.LIST.FILTER.SHOW_DELETED'"
+          ></cr-checkbox-control>
+        </div>
+
+        <div class="col-lg-10 cr-search-button-column">
+          <cr-button-control
+              [buttonTemplateType]="'underlined-action-button'"
+              [type]="'submit'"
+              [textTranslateKey]="'COMMON.BUTTON.SEARCH'"
+              (buttonClickEvent)="onFilter()"
+          ></cr-button-control>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="cr-outer-wrapper">
+    <div class="cr-panel-header-wrapper">
+      <p [attr.data-translate]="'ATTESTATION.LIST.GRID.TITLE'">
+        {{ 'ATTESTATION.LIST.GRID.TITLE' | translate }}
+      </p>
+    </div>
+    <div class="cr-grid-wrapper-new">
+      <cr-edit-grid-server-paging
+          (cellClickEvent)="cellClick($event)"
+          (pageChangeEvent)="changePage($event)"
+          [columnSettings]="columnSettings"
+          [dataCacheName]="'AttestationListGrid'"
+          [dataSource]="dataSource"
+          [pageable]="true"
+          [resizable]="true"
+          [uniqueField]="'id'"
+          [sortable]="{allowUnsort: false}"
+          [sortableState]="paginator.sort"
+      ></cr-edit-grid-server-paging>
+    </div>
+  </div>
+</ng-container>

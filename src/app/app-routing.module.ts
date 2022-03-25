@@ -88,6 +88,11 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
+        path: 'attestation',
+        loadChildren: () => import('./features/attestation/attestation.module').then(m => m.AttestationModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
         path: '403',
         component: ViewPageForbiddenComponent,
         canActivate: [BookmarkProcessGuard, AuthGuard],

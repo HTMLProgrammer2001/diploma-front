@@ -30,6 +30,8 @@ import {ICategoryViewModel} from '../../../features/category/types/view-model/ca
 import {ICategoryAttestationViewModel} from '../../../features/category/types/view-model/category-attestation-view-model';
 import {IInternshipListViewModel} from '../../../features/internship/types/view-model/internship-list-view-model';
 import {IInternshipViewModel} from '../../../features/internship/types/view-model/internship-view-model';
+import {IAttestationListViewModel} from '../../../features/attestation/types/view-model/attestation-list-view-model';
+import {IAttestationViewModel} from '../../../features/attestation/types/view-model/attestation-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -97,4 +99,9 @@ export interface IBookmarkData {
   internshipList?: IPaginator<IInternshipListViewModel>;
   internshipDetail?: IInternshipViewModel;
   internshipDetailCopy?: IInternshipViewModel;
+
+  /** Attestation **/
+  attestationList?: IPaginator<IAttestationListViewModel>;
+  attestationDetail?: IAttestationViewModel;
+  attestationDetailCopy?: IAttestationViewModel;
 }

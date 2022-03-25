@@ -540,7 +540,7 @@ export class Validator {
       result.messages.push({
         message: rule.message,
         messageTranslateKey: rule.messageTranslateKey,
-        replacers: {minDate: rule.settingValue}
+        replacers: {minDate: rule.settingValue.toLocaleDateString()}
       });
     }
     return result;
@@ -561,7 +561,7 @@ export class Validator {
       result.messages.push({
         message: rule.message,
         messageTranslateKey: rule.messageTranslateKey,
-        replacers: {maxDate: rule.settingValue}
+        replacers: {maxDate: rule.settingValue.toLocaleDateString()}
       });
     }
     return result;

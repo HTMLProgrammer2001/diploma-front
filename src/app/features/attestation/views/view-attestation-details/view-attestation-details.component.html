@@ -1,0 +1,68 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'ATTESTATION.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="attestation">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-4">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="attestation.teacher"
+            [value]="attestation.teacher.id"
+            [dataCacheName]="'AttestationDetailsTeacherDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'ATTESTATION.DETAILS.TEACHER'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getTeacherDropdownList"
+            [validator]="validator"
+            [validationField]="'teacher.id'"
+            [isDisabled]="attestation.isDeleted && !viewState.restoring"
+        ></cr-dropdown-smart-control>
+      </div>
+
+      <div class="col-lg-4">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="attestation.category"
+            [value]="attestation.category.id"
+            [dataCacheName]="'AttestationDetailsCategoryDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'ATTESTATION.DETAILS.CATEGORY'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getCategoryDropdownList"
+            [validator]="validator"
+            [validationField]="'category.id'"
+            [isDisabled]="attestation.isDeleted && !viewState.restoring"
+        ></cr-dropdown-smart-control>
+      </div>
+      <div class="col-lg-4">
+        <cr-control-datepicker
+            [(dataValue)]="attestation.date"
+            [translateKeys]="'ATTESTATION.DETAILS.DATE'"
+            [validator]="validator"
+            [validationField]="'date'"
+            [isDisabled]="attestation.isDeleted && !viewState.restoring"
+        ></cr-control-datepicker>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-12">
+        <cr-text-area-control
+            [(dataValue)]="attestation.description"
+            [translateKeys]="'ATTESTATION.DETAILS.DESCRIPTION'"
+            [validator]="validator"
+            [validationField]="'description'"
+            [isDisabled]="attestation.isDeleted && !viewState.restoring"
+        ></cr-text-area-control>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

@@ -21,6 +21,8 @@ import {ICategoryFilterViewModel} from '../../../features/category/types/view-mo
 import {ICategoryDetailsViewState} from '../../../features/category/types/view-model/category-details-view-state';
 import {IInternshipDetailsViewState} from '../../../features/internship/types/view-model/internship-details-view-state';
 import {IInternshipFilterViewModel} from '../../../features/internship/types/view-model/internship-filter-view-model';
+import {IAttestationFilterViewModel} from '../../../features/attestation/types/view-model/attestation-filter-view-model';
+import {IAttestationDetailsViewState} from '../../../features/attestation/types/view-model/attestation-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -95,4 +97,10 @@ export interface IBookmarkViewState {
   internshipFilter?: IInternshipFilterViewModel;
   internshipValidator?: Validator;
   internshipDetails?: IInternshipDetailsViewState;
+
+  /** Attestation  **/
+  attestationListPaginator?: IPaginatorBase;
+  attestationFilter?: IAttestationFilterViewModel;
+  attestationValidator?: Validator;
+  attestationDetails?: IAttestationDetailsViewState;
 }
