@@ -11,6 +11,7 @@
       <div class="col-lg-6">
         <cr-dropdown-smart-control
             [(currentItemValue)]="education.teacher"
+            (currentItemValueChange)="changeTitle()"
             [value]="education.teacher.id"
             [dataCacheName]="'EducationDetailsTeacherDropdown'"
             [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"

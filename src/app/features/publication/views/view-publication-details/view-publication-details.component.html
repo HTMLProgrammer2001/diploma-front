@@ -1,0 +1,91 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'PUBLICATION.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="publication">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-control-edit
+          [(dataValue)]="publication.title"
+          [translateKeys]="'PUBLICATION.DETAILS.TITLE_PUBLICATION'"
+          [isDisabled]="publication.isDeleted && !viewState.restoring"
+          [validator]="validator"
+          [validationField]="'title'"
+        ></cr-control-edit>
+      </div>
+
+      <div class="col-lg-6">
+        <cr-control-datepicker
+            [(dataValue)]="publication.date"
+            [translateKeys]="'PUBLICATION.DETAILS.DATE'"
+            [isDisabled]="publication.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'date'"
+        ></cr-control-datepicker>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-multi-select-smart-control
+            [(currentItemValues)]="publication.teachers"
+            [values]="teacherIds"
+            [translateKeys]="'PUBLICATION.DETAILS.TEACHERS'"
+            [dataCacheName]="'PublicationDetailsTeacherDropdown'"
+            [getListItemsFunction]="getTeacherDropdownList"
+            [textField]="'name'"
+            [valueField]="'id'"
+            [isDisabled]="publication.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'teachers'"
+        ></cr-multi-select-smart-control>
+      </div>
+
+      <div class="col-lg-6">
+        <cr-control-edit
+          [translateKeys]="'PUBLICATION.DETAILS.ANOTHER_TEACHERS'"
+          [(dataValue)]="publication.anotherAuthors"
+          [isDisabled]="publication.isDeleted && !viewState.restoring"
+          [validator]="validator"
+          [validationField]="'anotherAuthors'"
+        ></cr-control-edit>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-control-edit
+          [(dataValue)]="publication.publisher"
+          [translateKeys]="'PUBLICATION.DETAILS.PUBLISHER'"
+          [isDisabled]="publication.isDeleted && !viewState.restoring"
+          [validator]="validator"
+          [validationField]="'publisher'"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-6">
+        <cr-control-edit
+            [(dataValue)]="publication.url"
+            [translateKeys]="'PUBLICATION.DETAILS.URL'"
+            [isDisabled]="publication.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'url'"
+        ></cr-control-edit>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-12">
+        <cr-text-area-control
+            [(dataValue)]="publication.description"
+            [translateKeys]="'PUBLICATION.DETAILS.DESCRIPTION'"
+            [isDisabled]="publication.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'description'"
+        ></cr-text-area-control>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

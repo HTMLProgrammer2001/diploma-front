@@ -22,4 +22,6 @@ export class BookmarkIcon {
   static internshipDetails = null;
   static attestationList = null;
   static attestationDetails = null;
+  static publicationList = null;
+  static publicationDetails = null;
 }

@@ -32,6 +32,8 @@ import {IInternshipListViewModel} from '../../../features/internship/types/view-
 import {IInternshipViewModel} from '../../../features/internship/types/view-model/internship-view-model';
 import {IAttestationListViewModel} from '../../../features/attestation/types/view-model/attestation-list-view-model';
 import {IAttestationViewModel} from '../../../features/attestation/types/view-model/attestation-view-model';
+import {IPublicationListViewModel} from '../../../features/publication/types/view-model/publication-list-view-model';
+import {IPublicationViewModel} from '../../../features/publication/types/view-model/publication-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -104,4 +106,9 @@ export interface IBookmarkData {
   attestationList?: IPaginator<IAttestationListViewModel>;
   attestationDetail?: IAttestationViewModel;
   attestationDetailCopy?: IAttestationViewModel;
+
+  /** Publication **/
+  publicationList?: IPaginator<IPublicationListViewModel>;
+  publicationDetail?: IPublicationViewModel;
+  publicationDetailCopy?: IPublicationViewModel;
 }

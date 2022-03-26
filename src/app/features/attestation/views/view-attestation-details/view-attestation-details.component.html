@@ -11,6 +11,7 @@
       <div class="col-lg-4">
         <cr-dropdown-smart-control
             [(currentItemValue)]="attestation.teacher"
+            (currentItemValueChange)="changeTitle()"
             [value]="attestation.teacher.id"
             [dataCacheName]="'AttestationDetailsTeacherDropdown'"
             [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
@@ -24,7 +25,6 @@
             [isDisabled]="attestation.isDeleted && !viewState.restoring"
         ></cr-dropdown-smart-control>
       </div>
-
       <div class="col-lg-4">
         <cr-dropdown-smart-control
             [(currentItemValue)]="attestation.category"

@@ -276,6 +276,16 @@
           "BOOKMARK_NAME": "Attestation: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "PUBLICATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Publication list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Publication: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -297,6 +307,7 @@
       "CATEGORY": "Category list",
       "INTERNSHIP": "Internship list",
       "ATTESTATION": "Attestation list",
+      "PUBLICATION": "Publication list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -754,7 +765,8 @@
         "FROM": "From",
         "TO": "To",
         "HOURS": "Hours",
-        "PLACE": "Place"
+        "PLACE": "Place",
+        "TEACHER": "Teacher"
       }
     },
     "DETAILS": {
@@ -832,6 +844,53 @@
         "SUCCESS_CREATE": "Attestation was successfully created",
         "SUCCESS_DELETE": "Attestation was successfully deleted",
         "SUCCESS_UPDATE": "Attestation was successfully updated"
+      }
+    }
+  },
+  "PUBLICATION": {
+    "LIST": {
+      "TITLE": "Publication list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "TEACHERS": "Teachers",
+        "DATE_MORE": "Date more",
+        "DATE_LESS": "Date less",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "DELETED": "Deleted",
+        "ID": "ID",
+        "TITLE": "Title",
+        "AUTHORS": "Authors",
+        "DATE": "Date"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Publication: {{value}}",
+      "TITLE_PUBLICATION": "Title",
+      "TEACHERS": "Teachers",
+      "ANOTHER_TEACHERS": "Another teachers",
+      "URL": "URL",
+      "PUBLISHER": "Publisher",
+      "DATE": "Date",
+      "DESCRIPTION": "Description",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Title is required",
+        "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
+        "REQUIRED_DATE": "Date is required",
+        "INVALID_MIN_DATE": "Min date is {{minDate}}",
+        "INVALID_MAX_DATE": "Max date is {{maxDate}}",
+        "REQUIRED_TEACHERS": "Teachers is required",
+        "MAX_LENGTH_ANOTHER_AUTHORS": "Another authors max length is {{maxLength}}",
+        "MAX_LENGTH_PUBLISHER": "Publisher max length is {{maxLength}}",
+        "INVALID_URL": "URL format is invalid",
+        "MAX_LENGTH_URL": "URL max length is {{maxLength}}",
+        "MAX_LENGTH_DESCRIPTION": "Description max length is {{maxLength}}"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Publication was successfully created",
+        "SUCCESS_DELETE": "Publication was successfully deleted",
+        "SUCCESS_UPDATE": "Publication was successfully updated"
       }
     }
   }

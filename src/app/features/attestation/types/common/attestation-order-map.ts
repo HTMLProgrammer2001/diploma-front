@@ -1,6 +1,6 @@
 export const AttestationOrderMap = {
   id: 'ID',
   date: 'DATE',
-  teacher: 'TEACHER',
-  category: 'CATEGORY'
+  ['teacher.name']: 'TEACHER',
+  ['category.name']: 'CATEGORY'
 };

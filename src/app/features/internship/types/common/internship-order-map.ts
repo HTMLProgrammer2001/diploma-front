@@ -4,6 +4,6 @@ export const InternshipOrderMap = {
   title: 'TITLE',
   dateFrom: 'DATE_FROM',
   dateTo: 'DATE_TO',
-  teacher: 'TEACHER',
+  ['teacher.name']: 'TEACHER',
   hours: 'HOURS'
 };
