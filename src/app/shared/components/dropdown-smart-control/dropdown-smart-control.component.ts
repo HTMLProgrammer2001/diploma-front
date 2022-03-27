@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import {
   AfterViewInit,
   Component,
@@ -493,12 +494,12 @@ export class DropdownSmartControlComponent implements OnInit, OnChanges, AfterVi
   // load data item by value (ID) or from cache
   loadCurrentDataItemByValue(change: SimpleChange): void {
     // check and set unselected values as currentDataItem if necessary
-    if (this.unselectedItemValue && this.unselectedItemValue[this.valueField] === this.value) {
+    if (this.unselectedItemValue && this.unselectedItemValue[this.valueField] == this.value) {
       this.cache.currentDataItem = this.unselectedItemValue;
     }
     // check if changes necessary
-    if (!this.cache.currentDataItem || this.value !== this.cache.currentDataItem[this.valueField]
-      || (change.currentValue !== this.value)) {
+    if (!this.cache.currentDataItem || this.value != this.cache.currentDataItem[this.valueField]
+      || (change.currentValue != this.value)) {
       // set from (@Input() currentItemValue) if used
       if (this.currentItemValue) {
         this.cache.currentDataItem = this.currentItemValue;

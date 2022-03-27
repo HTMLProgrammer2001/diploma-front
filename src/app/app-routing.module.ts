@@ -98,6 +98,11 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
+        path: 'honor',
+        loadChildren: () => import('./features/honor/honor.module').then(m => m.HonorModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
         path: '403',
         component: ViewPageForbiddenComponent,
         canActivate: [BookmarkProcessGuard, AuthGuard],

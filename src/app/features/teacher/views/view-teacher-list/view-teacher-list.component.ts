@@ -16,7 +16,7 @@ import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-gr
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
 import {ITeacherListViewModel} from '../../types/view-model/teacher-list-view-model';
-import {isEmpty} from 'lodash';
+import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {ITeacherFilterViewModel} from '../../types/view-model/teacher-filter-view-model';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
@@ -30,6 +30,7 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public filter: ITeacherFilterViewModel;
+  private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
   public getCommissionDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
@@ -116,6 +117,7 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
     this.refreshTitleHeaderButtons();
     this.initDropdowns();
 
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().teacherFilter);
     this.teacherFacadeService.getViewStateTeacherFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
@@ -136,26 +138,43 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.fullName = this.route.snapshot.queryParamMap.get('name') || '';
-    this.filter.email = this.route.snapshot.queryParamMap.get('email') || '';
-    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
+    if (!this.cacheInitialized) {
+      if (this.route.snapshot.queryParamMap.get('fullName')) {
+        this.filter.fullName = this.route.snapshot.queryParamMap.get('fullName');
+      }
 
-    this.filter.commissionId = this.route.snapshot.queryParamMap.get('commissionId') ?
-      Number(this.route.snapshot.queryParamMap.get('commissionId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('email')) {
+        this.filter.email = this.route.snapshot.queryParamMap.get('email');
+      }
 
-    this.filter.departmentId = this.route.snapshot.queryParamMap.get('departmentId') ?
-      Number(this.route.snapshot.queryParamMap.get('departmentId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('commissionId')) {
+        this.filter.commissionId = Number(this.route.snapshot.queryParamMap.get('commissionId'));
+      }
 
-    this.filter.teachingRankId = this.route.snapshot.queryParamMap.get('teachingRankId') ?
-      Number(this.route.snapshot.queryParamMap.get('teachingRankId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('departmentId')) {
+        this.filter.departmentId = Number(this.route.snapshot.queryParamMap.get('departmentId'));
+      }
 
-    this.filter.academicTitleId = this.route.snapshot.queryParamMap.get('academicTitleId') ?
-      Number(this.route.snapshot.queryParamMap.get('academicTitleId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('teachingRankId')) {
+        this.filter.teachingRankId = Number(this.route.snapshot.queryParamMap.get('teachingRankId'));
+      }
 
-    this.filter.academicDegreeId = this.route.snapshot.queryParamMap.get('academicDegreeId') ?
-      Number(this.route.snapshot.queryParamMap.get('academicDegreeId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('academicDegreeId')) {
+        this.filter.academicDegreeId = Number(this.route.snapshot.queryParamMap.get('academicDegreeId'));
+      }
 
-    this.deletedColumn.hidden = !this.filter.showDeleted;
+      if (this.route.snapshot.queryParamMap.get('academicTitleId')) {
+        this.filter.academicTitleId = Number(this.route.snapshot.queryParamMap.get('academicTitleId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showDeleted')) {
+        this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true';
+      }
+    }
+
+    if (this.route.snapshot.queryParamMap.get('showDeleted') === 'true') {
+      this.deletedColumn.hidden = !this.filter.showDeleted;
+    }
 
     this.getDataList();
   }
@@ -216,7 +235,6 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
   //region Work with grid
 
   cellClick(event: ITeacherListViewModel & {linkField: string}): Promise<boolean> {
-    debugger
     if(event.linkField === 'id') {
       const route = `teacher/details/${event.id}`;
       return this.router.navigate([route]);
@@ -254,7 +272,7 @@ export class ViewTeacherListComponent extends BaseViewComponent implements OnIni
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
     this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
     this.loadDataList();
   }
 

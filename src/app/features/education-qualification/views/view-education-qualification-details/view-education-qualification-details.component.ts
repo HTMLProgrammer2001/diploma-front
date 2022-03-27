@@ -152,6 +152,8 @@ export class ViewEducationQualificationDetailsComponent extends BaseViewComponen
         .educationQualificationInitializeViewModel();
       this.currentBookmark.data.educationQualificationDetailCopy = cloneDeep(this.currentBookmark.data.educationQualificationDetail);
       this.setData(this.currentBookmark.data.educationQualificationDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.educationQualificationDetail);
     } else if (isFinite(this.educationQualificationId)) {
       this.educationQualificationFacadeService.getEducationQualification$(this.educationQualificationId)
         .pipe(takeUntil(this.onDestroy))

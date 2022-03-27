@@ -25,6 +25,8 @@ import {IAttestationFilterViewModel} from '../../../features/attestation/types/v
 import {IAttestationDetailsViewState} from '../../../features/attestation/types/view-model/attestation-details-view-state';
 import {IPublicationFilterViewModel} from '../../../features/publication/types/view-model/publication-filter-view-model';
 import {IPublicationDetailsViewState} from '../../../features/publication/types/view-model/publication-details-view-state';
+import {IHonorFilterViewModel} from '../../../features/honor/types/view-model/honor-filter-view-model';
+import {IHonorDetailsViewState} from '../../../features/honor/types/view-model/honor-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -111,4 +113,10 @@ export interface IBookmarkViewState {
   publicationFilter?: IPublicationFilterViewModel;
   publicationValidator?: Validator;
   publicationDetails?: IPublicationDetailsViewState;
+
+  /** Honor  **/
+  honorListPaginator?: IPaginatorBase;
+  honorFilter?: IHonorFilterViewModel;
+  honorValidator?: Validator;
+  honorDetails?: IHonorDetailsViewState;
 }

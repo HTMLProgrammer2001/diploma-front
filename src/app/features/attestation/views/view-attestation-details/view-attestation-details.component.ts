@@ -163,6 +163,8 @@ export class ViewAttestationDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.attestationDetail = this.attestationMapperService.attestationInitializeViewModel();
       this.currentBookmark.data.attestationDetailCopy = cloneDeep(this.currentBookmark.data.attestationDetail);
       this.setData(this.currentBookmark.data.attestationDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.attestationDetail);
     } else if (isFinite(this.attestationId)) {
       this.attestationFacadeService.getAttestation$(this.attestationId)
         .pipe(takeUntil(this.onDestroy))

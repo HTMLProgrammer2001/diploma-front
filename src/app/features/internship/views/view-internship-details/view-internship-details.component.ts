@@ -161,6 +161,8 @@ export class ViewInternshipDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.internshipDetail = this.internshipMapperService.internshipInitializeViewModel();
       this.currentBookmark.data.internshipDetailCopy = cloneDeep(this.currentBookmark.data.internshipDetail);
       this.setData(this.currentBookmark.data.internshipDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.internshipDetail);
     } else if (isFinite(this.internshipId)) {
       this.internshipFacadeService.getInternship$(this.internshipId)
         .pipe(takeUntil(this.onDestroy))

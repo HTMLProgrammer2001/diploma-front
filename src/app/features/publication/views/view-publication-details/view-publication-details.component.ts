@@ -165,6 +165,8 @@ export class ViewPublicationDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.publicationDetail = this.publicationMapperService.publicationInitializeViewModel();
       this.currentBookmark.data.publicationDetailCopy = cloneDeep(this.currentBookmark.data.publicationDetail);
       this.setData(this.currentBookmark.data.publicationDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.publicationDetail);
     } else if (isFinite(this.publicationId)) {
       this.publicationFacadeService.getPublication$(this.publicationId)
         .pipe(takeUntil(this.onDestroy))

@@ -150,6 +150,8 @@ export class ViewTeachingRankDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.teachingRankDetail = this.teachingRankMapperService.teachingRankInitializeViewModel();
       this.currentBookmark.data.teachingRankDetailCopy = cloneDeep(this.currentBookmark.data.teachingRankDetail);
       this.setData(this.currentBookmark.data.teachingRankDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.teachingRankDetail);
     } else if (isFinite(this.teachingRankId)) {
       this.teachingRankFacadeService.getTeachingRank$(this.teachingRankId)
         .pipe(takeUntil(this.onDestroy))

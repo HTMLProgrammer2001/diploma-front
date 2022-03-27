@@ -173,6 +173,8 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.educationDetail = this.educationMapperService.educationInitializeViewModel();
       this.currentBookmark.data.educationDetailCopy = cloneDeep(this.currentBookmark.data.educationDetail);
       this.setData(this.currentBookmark.data.educationDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.educationDetail);
     } else if (isFinite(this.educationId)) {
       this.educationFacadeService.getEducation$(this.educationId)
         .pipe(takeUntil(this.onDestroy))

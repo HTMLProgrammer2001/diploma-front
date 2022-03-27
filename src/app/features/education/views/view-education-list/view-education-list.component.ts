@@ -16,7 +16,7 @@ import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-gr
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
 import {IEducationListViewModel} from '../../types/view-model/education-list-view-model';
-import {isEmpty} from 'lodash';
+import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {IEducationFilterViewModel} from '../../types/view-model/education-filter-view-model';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
@@ -30,6 +30,7 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public filter: IEducationFilterViewModel;
+  private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
@@ -104,6 +105,7 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
     this.refreshTitleHeaderButtons();
     this.initDropdowns();
 
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().educationFilter);
     this.educationFacadeService.getViewStateEducationFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
@@ -122,23 +124,39 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.institution = this.route.snapshot.queryParamMap.get('institution') || '';
-    this.filter.specialty = this.route.snapshot.queryParamMap.get('specialty') || '';
+    if (!this.cacheInitialized) {
+      if (this.route.snapshot.queryParamMap.get('institution')) {
+        this.filter.institution = this.route.snapshot.queryParamMap.get('institution');
+      }
 
-    this.filter.yearOfIssueMore = this.route.snapshot.queryParamMap.get('yearOfIssueMore') ?
-      Number(this.route.snapshot.queryParamMap.get('yearOfIssueMore')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('specialty')) {
+        this.filter.specialty = this.route.snapshot.queryParamMap.get('specialty');
+      }
 
-    this.filter.yearOfIssueLess = this.route.snapshot.queryParamMap.get('yearOfIssueLess') ?
-      Number(this.route.snapshot.queryParamMap.get('yearOfIssueLess')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('yearOfIssueLess')) {
+        this.filter.yearOfIssueLess = Number(this.route.snapshot.queryParamMap.get('yearOfIssueLess'));
+      }
 
-    this.filter.educationQualificationId = this.route.snapshot.queryParamMap.get('educationQualificationId') ?
-      Number(this.route.snapshot.queryParamMap.get('educationQualificationId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('yearOfIssueMore')) {
+        this.filter.yearOfIssueMore = Number(this.route.snapshot.queryParamMap.get('yearOfIssueMore'));
+      }
 
-    this.filter.teacherId = this.route.snapshot.queryParamMap.get('teacherId') ?
-      Number(this.route.snapshot.queryParamMap.get('teacherId')) : undefined;
+      if (this.route.snapshot.queryParamMap.get('educationQualificationId')) {
+        this.filter.educationQualificationId = Number(this.route.snapshot.queryParamMap.get('educationQualificationId'));
+      }
 
-    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
-    this.deletedColumn.hidden = !this.filter.showDeleted;
+      if (this.route.snapshot.queryParamMap.get('teacherId')) {
+        this.filter.teacherId = Number(this.route.snapshot.queryParamMap.get('teacherId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showDeleted')) {
+        this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true';
+      }
+    }
+
+    if (this.route.snapshot.queryParamMap.get('showDeleted') === 'true') {
+      this.deletedColumn.hidden = !this.filter.showDeleted;
+    }
 
     this.getDataList();
   }
@@ -222,7 +240,7 @@ export class ViewEducationListComponent extends BaseViewComponent implements OnI
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
     this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
     this.loadDataList();
   }
 

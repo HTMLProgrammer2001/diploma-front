@@ -24,4 +24,6 @@ export class BookmarkIcon {
   static attestationDetails = null;
   static publicationList = null;
   static publicationDetails = null;
+  static honorList = null;
+  static honorDetails = null;
 }

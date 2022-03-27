@@ -167,6 +167,8 @@ export class ViewTeacherDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.teacherDetail = this.teacherMapperService.teacherInitializeViewModel();
       this.currentBookmark.data.teacherDetailCopy = cloneDeep(this.currentBookmark.data.teacherDetail);
       this.setData(this.currentBookmark.data.teacherDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.teacherDetail);
     } else if (isFinite(this.teacherId)) {
       this.teacherFacadeService.getTeacher$(this.teacherId)
         .pipe(takeUntil(this.onDestroy))

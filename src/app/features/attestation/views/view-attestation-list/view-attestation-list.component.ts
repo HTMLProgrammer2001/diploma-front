@@ -16,7 +16,7 @@ import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-gr
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
 import {IAttestationListViewModel} from '../../types/view-model/attestation-list-view-model';
-import {isEmpty} from 'lodash';
+import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {IAttestationFilterViewModel} from '../../types/view-model/attestation-filter-view-model';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
@@ -30,6 +30,7 @@ export class ViewAttestationListComponent extends BaseViewComponent implements O
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public filter: IAttestationFilterViewModel;
+  private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
@@ -92,6 +93,7 @@ export class ViewAttestationListComponent extends BaseViewComponent implements O
     this.initTitleHeaderButtons();
     this.refreshTitleHeaderButtons();
 
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().attestationFilter);
     this.attestationFacadeService.getViewStateAttestationFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
@@ -106,14 +108,31 @@ export class ViewAttestationListComponent extends BaseViewComponent implements O
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.teacherId = this.route.snapshot.queryParamMap.get('teacherId') ?
-      Number(this.route.snapshot.queryParamMap.get('teacherId')) : undefined;
-    this.filter.categoryId = this.route.snapshot.queryParamMap.get('categoryId') ?
-      Number(this.route.snapshot.queryParamMap.get('categoryId')) : undefined;
-    this.filter.dateMore = this.route.snapshot.queryParamMap.get('dateMore') || '';
-    this.filter.dateLess = this.route.snapshot.queryParamMap.get('dateLess') || '';
-    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
-    this.deletedColumn.hidden = !this.filter.showDeleted;
+    if (!this.cacheInitialized) {
+      if (this.route.snapshot.queryParamMap.get('dateMore')) {
+        this.filter.dateMore = this.route.snapshot.queryParamMap.get('dateMore');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('dateLess')) {
+        this.filter.dateLess = this.route.snapshot.queryParamMap.get('dateLess');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('teacherId')) {
+        this.filter.teacherId = Number(this.route.snapshot.queryParamMap.get('teacherId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('categoryId')) {
+        this.filter.categoryId = Number(this.route.snapshot.queryParamMap.get('categoryId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showDeleted')) {
+        this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true';
+      }
+    }
+
+    if (this.route.snapshot.queryParamMap.get('showDeleted') === 'true') {
+      this.deletedColumn.hidden = !this.filter.showDeleted;
+    }
 
     this.getDataList();
   }
@@ -173,16 +192,14 @@ export class ViewAttestationListComponent extends BaseViewComponent implements O
 
   //region Work with grid
 
-  cellClick(event: IAttestationListViewModel & {linkField: string}): Promise<boolean> {
-    if(event.linkField === 'id') {
+  cellClick(event: IAttestationListViewModel & { linkField: string }): Promise<boolean> {
+    if (event.linkField === 'id') {
       const route = `attestation/details/${event.id}`;
       return this.router.navigate([route]);
-    }
-    else if(event.linkField === 'category.name') {
+    } else if (event.linkField === 'category.name') {
       const route = `category/details/${event.category.id}`;
       return this.router.navigate([route]);
-    }
-    else {
+    } else {
       const route = `teacher/details/${event.teacher.id}`;
       return this.router.navigate([route]);
     }
@@ -199,7 +216,7 @@ export class ViewAttestationListComponent extends BaseViewComponent implements O
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
     this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
     this.loadDataList();
   }
 

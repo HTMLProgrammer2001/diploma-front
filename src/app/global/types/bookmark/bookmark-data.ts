@@ -34,6 +34,8 @@ import {IAttestationListViewModel} from '../../../features/attestation/types/vie
 import {IAttestationViewModel} from '../../../features/attestation/types/view-model/attestation-view-model';
 import {IPublicationListViewModel} from '../../../features/publication/types/view-model/publication-list-view-model';
 import {IPublicationViewModel} from '../../../features/publication/types/view-model/publication-view-model';
+import {IHonorListViewModel} from '../../../features/honor/types/view-model/honor-list-view-model';
+import {IHonorViewModel} from '../../../features/honor/types/view-model/honor-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -111,4 +113,9 @@ export interface IBookmarkData {
   publicationList?: IPaginator<IPublicationListViewModel>;
   publicationDetail?: IPublicationViewModel;
   publicationDetailCopy?: IPublicationViewModel;
+
+  /** Honor **/
+  honorList?: IPaginator<IHonorListViewModel>;
+  honorDetail?: IHonorViewModel;
+  honorDetailCopy?: IHonorViewModel;
 }

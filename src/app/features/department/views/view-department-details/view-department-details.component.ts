@@ -149,6 +149,8 @@ export class ViewDepartmentDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.departmentDetail = this.departmentMapperService.departmentInitializeViewModel();
       this.currentBookmark.data.departmentDetailCopy = cloneDeep(this.currentBookmark.data.departmentDetail);
       this.setData(this.currentBookmark.data.departmentDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.departmentDetail);
     } else if (isFinite(this.departmentId)) {
       this.departmentFacadeService.getDepartment$(this.departmentId)
         .pipe(takeUntil(this.onDestroy))

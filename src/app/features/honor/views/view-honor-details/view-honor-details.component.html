@@ -1,0 +1,80 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'HONOR.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="honor">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="honor.teacher"
+            (currentItemValueChange)="changeTitle()"
+            [value]="honor.teacher.id"
+            [dataCacheName]="'HonorDetailsTeacherDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'HONOR.DETAILS.TEACHER'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getTeacherDropdownList"
+            [validator]="validator"
+            [validationField]="'teacher.id'"
+            [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-dropdown-smart-control>
+      </div>
+      <div class="col-lg-6">
+        <cr-control-edit
+          [(dataValue)]="honor.title"
+          (dataValueChange)="changeTitle()"
+          [translateKeys]="'HONOR.DETAILS.TITLE_HONOR'"
+          [validator]="validator"
+          [validationField]="'title'"
+          [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-4">
+        <cr-control-datepicker
+          [(dataValue)]="honor.date"
+          [translateKeys]="'HONOR.DETAILS.DATE'"
+          [validator]="validator"
+          [validationField]="'date'"
+          [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-control-datepicker>
+      </div>
+      <div class="col-lg-4">
+        <cr-control-edit
+            [(dataValue)]="honor.orderNumber"
+            [translateKeys]="'HONOR.DETAILS.ORDER_NUMBER'"
+            [validator]="validator"
+            [validationField]="'orderNumber'"
+            [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-4">
+        <cr-checkbox-control
+            [(dataValue)]="honor.isActive"
+            [translateKeys]="'HONOR.DETAILS.IS_ACTIVE'"
+            [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-checkbox-control>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-12">
+        <cr-text-area-control
+          [(dataValue)]="honor.description"
+          [translateKeys]="'HONOR.DETAILS.DESCRIPTION'"
+          [validator]="validator"
+          [validationField]="'description'"
+          [isDisabled]="honor.isDeleted && !viewState.restoring"
+        ></cr-text-area-control>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

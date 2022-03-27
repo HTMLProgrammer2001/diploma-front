@@ -16,7 +16,7 @@ import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-gr
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
 import {IInternshipListViewModel} from '../../types/view-model/internship-list-view-model';
-import {isEmpty} from 'lodash';
+import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {IInternshipFilterViewModel} from '../../types/view-model/internship-filter-view-model';
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
@@ -30,6 +30,7 @@ export class ViewInternshipListComponent extends BaseViewComponent implements On
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public filter: IInternshipFilterViewModel;
+  private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
@@ -110,6 +111,7 @@ export class ViewInternshipListComponent extends BaseViewComponent implements On
     this.refreshTitleHeaderButtons();
     this.initDropdowns();
 
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().internshipFilter);
     this.internshipFacadeService.getViewStateInternshipFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
@@ -122,16 +124,39 @@ export class ViewInternshipListComponent extends BaseViewComponent implements On
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.title = this.route.snapshot.queryParamMap.get('title') || '';
-    this.filter.place = this.route.snapshot.queryParamMap.get('place') || '';
-    this.filter.dateFromMore = this.route.snapshot.queryParamMap.get('dateFromMore') || '';
-    this.filter.dateToLess = this.route.snapshot.queryParamMap.get('dateToLess') || '';
-    this.filter.code = this.route.snapshot.queryParamMap.get('code') || '';
-    this.filter.teacherId = this.route.snapshot.queryParamMap.get('teacherId') ?
-      Number(this.route.snapshot.queryParamMap.get('teacherId')) : undefined;
+    if (!this.cacheInitialized) {
+      if (this.route.snapshot.queryParamMap.get('title')) {
+        this.filter.title = this.route.snapshot.queryParamMap.get('title');
+      }
 
-    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
-    this.deletedColumn.hidden = !this.filter.showDeleted;
+      if (this.route.snapshot.queryParamMap.get('place')) {
+        this.filter.place = this.route.snapshot.queryParamMap.get('place');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('dateToLess')) {
+        this.filter.dateToLess = this.route.snapshot.queryParamMap.get('dateToLess');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('dateFromMore')) {
+        this.filter.dateFromMore = this.route.snapshot.queryParamMap.get('dateFromMore');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('code')) {
+        this.filter.code = this.route.snapshot.queryParamMap.get('code');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('teacherId')) {
+        this.filter.teacherId = Number(this.route.snapshot.queryParamMap.get('teacherId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showDeleted')) {
+        this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true';
+      }
+    }
+
+    if (this.route.snapshot.queryParamMap.get('showDeleted') === 'true') {
+      this.deletedColumn.hidden = !this.filter.showDeleted;
+    }
 
     this.getDataList();
   }
@@ -212,7 +237,7 @@ export class ViewInternshipListComponent extends BaseViewComponent implements On
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
     this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
     this.loadDataList();
   }
 

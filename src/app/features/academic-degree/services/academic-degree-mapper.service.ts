@@ -81,7 +81,7 @@ export class AcademicDegreeMapperService {
 
   public academicDegreeInitializeFilterViewModel(): IAcademicDegreeFilterViewModel {
     return {
-      name: '',
+      name: null,
       showDeleted: false
     };
   }

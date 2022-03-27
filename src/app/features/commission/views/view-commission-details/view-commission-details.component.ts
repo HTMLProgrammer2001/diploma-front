@@ -149,6 +149,8 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.commissionDetail = this.commissionMapperService.commissionInitializeViewModel();
       this.currentBookmark.data.commissionDetailCopy = cloneDeep(this.currentBookmark.data.commissionDetail);
       this.setData(this.currentBookmark.data.commissionDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.commissionDetail);
     } else if (isFinite(this.commissionId)) {
       this.commissionFacadeService.getCommission$(this.commissionId)
         .pipe(takeUntil(this.onDestroy))

@@ -150,6 +150,8 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.academicTitleDetail = this.academicTitleMapperService.academicTitleInitializeViewModel();
       this.currentBookmark.data.academicTitleDetailCopy = cloneDeep(this.currentBookmark.data.academicTitleDetail);
       this.setData(this.currentBookmark.data.academicTitleDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.academicTitleDetail);
     } else if (isFinite(this.academicTitleId)) {
       this.academicTitleFacadeService.getAcademicTitle$(this.academicTitleId)
         .pipe(takeUntil(this.onDestroy))

@@ -151,6 +151,8 @@ export class ViewCategoryDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.categoryDetail = this.categoryMapperService.categoryInitializeViewModel();
       this.currentBookmark.data.categoryDetailCopy = cloneDeep(this.currentBookmark.data.categoryDetail);
       this.setData(this.currentBookmark.data.categoryDetail);
+    } else if(this.isNew) {
+      this.setData(this.currentBookmark.data.categoryDetail);
     } else if (isFinite(this.categoryId)) {
       this.categoryFacadeService.getCategory$(this.categoryId)
         .pipe(takeUntil(this.onDestroy))

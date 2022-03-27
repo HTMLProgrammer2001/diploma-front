@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {forkJoin, ReplaySubject} from 'rxjs';
+import {forkJoin, Observable, ReplaySubject} from 'rxjs';
 import {BaseViewComponent} from '../../../../global/components/base-view/base-view.component';
 import {ErrorService} from '../../../../global/services/error.service';
 import {CustomNotificationService} from '../../../../global/services/custom-notification.service';
 import {BookmarkIcon} from '../../../../global/types/bookmark/bookmark-icon';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BookmarkService} from '../../../../global/services/bookmark/bookmark.service';
-import {CommissionFacadeService} from '../../services/commission-facade.service';
+import {HonorFacadeService} from '../../services/honor-facade.service';
 import {IPaginator} from '../../../../shared/types/paginator';
 import {IPaginatorBase} from '../../../../shared/types/paginator-base';
 import {TitleHeaderElementManager} from '../../../../shared/components/title-header/types/title-header-element-manager';
@@ -15,26 +15,30 @@ import {AuthService} from '../../../../global/services/auth/auth.service';
 import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-grid-column-settings';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
-import {ICommissionListViewModel} from '../../types/view-model/commission-list-view-model';
+import {IHonorListViewModel} from '../../types/view-model/honor-list-view-model';
 import {cloneDeep, isEmpty, isNil} from 'lodash';
-import {ICommissionFilterViewModel} from '../../types/view-model/commission-filter-view-model';
+import {IHonorFilterViewModel} from '../../types/view-model/honor-filter-view-model';
+import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 
 @Component({
-  selector: 'cr-view-commission-list',
-  templateUrl: './view-commission-list.component.html',
+  selector: 'cr-view-honor-list',
+  templateUrl: './view-honor-list.component.html',
 })
-export class ViewCommissionListComponent extends BaseViewComponent implements OnInit, OnDestroy {
-  public dataSource: IPaginator<ICommissionListViewModel>;
+export class ViewHonorListComponent extends BaseViewComponent implements OnInit, OnDestroy {
+  public dataSource: IPaginator<IHonorListViewModel>;
   public paginator: IPaginatorBase;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
-  public filter: ICommissionFilterViewModel;
+  public filter: IHonorFilterViewModel;
   private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
+  public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
+  public getTeacherDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
+
   private deletedColumn: IEditGridColumnSetting = {
     field: 'isDeleted',
-    titleTranslateKey: 'COMMISSION.LIST.GRID.DELETED',
+    titleTranslateKey: 'HONOR.LIST.GRID.DELETED',
     type: 'boolean',
     autoFit: true,
     hidden: true,
@@ -44,14 +48,39 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
   public columnSettings: Array<IEditGridColumnSetting> = [
     {
       field: 'id',
-      titleTranslateKey: 'COMMISSION.LIST.GRID.ID',
+      titleTranslateKey: 'HONOR.LIST.GRID.ID',
+      type: 'link',
+      disabledIf: () => !readRoles.includes(this.authService.currentRole),
+      autoFit: true
+    },
+    {
+      field: 'teacher.name',
+      titleTranslateKey: 'HONOR.LIST.GRID.TEACHER',
       type: 'link',
       disabledIf: () => !readRoles.includes(this.authService.currentRole)
     },
     {
-      field: 'name',
-      titleTranslateKey: 'COMMISSION.LIST.GRID.NAME',
+      field: 'title',
+      titleTranslateKey: 'HONOR.LIST.GRID.TITLE_HONOR',
       type: 'text',
+    },
+    {
+      field: 'orderNumber',
+      titleTranslateKey: 'HONOR.LIST.GRID.ORDER_NUMBER',
+      type: 'text',
+    },
+    {
+      field: 'date',
+      titleTranslateKey: 'HONOR.LIST.GRID.DATE',
+      type: 'date',
+      autoFit: true,
+    },
+    {
+      field: 'isActive',
+      titleTranslateKey: 'HONOR.LIST.GRID.IS_ACTIVE',
+      type: 'boolean',
+      autoFit: true,
+      sortable: false,
     },
     this.deletedColumn,
   ];
@@ -60,31 +89,57 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
     protected router: Router,
     protected route: ActivatedRoute,
     protected bookmarkService: BookmarkService,
-    private commissionFacadeService: CommissionFacadeService,
+    private honorFacadeService: HonorFacadeService,
     private errorService: ErrorService,
     private customNotificationService: CustomNotificationService,
     public authService: AuthService,
   ) {
     super({
-      nameTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_NAME',
-      descriptionTranslateKey: 'COMMON.BOOKMARK.COMMISSION.LIST.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.commissionList,
+      nameTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_NAME',
+      descriptionTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_DESCRIPTION',
+      iconSvg: BookmarkIcon.honorList,
       allowPinning: true,
     }, bookmarkService, router, route);
     this.initTitleHeaderButtons();
     this.refreshTitleHeaderButtons();
+    this.initDropdowns();
 
-    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().commissionFilter);
-    this.commissionFacadeService.getViewStateCommissionFilter$()
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().honorFilter);
+    this.honorFacadeService.getViewStateHonorFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
+  }
+
+  initDropdowns() {
+    this.getTeacherDropdownList = this.honorFacadeService.getTeacherDropdownList$.bind(this.honorFacadeService);
+    this.getTeacherDropdownItem = this.honorFacadeService.getTeacherDropdownItem$.bind(this.honorFacadeService);
   }
 
   // region Component lifecycle
   ngOnInit(): void {
     if (!this.cacheInitialized) {
-      if (this.route.snapshot.queryParamMap.get('name')) {
-        this.filter.name = this.route.snapshot.queryParamMap.get('name');
+      if (this.route.snapshot.queryParamMap.get('title')) {
+        this.filter.title = this.route.snapshot.queryParamMap.get('title');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('orderNumber')) {
+        this.filter.orderNumber = this.route.snapshot.queryParamMap.get('orderNumber');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('dateMore')) {
+        this.filter.dateMore = this.route.snapshot.queryParamMap.get('dateMore');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('dateLess')) {
+        this.filter.dateLess = this.route.snapshot.queryParamMap.get('dateLess');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('teacherId')) {
+        this.filter.teacherId = Number(this.route.snapshot.queryParamMap.get('teacherId'));
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showInActive')) {
+        this.filter.showInActive = this.route.snapshot.queryParamMap.get('showInActive') === 'true';
       }
 
       if (this.route.snapshot.queryParamMap.get('showDeleted')) {
@@ -108,16 +163,16 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   // region Get and create data
   createNewData(): Promise<boolean> {
-    const route = `/commission/new`;
+    const route = `/honor/new`;
     return this.router.navigate([route]);
   }
 
   getDataList(): void {
-    forkJoin({paginator: this.commissionFacadeService.getViewStateCommissionListPaginator$()}).pipe(
+    forkJoin({paginator: this.honorFacadeService.getViewStateHonorListPaginator$()}).pipe(
       takeUntil(this.onDestroy),
       switchMap(values => {
         this.paginator = values.paginator;
-        return this.commissionFacadeService.getCommissionList$(this.paginator, this.filter);
+        return this.honorFacadeService.getHonorList$(this.paginator, this.filter);
       })
     ).subscribe(dataSource => {
       this.dataSource = dataSource;
@@ -135,7 +190,7 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
   }
 
   loadDataList() {
-    this.commissionFacadeService.loadCommissionList$(this.paginator, this.filter).subscribe(value => {
+    this.honorFacadeService.loadHonorList$(this.paginator, this.filter).subscribe(value => {
       this.dataSource = value;
       this.paginator.page = value.page;
       this.paginator.size = value.size;
@@ -154,9 +209,14 @@ export class ViewCommissionListComponent extends BaseViewComponent implements On
 
   //region Work with grid
 
-  cellClick(event: ICommissionListViewModel): Promise<boolean> {
-    const route = `commission/details/${event.id}`;
-    return this.router.navigate([route]);
+  cellClick(event: IHonorListViewModel & { linkField: string }): Promise<boolean> {
+    if (event.linkField === 'id') {
+      const route = `honor/details/${event.id}`;
+      return this.router.navigate([route]);
+    } else {
+      const route = `teacher/details/${event.teacher?.id}`;
+      return this.router.navigate([route]);
+    }
   }
 
   changePage(paginator: IPaginatorBase): void {

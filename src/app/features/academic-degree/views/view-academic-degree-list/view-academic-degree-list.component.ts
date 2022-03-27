@@ -16,7 +16,7 @@ import {IEditGridColumnSetting} from '../../../../shared/types/edit-grid/edit-gr
 import {switchMap, takeUntil} from 'rxjs/operators';
 import {readRoles, writeRoles} from '../../../../shared/roles';
 import {IAcademicDegreeListViewModel} from '../../types/view-model/academic-degree-list-view-model';
-import {isEmpty} from 'lodash';
+import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {IAcademicDegreeFilterViewModel} from '../../types/view-model/academic-degree-filter-view-model';
 
 @Component({
@@ -29,6 +29,7 @@ export class ViewAcademicDegreeListComponent extends BaseViewComponent implement
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public filter: IAcademicDegreeFilterViewModel;
+  private cacheInitialized: boolean;
   private onDestroy = new ReplaySubject(1);
 
   private deletedColumn: IEditGridColumnSetting = {
@@ -73,6 +74,7 @@ export class ViewAcademicDegreeListComponent extends BaseViewComponent implement
     this.initTitleHeaderButtons();
     this.refreshTitleHeaderButtons();
 
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().academicDegreeFilter);
     this.academicDegreeFacadeService.getViewStateAcademicDegreeFilter$()
       .pipe(takeUntil(this.onDestroy))
       .subscribe(filter => this.filter = filter);
@@ -80,9 +82,19 @@ export class ViewAcademicDegreeListComponent extends BaseViewComponent implement
 
   // region Component lifecycle
   ngOnInit(): void {
-    this.filter.name = this.route.snapshot.queryParamMap.get('name') || '';
-    this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true' || false;
-    this.deletedColumn.hidden = !this.filter.showDeleted;
+    if (!this.cacheInitialized) {
+      if (this.route.snapshot.queryParamMap.get('name')) {
+        this.filter.name = this.route.snapshot.queryParamMap.get('name');
+      }
+
+      if (this.route.snapshot.queryParamMap.get('showDeleted')) {
+        this.filter.showDeleted = this.route.snapshot.queryParamMap.get('showDeleted') === 'true';
+      }
+    }
+
+    if (this.route.snapshot.queryParamMap.get('showDeleted') === 'true') {
+      this.deletedColumn.hidden = !this.filter.showDeleted;
+    }
 
     this.getDataList();
   }
@@ -158,7 +170,7 @@ export class ViewAcademicDegreeListComponent extends BaseViewComponent implement
   onFilter() {
     this.deletedColumn.hidden = !this.filter.showDeleted;
     this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-    this.bookmarkService.getCurrentBookmarkTask().params = this.filter;
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
     this.loadDataList();
   }
 

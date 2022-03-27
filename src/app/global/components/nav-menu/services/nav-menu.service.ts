@@ -173,6 +173,17 @@ export class NavMenuService {
         iconSvg: BookmarkIcon.publicationList,
       },
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.HONOR',
+      roles: readRoles,
+      task: {
+        route: 'honor/list',
+        nameTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_NAME',
+        descriptionTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_DESCRIPTION',
+        iconSvg: BookmarkIcon.honorList,
+      },
+    },
   ];
 
   constructor(

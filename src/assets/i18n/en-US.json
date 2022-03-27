@@ -286,6 +286,16 @@
           "BOOKMARK_NAME": "Publication: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "HONOR": {
+        "LIST": {
+          "BOOKMARK_NAME": "Honor list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Honor: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -308,6 +318,7 @@
       "INTERNSHIP": "Internship list",
       "ATTESTATION": "Attestation list",
       "PUBLICATION": "Publication list",
+      "HONOR": "Honor list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -819,6 +830,7 @@
         "SHOW_DELETED": "Show deleted"
       },
       "GRID": {
+        "TITLE": "Attestations",
         "DELETED": "Deleted",
         "ID": "ID",
         "TEACHER": "Teacher",
@@ -891,6 +903,56 @@
         "SUCCESS_CREATE": "Publication was successfully created",
         "SUCCESS_DELETE": "Publication was successfully deleted",
         "SUCCESS_UPDATE": "Publication was successfully updated"
+      }
+    }
+  },
+  "HONOR": {
+    "LIST": {
+      "TITLE": "Honor list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "TITLE_HONOR": "Title",
+        "TEACHER": "Teacher",
+        "ORDER_NUMBER": "Order number",
+        "DATE_LESS": "Date less",
+        "DATE_MORE": "Date more",
+        "SHOW_IN_ACTIVE": "Show inactive",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Honors",
+        "DELETED": "Deleted",
+        "TITLE_HONOR": "Title",
+        "ID": "ID",
+        "TEACHER": "Teacher",
+        "ORDER_NUMBER": "Order number",
+        "DATE": "Date",
+        "IS_ACTIVE": "Active"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Honor: {{value}}",
+      "TITLE_HONOR": "Title",
+      "TEACHER": "Teacher",
+      "ORDER_NUMBER": "Order number",
+      "DATE": "Date",
+      "IS_ACTIVE": "Active",
+      "DESCRIPTION": "Description",
+      "SHOW_IN_ACTIVE": "Show inactive",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Title is required",
+        "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
+        "MAX_LENGTH_ORDER_NUMBER": "Order number max length is {{maxLength}}",
+        "REQUIRED_DATE": "Date is required",
+        "INVALID_MIN_DATE": "Min date is {{minDate}}",
+        "INVALID_MAX_DATE": "Max date is {{maxDate}}",
+        "MAX_LENGTH_DESCRIPTION": "Description max length is {{maxLength}}",
+        "REQUIRED_TEACHER": "Teacher is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Honor was successfully created",
+        "SUCCESS_DELETE": "Honor was successfully deleted",
+        "SUCCESS_UPDATE": "Honor was successfully updated"
       }
     }
   }
