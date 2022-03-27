@@ -296,6 +296,16 @@
           "BOOKMARK_NAME": "Honor: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "REBUKE": {
+        "LIST": {
+          "BOOKMARK_NAME": "Rebuke list",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Rebuke: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
       }
     }
   },
@@ -319,6 +329,7 @@
       "ATTESTATION": "Attestation list",
       "PUBLICATION": "Publication list",
       "HONOR": "Honor list",
+      "REBUKE": "Rebuke list",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -953,6 +964,56 @@
         "SUCCESS_CREATE": "Honor was successfully created",
         "SUCCESS_DELETE": "Honor was successfully deleted",
         "SUCCESS_UPDATE": "Honor was successfully updated"
+      }
+    }
+  },
+  "REBUKE": {
+    "LIST": {
+      "TITLE": "Rebuke list",
+      "FILTER": {
+        "TITLE": "Selection filter",
+        "TITLE_HONOR": "Title",
+        "TEACHER": "Teacher",
+        "ORDER_NUMBER": "Order number",
+        "DATE_LESS": "Date less",
+        "DATE_MORE": "Date more",
+        "SHOW_IN_ACTIVE": "Show inactive",
+        "SHOW_DELETED": "Show deleted"
+      },
+      "GRID": {
+        "TITLE": "Rebukes",
+        "DELETED": "Deleted",
+        "TITLE_REBUKE": "Title",
+        "ID": "ID",
+        "TEACHER": "Teacher",
+        "ORDER_NUMBER": "Order number",
+        "DATE": "Date",
+        "IS_ACTIVE": "Active"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Rebuke: {{value}}",
+      "TITLE_REBUKE": "Title",
+      "TEACHER": "Teacher",
+      "ORDER_NUMBER": "Order number",
+      "DATE": "Date",
+      "IS_ACTIVE": "Active",
+      "DESCRIPTION": "Description",
+      "SHOW_IN_ACTIVE": "Show inactive",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Title is required",
+        "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
+        "MAX_LENGTH_ORDER_NUMBER": "Order number max length is {{maxLength}}",
+        "REQUIRED_DATE": "Date is required",
+        "INVALID_MIN_DATE": "Min date is {{minDate}}",
+        "INVALID_MAX_DATE": "Max date is {{maxDate}}",
+        "MAX_LENGTH_DESCRIPTION": "Description max length is {{maxLength}}",
+        "REQUIRED_TEACHER": "Teacher is required"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Rebuke was successfully created",
+        "SUCCESS_DELETE": "Rebuke was successfully deleted",
+        "SUCCESS_UPDATE": "Rebuke was successfully updated"
       }
     }
   }

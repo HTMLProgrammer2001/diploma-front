@@ -36,6 +36,8 @@ import {IPublicationListViewModel} from '../../../features/publication/types/vie
 import {IPublicationViewModel} from '../../../features/publication/types/view-model/publication-view-model';
 import {IHonorListViewModel} from '../../../features/honor/types/view-model/honor-list-view-model';
 import {IHonorViewModel} from '../../../features/honor/types/view-model/honor-view-model';
+import {IRebukeListViewModel} from '../../../features/rebuke/types/view-model/rebuke-list-view-model';
+import {IRebukeViewModel} from '../../../features/rebuke/types/view-model/rebuke-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -118,4 +120,9 @@ export interface IBookmarkData {
   honorList?: IPaginator<IHonorListViewModel>;
   honorDetail?: IHonorViewModel;
   honorDetailCopy?: IHonorViewModel;
+
+  /** Rebuke **/
+  rebukeList?: IPaginator<IRebukeListViewModel>;
+  rebukeDetail?: IRebukeViewModel;
+  rebukeDetailCopy?: IRebukeViewModel;
 }

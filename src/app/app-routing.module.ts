@@ -103,6 +103,11 @@ const routes: Routes = [
         canActivate: [ConfigLoadedGuard, AuthGuard],
       },
       {
+        path: 'rebuke',
+        loadChildren: () => import('./features/rebuke/rebuke.module').then(m => m.RebukeModule),
+        canActivate: [ConfigLoadedGuard, AuthGuard],
+      },
+      {
         path: '403',
         component: ViewPageForbiddenComponent,
         canActivate: [BookmarkProcessGuard, AuthGuard],

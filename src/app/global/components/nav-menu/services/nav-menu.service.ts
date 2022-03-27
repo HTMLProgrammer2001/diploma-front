@@ -184,6 +184,17 @@ export class NavMenuService {
         iconSvg: BookmarkIcon.honorList,
       },
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.REBUKE',
+      roles: readRoles,
+      task: {
+        route: 'rebuke/list',
+        nameTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_NAME',
+        descriptionTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_DESCRIPTION',
+        iconSvg: BookmarkIcon.rebukeList,
+      },
+    },
   ];
 
   constructor(

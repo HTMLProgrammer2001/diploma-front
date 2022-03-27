@@ -1,0 +1,80 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'REBUKE.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="rebuke">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="rebuke.teacher"
+            (currentItemValueChange)="changeTitle()"
+            [value]="rebuke.teacher.id"
+            [dataCacheName]="'RebukeDetailsTeacherDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'REBUKE.DETAILS.TEACHER'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getTeacherDropdownList"
+            [validator]="validator"
+            [validationField]="'teacher.id'"
+            [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-dropdown-smart-control>
+      </div>
+      <div class="col-lg-6">
+        <cr-control-edit
+          [(dataValue)]="rebuke.title"
+          (dataValueChange)="changeTitle()"
+          [translateKeys]="'REBUKE.DETAILS.TITLE_REBUKE'"
+          [validator]="validator"
+          [validationField]="'title'"
+          [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-4">
+        <cr-control-datepicker
+          [(dataValue)]="rebuke.date"
+          [translateKeys]="'REBUKE.DETAILS.DATE'"
+          [validator]="validator"
+          [validationField]="'date'"
+          [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-control-datepicker>
+      </div>
+      <div class="col-lg-4">
+        <cr-control-edit
+            [(dataValue)]="rebuke.orderNumber"
+            [translateKeys]="'REBUKE.DETAILS.ORDER_NUMBER'"
+            [validator]="validator"
+            [validationField]="'orderNumber'"
+            [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-4">
+        <cr-checkbox-control
+            [(dataValue)]="rebuke.isActive"
+            [translateKeys]="'REBUKE.DETAILS.IS_ACTIVE'"
+            [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-checkbox-control>
+      </div>
+    </div>
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-12">
+        <cr-text-area-control
+          [(dataValue)]="rebuke.description"
+          [translateKeys]="'REBUKE.DETAILS.DESCRIPTION'"
+          [validator]="validator"
+          [validationField]="'description'"
+          [isDisabled]="rebuke.isDeleted && !viewState.restoring"
+        ></cr-text-area-control>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>
