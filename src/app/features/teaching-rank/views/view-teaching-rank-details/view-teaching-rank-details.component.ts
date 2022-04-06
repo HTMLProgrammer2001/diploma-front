@@ -27,12 +27,12 @@ import {ITeachingRankDetailsViewState} from '../../types/view-model/teaching-ran
   templateUrl: './view-teaching-rank-details.component.html',
   styleUrls: ['./view-teaching-rank-details.component.scss']
 })
-export class ViewTeachingRankDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewTeachingRankDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public teachingRankId: number;
   public teachingRank: ITeachingRankViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +80,8 @@ export class ViewTeachingRankDetailsComponent extends BaseViewComponent
     this.teachingRankFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

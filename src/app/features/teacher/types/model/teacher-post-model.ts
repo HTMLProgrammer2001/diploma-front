@@ -2,7 +2,7 @@ export interface ITeacherPostModel {
   academicDegreeId?: number;
   academicTitleId?: number;
   address?: string;
-  avatar?: any;
+  avatar?: File;
   birthday?: string;
   commissionId: number;
   departmentId: number;

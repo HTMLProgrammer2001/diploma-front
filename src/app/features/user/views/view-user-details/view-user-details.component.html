@@ -1,0 +1,108 @@
+<ng-container *ngIf="!viewState.isNotFound">
+  <cr-title-header
+      (buttonClickEvent)="onTitleButtonClick($event)"
+      [buttonSettings]="titleHeaderButtonSettings"
+      [titleTranslateKey]="'USER.DETAILS.TITLE'"
+      [titleValue]="titleValue"
+  ></cr-title-header>
+
+  <div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="user">
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-control-edit
+            [(dataValue)]="user.fullName"
+            (dataValueChange)="changeTitle()"
+            [translateKeys]="'USER.DETAILS.NAME'"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'fullName'"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-control-edit>
+      </div>
+      <div class="col-lg-6">
+        <cr-control-edit
+            [(dataValue)]="user.email"
+            [translateKeys]="'USER.DETAILS.EMAIL'"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'email'"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-control-edit>
+      </div>
+    </div>
+
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-control-masked-edit
+            [translateKeys]="'USER.DETAILS.PHONE'"
+            [(dataValue)]="user.phone"
+            [validator]="validator"
+            [validationField]="'phone'"
+            [mask]="'+38\\0 (00) 00-00-000'"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-control-masked-edit>
+      </div>
+      <div class="col-lg-6">
+        <cr-edit-password-control
+            [(dataValue)]="user.password"
+            [translateKeys]="'USER.DETAILS.PASSWORD'"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
+            [validator]="validator"
+            [validationField]="'password'"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-edit-password-control>
+      </div>
+    </div>
+
+    <div class="row cr-bottom-row-border">
+      <div class="col-lg-6">
+        <cr-dropdown-smart-control
+            [(currentItemValue)]="user.role"
+            [value]="user.role?.id"
+            [dataCacheName]="'UserRoleDropdown'"
+            [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+            [labelTranslateKey]="'USER.DETAILS.ROLE'"
+            [dataTranslateKeyField]="'translateKey'"
+            [valueField]="'id'"
+            [textField]="'name'"
+            [getListItemsFunction]="getRoleDropdownList"
+            [getOneItemFunction]="getRoleDropdownItem"
+            [validator]="validator"
+            [validationField]="'role.id'"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-dropdown-smart-control>
+      </div>
+      <div class="col-lg-6">
+        <cr-file-control
+            [dataLabel]="'USER.DETAILS.AVATAR'"
+            [(dataValue)]="user.avatar"
+            (dataValueChange)="onAvatarChange($event)"
+            [maxFileSize]="50 * 1024 * 1024"
+            [allowedExtensions]="['.png', '.jpeg', '.jpg']"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
+        ></cr-file-control>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="user.avatarUrl">
+      <div class="cr-user-photo-wrapper">
+        <div>
+          <img
+              class="cr-user-photo-image"
+              [src]="sanitizeUrl(user.avatarUrl)"
+              [alt]="'USER.DETAILS.PHOTO' | translate:{name: user.fullName}"
+              [title]="'USER.DETAILS.PHOTO' | translate:{name: user.fullName}"
+          >
+        </div>
+
+        <div class="cr-user-photo-title" [attr.data-translate]="'USER.DETAILS.PHOTO'">
+          {{'USER.DETAILS.PHOTO' | translate:{name: user.fullName} }}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<cr-view-page-not-found *ngIf="viewState.isNotFound"></cr-view-page-not-found>

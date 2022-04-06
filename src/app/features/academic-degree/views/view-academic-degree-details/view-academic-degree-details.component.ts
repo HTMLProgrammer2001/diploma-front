@@ -27,12 +27,12 @@ import {IAcademicDegreeDetailsViewState} from '../../types/view-model/academic-d
   templateUrl: './view-academic-degree-details.component.html',
   styleUrls: ['./view-academic-degree-details.component.scss']
 })
-export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public academicDegreeId: number;
   public academicDegree: IAcademicDegreeViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +80,8 @@ export class ViewAcademicDegreeDetailsComponent extends BaseViewComponent
     this.academicDegreeFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

@@ -23,6 +23,7 @@
             [validator]="validator"
             [validationField]="'teacher.id'"
             [isDisabled]="honor.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-dropdown-smart-control>
       </div>
       <div class="col-lg-6">
@@ -33,6 +34,7 @@
           [validator]="validator"
           [validationField]="'title'"
           [isDisabled]="honor.isDeleted && !viewState.restoring"
+          [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
     </div>
@@ -44,6 +46,7 @@
           [validator]="validator"
           [validationField]="'date'"
           [isDisabled]="honor.isDeleted && !viewState.restoring"
+          [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-datepicker>
       </div>
       <div class="col-lg-4">
@@ -53,6 +56,7 @@
             [validator]="validator"
             [validationField]="'orderNumber'"
             [isDisabled]="honor.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
       <div class="col-lg-4">
@@ -60,6 +64,7 @@
             [(dataValue)]="honor.isActive"
             [translateKeys]="'HONOR.DETAILS.IS_ACTIVE'"
             [isDisabled]="honor.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-checkbox-control>
       </div>
     </div>
@@ -71,6 +76,7 @@
           [validator]="validator"
           [validationField]="'description'"
           [isDisabled]="honor.isDeleted && !viewState.restoring"
+          [permissionSettings]="{isAccessEdit: editable}"
         ></cr-text-area-control>
       </div>
     </div>

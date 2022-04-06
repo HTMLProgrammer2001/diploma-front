@@ -29,6 +29,8 @@ import {IHonorFilterViewModel} from '../../../features/honor/types/view-model/ho
 import {IHonorDetailsViewState} from '../../../features/honor/types/view-model/honor-details-view-state';
 import {IRebukeFilterViewModel} from '../../../features/rebuke/types/view-model/rebuke-filter-view-model';
 import {IRebukeDetailsViewState} from '../../../features/rebuke/types/view-model/rebuke-details-view-state';
+import {IUserFilterViewModel} from '../../../features/user/types/view-model/user-filter-view-model';
+import {IUserDetailsViewState} from '../../../features/user/types/view-model/user-details-view-state';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -127,4 +129,10 @@ export interface IBookmarkViewState {
   rebukeFilter?: IRebukeFilterViewModel;
   rebukeValidator?: Validator;
   rebukeDetails?: IRebukeDetailsViewState;
+
+  /** User  **/
+  userListPaginator?: IPaginatorBase;
+  userFilter?: IUserFilterViewModel;
+  userValidator?: Validator;
+  userDetails?: IUserDetailsViewState;
 }

@@ -38,6 +38,8 @@ import {IHonorListViewModel} from '../../../features/honor/types/view-model/hono
 import {IHonorViewModel} from '../../../features/honor/types/view-model/honor-view-model';
 import {IRebukeListViewModel} from '../../../features/rebuke/types/view-model/rebuke-list-view-model';
 import {IRebukeViewModel} from '../../../features/rebuke/types/view-model/rebuke-view-model';
+import {IUserListViewModel} from '../../../features/user/types/view-model/user-list-view-model';
+import {IUserViewModel} from '../../../features/user/types/view-model/user-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -125,4 +127,9 @@ export interface IBookmarkData {
   rebukeList?: IPaginator<IRebukeListViewModel>;
   rebukeDetail?: IRebukeViewModel;
   rebukeDetailCopy?: IRebukeViewModel;
+
+  /** User **/
+  userList?: IPaginator<IUserListViewModel>;
+  userDetail?: IUserViewModel;
+  userDetailCopy?: IUserViewModel;
 }

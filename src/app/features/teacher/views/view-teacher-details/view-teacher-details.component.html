@@ -43,6 +43,7 @@
                     [validator]="validator"
                     [validationField]="'fullName'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -52,6 +53,7 @@
                     [validator]="validator"
                     [validationField]="'email'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -62,6 +64,7 @@
                     [validationField]="'phone'"
                     [mask]="'+38\\0 (00) 00-00-000'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-masked-edit>
               </div>
             </div>
@@ -74,6 +77,7 @@
                     [validator]="validator"
                     [validationField]="'birthday'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-datepicker>
               </div>
               <div class="col-lg-4">
@@ -81,6 +85,7 @@
                     [translateKeys]="'TEACHER.DETAILS.PERSONAL.ADDRESS'"
                     [(dataValue)]="teacher.address"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-edit>
               </div>
               <div class="col-lg-4">
@@ -91,6 +96,7 @@
                     [maxFileSize]="50 * 1024 * 1024"
                     [allowedExtensions]="['.png', '.jpeg', '.jpg']"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-file-control>
               </div>
             </div>
@@ -156,6 +162,7 @@
                     [validator]="validator"
                     [validationField]="'commission.id'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -172,6 +179,7 @@
                     [validator]="validator"
                     [validationField]="'department.id'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -186,6 +194,7 @@
                     [textField]="'name'"
                     [getListItemsFunction]="getTeachingRankDropdownList"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-dropdown-smart-control>
               </div>
             </div>
@@ -203,6 +212,7 @@
                     [textField]="'name'"
                     [getListItemsFunction]="getAcademicTitleDropdownList"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -217,6 +227,7 @@
                     [textField]="'name'"
                     [getListItemsFunction]="getAcademicDegreeDropdownList"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-dropdown-smart-control>
               </div>
               <div class="col-lg-4">
@@ -226,6 +237,7 @@
                     [validator]="validator"
                     [validationField]="'workStartDate'"
                     [isDisabled]="teacher.isDeleted && !viewState.restoring"
+                    [permissionSettings]="{isAccessEdit: editable}"
                 ></cr-control-datepicker>
               </div>
             </div>

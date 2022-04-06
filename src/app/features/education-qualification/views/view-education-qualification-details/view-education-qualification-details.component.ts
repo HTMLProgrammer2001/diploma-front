@@ -27,12 +27,12 @@ import {IEducationQualificationDetailsViewState} from '../../types/view-model/ed
   templateUrl: './view-education-qualification-details.component.html',
   styleUrls: ['./view-education-qualification-details.component.scss']
 })
-export class ViewEducationQualificationDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewEducationQualificationDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public educationQualificationId: number;
   public educationQualification: IEducationQualificationViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +80,8 @@ export class ViewEducationQualificationDetailsComponent extends BaseViewComponen
     this.educationQualificationFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

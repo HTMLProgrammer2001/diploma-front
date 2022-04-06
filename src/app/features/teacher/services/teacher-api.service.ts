@@ -12,14 +12,24 @@ import {IPaginatorBase} from '../../../shared/types/paginator-base';
 import {
   createTeacherQuery,
   deleteTeacherQuery,
-  getAcademicDegreeDropdownQuery, getAcademicDegreeDropdownItemQuery,
-  getAcademicTitleDropdownQuery, getAcademicTitleDropdownItemQuery, getCommissionDropdownItemQuery,
+  getAcademicDegreeDropdownItemQuery,
+  getAcademicDegreeDropdownQuery,
+  getAcademicTitleDropdownItemQuery,
+  getAcademicTitleDropdownQuery,
+  getCommissionDropdownItemQuery,
   getCommissionDropdownQuery,
-  getDepartmentDropdownQuery, getDepartmentDropdownItemQuery,
+  getDepartmentDropdownItemQuery,
+  getDepartmentDropdownQuery,
   getTeacherAttestationListQuery,
-  getTeacherByIdQuery, getTeacherEducationListQuery, getTeacherHonorListQuery, getTeacherInternshipListQuery,
-  getTeacherListQuery, getTeacherPublicationListQuery, getTeacherRebukeListQuery,
-  getTeachingRankDropdownQuery, getTeachingRankDropdownItemQuery,
+  getTeacherByIdQuery,
+  getTeacherEducationListQuery,
+  getTeacherHonorListQuery,
+  getTeacherInternshipListQuery,
+  getTeacherListQuery,
+  getTeacherPublicationListQuery,
+  getTeacherRebukeListQuery,
+  getTeachingRankDropdownItemQuery,
+  getTeachingRankDropdownQuery,
   updateTeacherQuery
 } from './teacher-queries';
 import {ITeacherFilterModel} from '../types/model/teacher-filter-model';
@@ -28,11 +38,9 @@ import {ITeacherPutModel} from '../types/model/teacher-put-model';
 import {ITeacherListGetModel} from '../types/model/teacher-list-get-model';
 import {TeacherOrderMap} from '../types/common/teacher-order-map';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
-import {ITeacherAttestationListGetModel} from '../types/model/teacher-attestation-list-get-model';
 import {ICommonTeacherDataFilterGetModel} from '../types/model/common-teacher-data-filter-get-model';
 import {ITeacherRebukeListGetModel} from '../types/model/teacher-rebuke-list-get-model';
 import {ITeacherHonorListGetModel} from '../types/model/teacher-honor-list-get-model';
-import {ITeacherInternshipListGetModel} from '../types/model/teacher-internship-list-get-model';
 import {ITeacherEducationListGetModel} from '../types/model/teacher-education-list-get-model';
 import {ITeacherPublicationListGetModel} from '../types/model/teacher-publication-list-get-model';
 import {ITeacherInternshipListResponseModel} from '../types/model/teacher-internship-list-response-model';

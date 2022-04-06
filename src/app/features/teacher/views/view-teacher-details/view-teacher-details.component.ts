@@ -33,12 +33,12 @@ import {DomSanitizer} from '@angular/platform-browser';
   templateUrl: './view-teacher-details.component.html',
   styleUrls: ['./view-teacher-details.component.scss']
 })
-export class ViewTeacherDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewTeacherDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public teacherId: number;
   public teacher: ITeacherViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -97,6 +97,8 @@ export class ViewTeacherDetailsComponent extends BaseViewComponent
     this.teacherFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

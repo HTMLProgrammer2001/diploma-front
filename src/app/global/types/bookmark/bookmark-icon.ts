@@ -28,4 +28,6 @@ export class BookmarkIcon {
   static honorDetails = null;
   static rebukeList = null;
   static rebukeDetails = null;
+  static userList = null;
+  static userDetails = null;
 }

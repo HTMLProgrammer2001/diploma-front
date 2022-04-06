@@ -35,6 +35,7 @@ export class ViewHonorDetailsComponent extends BaseViewComponent implements OnIn
   public honor: IHonorViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -89,6 +90,8 @@ export class ViewHonorDetailsComponent extends BaseViewComponent implements OnIn
     this.honorFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

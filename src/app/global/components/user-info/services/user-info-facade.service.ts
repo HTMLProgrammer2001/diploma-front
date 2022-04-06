@@ -4,7 +4,7 @@ import {UserInfoApiService} from './user-info-api.service';
 import {IUserInfoProfileGetModel} from '../types/user-info-profile-get-model';
 import {BookmarkService} from '../../../services/bookmark/bookmark.service';
 import {isNil} from 'lodash';
-import {map, startWith, tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
 export class UserInfoFacadeService {

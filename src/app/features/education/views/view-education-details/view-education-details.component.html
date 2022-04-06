@@ -24,6 +24,7 @@
             [validator]="validator"
             [validationField]="'teacher.id'"
             [isDisabled]="education.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-dropdown-smart-control>
       </div>
       <div class="col-lg-6">
@@ -41,6 +42,7 @@
             [validator]="validator"
             [validationField]="'educationQualification.id'"
             [isDisabled]="education.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-dropdown-smart-control>
       </div>
     </div>
@@ -52,6 +54,7 @@
           [validator]="validator"
           [validationField]="'institution'"
           [isDisabled]="education.isDeleted && !viewState.restoring"
+          [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
       <div class="col-lg-4">
@@ -61,6 +64,7 @@
             [validator]="validator"
             [validationField]="'specialty'"
             [isDisabled]="education.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
       <div class="col-lg-4">
@@ -74,6 +78,7 @@
             [validator]="validator"
             [validationField]="'yearOfIssue'"
             [isDisabled]="education.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-numeric-control>
       </div>
     </div>
@@ -85,6 +90,7 @@
           [validator]="validator"
           [validationField]="'description'"
           [isDisabled]="education.isDeleted && !viewState.restoring"
+          [permissionSettings]="{isAccessEdit: editable}"
         ></cr-text-area-control>
       </div>
     </div>

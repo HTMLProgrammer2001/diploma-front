@@ -33,6 +33,7 @@ export class ViewCategoryDetailsComponent extends BaseViewComponent
   public category: ICategoryViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +81,8 @@ export class ViewCategoryDetailsComponent extends BaseViewComponent
     this.categoryFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {
@@ -151,7 +154,7 @@ export class ViewCategoryDetailsComponent extends BaseViewComponent
       this.currentBookmark.data.categoryDetail = this.categoryMapperService.categoryInitializeViewModel();
       this.currentBookmark.data.categoryDetailCopy = cloneDeep(this.currentBookmark.data.categoryDetail);
       this.setData(this.currentBookmark.data.categoryDetail);
-    } else if(this.isNew) {
+    } else if (this.isNew) {
       this.setData(this.currentBookmark.data.categoryDetail);
     } else if (isFinite(this.categoryId)) {
       this.categoryFacadeService.getCategory$(this.categoryId)

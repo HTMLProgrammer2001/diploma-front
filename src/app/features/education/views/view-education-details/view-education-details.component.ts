@@ -30,12 +30,12 @@ import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
   templateUrl: './view-education-details.component.html',
   styleUrls: ['./view-education-details.component.scss']
 })
-export class ViewEducationDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewEducationDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public educationId: number;
   public education: IEducationViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -104,6 +104,8 @@ export class ViewEducationDetailsComponent extends BaseViewComponent
     this.educationFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

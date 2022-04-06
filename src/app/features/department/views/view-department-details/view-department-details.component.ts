@@ -27,12 +27,12 @@ import {IDepartmentDetailsViewState} from '../../types/view-model/department-det
   templateUrl: './view-department-details.component.html',
   styleUrls: ['./view-department-details.component.scss']
 })
-export class ViewDepartmentDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewDepartmentDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public departmentId: number;
   public department: IDepartmentViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +80,8 @@ export class ViewDepartmentDetailsComponent extends BaseViewComponent
     this.departmentFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

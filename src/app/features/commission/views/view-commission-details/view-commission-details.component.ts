@@ -27,12 +27,12 @@ import {ICommissionDetailsViewState} from '../../types/view-model/commission-det
   templateUrl: './view-commission-details.component.html',
   styleUrls: ['./view-commission-details.component.scss']
 })
-export class ViewCommissionDetailsComponent extends BaseViewComponent
-  implements OnInit, OnDestroy {
+export class ViewCommissionDetailsComponent extends BaseViewComponent implements OnInit, OnDestroy {
   public commissionId: number;
   public commission: ICommissionViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -80,6 +80,8 @@ export class ViewCommissionDetailsComponent extends BaseViewComponent
     this.commissionFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

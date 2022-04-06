@@ -35,6 +35,7 @@ export class ViewRebukeDetailsComponent extends BaseViewComponent implements OnI
   public rebuke: IRebukeViewModel;
   public titleValue = '';
   public isNew = false;
+  public editable: boolean;
   public validator: Validator;
   public titleHeaderButtonManager: TitleHeaderElementManager;
   public titleHeaderButtonSettings: Array<TitleHeaderElement>;
@@ -89,6 +90,8 @@ export class ViewRebukeDetailsComponent extends BaseViewComponent implements OnI
     this.rebukeFacadeService.refreshDetails$
       .pipe(takeUntil(this.onDestroy))
       .subscribe(() => this.refresh());
+
+    this.editable = writeRoles.includes(this.authService.currentRole);
   }
 
   ngOnDestroy(): void {

@@ -16,6 +16,7 @@
             [isDisabled]="teachingRank.isDeleted && !viewState.restoring"
             [validator]="validator"
             [validationField]="'name'"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
     </div>
@@ -28,7 +29,7 @@
       </p>
     </div>
 
-    <cr-category-attestations-list [category]="teachingRank"></cr-category-attestations-list>
+    <cr-teaching-rank-teachers-list [teachingRank]="teachingRank"></cr-teaching-rank-teachers-list>
   </div>
 </ng-container>
 

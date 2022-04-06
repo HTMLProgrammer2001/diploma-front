@@ -14,6 +14,7 @@
             (dataValueChange)="changeTitle()"
             [translateKeys]="'ACADEMIC_TITLE.DETAILS.NAME'"
             [isDisabled]="academicTitle.isDeleted && !viewState.restoring"
+            [permissionSettings]="{isAccessEdit: editable}"
             [validator]="validator"
             [validationField]="'name'"
         ></cr-control-edit>

@@ -16,6 +16,7 @@
             [isDisabled]="educationQualification.isDeleted && !viewState.restoring"
             [validator]="validator"
             [validationField]="'name'"
+            [permissionSettings]="{isAccessEdit: editable}"
         ></cr-control-edit>
       </div>
     </div>

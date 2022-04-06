@@ -195,6 +195,17 @@ export class NavMenuService {
         iconSvg: BookmarkIcon.rebukeList,
       },
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.USER',
+      roles: readRoles,
+      task: {
+        route: 'user/list',
+        nameTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_NAME',
+        descriptionTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_DESCRIPTION',
+        iconSvg: BookmarkIcon.userList,
+      },
+    },
   ];
 
   constructor(
