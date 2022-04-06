@@ -1,0 +1,83 @@
+<cr-title-header
+    (buttonClickEvent)="onTitleButtonClick($event)"
+    [buttonSettings]="titleHeaderButtonSettings"
+    [titleTranslateKey]="'PROFILE.TITLE'"
+    [titleValue]="titleValue"
+></cr-title-header>
+
+<div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="profile">
+  <div class="row cr-bottom-row-border">
+    <div class="col-lg-6">
+      <cr-control-edit
+          [(dataValue)]="profile.fullName"
+          (dataValueChange)="changeTitle()"
+          [translateKeys]="'PROFILE.NAME'"
+          [validator]="validator"
+          [validationField]="'fullName'"
+      ></cr-control-edit>
+    </div>
+    <div class="col-lg-6">
+      <cr-control-edit
+          [(dataValue)]="profile.email"
+          [translateKeys]="'PROFILE.EMAIL'"
+          [validator]="validator"
+          [validationField]="'email'"
+      ></cr-control-edit>
+    </div>
+  </div>
+
+  <div class="row cr-bottom-row-border">
+    <div class="col-lg-6">
+      <cr-control-masked-edit
+          [translateKeys]="'PROFILE.PHONE'"
+          [(dataValue)]="profile.phone"
+          [validator]="validator"
+          [validationField]="'phone'"
+          [mask]="'+38\\0 (00) 00-00-000'"
+      ></cr-control-masked-edit>
+    </div>
+    <div class="col-lg-6">
+      <cr-edit-password-control
+          [(dataValue)]="profile.password"
+          [translateKeys]="'PROFILE.PASSWORD'"
+          [validator]="validator"
+          [validationField]="'password'"
+      ></cr-edit-password-control>
+    </div>
+  </div>
+
+  <div class="row cr-bottom-row-border">
+    <div class="col-lg-6">
+      <cr-label-control
+        [dataValue]="profile.role"
+        [translateKeys]="'PROFILE.ROLE'"
+      ></cr-label-control>
+    </div>
+    <div class="col-lg-6">
+      <cr-file-control
+          [dataLabel]="'PROFILE.AVATAR'"
+          [(dataValue)]="profile.avatar"
+          (dataValueChange)="onAvatarChange($event)"
+          [maxFileSize]="50 * 1024 * 1024"
+          [allowedExtensions]="['.png', '.jpeg', '.jpg']"
+      ></cr-file-control>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="profile.avatarUrl">
+    <div class="cr-profile-photo-wrapper">
+      <div>
+        <img
+            class="cr-profile-photo-image"
+            [src]="sanitizeUrl(profile.avatarUrl)"
+            [alt]="'PROFILE.PHOTO' | translate:{name: profile.fullName}"
+            [title]="'PROFILE.PHOTO' | translate:{name: profile.fullName}"
+        >
+      </div>
+
+      <div class="cr-profile-photo-title" [attr.data-translate]="'PROFILE.PHOTO'">
+        {{'PROFILE.PHOTO' | translate:{name: profile.fullName} }}
+      </div>
+    </div>
+  </div>
+</div>

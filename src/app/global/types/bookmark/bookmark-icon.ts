@@ -1,5 +1,6 @@
 export class BookmarkIcon {
   static dashboard = null;
+  static profile = null;
   static commissionList = null;
   static commissionDetails = null;
   static departmentList = null;

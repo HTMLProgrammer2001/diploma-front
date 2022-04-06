@@ -40,6 +40,7 @@ import {IRebukeListViewModel} from '../../../features/rebuke/types/view-model/re
 import {IRebukeViewModel} from '../../../features/rebuke/types/view-model/rebuke-view-model';
 import {IUserListViewModel} from '../../../features/user/types/view-model/user-list-view-model';
 import {IUserViewModel} from '../../../features/user/types/view-model/user-view-model';
+import {IProfileViewModel} from '../../../features/profile/types/view-model/profile-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -132,4 +133,8 @@ export interface IBookmarkData {
   userList?: IPaginator<IUserListViewModel>;
   userDetail?: IUserViewModel;
   userDetailCopy?: IUserViewModel;
+
+  /** Profile **/
+  profileDetail?: IProfileViewModel;
+  profileDetailCopy?: IProfileViewModel;
 }

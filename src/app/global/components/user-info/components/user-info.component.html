@@ -34,6 +34,9 @@
             (buttonClickEvent)="logout()"
           ></cr-button-control>
         </li>
+        <li>
+          <a [routerLink]="'profile'">{{'COMMON.USER_INFO.ACTIONS.PROFILE' | translate}}</a>
+        </li>
       </ul>
       <p class="cr-user-info-version">Version {{appVersion}}</p>
     </div>

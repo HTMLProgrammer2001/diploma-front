@@ -109,9 +109,8 @@
     "USER_INFO": {
       "ACTIONS": {
         "LOGOUT": "Logout",
-        "SETTINGS": "Settings"
-      },
-      "GREETING": "Hello,"
+        "PROFILE": "Profile"
+      }
     },
     "VALIDATION": {
       "CONTENT": "You have {{ count }} validation errors:",
@@ -316,6 +315,10 @@
           "BOOKMARK_NAME": "User: {{value}}",
           "BOOKMARK_DESCRIPTION": ""
         }
+      },
+      "PROFILE": {
+        "BOOKMARK_NAME": "Profile",
+        "BOOKMARK_DESCRIPTION": ""
       }
     }
   },
@@ -341,6 +344,7 @@
       "HONOR": "Honor list",
       "REBUKE": "Rebuke list",
       "USER": "User list",
+      "PROFILE": "Profile",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -1072,6 +1076,30 @@
         "SUCCESS_DELETE": "User was successfully deleted",
         "SUCCESS_UPDATE": "User was successfully updated"
       }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "Profile",
+    "NAME": "Full name",
+    "EMAIL": "Email",
+    "ROLE": "Role",
+    "PHONE": "Phone",
+    "PASSWORD": "Password",
+    "AVATAR": "Select avatar",
+    "PHOTO": "Avatar of {{name}}",
+    "VALIDATION": {
+      "REQUIRED_FULL_NAME": "Full name is required",
+      "MAX_LENGTH_FULL_NAME": "Full name max length is {{maxLength}}",
+      "REQUIRED_EMAIL": "Email is required",
+      "INVALID_EMAIL": "Invalid email format",
+      "MAX_LENGTH_EMAIL": "Email max length is {{maxLength}}",
+      "INVALID_PASSWORD": "Valid password length from {{min}} to {{max}}",
+      "INVALID_PHONE": "Invalid phone format"
+    },
+    "NOTIFICATION": {
+      "SUCCESS_CREATE": "User was successfully created",
+      "SUCCESS_DELETE": "User was successfully deleted",
+      "SUCCESS_UPDATE": "User was successfully updated"
     }
   }
 }

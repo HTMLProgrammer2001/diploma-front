@@ -135,4 +135,7 @@ export interface IBookmarkViewState {
   userFilter?: IUserFilterViewModel;
   userValidator?: Validator;
   userDetails?: IUserDetailsViewState;
+
+  /** Profile **/
+  profileValidator?: Validator;
 }

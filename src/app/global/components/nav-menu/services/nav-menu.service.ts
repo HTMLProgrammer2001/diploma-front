@@ -22,6 +22,16 @@ export class NavMenuService {
     },
     {
       iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.PROFILE',
+      task: {
+        route: 'profile',
+        nameTranslateKey: 'COMMON.BOOKMARK.PROFILE.BOOKMARK_NAME',
+        descriptionTranslateKey: 'COMMON.BOOKMARK.PROFILE.BOOKMARK_DESCRIPTION',
+        iconSvg: BookmarkIcon.profile,
+      },
+    },
+    {
+      iconSvg: 'icon-sub-link',
       titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER_DATA',
       roles: readRoles,
       items: [

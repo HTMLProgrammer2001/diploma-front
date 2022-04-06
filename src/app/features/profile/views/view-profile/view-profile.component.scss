@@ -1,0 +1,25 @@
+:host {
+    height: 100%;
+
+    .cr-profile-photo {
+        &-wrapper{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            width: 50%;
+        }
+
+        &-image {
+            max-height: 400px;
+            margin: auto;
+            display: block;
+        }
+
+        &-title {
+            font-size: 1rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+}

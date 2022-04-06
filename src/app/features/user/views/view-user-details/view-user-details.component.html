@@ -70,6 +70,7 @@
             [getOneItemFunction]="getRoleDropdownItem"
             [validator]="validator"
             [validationField]="'role.id'"
+            [isDisabled]="user.isDeleted && !viewState.restoring"
             [permissionSettings]="{isAccessEdit: editable}"
         ></cr-dropdown-smart-control>
       </div>

@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {AvatarModule} from '@progress/kendo-angular-layout';
 import {PopupModule} from '@progress/kendo-angular-popup';
 import {SharedModule} from '../../../shared/shared.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import {SharedModule} from '../../../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     AvatarModule,
     PopupModule,
     SharedModule,
