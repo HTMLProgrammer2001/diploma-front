@@ -4,7 +4,16 @@ import {IResponse} from './types/response';
 import {IError} from './types/error';
 import {Validator} from './types/validation/validator';
 import {DateTimeType} from './types/date-time-type';
-import {Route, UrlMatchResult, UrlSegment, UrlSegmentGroup} from '@angular/router';
+import {UrlMatchResult, UrlSegment} from '@angular/router';
+
+export const downloadByUrl = (url: string, downloadAs: string) => {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = downloadAs;
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+};
 
 export const addRemoveClass = (element: HTMLElement, className: string, isAdd: boolean): void =>
   isAdd ? element.classList.add(className) : element.classList.remove(className);

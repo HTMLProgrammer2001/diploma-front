@@ -63,7 +63,7 @@ export class ViewUserDetailsComponent extends BaseViewComponent implements OnIni
     super({
       nameTranslateKey: 'COMMON.BOOKMARK.USER.DETAILS.BOOKMARK_NAME',
       descriptionTranslateKey: 'COMMON.BOOKMARK.USER.DETAILS.BOOKMARK_DESCRIPTION',
-      iconSvg: BookmarkIcon.categoryDetails,
+      iconSvg: BookmarkIcon.userDetails,
     }, bookmarkService, router, route);
 
     this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);

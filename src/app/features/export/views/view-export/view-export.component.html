@@ -1,0 +1,100 @@
+<cr-title-header
+    [buttonSettings]="titleHeaderButtonSettings"
+    [titleTranslateKey]="'EXPORT.TITLE'"
+></cr-title-header>
+
+<div class="cr-outer-wrapper cr-alternate-shadow">
+  <div class="row">
+    <div class="col-lg-6">
+      <cr-control-dropdown
+        [translateKeys]="'EXPORT.FILTER.TYPE'"
+        [(dataValue)]="filter.type"
+        (dataValueChange)="onFilterTypeChange()"
+        [dataSource]="filterTypes"
+        [dataValueField]="'id'"
+        [dataTranslateKeysField]="'name'"
+      ></cr-control-dropdown>
+    </div>
+    <div class="col-lg-6">
+      <cr-dropdown-smart-control
+          *ngIf="filter.type === ExportFilterTypeEnum.COMMISSION"
+          [(value)]="filter.commissionId"
+          [dataCacheName]="'ExportFilterCommissionDropdown'"
+          [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+          [labelTranslateKey]="'EXPORT.FILTER.COMMISSION'"
+          [dataTranslateKeyField]="'translateKey'"
+          [valueField]="'id'"
+          [textField]="'name'"
+          [getListItemsFunction]="getCommissionDropdownList"
+          [getOneItemFunction]="getCommissionDropdownItem"
+      ></cr-dropdown-smart-control>
+
+      <cr-dropdown-smart-control
+          *ngIf="filter.type === ExportFilterTypeEnum.DEPARTMENT"
+          [(value)]="filter.departmentId"
+          [dataCacheName]="'ExportFilterDepartmentDropdown'"
+          [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+          [labelTranslateKey]="'EXPORT.FILTER.DEPARTMENT'"
+          [dataTranslateKeyField]="'translateKey'"
+          [valueField]="'id'"
+          [textField]="'name'"
+          [getListItemsFunction]="getDepartmentDropdownList"
+          [getOneItemFunction]="getDepartmentDropdownItem"
+      ></cr-dropdown-smart-control>
+
+      <cr-multi-select-smart-control
+          *ngIf="filter.type === ExportFilterTypeEnum.TEACHERS"
+          [(values)]="filter.teacherIds"
+          [translateKeys]="'EXPORT.FILTER.TEACHERS'"
+          [dataCacheName]="'ExportFilterTeacherDropdown'"
+          [getListItemsFunction]="getTeacherDropdownList"
+          [getSelectedItemsFunction]="getTeacherDropdownItems"
+          [textField]="'name'"
+          [valueField]="'id'"
+      ></cr-multi-select-smart-control>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <cr-control-datepicker
+          [(dataValue)]="filter.from"
+          [translateKeys]="'EXPORT.FILTER.FROM'"
+          [validator]="validator"
+          [validationField]="'from'"
+      ></cr-control-datepicker>
+    </div>
+    <div class="col-lg-6">
+      <cr-control-datepicker
+          [(dataValue)]="filter.to"
+          [translateKeys]="'EXPORT.FILTER.TO'"
+          [validator]="validator"
+          [validationField]="'to'"
+      ></cr-control-datepicker>
+    </div>
+  </div>
+
+  <ng-container *ngIf="exportTypes?.length">
+    <div class="cr-select-row-header">{{'EXPORT.FILTER.SELECT' | translate}}<span class="cr-required">*</span></div>
+    <div class="row">
+      <div *ngFor="let exportType of exportTypes" class="col-lg-3 mt-2">
+        <cr-checkbox-control
+            [dataValue]="filter.select.includes(+exportType.id)"
+            (dataValueChange)="onSelectChange(+exportType.id)"
+            [dataLabel]="exportType.name"
+        ></cr-checkbox-control>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="row">
+    <div class="col-lg-12 cr-search-button-column">
+      <cr-button-control
+          [buttonTemplateType]="'underlined-action-button'"
+          [type]="'submit'"
+          [textTranslateKey]="'COMMON.EXECUTE'"
+          (buttonClickEvent)="generateReport()"
+      ></cr-button-control>
+    </div>
+  </div>
+</div>

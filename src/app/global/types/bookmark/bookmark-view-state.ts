@@ -31,6 +31,7 @@ import {IRebukeFilterViewModel} from '../../../features/rebuke/types/view-model/
 import {IRebukeDetailsViewState} from '../../../features/rebuke/types/view-model/rebuke-details-view-state';
 import {IUserFilterViewModel} from '../../../features/user/types/view-model/user-filter-view-model';
 import {IUserDetailsViewState} from '../../../features/user/types/view-model/user-details-view-state';
+import {IGenerateReportFilterViewModel} from '../../../features/export/types/view-model/generate-report-filter-view-model';
 
 export interface IBookmarkViewState {
   /** Commission  **/
@@ -138,4 +139,8 @@ export interface IBookmarkViewState {
 
   /** Profile **/
   profileValidator?: Validator;
+
+  /** Export **/
+  exportFilter?: IGenerateReportFilterViewModel;
+  exportValidator?: Validator;
 }

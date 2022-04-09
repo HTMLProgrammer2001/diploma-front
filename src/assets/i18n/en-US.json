@@ -319,6 +319,10 @@
       "PROFILE": {
         "BOOKMARK_NAME": "Profile",
         "BOOKMARK_DESCRIPTION": ""
+      },
+      "EXPORT": {
+        "BOOKMARK_NAME": "Export",
+        "BOOKMARK_DESCRIPTION": ""
       }
     }
   },
@@ -345,6 +349,7 @@
       "REBUKE": "Rebuke list",
       "USER": "User list",
       "PROFILE": "Profile",
+      "EXPORT": "Export",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -1100,6 +1105,28 @@
       "SUCCESS_CREATE": "User was successfully created",
       "SUCCESS_DELETE": "User was successfully deleted",
       "SUCCESS_UPDATE": "User was successfully updated"
+    }
+  },
+  "EXPORT": {
+    "TITLE": "Export",
+    "FILTER": {
+      "COMMISSION": "Commission",
+      "DEPARTMENT": "Department",
+      "TEACHERS": "Teachers",
+      "FROM": "From",
+      "TO": "To",
+      "SELECT": "Select",
+      "TYPE": "Filter teacher type",
+      "TYPES": {
+        "COMMISSION": "Commission",
+        "DEPARTMENT": "Department",
+        "TEACHERS": "Teachers"
+      }
+    },
+    "VALIDATION": {
+      "FROM_MUST_BE_LESS_THAN_TO": "From must be less than to",
+      "TO_MUST_BE_GREATER_THAN_FROM": "To must be less than from",
+      "MIN_LENGTH_SELECT": "Select must contain at least one element"
     }
   }
 }

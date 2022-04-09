@@ -31,4 +31,5 @@ export class BookmarkIcon {
   static rebukeDetails = null;
   static userList = null;
   static userDetails = null;
+  static export = null;
 }
