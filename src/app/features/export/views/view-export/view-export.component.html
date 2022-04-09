@@ -27,6 +27,8 @@
           [textField]="'name'"
           [getListItemsFunction]="getCommissionDropdownList"
           [getOneItemFunction]="getCommissionDropdownItem"
+          [validator]="validator"
+          [validationField]="'commissionId'"
       ></cr-dropdown-smart-control>
 
       <cr-dropdown-smart-control
@@ -40,6 +42,8 @@
           [textField]="'name'"
           [getListItemsFunction]="getDepartmentDropdownList"
           [getOneItemFunction]="getDepartmentDropdownItem"
+          [validator]="validator"
+          [validationField]="'departmentId'"
       ></cr-dropdown-smart-control>
 
       <cr-multi-select-smart-control
@@ -51,6 +55,8 @@
           [getSelectedItemsFunction]="getTeacherDropdownItems"
           [textField]="'name'"
           [valueField]="'id'"
+          [validator]="validator"
+          [validationField]="'teacherIds'"
       ></cr-multi-select-smart-control>
     </div>
   </div>

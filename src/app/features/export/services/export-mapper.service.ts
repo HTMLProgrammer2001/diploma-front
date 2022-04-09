@@ -33,7 +33,7 @@ export class ExportMapperService {
       teacherIds: [],
       departmentId: null,
       commissionId: null,
-      type: ExportFilterTypeEnum.COMMISSION
+      type: ExportFilterTypeEnum.ALL
     };
   }
 

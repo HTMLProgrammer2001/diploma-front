@@ -21,10 +21,27 @@ export class ExportValidationService {
         fieldName: 'to'
       },
       {
-        type: ValidationTypes.customValidationWithFunction,
-        customFunction: (_, dto: IGenerateReportFilterViewModel) => dto.select.length >= 1,
-        messageTranslateKey: 'EXPORT.VALIDATION.MIN_LENGTH_SELECT',
+        type: ValidationTypes.required,
+        messageTranslateKey: 'EXPORT.VALIDATION.REQUIRED_SELECT',
         fieldName: 'select'
+      },
+      {
+        type: ValidationTypes.required,
+        messageTranslateKey: 'EXPORT.VALIDATION.REQUIRED_COMMISSION',
+        fieldName: 'commissionId',
+        isActive: false
+      },
+      {
+        type: ValidationTypes.required,
+        messageTranslateKey: 'EXPORT.VALIDATION.REQUIRED_DEPARTMENT',
+        fieldName: 'departmentId',
+        isActive: false
+      },
+      {
+        type: ValidationTypes.required,
+        messageTranslateKey: 'EXPORT.VALIDATION.REQUIRED_TEACHERS',
+        fieldName: 'teacherIds',
+        isActive: false
       }
     );
   }

@@ -21,11 +21,14 @@ import {IPaginator} from '../../../../shared/types/paginator';
 import {cloneDeep, isEmpty, isNil} from 'lodash';
 import {ExportValidationService} from '../../services/export-validation.service';
 import {downloadByUrl} from '../../../../shared/utils';
+import {ValidationRule} from '../../../../shared/types/validation/validation-rule';
+import {ValidationTypes} from '../../../../shared/types/validation/validation-types';
 
 export enum ExportFilterTypeEnum {
-  COMMISSION = 1,
-  DEPARTMENT = 2,
-  TEACHERS = 3
+  ALL = 1,
+  COMMISSION = 2,
+  DEPARTMENT = 3,
+  TEACHERS = 4
 }
 
 @Component({
@@ -38,6 +41,10 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
   public exportTypes: Array<IdNameSimpleItem> = [];
   public ExportFilterTypeEnum = ExportFilterTypeEnum;
   public filterTypes: Array<IdNameSimpleItem> = [
+    {
+      id: ExportFilterTypeEnum.ALL,
+      name: 'EXPORT.FILTER.TYPES.ALL'
+    },
     {
       id: ExportFilterTypeEnum.COMMISSION,
       name: 'EXPORT.FILTER.TYPES.COMMISSION'
@@ -63,6 +70,10 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
   public getDepartmentDropdownItem: (id: number) => Observable<IdNameSimpleItem>;
   public getTeacherDropdownList: (paginator: IPaginatorBase) => Observable<IPaginator<IdNameSimpleItem>>;
   public getTeacherDropdownItems: (ids: Array<number>) => Observable<Array<IdNameSimpleItem>>;
+
+  public commissionRequiredRule: ValidationRule;
+  public departmentRequiredRule: ValidationRule;
+  public teachersRequiredRule: ValidationRule;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -155,6 +166,10 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
 
     this.currentBookmark.viewState.exportValidator = initialExportValidator;
     this.validator = this.currentBookmark.viewState.exportValidator;
+
+    this.commissionRequiredRule = this.validator.getRule('commissionId', ValidationTypes.required);
+    this.departmentRequiredRule = this.validator.getRule('departmentId', ValidationTypes.required);
+    this.teachersRequiredRule = this.validator.getRule('teacherIds', ValidationTypes.required);
   }
 
   initDropdowns() {
@@ -187,7 +202,12 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
       this.exportFacadeService.generateReport$(this.filter)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(
-          resp => downloadByUrl(resp.url, resp.url.split('/').pop()),
+          resp => {
+            const url = new URL(resp.url);
+            const fileName = url.pathname.split('/').pop();
+            url.searchParams.set('token', this.authService.accessToken);
+            downloadByUrl(url.toString(), fileName);
+          },
           error => {
             const errors = this.errorService.getMessagesToShow(error.errors);
 
@@ -213,6 +233,22 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
     this.filter.commissionId = null;
     this.filter.departmentId = null;
     this.filter.teacherIds = [];
+
+    this.commissionRequiredRule.isActive = false;
+    this.departmentRequiredRule.isActive = false;
+    this.teachersRequiredRule.isActive = false;
+
+    if(this.filter.type === ExportFilterTypeEnum.COMMISSION) {
+      this.commissionRequiredRule.isActive = true;
+    }
+
+    if(this.filter.type === ExportFilterTypeEnum.DEPARTMENT) {
+      this.departmentRequiredRule.isActive = true;
+    }
+
+    if(this.filter.type === ExportFilterTypeEnum.TEACHERS) {
+      this.teachersRequiredRule.isActive = true;
+    }
   }
 
   //endregion
