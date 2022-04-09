@@ -18,11 +18,12 @@ import {IGenerateReportFilterViewModel} from '../../types/view-model/generate-re
 import {IdNameSimpleItem} from '../../../../shared/types/id-name-simple-item';
 import {IPaginatorBase} from '../../../../shared/types/paginator-base';
 import {IPaginator} from '../../../../shared/types/paginator';
-import {cloneDeep, isEmpty, isNil} from 'lodash';
+import {cloneDeep, isEmpty, isEqual, isNil} from 'lodash';
 import {ExportValidationService} from '../../services/export-validation.service';
 import {downloadByUrl} from '../../../../shared/utils';
 import {ValidationRule} from '../../../../shared/types/validation/validation-rule';
 import {ValidationTypes} from '../../../../shared/types/validation/validation-types';
+import {ExportMapperService} from '../../services/export-mapper.service';
 
 export enum ExportFilterTypeEnum {
   ALL = 1,
@@ -85,6 +86,7 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
     private customNotificationService: CustomNotificationService,
     private exportFacadeService: ExportFacadeService,
     private exportValidationService: ExportValidationService,
+    private exportMapperService: ExportMapperService,
     public authService: AuthService) {
     super({
       nameTranslateKey: 'COMMON.BOOKMARK.EXPORT.BOOKMARK_NAME',
@@ -92,7 +94,8 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
       iconSvg: BookmarkIcon.export,
     }, bookmarkService, router, route);
 
-    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentViewState().exportFilter);
+    this.currentBookmarkTask.checkDataChanged = this.checkDataChanged.bind(this);
+    this.cacheInitialized = !isNil(this.bookmarkService.getCurrentDataItem().exportFilter);
     this.initTitleHeaderButtons();
     this.initDropdowns();
     this.initValidator();
@@ -132,6 +135,10 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
       if (this.route.snapshot.queryParamMap.get('to')) {
         this.filter.to = this.route.snapshot.queryParamMap.get('to');
       }
+
+      if (this.route.snapshot.queryParamMap.get('type')) {
+        this.filter.type = Number(this.route.snapshot.queryParamMap.get('type'));
+      }
     }
 
     this.exportFacadeService.getExportTypes$()
@@ -149,6 +156,8 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
   }
 
   ngOnDestroy(): void {
+    this.currentBookmarkTask.isDataChanged = this.checkDataChanged();
+    this.currentBookmarkTask.checkDataChanged = null;
     this.onDestroy.next();
     this.onDestroy.complete();
   }
@@ -193,12 +202,16 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
 
   //region Events
 
+  checkDataChanged(): boolean {
+    return !isEqual(this.currentBookmark.data.exportFilter, this.exportMapperService.initializeGenerateFilterViewModel());
+  }
+
   generateReport() {
+    this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
+    this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
+
     this.validator.validateDto(this.filter);
     if (this.validator.dtoValidationResult.isValid) {
-      this.router.navigate([], {relativeTo: this.route, queryParams: this.filter, queryParamsHandling: 'merge'});
-      this.bookmarkService.getCurrentBookmarkTask().params = cloneDeep(this.filter);
-
       this.exportFacadeService.generateReport$(this.filter)
         .pipe(takeUntil(this.onDestroy))
         .subscribe(

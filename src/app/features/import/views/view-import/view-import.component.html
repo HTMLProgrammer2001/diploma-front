@@ -1,0 +1,103 @@
+<cr-title-header
+    [buttonSettings]="titleHeaderButtonSettings"
+    [titleTranslateKey]="'IMPORT.TITLE'"
+></cr-title-header>
+
+<div class="cr-outer-wrapper">
+  <div class="cr-panel-header-wrapper">
+    <p [attr.data-translate]="'IMPORT.PANEL_TITLE'">
+      {{ 'IMPORT.PANEL_TITLE' | translate }}
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <cr-file-control
+          [dataLabel]="'IMPORT.FILE'"
+          [(dataValue)]="importBody.file"
+          [maxFileSize]="50 * 1024 * 1024"
+          [allowedExtensions]="['.xlsx', '.xls']"
+          [validator]="validator"
+          [validationField]="'file'"
+      ></cr-file-control>
+    </div>
+    <div class="col-lg-6">
+      <cr-dropdown-smart-control
+          [(value)]="importBody.type"
+          [dataCacheName]="'ImportTypeDropdown'"
+          [unselectedItemValue]="{id: null, translateKey: 'COMMON.NOT_SELECTED'}"
+          [labelTranslateKey]="'IMPORT.TYPE'"
+          [dataTranslateKeyField]="'translateKey'"
+          [valueField]="'id'"
+          [textField]="'name'"
+          [getListItemsFunction]="getImportTypeDropdownList"
+          [getOneItemFunction]="getImportTypeDropdownItem"
+          [validator]="validator"
+          [validationField]="'type'"
+      ></cr-dropdown-smart-control>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <cr-numeric-control
+          [(dataValue)]="importBody.from"
+          [translateKeys]="'IMPORT.FROM'"
+          [validator]="validator"
+          [validationField]="'from'"
+          [min]="0"
+          [autoCorrectMinMax]="true"
+          [format]="'#'"
+      ></cr-numeric-control>
+    </div>
+    <div class="col-lg-6">
+      <cr-numeric-control
+          [(dataValue)]="importBody.to"
+          [translateKeys]="'IMPORT.TO'"
+          [validator]="validator"
+          [validationField]="'to'"
+          [min]="0"
+          [autoCorrectMinMax]="true"
+          [format]="'#'"
+      ></cr-numeric-control>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <cr-checkbox-control
+          [(dataValue)]="importBody.ignoreErrors"
+          [translateKeys]="'IMPORT.IGNORE_ERRORS'"
+      ></cr-checkbox-control>
+    </div>
+
+    <div class="col-lg-6 cr-search-button-column">
+      <cr-button-control
+          *ngIf="importBody.type"
+          [buttonTemplateType]="'underlined-action-button'"
+          [type]="'button'"
+          [textTranslateKey]="'IMPORT.GENERATE_TEMPLATE'"
+          (buttonClickEvent)="generateImportTemplate()"
+      ></cr-button-control>
+    </div>
+
+    <div class="col-lg-2 cr-search-button-column">
+      <cr-button-control
+          [buttonTemplateType]="'underlined-action-button'"
+          [type]="'submit'"
+          [textTranslateKey]="'IMPORT.IMPORT_DATA'"
+          (buttonClickEvent)="importData()"
+      ></cr-button-control>
+    </div>
+  </div>
+</div>
+
+<div class="cr-outer-wrapper">
+  <div class="cr-panel-header-wrapper">
+    <p [attr.data-translate]="'IMPORT.ERRORS.TITLE'">
+      {{ 'IMPORT.ERRORS.TITLE' | translate }}
+    </p>
+  </div>
+
+  <cr-import-errors [errors]="importErrors"></cr-import-errors>
+</div>

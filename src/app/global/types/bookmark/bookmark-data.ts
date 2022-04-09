@@ -41,6 +41,9 @@ import {IRebukeViewModel} from '../../../features/rebuke/types/view-model/rebuke
 import {IUserListViewModel} from '../../../features/user/types/view-model/user-list-view-model';
 import {IUserViewModel} from '../../../features/user/types/view-model/user-view-model';
 import {IProfileViewModel} from '../../../features/profile/types/view-model/profile-view-model';
+import {IGenerateReportFilterViewModel} from '../../../features/export/types/view-model/generate-report-filter-view-model';
+import {IImportBodyViewModel} from '../../../features/import/types/view-model/import-body-view-model';
+import {IImportErrorViewModel} from '../../../features/import/types/view-model/import-error-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -137,4 +140,11 @@ export interface IBookmarkData {
   /** Profile **/
   profileDetail?: IProfileViewModel;
   profileDetailCopy?: IProfileViewModel;
+
+  /** Export **/
+  exportFilter?: IGenerateReportFilterViewModel;
+
+  /** Import **/
+  importBody?: IImportBodyViewModel;
+  importErrors?: Array<IImportErrorViewModel>;
 }

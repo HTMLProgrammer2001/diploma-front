@@ -227,6 +227,17 @@ export class NavMenuService {
         iconSvg: BookmarkIcon.export,
       },
     },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.IMPORT',
+      roles: readRoles,
+      task: {
+        route: 'import',
+        nameTranslateKey: 'COMMON.BOOKMARK.IMPORT.BOOKMARK_NAME',
+        descriptionTranslateKey: 'COMMON.BOOKMARK.IMPORT.BOOKMARK_DESCRIPTION',
+        iconSvg: BookmarkIcon.import,
+      },
+    },
   ];
 
   constructor(

@@ -323,6 +323,10 @@
       "EXPORT": {
         "BOOKMARK_NAME": "Export",
         "BOOKMARK_DESCRIPTION": ""
+      },
+      "IMPORT": {
+        "BOOKMARK_NAME": "Import",
+        "BOOKMARK_DESCRIPTION": ""
       }
     }
   },
@@ -350,6 +354,7 @@
       "USER": "User list",
       "PROFILE": "Profile",
       "EXPORT": "Export",
+      "IMPORT": "Import",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -1126,11 +1131,41 @@
     },
     "VALIDATION": {
       "FROM_MUST_BE_LESS_THAN_TO": "From must be less than to",
-      "TO_MUST_BE_GREATER_THAN_FROM": "To must be less than from",
+      "TO_MUST_BE_GREATER_THAN_FROM": "To must be greater than from",
       "REQUIRED_SELECT": "Select is required",
       "REQUIRED_COMMISSION": "Commission is required",
       "REQUIRED_DEPARTMENT": "Department is required",
       "REQUIRED_TEACHERS": "Teachers is required"
+    }
+  },
+  "IMPORT": {
+    "TITLE": "Import",
+    "PANEL_TITLE": "Settings",
+    "FILE": "File",
+    "FROM": "From",
+    "TO": "To",
+    "TYPE": "Type",
+    "IGNORE_ERRORS": "Ignore errors",
+    "GENERATE_TEMPLATE": "Generate template",
+    "IMPORT_DATA": "Import",
+    "ERRORS": {
+      "TITLE": "Errors",
+      "GRID": {
+        "ROW": "Row",
+        "PROPERTY": "Property",
+        "MESSAGE": "Message"
+      }
+    },
+    "VALIDATION": {
+      "FROM_MUST_BE_LESS_THAN_TO": "From must be less than to",
+      "TO_MUST_BE_GREATER_THAN_FROM": "To must be greater than from",
+      "REQUIRED_SELECT": "Select is required",
+      "REQUIRED_TYPE": "Type is required",
+      "REQUIRED_FILE": "File is required"
+    },
+    "NOTIFICATION": {
+      "SUCCESS_IMPORT": "Import successfully",
+      "ERROR_IMPORT": "Errors occured while importing"
     }
   }
 }

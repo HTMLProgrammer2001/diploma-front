@@ -1,0 +1,10 @@
+<div class="cr-grid-wrapper-new">
+  <cr-edit-grid-server-paging
+      (pageChangeEvent)="changePage($event)"
+      [columnSettings]="columnSettings"
+      [dataCacheName]="'ImportErrorsListGrid'"
+      [dataSource]="localPagingAdapter.dataSource"
+      [pageable]="true"
+      [resizable]="true"
+  ></cr-edit-grid-server-paging>
+</div>

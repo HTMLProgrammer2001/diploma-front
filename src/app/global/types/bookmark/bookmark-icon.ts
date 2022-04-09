@@ -32,4 +32,5 @@ export class BookmarkIcon {
   static userList = null;
   static userDetails = null;
   static export = null;
+  static import = null;
 }

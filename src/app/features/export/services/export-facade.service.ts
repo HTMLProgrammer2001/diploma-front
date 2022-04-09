@@ -57,11 +57,11 @@ export class ExportFacadeService {
   }
 
   getExportFilter$(): Observable<IGenerateReportFilterViewModel> {
-    if (isNil(this.bookmarkService.getCurrentViewState().exportFilter)) {
-      this.bookmarkService.getCurrentViewState().exportFilter = this.exportMapperService.initializeGenerateFilterViewModel();
+    if (isNil(this.bookmarkService.getCurrentDataItem().exportFilter)) {
+      this.bookmarkService.getCurrentDataItem().exportFilter = this.exportMapperService.initializeGenerateFilterViewModel();
     }
 
-    return of(this.bookmarkService.getCurrentViewState().exportFilter);
+    return of(this.bookmarkService.getCurrentDataItem().exportFilter);
   }
 
   // endregion
