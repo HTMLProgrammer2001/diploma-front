@@ -37,7 +37,6 @@ import '@progress/kendo-angular-intl/locales/uk/all';
 import {ErrorsModule} from './global/components/errors/errors.module';
 import {CldrIntlService, IntlService} from '@progress/kendo-angular-intl';
 import {AuthService} from './global/services/auth/auth.service';
-import {CustomNotificationService} from './global/services/custom-notification.service';
 import {GraphqlCommonService} from './global/services/graphql-common.service';
 import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
@@ -120,17 +119,17 @@ export class AppModule {
     private languageService: LanguageService,
     private authService: AuthService,
     private intlService: IntlService,
-    private customNotificationService: CustomNotificationService,
-    private errorService: ErrorService,
   ) {
     this.translate.currentLang = '';
 
-    this.languageService.getDefaultLanguage$().subscribe(lang => {
+    if (this.languageService.getCurrentLanguage()) {
+      this.translate.use(this.languageService.getCurrentLanguage().code);
+      (this.intlService as CldrIntlService).localeId = this.languageService.getCurrentLanguage().code;
+    } else {
+      this.languageService.getDefaultLanguage$().subscribe(lang => {
         this.translate.use(lang.code);
         (this.intlService as CldrIntlService).localeId = lang.code;
-      },
-      error => {
-        this.customNotificationService.showDialogError(this.errorService.getMessagesToShow(error.errors));
       });
+    }
   }
 }

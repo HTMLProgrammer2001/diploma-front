@@ -193,6 +193,7 @@ export class ViewExportComponent extends BaseViewComponent implements OnInit, On
   initTitleHeaderButtons(): void {
     this.titleHeaderButtonManager = new TitleHeaderElementManager();
     this.titleHeaderButtonManager
+      .addElement('pin')
       .addElement('close-bookmark');
 
     this.titleHeaderButtonSettings = this.titleHeaderButtonManager.getButtonList();

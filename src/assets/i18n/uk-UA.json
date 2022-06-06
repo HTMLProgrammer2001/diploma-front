@@ -1,0 +1,1205 @@
+{
+  "LOGIN": {
+    "APP_NAME": "Track teacher",
+    "LOGIN_TITLE": "Логін",
+    "EMAIL": "Email",
+    "PASSWORD": "Пароль",
+    "LOGIN_BUTTON": "Ввійти",
+    "VERSION": "Версія: {{version}}",
+    "VALIDATION": {
+      "REQUIRED_EMAIL": "Email обов'язкове поле",
+      "REQUIRED_PASSWORD": "Пароль обов'язкове поле",
+      "VALIDATE_EMAIL": "Email невалідний",
+      "PASSWORD_MIN_LENGTH": "Пароль повинен мати {{minLength}} чи більше символів"
+    }
+  },
+  "COMMON": {
+    "CALENDAR": {
+      "NOW": "Зараз",
+      "SELECT_NOW": "Вибрати зараз",
+      "TODAY": "Сьогодні",
+      "CANCEL": "Відміна",
+      "CANCEL_LABEL": "Відміна",
+      "SET": "Встановити",
+      "SET_LABEL": "Встановити",
+      "DATE_LABEL": "Дата",
+      "DATE": "Дата",
+      "TIME_LABEL": "Час",
+      "TIME": "Час"
+    },
+    "DAY_OF_WEEK": {
+      "SUNDAY": "Неділя",
+      "MONDAY": "Понеділок",
+      "TUESDAY": "Вівторок",
+      "WEDNESDAY": "Середа",
+      "THURSDAY": "Четвер",
+      "FRIDAY": "П'ятниця",
+      "SATURDAY": "Субота"
+    },
+    "STATUS": {
+      "DELETED": "Видалено"
+    },
+    "BUTTON": {
+      "CANCEL": "Відміна",
+      "CLOSE": "Закрити",
+      "CONFIRM": "Підтвердити",
+      "CREATE": "Створити",
+      "NO": "Ні",
+      "OK": "ОК",
+      "RESTORE": "Відновити",
+      "SAVE": "Зберегти",
+      "YES": "Так",
+      "YES_INTERVAL": "Так ({{value}})",
+      "SEARCH": "Пошук",
+      "CONFIRM_RESTORE": "Підтвердити відновлення",
+      "CANCEL_RESTORE": "Відмінити відновлення"
+    },
+    "TASK_BAR_MANAGER": {
+      "TITLE": "Управління вкладинками",
+      "CLOSE": "Закрити",
+      "FINISH_ALL_TASKS": "Закрити всі вкладинки"
+    },
+    "CLOSE_NOT_SAVED_DIALOG": {
+      "CONTENT": "Данні для \"{{ name }}\" не збережені. Ви дійсно хочете закрити вкладинку?",
+      "TITLE": "Підтвердження закриття"
+    },
+    "INACTIVE_DIALOG": {
+      "CONTENT": "Ви тут?",
+      "TITLE": "Ви тут?"
+    },
+    "DELETE_DIALOG": {
+      "CONTENT": "Ви дійсно хочете видалити цей запис?",
+      "TITLE": "Підтвердження видалення"
+    },
+    "EDIT_GRID": {
+      "ADD": "Додати",
+      "SAVE": "Зберегти",
+      "UPDATE": "Обновити",
+      "EDIT": "Редагувати",
+      "NO_RECORDS": "Немає записів",
+      "NO_READ_ACCESS": "Немає доступа на перегляд"
+    },
+    "ERROR_DIALOG": {
+      "CONTENT": "Повідомлення про помилки:",
+      "TITLE": "Помилка"
+    },
+    "FILTER": "Фільтр",
+    "SELECT": "Вибрати",
+    "NEW": "Новий",
+    "NOT_SELECTED": "Не вибрано",
+    "PAGINATION": {
+      "COUNT": "Всього",
+      "OF": "з",
+      "PAGE": "Сторінка",
+      "PER_PAGE": "На сторінку:"
+    },
+    "PANEL": {
+      "FILTERS": "Фільтри",
+      "GENERAL": "Загальна"
+    },
+    "CLEAN_FILTER": "Очистити фільтр",
+    "DROPZONE": "Перетягни файл, щоб вибрати",
+    "EXECUTE": "Виконати",
+    "RESET": "Очистити",
+    "RESEND": "Перевідправити",
+    "WARNING": "Попередження",
+    "INVALID_ID": "Невалідний ID",
+    "SHOW_DELETED": "Показати видалені",
+    "MULTISELECT_GROUP_TAG_LABEL": "Вибрано: {{selected}}",
+    "USER_INFO": {
+      "ACTIONS": {
+        "LOGOUT": "Вийти",
+        "PROFILE": "Профіль"
+      }
+    },
+    "VALIDATION": {
+      "CONTENT": "Виявлено {{ count }} помилок валідації:",
+      "TITLE": "Помилки валідації"
+    },
+    "POP_UP": {
+      "GENERAL": "Загальне"
+    },
+    "VALUE": "Значення",
+    "CONTROL_CONTEXT_MENU": {
+      "COPY_TO_CLIPBOARD": "Скопіювати в буфер",
+      "NAVIGATE_TO": "Перейти ..."
+    },
+    "ERROR_PAGE": {
+      "ERROR_HEADER": "Помилка",
+      "NOT_FOUND": {
+        "BOOKMARK_NAME": "Сторінка не знайдена",
+        "BOOKMARK_DESCRIPTION": "",
+        "TITLE": "404",
+        "DESCRIPTION": "Сторінка {{url}} не знайдена"
+      },
+      "FORBIDDEN": {
+        "BOOKMARK_NAME": "Доступ заборонено",
+        "BOOKMARK_DESCRIPTION": "",
+        "TITLE": "403",
+        "DESCRIPTION": "Вам заборонено доступ до {{url}}"
+      }
+    },
+    "FILE": {
+      "BUTTON": "Вибери файл",
+      "DROPZONE": "Перетагни файл"
+    },
+    "NETWORK": {
+      "DISCONNECT_LAYOUT_MESSAGE": "Помилка підключення",
+      "DISCONNECT_ERROR_TITLE": "Помилка підключення",
+      "DISCONNECT_ERROR_MESSAGE": "Помилка підключення",
+      "MESSAGE_ONLINE": "Online",
+      "MESSAGE_OFFLINE": "Offline"
+    },
+    "BOOKMARK": {
+      "DASHBOARD": {
+        "BOOKMARK_NAME": "Головна",
+        "BOOKMARK_DESCRIPTION": ""
+      },
+      "ERROR_PAGE": {
+        "NOT_FOUND": {
+          "BOOKMARK_NAME": "Сторінка не знайдена",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "FORBIDDEN": {
+          "BOOKMARK_NAME": "Доступ заборонено",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "COMMISSION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Циклові комісії",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Циклова комісія: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "DEPARTMENT": {
+        "LIST": {
+          "BOOKMARK_NAME": "Відділи",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Відділ: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "ACADEMIC_DEGREE": {
+        "LIST": {
+          "BOOKMARK_NAME": "Вчені звання",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Вчене звання: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "ACADEMIC_TITLE": {
+        "LIST": {
+          "BOOKMARK_NAME": "Вчені ступені",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Вчена ступінь: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "TEACHING_RANK": {
+        "LIST": {
+          "BOOKMARK_NAME": "Педагогічні звання",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Педагогічне звання: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "TEACHER": {
+        "LIST": {
+          "BOOKMARK_NAME": "Вчителі",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Вчитель: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "EDUCATION_QUALIFICATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Рівні кваліфікацій",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Рівень кваліфікації: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "EDUCATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Освіта",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Освіта: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "CATEGORY": {
+        "LIST": {
+          "BOOKMARK_NAME": "Категорії",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Категорія: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "INTERNSHIP": {
+        "LIST": {
+          "BOOKMARK_NAME": "Стажування",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Стажування: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "ATTESTATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Атестації",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Атестація: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "PUBLICATION": {
+        "LIST": {
+          "BOOKMARK_NAME": "Публікації",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Публікація: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "HONOR": {
+        "LIST": {
+          "BOOKMARK_NAME": "Нагороди",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Нагорода: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "REBUKE": {
+        "LIST": {
+          "BOOKMARK_NAME": "Догани",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Догана: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "USER": {
+        "LIST": {
+          "BOOKMARK_NAME": "Користувачі",
+          "BOOKMARK_DESCRIPTION": ""
+        },
+        "DETAILS": {
+          "BOOKMARK_NAME": "Користувач: {{value}}",
+          "BOOKMARK_DESCRIPTION": ""
+        }
+      },
+      "PROFILE": {
+        "BOOKMARK_NAME": "Профіль",
+        "BOOKMARK_DESCRIPTION": ""
+      },
+      "EXPORT": {
+        "BOOKMARK_NAME": "Звіт",
+        "BOOKMARK_DESCRIPTION": ""
+      },
+      "IMPORT": {
+        "BOOKMARK_NAME": "Імпорт",
+        "BOOKMARK_DESCRIPTION": ""
+      },
+      "NOTIFICATION": {
+        "BOOKMARK_NAME": "Керування повідомленнями",
+        "BOOKMARK_DESCRIPTION": ""
+      }
+    }
+  },
+  "DASHBOARD": {
+    "TITLE": "Головна",
+    "NAV_MENU": {
+      "DASHBOARD": "Головна",
+      "TEACHER_DATA": "Дані вчителя",
+      "COMMISSION": "Циклові комісії",
+      "DEPARTMENT": "Відділи",
+      "ACADEMIC_DEGREE": "Вчені звання",
+      "ACADEMIC_TITLE": "Вчені ступені",
+      "TEACHING_RANK": "Педагогічні звання",
+      "TEACHER": "Вчителі",
+      "EDUCATION_DATA": "Дані про освіту",
+      "EDUCATION_QUALIFICATION": "Рівні кваліфікації",
+      "EDUCATION": "Освіта",
+      "ATTESTATION_DATA": "Дані про атестацію",
+      "CATEGORY": "Категорії",
+      "INTERNSHIP": "Стажування",
+      "ATTESTATION": "Атестації",
+      "PUBLICATION": "Публікації",
+      "HONOR": "Нагороди",
+      "REBUKE": "Догани",
+      "USER": "Користувачі",
+      "PROFILE": "Профіль",
+      "EXPORT": "Звіт",
+      "IMPORT": "Імпорт",
+      "NOTIFICATION": "Керування повідомленнями",
+      "STRUCTURE": "Структура",
+      "DOCUMENTS": "Документи",
+      "ADMINISTRATION": "Адміністрація",
+      "MENU_QUICK_SEARCH": "Пошук"
+    }
+  },
+  "COMMISSION": {
+    "LIST": {
+      "TITLE": "Комісії",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Комісії",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Комісія: {{value}}",
+      "NAME": "Назва",
+      "TEACHERS_LIST": {
+        "TITLE": "Вчителі",
+        "GRID": {
+          "NAME": "Ім'я"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Комісія вдало створена",
+        "SUCCESS_DELETE": "Комісія вдало видалена",
+        "SUCCESS_UPDATE": "Комісія вдало оновлена"
+      }
+    }
+  },
+  "DEPARTMENT": {
+    "LIST": {
+      "TITLE": "Відділи",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Відділи",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Відділ: {{value}}",
+      "NAME": "Назва",
+      "TEACHERS_LIST": {
+        "TITLE": "Вчителі",
+        "GRID": {
+          "NAME": "Ім'я"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Відділ вдало створено",
+        "SUCCESS_DELETE": "Відділ вдало видалено",
+        "SUCCESS_UPDATE": "Відділ вдало оновлено"
+      }
+    }
+  },
+  "ACADEMIC_DEGREE": {
+    "LIST": {
+      "TITLE": "Вчені звання",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Вчені звання",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Вчене звання: {{value}}",
+      "NAME": "Назва",
+      "TEACHERS_LIST": {
+        "TITLE": "Вчителі",
+        "GRID": {
+          "NAME": "Ім'я"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Вчене звання вдало створено",
+        "SUCCESS_DELETE": "Вчене звання вдало видалено",
+        "SUCCESS_UPDATE": "Вчене звання вдало оновлено"
+      }
+    }
+  },
+  "ACADEMIC_TITLE": {
+    "LIST": {
+      "TITLE": "Вчені ступені",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Вчені ступені",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Вчена ступінь: {{value}}",
+      "NAME": "Назва",
+      "TEACHERS_LIST": {
+        "TITLE": "Вчителі",
+        "GRID": {
+          "NAME": "Ім'я"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Вчена ступінь вдало створена",
+        "SUCCESS_DELETE": "Вчена ступінь вдало видалена",
+        "SUCCESS_UPDATE": "Вчена ступінь вдало оновлена"
+      }
+    }
+  },
+  "TEACHING_RANK": {
+    "LIST": {
+      "TITLE": "Педагогічні звання",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Педагогічні звання",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Педагогічні звання: {{value}}",
+      "NAME": "Назва",
+      "TEACHERS_LIST": {
+        "TITLE": "Вчителі",
+        "GRID": {
+          "NAME": "Ім'я"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Педагогічне звання вдало створене",
+        "SUCCESS_DELETE": "Педагогічне звання вдало видалене",
+        "SUCCESS_UPDATE": "Педагогічне звання вдало оновлене"
+      }
+    }
+  },
+  "TEACHER": {
+    "LIST": {
+      "TITLE": "Вчителі",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Ім'я",
+        "EMAIL": "Email",
+        "COMMISSION": "Комісія",
+        "DEPARTMENT": "Відділ",
+        "TEACHING_RANK": "Педагогічне звання",
+        "ACADEMIC_DEGREE": "Вчене звання",
+        "ACADEMIC_TITLE": "Вчена ступінь",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Вчителі",
+        "DELETED": "Видалено",
+        "NAME": "Ім'я",
+        "EMAIL": "Email",
+        "COMMISSION": "Комісія",
+        "DEPARTMENT": "Відділ",
+        "TEACHING_RANK": "Педагогічне звання",
+        "ACADEMIC_DEGREE": "Вчене звання",
+        "ACADEMIC_TITLE": "Вчена ступінь",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Вчитель: {{value}}",
+      "PERSONAL": {
+        "TITLE": "Особисті дані",
+        "FULL_NAME": "Ім'я",
+        "EMAIL": "Email",
+        "PHONE": "Телефон",
+        "BIRTHDAY": "День нарождення",
+        "ADDRESS": "Адреса",
+        "AVATAR": "Аватар",
+        "PHOTO": "Аватар {{name}}"
+      },
+      "PROFESSIONAL": {
+        "TITLE": "Професійні дані",
+        "COMMISSION": "Комісія",
+        "DEPARTMENT": "Відділ",
+        "TEACHING_RANK": "Педагогічні звання",
+        "ACADEMIC_DEGREE": "Вчене звання",
+        "ACADEMIC_TITLE": "Вчена ступінь",
+        "WORK_START_DATE": "Дата початку роботи"
+      },
+      "ATTESTATIONS_LIST": {
+        "TITLE": "Атестації",
+        "GRID": {
+          "ID": "ID",
+          "CATEGORY": "Категорія",
+          "DATE": "Дата"
+        },
+        "LAST_ATTESTATION_DATE": "Дата останньої атестації",
+        "NEXT_ATTESTATION_DATE": "Дата наступної атестації"
+      },
+      "INTERNSHIPS_LIST": {
+        "TITLE": "Стажування",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Назва",
+          "PLACE": "Місце проведення",
+          "HOURS": "Години",
+          "CREDITS": "Кредити",
+          "FROM": "З",
+          "TO": "До"
+        },
+        "INTERNSHIP_HOURS_FROM_LAST_ATTESTATION": "Годин стажування з останньої атестації"
+      },
+      "PUBLICATIONS_LIST": {
+        "TITLE": "Публікації",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Назва",
+          "DATE": "Дата"
+        }
+      },
+      "HONORS_LIST": {
+        "TITLE": "Нагороди",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Назва",
+          "DATE": "Дата",
+          "ORDER_NUMBER": "Номер наказу",
+          "IS_ACTIVE": "Активна"
+        }
+      },
+      "REBUKES_LIST": {
+        "TITLE": "Догани",
+        "GRID": {
+          "ID": "ID",
+          "TITLE": "Назва",
+          "DATE": "Дата",
+          "ORDER_NUMBER": "Номер наказу",
+          "IS_ACTIVE": "Активний"
+        }
+      },
+      "EDUCATIONS_LIST": {
+        "TITLE": "Освіта",
+        "GRID": {
+          "ID": "ID",
+          "EDUCATION_QUALIFICATION": "Кваліфікація",
+          "INSTITUTION": "Інститут",
+          "SPECIALTY": "Спеціальність",
+          "YEAR_OF_ISSUE": "Рік випуску"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Ім'я обов'язкове поле",
+        "REQUIRED_EMAIL": "Email обов'язкове поле",
+        "INVALID_EMAIL": "Email невалідний",
+        "INVALID_PHONE": "Phone невалідний",
+        "INVALID_MAX_BIRTHDAY": "День народження повинен бути менше сьогоднішньої дати",
+        "REQUIRED_COMMISSION": "Комісія обов'язкове поле",
+        "REQUIRED_DEPARTMENT": "Відділ обов'язкове поле",
+        "INVALID_MIN_WORK_START_DATE": "Рік початку роботи повинен бути більше 1970",
+        "INVALID_MAX_WORK_START_DATE": "Рік початку роботи не повинен бути більше сьогоднішнього",
+        "MAX_LENGTH_NAME": "Максимальна довжина імені {{maxLength}} символів",
+        "MAX_LENGTH_ADDRESS": "Максимальна довжина адреси {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Вчитель вдало створено",
+        "SUCCESS_DELETE": "Вчитель вдало видалений",
+        "SUCCESS_UPDATE": "Вчитель вдало оновлений"
+      }
+    }
+  },
+  "EDUCATION_QUALIFICATION": {
+    "LIST": {
+      "TITLE": "Рівні кваліфікації",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Рівні кваліфікації",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Рівень кваліфікації: {{value}}",
+      "NAME": "Назва",
+      "EDUCATIONS_LIST": {
+        "TITLE": "Освіта",
+        "GRID": {
+          "ID": "ID",
+          "INSTITUTION": "Інститут",
+          "SPECIALTY": "Спеціальність",
+          "TEACHER": "Вчитель",
+          "YEAR_OF_ISSUE": "Рік випуску"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Рівень кваліфікації вдало створено",
+        "SUCCESS_DELETE": "Рівень кваліфікації вдало видалено",
+        "SUCCESS_UPDATE": "Рівень кваліфікації вдало оновлено"
+      }
+    }
+  },
+  "EDUCATION": {
+    "LIST": {
+      "TITLE": "Освіта",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TEACHER": "Вчитель",
+        "EDUCATION_QUALIFICATION": "Рівень кваліфікації",
+        "INSTITUTION": "Інститут",
+        "SPECIALTY": "Спеціальність",
+        "ISSUE_YEAR_MORE": "Рік випуску більше",
+        "ISSUE_YEAR_LESS": "Рік випуску менше",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Освіти",
+        "DELETED": "Видалено",
+        "TEACHER": "Вчитель",
+        "EDUCATION_QUALIFICATION": "Рівень кваліфікації",
+        "INSTITUTION": "Інститут",
+        "SPECIALTY": "Спеціальність",
+        "YEAR_OF_ISSUE": "Рік випуску",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Освіта: {{value}}",
+      "TEACHER": "Вчитель",
+      "EDUCATION_QUALIFICATION": "Кваліфікація",
+      "INSTITUTION": "Інститут",
+      "SPECIALTY": "Спеціальність",
+      "YEAR_OF_ISSUE": "Рік випуску",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TEACHER": "Вчитель обов'язкове поле",
+        "REQUIRED_EDUCATION_QUALIFICATION": "Кваліфікація обов'язкове поле",
+        "REQUIRED_INSTITUTION": "Інститут обов'язкове поле",
+        "MAX_LENGTH_INSTITUTION": "Максимальна довжина назви інститута {{maxLength}} символів",
+        "REQUIRED_SPECIALTY": "Спеціальність обов'язкове поле",
+        "MAX_LENGTH_SPECIALTY": "Максимальна довжина спеціальності {{maxLength}} символів",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів",
+        "REQUIRED_YEAR_OF_ISSUE": "Рік випуску обов'язкове поле",
+        "MIN_YEAR_OF_ISSUE": "Рік випуску повинен бути більше {{min}}",
+        "MAX_YEAR_OF_ISSUE": "Рік випуску повинен бути менше {{max}}"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Освіта вдало створена",
+        "SUCCESS_DELETE": "Освіта вдало видалена",
+        "SUCCESS_UPDATE": "Освіта вдало оновлена"
+      }
+    }
+  },
+  "CATEGORY": {
+    "LIST": {
+      "TITLE": "Категорія",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Назва",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Категорія",
+        "DELETED": "Видалено",
+        "NAME": "Назва",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Категорія: {{value}}",
+      "NAME": "Назва",
+      "ATTESTATIONS_LIST": {
+        "TITLE": "Атестація",
+        "GRID": {
+          "ID": "ID",
+          "TEACHER": "Вчитель",
+          "DATE": "Дата"
+        }
+      },
+      "VALIDATION": {
+        "REQUIRED_NAME": "Назва обов'язкове поле",
+        "MAX_LENGTH_NAME": "Максимальна довжина назви {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Категорія вдало створена",
+        "SUCCESS_DELETE": "Категорія вдало видалена",
+        "SUCCESS_UPDATE": "Категорія вдало оновлена"
+      }
+    }
+  },
+  "INTERNSHIP": {
+    "LIST": {
+      "TITLE": "Стажування",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TEACHER": "Вчитель",
+        "CODE": "Код",
+        "TITLE_FILTER": "Назва",
+        "PLACE": "Місце",
+        "FROM": "З",
+        "TO": "До",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Стажування",
+        "DELETED": "Видалено",
+        "ID": "ID",
+        "CODE": "Код",
+        "TITLE_GRID": "Назва",
+        "FROM": "З",
+        "TO": "До",
+        "HOURS": "Години",
+        "PLACE": "Місце",
+        "TEACHER": "Вчитель"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Стажування: {{value}}",
+      "TEACHER": "Вчитель",
+      "CODE": "Код",
+      "TITLE_DETAILS": "Назва",
+      "PLACE": "Місце",
+      "HOURS": "Години",
+      "CREDITS": "Кредити",
+      "FROM": "Дата початку",
+      "TO": "Дата кінця",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Назва обов'язкове поле",
+        "MAX_LENGTH_TITLE": "Максимальна довжина назви {{maxLength}} символів",
+        "REQUIRED_FROM": "Дата початку обов'язкове поле",
+        "REQUIRED_TO": "Дата кінця обов'язкове поле",
+        "INVALID_MIN_FROM": "Дата початку повинна бути більше {{minDate}}",
+        "INVALID_MAX_FROM": "Дата початку повинна бути менше {{maxDate}}",
+        "INVALID_MIN_TO": "Дата кінця повинна бути більше {{minDate}}",
+        "INVALID_MAX_TO": "Дата кінця повинна бути менше {{maxDate}}",
+        "FROM_LESS": "Дата початку повинна бути менше дати кінця",
+        "TO_GREATER": "Дата кінця повиння бути більше дати початку",
+        "REQUIRED_CODE": "Код обов'язкове поле",
+        "MAX_LENGTH_CODE": "Максимальна довжина коду {{maxLength}} символів",
+        "MAX_LENGTH_PLACE": "Максимальна довжина місця проведення {{maxLength}} символів",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів",
+        "REQUIRED_HOURS": "Години обов'язкове поле",
+        "MIN_HOURS": "Годин повинна бути більше {{min}}",
+        "MIN_CREDITS": "Кредитів повинно бути більше {{min}}",
+        "REQUIRED_TEACHER": "Вчитель обов'язкове поле"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Стажування вдало створено",
+        "SUCCESS_DELETE": "Стажування вдало видалено",
+        "SUCCESS_UPDATE": "Стажування вдало оновлено"
+      }
+    }
+  },
+  "ATTESTATION": {
+    "LIST": {
+      "TITLE": "Атестації",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TEACHER": "Вчителі",
+        "CATEGORY": "Категорія",
+        "DATE_MORE": "Дата більше",
+        "DATE_LESS": "Дата менше",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Атестації",
+        "DELETED": "Видалено",
+        "ID": "ID",
+        "TEACHER": "Вчитель",
+        "CATEGORY": "Категорія",
+        "DATE": "Дата"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Атестація: {{value}}",
+      "TEACHER": "Вчитель",
+      "CATEGORY": "Категорія",
+      "DATE": "Дата",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TEACHER": "Вчитель обов'язкове поле",
+        "REQUIRED_CATEGORY": "Категорія обов'язкове поле",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів",
+        "REQUIRED_DATE": "Дата обов'язкове поле",
+        "INVALID_MIN_DATE": "Дата повинна бути більше {{minDate}}",
+        "INVALID_MAX_DATE": "Дата повинна бути менше {{maxDate}}"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Атестація вдало створено",
+        "SUCCESS_DELETE": "Атестація вдало видалено",
+        "SUCCESS_UPDATE": "Атестація вдало оновлено"
+      }
+    }
+  },
+  "PUBLICATION": {
+    "LIST": {
+      "TITLE": "Публікації",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TEACHERS": "Вчитель",
+        "DATE_MORE": "Дата більше",
+        "DATE_LESS": "Дата менше",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "DELETED": "Видалено",
+        "ID": "ID",
+        "TITLE": "Назва",
+        "AUTHORS": "Автори",
+        "DATE": "Дата"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Публікація: {{value}}",
+      "TITLE_PUBLICATION": "Назва",
+      "TEACHERS": "Автори",
+      "ANOTHER_TEACHERS": "Інші автори",
+      "URL": "URL",
+      "PUBLISHER": "Видавець",
+      "DATE": "Дата",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Назва обов'язкове поле",
+        "MAX_LENGTH_TITLE": "Максимальна довжина назви {{maxLength}} символів",
+        "REQUIRED_DATE": "Дата обов'язкове поле",
+        "INVALID_MIN_DATE": "Дата повинна бути більше {{minDate}}",
+        "INVALID_MAX_DATE": "Дата повинна бути менше {{maxDate}}",
+        "REQUIRED_TEACHERS": "Автори обов'язкове поле",
+        "MAX_LENGTH_ANOTHER_AUTHORS": "Максимальна довжина інших авторів {{maxLength}} символів",
+        "MAX_LENGTH_PUBLISHER": "Максимальна довжина видавця {{maxLength}} символів",
+        "INVALID_URL": "URL невалідний",
+        "MAX_LENGTH_URL": "Максимальна довжина URL {{maxLength}} символів",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Публікація вдало створена",
+        "SUCCESS_DELETE": "Публікація вдало видалена",
+        "SUCCESS_UPDATE": "Публікація вдало оновлена"
+      }
+    }
+  },
+  "HONOR": {
+    "LIST": {
+      "TITLE": "Нагороди",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TITLE_HONOR": "Назви",
+        "TEACHER": "Вчитель",
+        "ORDER_NUMBER": "Номер наказу",
+        "DATE_LESS": "Дата менше",
+        "DATE_MORE": "Дата більше",
+        "SHOW_IN_ACTIVE": "Показать не активні",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Нагороди",
+        "DELETED": "Видалено",
+        "TITLE_HONOR": "Назва",
+        "ID": "ID",
+        "TEACHER": "Вчитель",
+        "ORDER_NUMBER": "Номер наказу",
+        "DATE": "Дата",
+        "IS_ACTIVE": "Активна"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Нагорода: {{value}}",
+      "TITLE_HONOR": "Назва",
+      "TEACHER": "Вчитель",
+      "ORDER_NUMBER": "Номер наказу",
+      "DATE": "Дата",
+      "IS_ACTIVE": "Активна",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Назва обов'язкове поле",
+        "MAX_LENGTH_TITLE": "Максимальна довжина назви {{maxLength}} символів",
+        "MAX_LENGTH_ORDER_NUMBER": "Максимальна довжина номеру наказу {{maxLength}} символів",
+        "REQUIRED_DATE": "Дата обов'язкове поле",
+        "INVALID_MIN_DATE": "Дата повинна бути більше {{minDate}}",
+        "INVALID_MAX_DATE": "Дата повинна бути менше {{maxDate}}",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів",
+        "REQUIRED_TEACHER": "Вчитель обов'язкове поле"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Нагорода вдало створена",
+        "SUCCESS_DELETE": "Нагорода вдало видалена",
+        "SUCCESS_UPDATE": "Нагорода вдало оновлена"
+      }
+    }
+  },
+  "REBUKE": {
+    "LIST": {
+      "TITLE": "Догани",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "TITLE_HONOR": "Назва",
+        "TEACHER": "Вчитель",
+        "ORDER_NUMBER": "Номер наказу",
+        "DATE_LESS": "Дата менше",
+        "DATE_MORE": "Дата більше",
+        "SHOW_IN_ACTIVE": "Показать неактивні",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Догани",
+        "DELETED": "Видалено",
+        "TITLE_REBUKE": "Назва",
+        "ID": "ID",
+        "TEACHER": "Вчитель",
+        "ORDER_NUMBER": "Номер наказу",
+        "DATE": "Дата",
+        "IS_ACTIVE": "Активний"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Догана: {{value}}",
+      "TITLE_REBUKE": "Назва",
+      "TEACHER": "Вчитель",
+      "ORDER_NUMBER": "Номер наказу",
+      "DATE": "Дата",
+      "IS_ACTIVE": "Активні",
+      "DESCRIPTION": "Опис",
+      "VALIDATION": {
+        "REQUIRED_TITLE": "Назва обов'язкове поле",
+        "MAX_LENGTH_TITLE": "Максимальна довжина назви {{maxLength}} символів",
+        "MAX_LENGTH_ORDER_NUMBER": "Максимальна довжина номеру наказу {{maxLength}} символів",
+        "REQUIRED_DATE": "Дата обов'язкове поле",
+        "INVALID_MIN_DATE": "Дата повинна бути більше {{minDate}}",
+        "INVALID_MAX_DATE": "Дата повинна бути менше {{maxDate}}",
+        "MAX_LENGTH_DESCRIPTION": "Максимальна довжина опису {{maxLength}} символів",
+        "REQUIRED_TEACHER": "Вчитель обов'язкове поле"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Догани вдало створено",
+        "SUCCESS_DELETE": "Догани вдало видалено",
+        "SUCCESS_UPDATE": "Догани вдало оновлено"
+      }
+    }
+  },
+  "USER": {
+    "LIST": {
+      "TITLE": "Користувачі",
+      "FILTER": {
+        "TITLE": "Фільтри",
+        "NAME": "Ім'я",
+        "EMAIL": "Email",
+        "ROLE": "Роль",
+        "SHOW_DELETED": "Показати видалені"
+      },
+      "GRID": {
+        "TITLE": "Користувачі",
+        "DELETED": "Видалено",
+        "NAME": "Ім'я",
+        "EMAIL": "Email",
+        "ROLE": "Роль",
+        "ID": "ID"
+      }
+    },
+    "DETAILS": {
+      "TITLE": "Користувач: {{value}}",
+      "NAME": "Ім'я",
+      "EMAIL": "Email",
+      "ROLE": "Роль",
+      "PHONE": "Телефон",
+      "PASSWORD": "Пароль",
+      "AVATAR": "Аватар",
+      "PHOTO": "Аватар {{name}}",
+      "VALIDATION": {
+        "REQUIRED_FULL_NAME": "Ім'я обов'язкове поле",
+        "MAX_LENGTH_FULL_NAME": "Максимальна довжина імені {{maxLength}} символів",
+        "REQUIRED_EMAIL": "Email обов'язкове поле",
+        "INVALID_EMAIL": "Невалідний email",
+        "MAX_LENGTH_EMAIL": "Максимальна довжина email {{maxLength}} символів",
+        "REQUIRED_PASSWORD": "Пароль обов'язкове поле",
+        "INVALID_PASSWORD": "Пароль повинен мати довжину від {{min}} до {{max}}",
+        "INVALID_PHONE": "Невалідний формат телефона",
+        "REQUIRED_ROLE": "Роль обов'язкове поле"
+      },
+      "NOTIFICATION": {
+        "SUCCESS_CREATE": "Користувач успішно створений",
+        "SUCCESS_DELETE": "Користувач успішно видалений",
+        "SUCCESS_UPDATE": "Користувач успішно оновлений"
+      }
+    }
+  },
+  "PROFILE": {
+    "TITLE": "Профіль",
+    "NAME": "Ім'я",
+    "EMAIL": "Email",
+    "ROLE": "Роль",
+    "PHONE": "Телефон",
+    "PASSWORD": "Пароль",
+    "AVATAR": "Аватар",
+    "PHOTO": "Аватар {{name}}",
+    "VALIDATION": {
+      "REQUIRED_FULL_NAME": "Ім'я обов'язкове поле",
+      "MAX_LENGTH_FULL_NAME": "Максимальна довжина імені {{maxLength}} символів",
+      "REQUIRED_EMAIL": "Email обов'язкове поле",
+      "INVALID_EMAIL": "Email невалідний",
+      "MAX_LENGTH_EMAIL": "Максимальна довжина email {{maxLength}} символів",
+      "INVALID_PASSWORD": "Пароль повинен мати від {{min}} до {{max}}",
+      "INVALID_PHONE": "Невалідний телефон"
+    },
+    "NOTIFICATION": {
+      "SUCCESS_DELETE": "Профіль успішно видалено",
+      "SUCCESS_UPDATE": "Профіль успішно оновлено"
+    }
+  },
+  "EXPORT": {
+    "TITLE": "Звіт",
+    "FILTER": {
+      "COMMISSION": "Комісія",
+      "DEPARTMENT": "Відділ",
+      "TEACHERS": "Вчителі",
+      "FROM": "Починаючи з",
+      "TO": "Закінчуючи по",
+      "SELECT": "Включити до звіту",
+      "TYPE": "Тип фільтрації вчителів",
+      "TYPES": {
+        "ALL": "Всі",
+        "COMMISSION": "Комісія",
+        "DEPARTMENT": "Відділ",
+        "TEACHERS": "Список вчителів"
+      }
+    },
+    "VALIDATION": {
+      "FROM_MUST_BE_LESS_THAN_TO": "Дата початку повинна бути менше дати кінця",
+      "TO_MUST_BE_GREATER_THAN_FROM": "Дата кінця повинна бути більше дати початку",
+      "REQUIRED_SELECT": "Обов'язково необхідно вибрати хоч один тип для включення в звіт",
+      "REQUIRED_COMMISSION": "Комісія обов'язкове поле",
+      "REQUIRED_DEPARTMENT": "Відділ обов'язкове поле",
+      "REQUIRED_TEACHERS": "Список вчителів обязателен"
+    }
+  },
+  "IMPORT": {
+    "TITLE": "Імпорт",
+    "PANEL_TITLE": "Налаштування",
+    "FILE": "Файл",
+    "FROM": "Починаючи з рядку",
+    "TO": "Закінчуючи рядком",
+    "TYPE": "Тип імпорту",
+    "IGNORE_ERRORS": "Ігнорувати помилки",
+    "GENERATE_TEMPLATE": "Завантажити шаблон",
+    "IMPORT_DATA": "Імпорт",
+    "ERRORS": {
+      "TITLE": "Помилки",
+      "GRID": {
+        "ROW": "Рядок",
+        "PROPERTY": "Поле",
+        "MESSAGE": "Повідомлення"
+      }
+    },
+    "VALIDATION": {
+      "FROM_MUST_BE_LESS_THAN_TO": "Рядок початку повинен бути менше рядка кінця",
+      "TO_MUST_BE_GREATER_THAN_FROM": "Рядок кінця повинен бути більше рядка початку",
+      "REQUIRED_TYPE": "Тип імпорту обов'язкове поле",
+      "REQUIRED_FILE": "Файл обов'язкове поле"
+    },
+    "NOTIFICATION": {
+      "SUCCESS_IMPORT": "Імпорт завершився вдало",
+      "ERROR_IMPORT": "Помилки при імпорті"
+    }
+  },
+  "NOTIFICATION": {
+    "TITLE": "Керування повідомленнями",
+    "ATTESTATION_YEARS_PERIOD": "Кількість років між атестаціями",
+    "REQUIRED_INTERNSHIP_HOURS": "Обов'язкова кількість годин стажувань",
+    "NOTIFY_BEFORE_DAYS": "Почати повідомлення за кількість днів до наступної атестації",
+    "ADMIN_EMAILS": "Почта адмінів",
+    "IS_NOTIFY_ADMINS": "Повідомляти адмінів",
+    "IS_NOTIFY_TEACHERS": "Повідомляти вчителів",
+    "NOTIFY_TYPE": "Частота повідомлення",
+    "NOTIFY_TIME": "Час повідомлення",
+    "NOTIFY_DAY": "День повідомлення",
+    "NOTIFY_NOW": "Повідомити зараз",
+    "NOTIFY_TYPES": {
+      "DAILY": "Кожен день",
+      "WEEKLY": "Кожен тиждень",
+      "MONTHLY": "Кожен місяць"
+    },
+    "TEACHER_TO_NOTIFY_LIST": {
+      "TITLE": "Вчителі для повідомлення",
+      "GRID": {
+        "NAME": "Ім'я",
+        "EMAIL": "Email",
+        "INTERNSHIP_HOURS_FROM_LAST_ATTESTATION": "Годин стажування з останньої атестації",
+        "LAST_ATTESTATION_DATE": "Дата останньої атестації",
+        "NEXT_ATTESTATION_DATE": "Дата наступної атестації"
+      }
+    },
+    "NOTIFICATION": {
+      "SUCCESS_TRIGGER": "Повідомлення вдало відправлені",
+      "SUCCESS_UPDATE": "Конфігурація повідомлень вдало оновлена"
+    }
+  }
+}

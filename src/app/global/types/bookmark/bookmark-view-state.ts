@@ -146,4 +146,8 @@ export interface IBookmarkViewState {
 
   /** Import **/
   importValidator?: Validator;
+
+  /** Notification **/
+  notificationValidator?: Validator;
+  notificationTeachersPaginator?: IPaginatorBase;
 }

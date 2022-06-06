@@ -3,7 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {NavMenuFullItem} from '../types/nav-menu-full-item';
 import {BookmarkIcon} from '../../../types/bookmark/bookmark-icon';
 import {AuthService} from '../../../services/auth/auth.service';
-import {readRoles} from '../../../../shared/roles';
+import {configurationRoles, readRoles, writeRoles} from '../../../../shared/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,36 @@ export class NavMenuService {
     },
     {
       iconSvg: 'icon-sub-link',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER_DATA',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.ADMINISTRATION',
+      roles: readRoles,
+      items: [
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.NOTIFICATION',
+          roles: configurationRoles,
+          task: {
+            route: 'notification',
+            nameTranslateKey: 'COMMON.BOOKMARK.NOTIFICATION.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.NOTIFICATION.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.notification,
+          },
+        },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.USER',
+          roles: readRoles,
+          task: {
+            route: 'user/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.userList,
+          },
+        },
+      ],
+    },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.STRUCTURE',
       roles: readRoles,
       items: [
         {
@@ -55,6 +84,24 @@ export class NavMenuService {
             nameTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_NAME',
             descriptionTranslateKey: 'COMMON.BOOKMARK.DEPARTMENT.LIST.BOOKMARK_DESCRIPTION',
             iconSvg: BookmarkIcon.departmentList,
+          },
+        }
+      ],
+    },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER_DATA',
+      roles: readRoles,
+      items: [
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER',
+          roles: readRoles,
+          task: {
+            route: 'teacher/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.teacherList,
           },
         },
         {
@@ -90,15 +137,44 @@ export class NavMenuService {
             iconSvg: BookmarkIcon.teachingRankList,
           },
         },
+      ],
+    },
+    {
+      iconSvg: 'icon-sub-link',
+      titleTranslateKeys: 'DASHBOARD.NAV_MENU.DOCUMENTS',
+      roles: readRoles,
+      items: [
         {
           iconSvg: 'icon-sub-link',
-          titleTranslateKeys: 'DASHBOARD.NAV_MENU.TEACHER',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.PUBLICATION',
           roles: readRoles,
           task: {
-            route: 'teacher/list',
-            nameTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_NAME',
-            descriptionTranslateKey: 'COMMON.BOOKMARK.TEACHER.LIST.BOOKMARK_DESCRIPTION',
-            iconSvg: BookmarkIcon.teachingRankList,
+            route: 'publication/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.PUBLICATION.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.PUBLICATION.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.publicationList,
+          },
+        },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.HONOR',
+          roles: readRoles,
+          task: {
+            route: 'honor/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.honorList,
+          },
+        },
+        {
+          iconSvg: 'icon-sub-link',
+          titleTranslateKeys: 'DASHBOARD.NAV_MENU.REBUKE',
+          roles: readRoles,
+          task: {
+            route: 'rebuke/list',
+            nameTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_NAME',
+            descriptionTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_DESCRIPTION',
+            iconSvg: BookmarkIcon.rebukeList,
           },
         },
       ],
@@ -174,50 +250,6 @@ export class NavMenuService {
     },
     {
       iconSvg: 'icon-sub-link',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.PUBLICATION',
-      roles: readRoles,
-      task: {
-        route: 'publication/list',
-        nameTranslateKey: 'COMMON.BOOKMARK.PUBLICATION.LIST.BOOKMARK_NAME',
-        descriptionTranslateKey: 'COMMON.BOOKMARK.PUBLICATION.LIST.BOOKMARK_DESCRIPTION',
-        iconSvg: BookmarkIcon.publicationList,
-      },
-    },
-    {
-      iconSvg: 'icon-sub-link',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.HONOR',
-      roles: readRoles,
-      task: {
-        route: 'honor/list',
-        nameTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_NAME',
-        descriptionTranslateKey: 'COMMON.BOOKMARK.HONOR.LIST.BOOKMARK_DESCRIPTION',
-        iconSvg: BookmarkIcon.honorList,
-      },
-    },
-    {
-      iconSvg: 'icon-sub-link',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.REBUKE',
-      roles: readRoles,
-      task: {
-        route: 'rebuke/list',
-        nameTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_NAME',
-        descriptionTranslateKey: 'COMMON.BOOKMARK.REBUKE.LIST.BOOKMARK_DESCRIPTION',
-        iconSvg: BookmarkIcon.rebukeList,
-      },
-    },
-    {
-      iconSvg: 'icon-sub-link',
-      titleTranslateKeys: 'DASHBOARD.NAV_MENU.USER',
-      roles: readRoles,
-      task: {
-        route: 'user/list',
-        nameTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_NAME',
-        descriptionTranslateKey: 'COMMON.BOOKMARK.USER.LIST.BOOKMARK_DESCRIPTION',
-        iconSvg: BookmarkIcon.userList,
-      },
-    },
-    {
-      iconSvg: 'icon-sub-link',
       titleTranslateKeys: 'DASHBOARD.NAV_MENU.EXPORT',
       roles: readRoles,
       task: {
@@ -230,7 +262,7 @@ export class NavMenuService {
     {
       iconSvg: 'icon-sub-link',
       titleTranslateKeys: 'DASHBOARD.NAV_MENU.IMPORT',
-      roles: readRoles,
+      roles: writeRoles,
       task: {
         route: 'import',
         nameTranslateKey: 'COMMON.BOOKMARK.IMPORT.BOOKMARK_NAME',

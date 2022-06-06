@@ -19,6 +19,7 @@ import {
 } from './export-queries';
 import {IGenerateReportFilterModel} from '../types/model/generate-report-filter-model';
 import {IGenerateReportGetModel} from '../types/model/generate-report-get-model';
+import {readRoles} from '../../../shared/roles';
 
 @Injectable({providedIn: 'root'})
 export class ExportApiService {
@@ -35,6 +36,7 @@ export class ExportApiService {
       },
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getCommissionsList'
     };
 
@@ -48,6 +50,7 @@ export class ExportApiService {
       variables: {id},
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getCommissionById'
     };
 
@@ -65,6 +68,7 @@ export class ExportApiService {
       },
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getDepartmentsList'
     };
 
@@ -78,6 +82,7 @@ export class ExportApiService {
       variables: {id},
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getDepartmentById'
     };
 
@@ -95,6 +100,7 @@ export class ExportApiService {
       },
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getTeacherList'
     };
 
@@ -108,6 +114,7 @@ export class ExportApiService {
       variables: {ids},
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getTeachersByIds'
     };
 
@@ -126,6 +133,7 @@ export class ExportApiService {
       },
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'getExportTypeList'
     };
 
@@ -139,6 +147,7 @@ export class ExportApiService {
       variables: {body: filter},
       isPreloader: true,
       isAuthorize: true,
+      roles: readRoles,
       resultField: 'generateReport'
     };
 

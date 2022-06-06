@@ -5,6 +5,7 @@ import {ViewImportComponent} from './views/view-import/view-import.component';
 import {AuthGuard} from '../../global/services/auth/auth.guard';
 import {PermissionsGuard} from '../../global/services/auth/permissions.guard';
 import {ViewPageNotFoundComponent} from '../../global/components/errors/view-page-not-found/view-page-not-found.component';
+import {writeRoles} from '../../shared/roles';
 
 export const routingPaths = {
   exportPage: '',
@@ -16,7 +17,7 @@ const routes: Routes = [
     component: ViewImportComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
-    data: {allowPinning: true},
+    data: {allowPinning: true, roles: writeRoles},
   },
   {
     path: '**',

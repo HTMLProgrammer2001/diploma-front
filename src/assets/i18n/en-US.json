@@ -327,6 +327,10 @@
       "IMPORT": {
         "BOOKMARK_NAME": "Import",
         "BOOKMARK_DESCRIPTION": ""
+      },
+      "NOTIFICATION": {
+        "BOOKMARK_NAME": "Notification management",
+        "BOOKMARK_DESCRIPTION": ""
       }
     }
   },
@@ -334,17 +338,17 @@
     "TITLE": "Dashboard",
     "NAV_MENU": {
       "DASHBOARD": "Dashboard",
-      "TEACHER_DATA": "Teacher data",
+      "TEACHER_DATA": "Teachers",
       "COMMISSION": "Commission list",
       "DEPARTMENT": "Department list",
       "ACADEMIC_DEGREE": "Academic degree list",
       "ACADEMIC_TITLE": "Academic title list",
       "TEACHING_RANK": "Teaching rank list",
       "TEACHER": "Teacher list",
-      "EDUCATION_DATA": "Education data",
+      "EDUCATION_DATA": "Educations",
       "EDUCATION_QUALIFICATION": "Education qualification list",
       "EDUCATION": "Education list",
-      "ATTESTATION_DATA": "Attestation data",
+      "ATTESTATION_DATA": "Attestations",
       "CATEGORY": "Category list",
       "INTERNSHIP": "Internship list",
       "ATTESTATION": "Attestation list",
@@ -355,6 +359,10 @@
       "PROFILE": "Profile",
       "EXPORT": "Export",
       "IMPORT": "Import",
+      "NOTIFICATION": "Notification management",
+      "STRUCTURE": "Structure",
+      "DOCUMENTS": "Documents",
+      "ADMINISTRATION": "Administration",
       "MENU_QUICK_SEARCH": "Menu quick search"
     }
   },
@@ -647,7 +655,6 @@
         "REQUIRED_EMAIL": "Email is required",
         "INVALID_EMAIL": "Email is invalid",
         "INVALID_PHONE": "Phone is invalid",
-        "INVALID_MIN_BIRTHDAY": "Birthday year must be more than 1970",
         "INVALID_MAX_BIRTHDAY": "You cannot select birthday from future",
         "REQUIRED_COMMISSION": "Commission is required",
         "REQUIRED_DEPARTMENT": "Department is required",
@@ -974,7 +981,6 @@
       "DATE": "Date",
       "IS_ACTIVE": "Active",
       "DESCRIPTION": "Description",
-      "SHOW_IN_ACTIVE": "Show inactive",
       "VALIDATION": {
         "REQUIRED_TITLE": "Title is required",
         "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
@@ -1024,7 +1030,6 @@
       "DATE": "Date",
       "IS_ACTIVE": "Active",
       "DESCRIPTION": "Description",
-      "SHOW_IN_ACTIVE": "Show inactive",
       "VALIDATION": {
         "REQUIRED_TITLE": "Title is required",
         "MAX_LENGTH_TITLE": "Title max length is {{maxLength}}",
@@ -1107,9 +1112,8 @@
       "INVALID_PHONE": "Invalid phone format"
     },
     "NOTIFICATION": {
-      "SUCCESS_CREATE": "User was successfully created",
-      "SUCCESS_DELETE": "User was successfully deleted",
-      "SUCCESS_UPDATE": "User was successfully updated"
+      "SUCCESS_DELETE": "Profile was successfully deleted",
+      "SUCCESS_UPDATE": "Profile was successfully updated"
     }
   },
   "EXPORT": {
@@ -1159,13 +1163,44 @@
     "VALIDATION": {
       "FROM_MUST_BE_LESS_THAN_TO": "From must be less than to",
       "TO_MUST_BE_GREATER_THAN_FROM": "To must be greater than from",
-      "REQUIRED_SELECT": "Select is required",
       "REQUIRED_TYPE": "Type is required",
       "REQUIRED_FILE": "File is required"
     },
     "NOTIFICATION": {
       "SUCCESS_IMPORT": "Import successfully",
       "ERROR_IMPORT": "Errors occured while importing"
+    }
+  },
+  "NOTIFICATION": {
+    "TITLE": "Notification management",
+    "ATTESTATION_YEARS_PERIOD": "Years between attestation",
+    "REQUIRED_INTERNSHIP_HOURS": "Required internship hours for attestation",
+    "NOTIFY_BEFORE_DAYS": "Start notification before next attestation (in days)",
+    "ADMIN_EMAILS": "Admin emails",
+    "IS_NOTIFY_ADMINS": "Is notify admins",
+    "IS_NOTIFY_TEACHERS": "Is notify teachers",
+    "NOTIFY_TYPE": "Notification frequently type",
+    "NOTIFY_TIME": "Notification time",
+    "NOTIFY_DAY": "Notification day",
+    "NOTIFY_NOW": "Notify now",
+    "NOTIFY_TYPES": {
+      "DAILY": "Daily",
+      "WEEKLY": "Weekly",
+      "MONTHLY": "Monthly"
+    },
+    "TEACHER_TO_NOTIFY_LIST": {
+      "TITLE": "Teachers that will be notified",
+      "GRID": {
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "INTERNSHIP_HOURS_FROM_LAST_ATTESTATION": "Internship hours from last attestation",
+        "LAST_ATTESTATION_DATE": "Last attestation date",
+        "NEXT_ATTESTATION_DATE": "Next attestation date"
+      }
+    },
+    "NOTIFICATION": {
+      "SUCCESS_TRIGGER": "Successfully notified",
+      "SUCCESS_UPDATE": "Notification configuration successfully updated"
     }
   }
 }

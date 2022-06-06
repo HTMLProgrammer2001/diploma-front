@@ -44,6 +44,8 @@ import {IProfileViewModel} from '../../../features/profile/types/view-model/prof
 import {IGenerateReportFilterViewModel} from '../../../features/export/types/view-model/generate-report-filter-view-model';
 import {IImportBodyViewModel} from '../../../features/import/types/view-model/import-body-view-model';
 import {IImportErrorViewModel} from '../../../features/import/types/view-model/import-error-view-model';
+import {INotificationConfigViewModel} from '../../../features/notification/types/view-model/notification-config-view-model';
+import {INotificationTeacherViewModel} from '../../../features/notification/types/view-model/notification-teacher-view-model';
 
 export interface IBookmarkData {
   /** User info **/
@@ -147,4 +149,9 @@ export interface IBookmarkData {
   /** Import **/
   importBody?: IImportBodyViewModel;
   importErrors?: Array<IImportErrorViewModel>;
+
+  /** Notification **/
+  notificationConfig?: INotificationConfigViewModel;
+  notificationConfigCopy?: INotificationConfigViewModel;
+  teachersToNotify?: Array<INotificationTeacherViewModel>;
 }

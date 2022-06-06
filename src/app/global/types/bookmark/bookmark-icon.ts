@@ -33,4 +33,5 @@ export class BookmarkIcon {
   static userDetails = null;
   static export = null;
   static import = null;
+  static notification = null;
 }

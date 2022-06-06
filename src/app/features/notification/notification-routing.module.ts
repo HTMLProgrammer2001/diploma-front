@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BookmarkProcessGuard} from '../../global/services/bookmark/bookmark-process.guard';
-import {ViewExportComponent} from './views/view-export/view-export.component';
+import {ViewNotificationComponent} from './views/view-notification/view-notification.component';
 import {AuthGuard} from '../../global/services/auth/auth.guard';
 import {PermissionsGuard} from '../../global/services/auth/permissions.guard';
 import {ViewPageNotFoundComponent} from '../../global/components/errors/view-page-not-found/view-page-not-found.component';
-import {readRoles} from '../../shared/roles';
+import {configurationRoles} from '../../shared/roles';
 
 export const routingPaths = {
   exportPage: '',
@@ -14,10 +14,10 @@ export const routingPaths = {
 const routes: Routes = [
   {
     path: routingPaths.exportPage,
-    component: ViewExportComponent,
+    component: ViewNotificationComponent,
     canActivate: [AuthGuard, PermissionsGuard],
     canDeactivate: [BookmarkProcessGuard],
-    data: {allowPinning: true, roles: readRoles},
+    data: {allowPinning: true, roles: configurationRoles},
   },
   {
     path: '**',
@@ -30,5 +30,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ExportRoutingModule {
+export class NotificationRoutingModule {
 }

@@ -1,0 +1,148 @@
+<cr-title-header
+    [buttonSettings]="titleHeaderButtonSettings"
+    [titleTranslateKey]="'NOTIFICATION.TITLE'"
+    (buttonClickEvent)="onTitleButtonClick($event)"
+></cr-title-header>
+
+<div class="cr-outer-wrapper cr-alternate-shadow" *ngIf="config">
+  <div class="row cr-bottom-row-border">
+    <div class="col-lg-4">
+      <cr-numeric-control
+          [translateKeys]="'NOTIFICATION.ATTESTATION_YEARS_PERIOD'"
+          [(dataValue)]="config.attestationYearsPeriod"
+          [autoCorrectMinMax]="true"
+          [format]="'#'"
+          [min]="1"
+          [max]="100"
+          [validator]="validator"
+          [validationField]="'attestationYearsPeriod'"
+      ></cr-numeric-control>
+    </div>
+
+    <div class="col-lg-4">
+      <cr-numeric-control
+          [translateKeys]="'NOTIFICATION.REQUIRED_INTERNSHIP_HOURS'"
+          [(dataValue)]="config.requiredInternshipHours"
+          [autoCorrectMinMax]="true"
+          [format]="'#'"
+          [min]="1"
+          [max]="1000"
+          [validator]="validator"
+          [validationField]="'requiredInternshipHours'"
+      ></cr-numeric-control>
+    </div>
+
+    <div class="col-lg-4">
+      <cr-numeric-control
+          [translateKeys]="'NOTIFICATION.NOTIFY_BEFORE_DAYS'"
+          [(dataValue)]="config.notifyBeforeDays"
+          [autoCorrectMinMax]="true"
+          [format]="'#'"
+          [min]="1"
+          [max]="maxNotifyBeforeDays"
+          [validator]="validator"
+          [validationField]="'notifyBeforeDays'"
+      ></cr-numeric-control>
+    </div>
+  </div>
+
+  <div class="row cr-bottom-row-border">
+    <div class="col-lg-6">
+      <div
+          class="cr-custom-chip-input"
+          kendoTooltip
+          position="top"
+          tooltipClass="cr-tooltip"
+          [ngClass]="{'ng-invalid': adminEmailsValidationResult?.isValid === false}"
+      >
+        <kendo-label text="{{'NOTIFICATION.ADMIN_EMAILS' | translate}}"
+                     title="{{adminEmailsValidationResult?.messages | validationMessageTranslate}}"
+                     [optional]="false"
+                     [attr.data-translate]="'NOTIFICATION.ADMIN_EMAILS'"
+        >
+          <kendo-multiselect
+              [popupSettings]="{popupClass : 'cr-custom-chip-input-popup', width: 'auto'}"
+              [(value)]="config.adminEmails"
+              [allowCustom]="true"
+              (valueChange)="validateAdminEmails()"
+              (blur)="validateAdminEmails()"
+          ></kendo-multiselect>
+        </kendo-label>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <cr-checkbox-control
+          [(dataValue)]="config.isNotifyAdmins"
+          [translateKeys]="'NOTIFICATION.IS_NOTIFY_ADMINS'"
+      ></cr-checkbox-control>
+    </div>
+
+    <div class="col-lg-3">
+      <cr-checkbox-control
+          [(dataValue)]="config.isNotifyTeachers"
+          [translateKeys]="'NOTIFICATION.IS_NOTIFY_TEACHERS'"
+      ></cr-checkbox-control>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <cr-control-dropdown
+          [translateKeys]="'NOTIFICATION.NOTIFY_TYPE'"
+          [dataValueField]="'type'"
+          [dataTranslateKeysField]="'translateKey'"
+          [(dataValue)]="config.notifyType"
+          (dataValueChange)="onNotifyTypeChange()"
+          [dataSource]="notifyTypes"
+          [validator]="validator"
+          [validationField]="'notifyType'"
+      ></cr-control-dropdown>
+    </div>
+
+    <div class="col-lg-3">
+      <cr-time-picker-control
+          [(dataValue)]="config.notifyTime"
+          [translateKeys]="'NOTIFICATION.NOTIFY_TIME'"
+          [validator]="validator"
+          [validationField]="'notifyTime'"
+      ></cr-time-picker-control>
+    </div>
+
+    <div class="col-lg-3" *ngIf="config.notifyType === NotificationTypesEnum.WEEKLY">
+      <cr-control-dropdown
+          [translateKeys]="'NOTIFICATION.NOTIFY_DAY'"
+          [dataValueField]="'day'"
+          [dataTranslateKeysField]="'translateKey'"
+          [(dataValue)]="config.notifyDay"
+          [dataSource]="notifyDays"
+          [validator]="validator"
+          [validationField]="'notifyDay'"
+      ></cr-control-dropdown>
+    </div>
+
+    <div class="col-lg-3" *ngIf="config.notifyType === NotificationTypesEnum.MONTHLY">
+      <cr-numeric-control
+          [translateKeys]="'NOTIFICATION.NOTIFY_DAY'"
+          [validator]="validator"
+          [validationField]="'notifyDay'"
+          [max]="31"
+          [min]="1"
+          [autoCorrectMinMax]="true"
+          [(dataValue)]="config.notifyDay"
+          [format]="'#'"
+      ></cr-numeric-control>
+    </div>
+  </div>
+</div>
+
+<div class="cr-outer-wrapper" *ngIf="config">
+  <div class="cr-panel-header-wrapper">
+    <p [attr.data-translate]="'NOTIFICATION.TEACHER_TO_NOTIFY_LIST.TITLE'">
+      {{ 'NOTIFICATION.TEACHER_TO_NOTIFY_LIST.TITLE' | translate }}
+    </p>
+  </div>
+  <div class="cr-grid-wrapper-new">
+    <cr-teachers-to-notify-list></cr-teachers-to-notify-list>
+  </div>
+</div>

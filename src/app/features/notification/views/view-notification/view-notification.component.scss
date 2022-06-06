@@ -1,0 +1,128 @@
+@use "../styles/variables" as *;
+
+.cr-select-row-header {
+  font-weight: bolder;
+  padding-left: 25px;
+
+  .cr-required {
+    color: red;
+  }
+}
+
+.cr-custom-chip-input {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 1px 10px 0 10px;
+  list-style: none;
+  border: 1px solid #E9E9E9;
+  background: white;
+  border-radius: 5px;
+
+  &.ng-invalid {
+    border-color: $error-color;
+  }
+
+  ::ng-deep {
+    kendo-taglist {
+      max-width: 100%;
+
+      .k-reset {
+        li {
+          max-width: 100%;
+
+          .ng-star-inserted {
+            &:first-child {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+    }
+
+    .k-multiselect.k-header {
+      top: -6px;
+    }
+
+    ul.k-reset > li.k-button {
+      margin-left: 2px;
+      margin-top: 1px;
+      overflow: hidden;
+      min-height: auto;
+    }
+
+    kendo-label {
+      display: block;
+      width: 100%;
+      border: 0;
+      color: $control-color-label;
+      font-size: small;
+
+      > label {
+        &.k-label {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          line-height: 17px;
+          max-width: calc(100% - 40px);
+          padding-right: 10px;
+          position: relative;
+          height: 17px;
+          font-size: 13px;
+          margin: 0 10px;
+          display: inline-block;
+          padding-left: 2px;
+        }
+
+        > .k-label-optional {
+          font-size: 0;
+          position: absolute;
+          color: $control-color-required;
+          right: 0;
+        }
+
+        > .k-label-optional::before {
+          position: relative;
+          left: -5px;
+          font-size: 13px;
+          content: "*";
+          color: $control-color-required;
+        }
+      }
+
+      .k-multiselect {
+        display: block;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow: visible;
+        position: inherit;
+
+        .k-searchbar + .k-icon {
+          top: 0;
+          right: 0;
+        }
+
+        .k-multiselect-wrap {
+          border: 0;
+          background: none;
+          box-shadow: none;
+          padding: 0 35px 0 0;
+
+          &.k-state-focused, &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+
+  }
+}
+
+::ng-deep {
+  .cr-custom-chip-input-popup {
+    display: none;
+  }
+}

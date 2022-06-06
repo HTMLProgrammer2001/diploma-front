@@ -117,11 +117,10 @@
 
     .svg-icon-logo {
       margin: 0 10px 0 5px;
-      width: 30px;
-
-      svg {
-        width: 35px;
-      }
+      min-width: 35px;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
     }
   }
 }

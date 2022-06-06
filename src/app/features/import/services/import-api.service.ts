@@ -7,7 +7,7 @@ import {IPaginator} from '../../../shared/types/paginator';
 import {IdNameSimpleItem} from '../../../shared/types/id-name-simple-item';
 import {RequestConfig} from '../../../global/types/request-config';
 import {RequestType} from '../../../global/types/request-type';
-import {readRoles} from '../../../shared/roles';
+import {readRoles, writeRoles} from '../../../shared/roles';
 import {
   generateImportTemplateQuery,
   getImportDropdownItemQuery,
@@ -62,7 +62,7 @@ export class ImportApiService {
       variables: {type},
       isPreloader: true,
       isAuthorize: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'generateImportTemplate'
     };
 
@@ -77,7 +77,7 @@ export class ImportApiService {
       isPreloader: true,
       isAuthorize: true,
       useMultipart: true,
-      roles: readRoles,
+      roles: writeRoles,
       resultField: 'importData'
     };
 

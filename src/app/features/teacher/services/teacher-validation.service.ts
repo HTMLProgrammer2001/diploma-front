@@ -31,13 +31,6 @@ export class TeacherValidationService {
         messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.INVALID_PHONE'
       },
       {
-        type: ValidationTypes.minDate,
-        settingValue: new Date(0),
-        fieldName: 'birthday',
-        groupResultName: 'personal',
-        messageTranslateKey: 'TEACHER.DETAILS.VALIDATION.INVALID_MIN_BIRTHDAY'
-      },
-      {
         type: ValidationTypes.maxDate,
         settingValue: new Date(),
         fieldName: 'birthday',
